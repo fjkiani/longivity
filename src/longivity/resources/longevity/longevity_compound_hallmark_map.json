@@ -1,0 +1,687 @@
+{
+  "_file_header": {
+    "schema_version": "1.0",
+    "weight_rule": "Weights are DERIVED from evidence_strength and human_evidence (not arbitrary): ESTABLISHED + human evidence = 0.85; ESTABLISHED + no human = 0.70; MODERATE + human = 0.60; MODERATE + no human = 0.45; WEAK = 0.35.",
+    "pmid_policy": "Hallmark links used for scoring must include at least one verified PMID. Links with only unverified PMIDs carry include_in_scoring: false. Unverified PMIDs remain in JSON for manual QA with pmid_verified: false.",
+    "corrections_reference": "api/resources/longevity/CORRECTIONS_LOG.md"
+  },
+  "compounds": [
+    {
+      "compound_id": "berberine",
+      "display_name": "Berberine",
+      "hallmark_links": [
+        {
+          "hallmark": "nutrient_sensing",
+          "weight": 0.85,
+          "mechanism": "AMPK activation → improved insulin sensitivity and glucose uptake; overlaps with mTOR/insulin signaling nodes.",
+          "db_pathways": ["pi3k_akt_mtor", "insulin_resistance"],
+          "pmids": ["16873688", "34956436"],
+          "pmid_verified": [true, true],
+          "evidence_strength": "ESTABLISHED",
+          "human_evidence": true,
+          "study_types": ["mechanistic", "meta-analysis of RCTs"],
+          "include_in_scoring": true
+        },
+        {
+          "hallmark": "cellular_senescence",
+          "weight": 0.85,
+          "mechanism": "Berberine modulates senescence-associated programs in cardiovascular models; Klotho/SIRT1 axis implicated (corrected PMID).",
+          "db_pathways": ["pi3k_akt_mtor"],
+          "pmids": ["35609366", "31773901"],
+          "pmid_verified": [true, true],
+          "evidence_strength": "ESTABLISHED",
+          "human_evidence": true,
+          "study_types": ["preclinical", "aging-related experimental"],
+          "include_in_scoring": true
+        }
+      ],
+      "dose": {
+        "range_mg": "500-1500",
+        "frequency": "2-3x/day with meals",
+        "source_pmid": "34956436",
+        "source_verified": true,
+        "context": "T2DM-focused RCT evidence base; not a dedicated longevity trial."
+      },
+      "interactions": [
+        "May affect CYP450 substrates — review concomitant medications with clinician.",
+        "Use caution with anticoagulants and vitamin K antagonists (e.g., warfarin) — bleeding and enzyme interaction risk; clinician review."
+      ],
+      "safety_notes": [
+        "GI upset common; avoid unsupervised use in pregnancy/lactation.",
+        "RUO: not a prescription recommendation."
+      ]
+    },
+    {
+      "compound_id": "rapamycin",
+      "display_name": "Rapamycin (sirolimus) / mTOR inhibitors",
+      "hallmark_links": [
+        {
+          "hallmark": "nutrient_sensing",
+          "weight": 0.7,
+          "mechanism": "mTORC1 inhibition; central node in nutrient-sensing longevity biology.",
+          "db_pathways": ["pi3k_akt_mtor"],
+          "pmids": ["29190625"],
+          "pmid_verified": [true],
+          "evidence_strength": "ESTABLISHED",
+          "human_evidence": false,
+          "study_types": ["review", "mechanistic"],
+          "include_in_scoring": true
+        },
+        {
+          "hallmark": "cellular_senescence",
+          "weight": 0.7,
+          "mechanism": "mTOR modulation intersects with senescence entry programs and SASP regulation (geroconversion context).",
+          "db_pathways": ["pi3k_akt_mtor"],
+          "pmids": ["30541901"],
+          "pmid_verified": [true],
+          "evidence_strength": "ESTABLISHED",
+          "human_evidence": false,
+          "study_types": ["mechanistic"],
+          "include_in_scoring": true
+        }
+      ],
+      "dose": {
+        "range_mg": "context-dependent (everolimus low-dose studied in aging-immune trials)",
+        "frequency": "per trial protocol only",
+        "source_pmid": "25540326",
+        "source_verified": true,
+        "context": "Mannick et al. mTOR inhibitor intermittent dosing in older adults (immune endpoints); prescription drug — not self-administered."
+      },
+      "interactions": ["Major immunosuppression risk at transplant doses; drug-drug interactions via CYP3A4."],
+      "safety_notes": ["Prescription-only; RUO mapping — requires physician oversight.", "Metabolic and infection risks at clinical doses."]
+    },
+    {
+      "compound_id": "metformin",
+      "display_name": "Metformin",
+      "hallmark_links": [
+        {
+          "hallmark": "nutrient_sensing",
+          "weight": 0.85,
+          "mechanism": "AMPK activation, mitochondrial effects, reduced hepatic gluconeogenesis; intersects aging-relevant nutrient pathways.",
+          "db_pathways": ["insulin_resistance", "pi3k_akt_mtor"],
+          "pmids": ["32333835"],
+          "pmid_verified": [true],
+          "evidence_strength": "ESTABLISHED",
+          "human_evidence": true,
+          "study_types": ["review", "clinical pharmacology"],
+          "include_in_scoring": true
+        },
+        {
+          "hallmark": "cellular_senescence",
+          "weight": 0.6,
+          "mechanism": "Preclinical and translational links to senescence modulation; human longevity effect TAME-targeted.",
+          "db_pathways": ["pi3k_akt_mtor"],
+          "pmids": ["34421827"],
+          "pmid_verified": [true],
+          "evidence_strength": "MODERATE",
+          "human_evidence": true,
+          "study_types": ["critical review"],
+          "include_in_scoring": true
+        }
+      ],
+      "dose": {
+        "range_mg": "500-2000",
+        "frequency": "per label / T2DM practice (extended-release variants exist)",
+        "source_pmid": "30416844",
+        "source_verified": true,
+        "source_note": "Geroscience TAME trial design article (companion PMC6230116); PMID corrected from unverified 30398915.",
+        "context": "Anti-aging indication not FDA-approved; diabetes dosing precedents."
+      },
+      "interactions": ["Renal clearance — hold around iodinated contrast per local protocol.", "B12 malabsorption with chronic use."],
+      "safety_notes": ["Lactic acidosis rare but serious in renal failure.", "RUO longevity framing."]
+    },
+    {
+      "compound_id": "resveratrol",
+      "display_name": "Resveratrol",
+      "hallmark_links": [
+        {
+          "hallmark": "nutrient_sensing",
+          "weight": 0.85,
+          "mechanism": "SIRT1/AMPK-related signaling and mitochondrial stress-response biology (primary verified review anchor).",
+          "db_pathways": ["pi3k_akt_mtor"],
+          "pmids": ["22560220"],
+          "pmid_verified": [true],
+          "evidence_strength": "ESTABLISHED",
+          "human_evidence": true,
+          "study_types": ["review", "human pharmacology (variable bioavailability)"],
+          "include_in_scoring": true
+        },
+        {
+          "hallmark": "altered_intercellular_communication",
+          "weight": 0.35,
+          "mechanism": "NF-κB / inflammatory modulation proposed in resveratrol aging reviews (PMIDs queued for manual confirmation).",
+          "db_pathways": [],
+          "pmids": ["34257808", "33551004"],
+          "pmid_verified": [false, false],
+          "evidence_strength": "WEAK",
+          "human_evidence": false,
+          "study_types": ["review_candidate"],
+          "include_in_scoring": false
+        }
+      ],
+      "dose": {
+        "range_mg": "100-1000 (high inter-individual variability)",
+        "frequency": "trial-dependent",
+        "source_pmid": "22560220",
+        "source_verified": true,
+        "context": "Human trials use diverse doses; bioavailability limits interpretation."
+      },
+      "interactions": ["Antiplatelet/anticoagulant caution; CYP interactions possible."],
+      "safety_notes": ["GI symptoms at higher doses.", "RUO."]
+    },
+    {
+      "compound_id": "spermidine",
+      "display_name": "Spermidine",
+      "hallmark_links": [
+        {
+          "hallmark": "loss_of_proteostasis",
+          "weight": 0.7,
+          "mechanism": "Autophagy enhancement; arterial aging reversal in vivo (corrected PMID).",
+          "db_pathways": ["autophagy"],
+          "pmids": ["23612189"],
+          "pmid_verified": [true],
+          "evidence_strength": "ESTABLISHED",
+          "human_evidence": false,
+          "study_types": ["in vivo model"],
+          "include_in_scoring": true
+        },
+        {
+          "hallmark": "nutrient_sensing",
+          "weight": 0.6,
+          "mechanism": "Polyamine metabolism intersects growth/nutrient signaling; human longevity associations in population work.",
+          "db_pathways": [],
+          "pmids": ["30082504", "29371440"],
+          "pmid_verified": [true, true],
+          "evidence_strength": "MODERATE",
+          "human_evidence": true,
+          "study_types": ["observational", "review"],
+          "include_in_scoring": true
+        }
+      ],
+      "dose": {
+        "range_mg": "dietary to low-dose supplemental (trial-defined)",
+        "frequency": "trial-dependent",
+        "source_pmid": "35503004",
+        "source_verified": false,
+        "context": "Cognition trial PMID flagged UNVERIFIED in audit — do not display to users until confirmed."
+      },
+      "interactions": ["Limited formal interaction data at supplement doses."],
+      "safety_notes": ["High-dose polyamine theory caution in malignancy contexts — specialist input.", "RUO."]
+    },
+    {
+      "compound_id": "fisetin",
+      "display_name": "Fisetin",
+      "hallmark_links": [
+        {
+          "hallmark": "cellular_senescence",
+          "weight": 0.7,
+          "mechanism": "Senotherapeutic flavonoid; senolytic/senomorphic evidence in preclinical models (verified PMID replaces 28610460).",
+          "db_pathways": [],
+          "pmids": ["30279143"],
+          "pmid_verified": [true],
+          "evidence_strength": "ESTABLISHED",
+          "human_evidence": false,
+          "study_types": ["preclinical", "lifespan models"],
+          "include_in_scoring": true
+        }
+      ],
+      "dose": {
+        "range_mg": "not standardized for senolytic use",
+        "frequency": "trial-only context",
+        "source_pmid": "30279143",
+        "source_verified": true,
+        "context": "Human senolytic dosing not established outside trials."
+      },
+      "interactions": ["Theoretical CYP interactions."],
+      "safety_notes": ["Early-phase senolytic research; not standard of care.", "RUO."]
+    },
+    {
+      "compound_id": "quercetin",
+      "display_name": "Quercetin",
+      "hallmark_links": [
+        {
+          "hallmark": "cellular_senescence",
+          "weight": 0.6,
+          "mechanism": "Dasatinib + quercetin (D+Q) phase I feasibility/tolerability in IPF (eBioMedicine 2023; PMID 36857968).",
+          "db_pathways": [],
+          "pmids": ["36857968"],
+          "pmid_verified": [true],
+          "evidence_strength": "MODERATE",
+          "human_evidence": true,
+          "study_types": ["clinical_trial", "phase_I"],
+          "include_in_scoring": true
+        }
+      ],
+      "dose": {
+        "range_mg": "trial-combination only with dasatinib",
+        "frequency": "protocol-specific",
+        "source_pmid": null,
+        "source_verified": false,
+        "context": "No verified dose PMID in audit queue; manual confirmation required."
+      },
+      "interactions": ["Many potential drug interactions as flavonoid; D+Q is prescription-context."],
+      "safety_notes": ["Do not self-experiment with D+Q.", "RUO."]
+    },
+    {
+      "compound_id": "nmn",
+      "display_name": "β-Nicotinamide Mononucleotide (NMN)",
+      "hallmark_links": [
+        {
+          "hallmark": "mitochondrial_dysfunction",
+          "weight": 0.6,
+          "mechanism": "NAD+ precursor biology; RCT in adults for safety/tolerability and exploratory endpoints.",
+          "db_pathways": ["nad_metabolism"],
+          "pmids": ["36482258"],
+          "pmid_verified": [true],
+          "evidence_strength": "MODERATE",
+          "human_evidence": true,
+          "study_types": ["RCT"],
+          "include_in_scoring": true
+        },
+        {
+          "hallmark": "nutrient_sensing",
+          "weight": 0.45,
+          "mechanism": "NAD+ links to sirtuin/mitochondrial stress responses (inferential at whole-organism level).",
+          "db_pathways": [],
+          "pmids": ["36482258"],
+          "pmid_verified": [true],
+          "evidence_strength": "MODERATE",
+          "human_evidence": false,
+          "study_types": ["mechanistic inference"],
+          "include_in_scoring": true
+        }
+      ],
+      "dose": {
+        "range_mg": "per published RCT arms",
+        "frequency": "daily in trials",
+        "source_pmid": "36482258",
+        "source_verified": true,
+        "context": "Regulatory status varies by jurisdiction; supplement quality variable."
+      },
+      "interactions": ["Limited long-term interaction data."],
+      "safety_notes": ["Long-term human longevity outcome data immature.", "RUO."]
+    },
+    {
+      "compound_id": "nr",
+      "display_name": "Nicotinamide Riboside (NR)",
+      "hallmark_links": [
+        {
+          "hallmark": "mitochondrial_dysfunction",
+          "weight": 0.6,
+          "mechanism": "NAD+ precursor; NRPT trial and related human studies for NAD metabolites.",
+          "db_pathways": ["nad_metabolism"],
+          "pmids": ["29211728"],
+          "pmid_verified": [true],
+          "evidence_strength": "MODERATE",
+          "human_evidence": true,
+          "study_types": ["clinical trial"],
+          "include_in_scoring": true
+        }
+      ],
+      "dose": {
+        "range_mg": "trial-formulation dependent",
+        "frequency": "daily",
+        "source_pmid": "29211728",
+        "source_verified": true,
+        "context": "Commercial formulations differ; not longevity-indicated."
+      },
+      "interactions": ["Theoretical overlap with methyl donor demand at high dose."],
+      "safety_notes": ["Flushing less than niacin; long-term outcome data incomplete.", "RUO."]
+    },
+    {
+      "compound_id": "nac",
+      "display_name": "N-Acetylcysteine (NAC) / GlyNAC",
+      "hallmark_links": [
+        {
+          "hallmark": "mitochondrial_dysfunction",
+          "weight": 0.85,
+          "mechanism": "Glutathione precursor; redox and mitochondrial function improvements in older adults (GlyNAC trials).",
+          "db_pathways": ["oxidative_stress_response"],
+          "pmids": ["33783984", "34587244"],
+          "pmid_verified": [true, true],
+          "evidence_strength": "ESTABLISHED",
+          "human_evidence": true,
+          "study_types": ["pilot RCT", "review"],
+          "include_in_scoring": true
+        },
+        {
+          "hallmark": "altered_intercellular_communication",
+          "weight": 0.6,
+          "mechanism": "Redox modulation can downshift inflammatory tone when oxidative stress drives signaling.",
+          "db_pathways": [],
+          "pmids": ["34587244"],
+          "pmid_verified": [true],
+          "evidence_strength": "MODERATE",
+          "human_evidence": true,
+          "study_types": ["review"],
+          "include_in_scoring": true
+        }
+      ],
+      "dose": {
+        "range_mg": "600-1200 (NAC); GlyNAC per trial",
+        "frequency": "trial-dependent",
+        "source_pmid": "33783984",
+        "source_verified": true,
+        "context": "GlyNAC combines glycine + NAC in published geroscience trials."
+      },
+      "interactions": ["Nitroglycerin interaction classically taught; anticoagulant caution."],
+      "safety_notes": ["Asthma caution (bronchospasm history).", "RUO longevity framing."]
+    },
+    {
+      "compound_id": "vitamin_d3",
+      "display_name": "Vitamin D3 (Cholecalciferol)",
+      "hallmark_links": [
+        {
+          "hallmark": "altered_intercellular_communication",
+          "weight": 0.85,
+          "mechanism": "Immune modulation and inflammaging-relevant biology in hallmarks-aligned vitamin D review (PMID corrected).",
+          "db_pathways": ["immune_regulation"],
+          "pmids": ["38542817"],
+          "pmid_verified": [true],
+          "evidence_strength": "ESTABLISHED",
+          "human_evidence": true,
+          "study_types": ["review"],
+          "include_in_scoring": true
+        },
+        {
+          "hallmark": "epigenetic_alterations",
+          "weight": 0.35,
+          "mechanism": "Proposed VDR-linked immune epigenetic programming (PMID 38285035 not audit-verified).",
+          "db_pathways": [],
+          "pmids": ["38285035"],
+          "pmid_verified": [false],
+          "evidence_strength": "WEAK",
+          "human_evidence": false,
+          "study_types": ["review_candidate"],
+          "include_in_scoring": false
+        }
+      ],
+      "dose": {
+        "range_iu": "individualized repletion per 25(OH)D",
+        "frequency": "daily/weekly per guideline",
+        "source_pmid": "38542817",
+        "source_verified": true,
+        "context": "Avoid mega-doses without monitoring; toxicity is possible."
+      },
+      "interactions": ["Thiazide + calcium hypercalcemia risk; some enzyme inducers lower 25(OH)D."],
+      "safety_notes": ["Hypercalcemia monitoring if high-dose.", "RUO longevity mapping."]
+    },
+    {
+      "compound_id": "folate",
+      "display_name": "Folate (5-MTHF / folic acid)",
+      "hallmark_links": [
+        {
+          "hallmark": "epigenetic_alterations",
+          "weight": 0.85,
+          "mechanism": "Methyl donor supply for one-carbon metabolism and DNA methylation balance.",
+          "db_pathways": ["one_carbon_metabolism"],
+          "pmids": ["19740080"],
+          "pmid_verified": [true],
+          "evidence_strength": "ESTABLISHED",
+          "human_evidence": true,
+          "study_types": ["biochemical", "clinical nutrition"],
+          "include_in_scoring": true
+        }
+      ],
+      "dose": {
+        "range_mcg": "400-800 DFE typical adult; higher in pregnancy per guidelines",
+        "frequency": "daily",
+        "source_pmid": "19740080",
+        "source_verified": true,
+        "context": "Masking B12 deficiency possible with high folic acid — evaluate B12 in neuropathy."
+      },
+      "interactions": ["Methotrexate antagonism; antiepileptic drug interactions."],
+      "safety_notes": ["Unmetabolized folic acid concerns at very high intakes — contested.", "RUO."]
+    },
+    {
+      "compound_id": "omega_3",
+      "display_name": "Omega-3 Fatty Acids (EPA/DHA)",
+      "hallmark_links": [
+        {
+          "hallmark": "telomere_attrition",
+          "weight": 0.6,
+          "mechanism": "RCT evidence linking omega-3 exposure to leukocyte telomere biology in published trial literature.",
+          "db_pathways": ["lipid_signaling"],
+          "pmids": ["20085953"],
+          "pmid_verified": [true],
+          "evidence_strength": "MODERATE",
+          "human_evidence": true,
+          "study_types": ["RCT"],
+          "include_in_scoring": true
+        },
+        {
+          "hallmark": "altered_intercellular_communication",
+          "weight": 0.6,
+          "mechanism": "Specialized pro-resolving mediators and anti-inflammatory lipid biology.",
+          "db_pathways": [],
+          "pmids": ["20085953"],
+          "pmid_verified": [true],
+          "evidence_strength": "MODERATE",
+          "human_evidence": true,
+          "study_types": ["clinical trial"],
+          "include_in_scoring": true
+        }
+      ],
+      "dose": {
+        "range_g": "0.5-2 EPA+DHA combined (trial-dependent)",
+        "frequency": "daily with meals",
+        "source_pmid": "20085953",
+        "source_verified": true,
+        "context": "Bleeding risk at high doses with anticoagulants."
+      },
+      "interactions": ["Anticoagulants/antiplatelets; surgical hold per anesthesia guidance."],
+      "safety_notes": ["Fish allergy considerations for marine oil sources.", "RUO."]
+    },
+    {
+      "compound_id": "curcumin",
+      "display_name": "Curcumin",
+      "hallmark_links": [
+        {
+          "hallmark": "cellular_senescence",
+          "weight": 0.6,
+          "mechanism": "MAPK/NF-κB-related senescence modulation in experimental systems (verified PMID).",
+          "db_pathways": ["mapk_signaling", "nfkb_pathway"],
+          "pmids": ["37371895"],
+          "pmid_verified": [true],
+          "evidence_strength": "MODERATE",
+          "human_evidence": false,
+          "study_types": ["preclinical"],
+          "include_in_scoring": true
+        },
+        {
+          "hallmark": "altered_intercellular_communication",
+          "weight": 0.45,
+          "mechanism": "Anti-inflammatory signaling in vitro/in vivo models; human translation limited by bioavailability.",
+          "db_pathways": [],
+          "pmids": ["37371895"],
+          "pmid_verified": [true],
+          "evidence_strength": "MODERATE",
+          "human_evidence": false,
+          "study_types": ["mechanistic"],
+          "include_in_scoring": true
+        }
+      ],
+      "dose": {
+        "range_mg": "500-2000 (often with piperine/phospholipid formulations)",
+        "frequency": "daily",
+        "source_pmid": "37371895",
+        "source_verified": true,
+        "context": "Formulation strongly affects exposure."
+      },
+      "interactions": ["Anticoagulant caution; may affect chemotherapy metabolism — oncology coordination."],
+      "safety_notes": ["Biliary obstruction caution.", "RUO."]
+    },
+    {
+      "compound_id": "egcg",
+      "display_name": "EGCG (Green Tea Catechin)",
+      "hallmark_links": [
+        {
+          "hallmark": "nutrient_sensing",
+          "weight": 0.7,
+          "mechanism": "mTOR-related modulation and metabolic stress-response biology in experimental senescence models.",
+          "db_pathways": ["pi3k_akt_mtor"],
+          "pmids": ["30456590"],
+          "pmid_verified": [true],
+          "evidence_strength": "ESTABLISHED",
+          "human_evidence": false,
+          "study_types": ["preclinical"],
+          "include_in_scoring": true
+        },
+        {
+          "hallmark": "cellular_senescence",
+          "weight": 0.7,
+          "mechanism": "Long-term green tea / EGCG exposure in rodent aging studies (verified PMID).",
+          "db_pathways": [],
+          "pmids": ["35618244"],
+          "pmid_verified": [true],
+          "evidence_strength": "ESTABLISHED",
+          "human_evidence": false,
+          "study_types": ["animal long-term"],
+          "include_in_scoring": true
+        },
+        {
+          "hallmark": "altered_intercellular_communication",
+          "weight": 0.45,
+          "mechanism": "Senescent endothelial context (additional verified PMID in audit list).",
+          "db_pathways": [],
+          "pmids": ["39906338"],
+          "pmid_verified": [true],
+          "evidence_strength": "MODERATE",
+          "human_evidence": false,
+          "study_types": ["preclinical"],
+          "include_in_scoring": true
+        }
+      ],
+      "dose": {
+        "range_mg": "100-800 EGCG (hepatotoxicity risk at high doses)",
+        "frequency": "divided doses",
+        "source_pmid": "30456590",
+        "source_verified": true,
+        "context": "EGCG concentrates linked to liver injury case reports — avoid megadoses."
+      },
+      "interactions": ["Anticoagulants; iron absorption reduction."],
+      "safety_notes": ["Hepatotoxicity signal at concentrated supplements.", "RUO."]
+    },
+    {
+      "compound_id": "coq10",
+      "display_name": "Coenzyme Q10 (Ubiquinone)",
+      "hallmark_links": [
+        {
+          "hallmark": "mitochondrial_dysfunction",
+          "weight": 0.45,
+          "mechanism": "Electron transport cofactor; mitochondrial energetics and oxidative stress balance (verified aging review PMID).",
+          "db_pathways": ["oxidative_phosphorylation"],
+          "pmids": ["29373872"],
+          "pmid_verified": [true],
+          "evidence_strength": "MODERATE",
+          "human_evidence": false,
+          "study_types": ["review"],
+          "include_in_scoring": true
+        },
+        {
+          "hallmark": "mitochondrial_dysfunction",
+          "weight": 0.35,
+          "mechanism": "Alternate aging-focused review PMID previously used — flagged UNVERIFIED pending manual confirmation.",
+          "db_pathways": [],
+          "pmids": ["31257257"],
+          "pmid_verified": [false],
+          "evidence_strength": "WEAK",
+          "human_evidence": false,
+          "study_types": ["review_candidate"],
+          "include_in_scoring": false
+        }
+      ],
+      "dose": {
+        "range_mg": "100-300 common in trials",
+        "frequency": "daily with fat-containing meal",
+        "source_pmid": "29373872",
+        "source_verified": true,
+        "context": "Ubiquinol vs ubiquinone formulations differ."
+      },
+      "interactions": ["Warfarin effect debated — monitor INR if combined."],
+      "safety_notes": ["Generally well tolerated; GI upset.", "RUO longevity claims."]
+    },
+    {
+      "compound_id": "l_carnitine",
+      "display_name": "L-Carnitine",
+      "hallmark_links": [
+        {
+          "hallmark": "mitochondrial_dysfunction",
+          "weight": 0.45,
+          "mechanism": "Fatty acid shuttle into mitochondria; supports beta-oxidation in deficiency states.",
+          "db_pathways": ["fatty_acid_metabolism"],
+          "pmids": ["15591008"],
+          "pmid_verified": [true],
+          "evidence_strength": "MODERATE",
+          "human_evidence": true,
+          "study_types": ["clinical physiology"],
+          "include_in_scoring": true
+        }
+      ],
+      "dose": {
+        "range_mg": "500-2000",
+        "frequency": "divided",
+        "source_pmid": "15591008",
+        "source_verified": true,
+        "context": "TMAO microbiome metabolism controversy in CVD risk — context-specific."
+      },
+      "interactions": ["Thyroid hormone interplay in theory; dialysis dosing distinct."],
+      "safety_notes": ["Fishy odor metabolite; GI upset.", "RUO."]
+    },
+    {
+      "compound_id": "magnesium",
+      "display_name": "Magnesium",
+      "hallmark_links": [
+        {
+          "hallmark": "telomere_attrition",
+          "weight": 0.6,
+          "mechanism": "Observational and mechanistic links between magnesium status and telomere biology (verified PMIDs).",
+          "db_pathways": ["ion_homeostasis"],
+          "pmids": ["29318949", "35596367"],
+          "pmid_verified": [true, true],
+          "evidence_strength": "MODERATE",
+          "human_evidence": true,
+          "study_types": ["observational", "NHANES-related"],
+          "include_in_scoring": true
+        },
+        {
+          "hallmark": "genomic_instability",
+          "weight": 0.45,
+          "mechanism": "Magnesium dependence of DNA repair enzymes; deficiency models link to genomic stress (mechanistic).",
+          "db_pathways": [],
+          "pmids": ["24570673", "22364515"],
+          "pmid_verified": [true, true],
+          "evidence_strength": "MODERATE",
+          "human_evidence": false,
+          "study_types": ["mechanistic", "model organism"],
+          "include_in_scoring": true
+        }
+      ],
+      "dose": {
+        "range_mg": "200-400 elemental (diet + supplement)",
+        "frequency": "daily",
+        "source_pmid": "29318949",
+        "source_verified": true,
+        "context": "Renal failure: avoid unsupervised supplementation."
+      },
+      "interactions": ["Osmotic laxative effect; bisphosphonate absorption spacing."],
+      "safety_notes": ["Hypermagnesemia risk in CKD.", "RUO."]
+    },
+    {
+      "compound_id": "beta_carotene",
+      "display_name": "Beta-Carotene",
+      "status": "HARMFUL_IN_CONTEXT",
+      "hallmark_links": [],
+      "harm_evidence": {
+        "context": "Current smokers, lung cancer risk",
+        "finding": "18-28% INCREASED lung cancer incidence",
+        "trials": "ATBC (n=29,133) + CARET (n=18,314)",
+        "pmids": ["8127329", "8602180"],
+        "action": "WARN"
+      },
+      "dose": null,
+      "interactions": []
+    }
+  ]
+}
+

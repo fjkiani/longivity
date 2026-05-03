@@ -1,0 +1,103 @@
+{
+  "_provenance": {
+    "title": "An epigenetic biomarker of aging for lifespan and healthspan",
+    "authors": "Levine ME et al.",
+    "journal": "Aging (Albany NY)",
+    "year": 2018,
+    "pmid": "29676998",
+    "doi": "10.18632/aging.101414",
+    "main_text_table": "Table 1. Phenotypic aging measures and Gompertz coefficients.",
+    "supplementary_pdf": "https://www.aging-us.com/article/101414/supplementary/SD1/0/aging-v10i4-101414-supplementary-material-SD1.pdf",
+    "supplementary_table_s1": "Supplementary Table S1 — same biomarker weights as Table 1 plus Constant and Gamma for the Gompertz PH model.",
+    "notes": [
+      "Biomarker + age weights are the published Gompertz linear predictor coefficients (Supplementary Table S1 / main text Table 1), not the penalized Cox selection betas.",
+      "x_b = Constant + sum(weight_i * marker_i), with CRP as natural log in mg/dL.",
+      "10-year mortality risk: MortalityScore_j = CDF(120 months, x_j) = 1 - exp(-exp(x_b) * (exp(120*gamma) - 1) / gamma), with t in months per Supplementary Methods.",
+      "Phenotypic age (years): PhenotypicAge_j = 141.50225 + ln(-0.00553 * ln(1 - MortalityScore_j)) / 0.090165 (Supplementary Methods, step 4).",
+      "Gamma is given as 0.0076927 in Supplementary Methods text; Supplementary Table S1 lists Gamma 0.0077 (rounded).",
+      "CRP log base (Methods vs Table S1): Supplementary Table S1 labels CRP as log(mg/dL) without specifying log10 vs ln. Supplementary Methods for PhenotypicAge use natural-log steps in surrounding equations. Reference stacks (NHANES BioAge / R BioAge) treat PhenoAge CRP as ln(mg/dL). This repo locks transform to natural_log (see biomarkers[].transform). If future primary-source erratum specifies log10, update transform + tests."
+    ]
+  },
+  "gompertz_model": {
+    "xb_intercept_constant": -19.9067,
+    "gamma_months": 0.0076927,
+    "gamma_months_table_s1_rounded": 0.0077,
+    "mortality_horizon_months": 120,
+    "phenotypic_age_calibration": {
+      "offset": 141.50225,
+      "ln_numerator_coefficient": -0.00553,
+      "denominator": 0.090165
+    }
+  },
+  "chronological_age": {
+    "units": "years",
+    "gompertz_weight": 0.0804
+  },
+  "biomarkers": [
+    {
+      "canonical_key": "albumin",
+      "label": "Albumin",
+      "units": "g/L",
+      "gompertz_weight": -0.0336,
+      "direction_higher_mortality": "lower_albumin_worse"
+    },
+    {
+      "canonical_key": "creatinine",
+      "label": "Creatinine",
+      "units": "umol/L",
+      "gompertz_weight": 0.0095,
+      "direction_higher_mortality": "higher_creatinine_worse"
+    },
+    {
+      "canonical_key": "glucose_serum",
+      "label": "Glucose, serum",
+      "units": "mmol/L",
+      "gompertz_weight": 0.1953,
+      "direction_higher_mortality": "higher_glucose_worse"
+    },
+    {
+      "canonical_key": "crp_log",
+      "label": "C-reactive protein (log)",
+      "units": "mg/dL",
+      "transform": "natural_log",
+      "gompertz_weight": 0.0954,
+      "direction_higher_mortality": "higher_log_crp_worse"
+    },
+    {
+      "canonical_key": "lymphocyte_percent",
+      "label": "Lymphocyte percent",
+      "units": "%",
+      "gompertz_weight": -0.012,
+      "direction_higher_mortality": "lower_lymphocyte_pct_worse"
+    },
+    {
+      "canonical_key": "mcv",
+      "label": "Mean cell volume",
+      "units": "fL",
+      "gompertz_weight": 0.0268,
+      "direction_higher_mortality": "higher_mcv_worse"
+    },
+    {
+      "canonical_key": "rdw",
+      "label": "Red cell distribution width",
+      "units": "%",
+      "gompertz_weight": 0.3306,
+      "direction_higher_mortality": "higher_rdw_worse"
+    },
+    {
+      "canonical_key": "alkaline_phosphatase",
+      "label": "Alkaline phosphatase",
+      "units": "U/L",
+      "gompertz_weight": 0.0019,
+      "direction_higher_mortality": "higher_alk_phos_worse"
+    },
+    {
+      "canonical_key": "wbc",
+      "label": "White blood cell count",
+      "units": "1000 cells/uL",
+      "gompertz_weight": 0.0554,
+      "direction_higher_mortality": "higher_wbc_worse"
+    }
+  ]
+}
+

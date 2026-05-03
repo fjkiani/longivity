@@ -1,0 +1,47 @@
+{
+  "version": "1.0.0",
+  "panel_name": "parental_lifespan_prs_27snp_timmers2019",
+  "description": "27 SNPs with largest |Years| effect from Timmers et al. 2019 parental lifespan GWAS (eLife 39856 supplementary table 2, sheet 'iGWAS 1% FDR'). APOE-region variants excluded from this panel (APOE diplotype remains in genetic_annotator). Effect size = Years column (parental lifespan change in years per copy of A1). GRCh37 coordinates from same table.",
+  "excluded_from_panel_note": "rs429358, rs7412 (APOE coding); rs147711004 (APOE locus, Timmers table).",
+  "literature_context": {
+    "timmers_parental_lifespan_gwas": {
+      "pmid": "31735170",
+      "journal": "eLife",
+      "article": "39856",
+      "data_file": "https://cdn.elifesciences.org/articles/39856/elife-39856-table2-data2-v2.xlsx",
+      "sheet": "iGWAS 1% FDR"
+    },
+    "prs5_centenarian_meta_note": "Multi-SNP longevity/centenarian PRS meta-analyses (e.g. van der Lee et al., J Gerontol A Biol Sci Med Sci 2021, PMID 33216869; related PRS-5 centenarian OR≈1.27 with APOE excluded) validate the general approach at larger SNP counts. This 27-SNP panel is a reduced instrument for demonstration; it is not numerically calibrated to PRS-5 ORs."
+  },
+  "min_loci_for_tertile": 10,
+  "variants": [
+    { "rsid": "rs117791490", "chromosome": 6, "position_grch37": 160916058, "effect_allele": "T", "beta_years_per_allele": -0.9114099, "locus_label": "near HLA region" },
+    { "rsid": "rs9986540", "chromosome": 6, "position_grch37": 160242487, "effect_allele": "T", "beta_years_per_allele": -0.8698921, "locus_label": "near HLA region" },
+    { "rsid": "rs114991018", "chromosome": 6, "position_grch37": 39560859, "effect_allele": "T", "beta_years_per_allele": 0.8084562, "locus_label": "6p21.1" },
+    { "rsid": "rs141766382", "chromosome": 6, "position_grch37": 161443939, "effect_allele": "C", "beta_years_per_allele": -0.798024, "locus_label": "near HLA region" },
+    { "rsid": "rs72686719", "chromosome": 4, "position_grch37": 102741302, "effect_allele": "G", "beta_years_per_allele": 0.6989415, "locus_label": "4q22.1" },
+    { "rsid": "rs113844046", "chromosome": 18, "position_grch37": 10125558, "effect_allele": "G", "beta_years_per_allele": 0.6891384, "locus_label": "18p11.32" },
+    { "rsid": "rs268", "chromosome": 8, "position_grch37": 19813529, "effect_allele": "G", "beta_years_per_allele": 0.6556407, "locus_label": "LPL region" },
+    { "rsid": "rs34891485", "chromosome": 17, "position_grch37": 40263458, "effect_allele": "C", "beta_years_per_allele": 0.4527068, "locus_label": "17q21.31" },
+    { "rsid": "rs116773366", "chromosome": 4, "position_grch37": 16500225, "effect_allele": "A", "beta_years_per_allele": 0.4209003, "locus_label": "4p15.2" },
+    { "rsid": "rs72736802", "chromosome": 15, "position_grch37": 78719501, "effect_allele": "T", "beta_years_per_allele": 0.3727872, "locus_label": "CHRNA3/5" },
+    { "rsid": "rs79257428", "chromosome": 8, "position_grch37": 29167857, "effect_allele": "G", "beta_years_per_allele": -0.3514769, "locus_label": "8p23.1" },
+    { "rsid": "rs2051677", "chromosome": 11, "position_grch37": 113732582, "effect_allele": "A", "beta_years_per_allele": -0.3471243, "locus_label": "11q23.3" },
+    { "rsid": "rs56289821", "chromosome": 19, "position_grch37": 11188247, "effect_allele": "A", "beta_years_per_allele": 0.3440575, "locus_label": "19p13.3" },
+    { "rsid": "rs1011157", "chromosome": 17, "position_grch37": 40960253, "effect_allele": "T", "beta_years_per_allele": -0.3386474, "locus_label": "17q25.3" },
+    { "rsid": "rs17123764", "chromosome": 12, "position_grch37": 49947952, "effect_allele": "T", "beta_years_per_allele": 0.3320326, "locus_label": "12q24.31" },
+    { "rsid": "rs1230666", "chromosome": 1, "position_grch37": 114173410, "effect_allele": "G", "beta_years_per_allele": -0.3224084, "locus_label": "1p13.2" },
+    { "rsid": "rs12594483", "chromosome": 15, "position_grch37": 43021986, "effect_allele": "A", "beta_years_per_allele": 0.3148293, "locus_label": "15q15.1" },
+    { "rsid": "rs2273500", "chromosome": 20, "position_grch37": 61986949, "effect_allele": "C", "beta_years_per_allele": 0.2974076, "locus_label": "20q13.33" },
+    { "rsid": "rs1445997", "chromosome": 5, "position_grch37": 56260634, "effect_allele": "G", "beta_years_per_allele": -0.2895798, "locus_label": "5q31.1" },
+    { "rsid": "rs35933822", "chromosome": 15, "position_grch37": 75273472, "effect_allele": "T", "beta_years_per_allele": 0.2874245, "locus_label": "15q25.1" },
+    { "rsid": "rs55869368", "chromosome": 1, "position_grch37": 56986633, "effect_allele": "T", "beta_years_per_allele": 0.2828809, "locus_label": "1p31.3" },
+    { "rsid": "rs12924886", "chromosome": 16, "position_grch37": 72075593, "effect_allele": "T", "beta_years_per_allele": 0.2797694, "locus_label": "16q24.1" },
+    { "rsid": "rs6744653", "chromosome": 2, "position_grch37": 628524, "effect_allele": "G", "beta_years_per_allele": 0.2772115, "locus_label": "2p25.3" },
+    { "rsid": "rs59234174", "chromosome": 9, "position_grch37": 16730258, "effect_allele": "T", "beta_years_per_allele": -0.2764555, "locus_label": "9p21.3" },
+    { "rsid": "rs57301765", "chromosome": 7, "position_grch37": 19052733, "effect_allele": "A", "beta_years_per_allele": -0.2676652, "locus_label": "7p22.1" },
+    { "rsid": "rs2272168", "chromosome": 7, "position_grch37": 99102777, "effect_allele": "C", "beta_years_per_allele": 0.2665403, "locus_label": "7q22.1" },
+    { "rsid": "rs56165099", "chromosome": 12, "position_grch37": 21357731, "effect_allele": "T", "beta_years_per_allele": 0.2648498, "locus_label": "12p12.1" }
+  ]
+}
+

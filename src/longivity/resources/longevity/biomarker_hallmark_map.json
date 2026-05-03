@@ -1,0 +1,935 @@
+{
+  "_file_header": {
+    "schema_version": "1.0",
+    "weight_derivation_note": "Hallmark link weights in companion compound file are derived from evidence_strength + human_evidence; biomarker thresholds here use clinical_consensus where no single PMID supports a numeric cutoff.",
+    "hallmark_weights": {
+      "genomic_instability": 1.0,
+      "telomere_attrition": 1.0,
+      "epigenetic_alterations": 1.0,
+      "loss_of_proteostasis": 1.0,
+      "nutrient_sensing": 1.0,
+      "mitochondrial_dysfunction": 1.0,
+      "cellular_senescence": 1.0,
+      "stem_cell_exhaustion": 1.0,
+      "altered_intercellular_communication": 1.0
+    },
+    "weight_rationale": "Equal weights applied. Lopez-Otin 2013 (PMID 23746838) and 2023 (PMID 36599349) present hallmarks as interconnected without quantitative ranking. No published systematic review assigns differential weights. Nature 2022 critical review (PMID 35880523) notes hallmarks are defined phenomenologically, not quantitatively.",
+    "weight_source": "absence of evidence for differential weighting",
+    "grimage_components": {
+      "pmid": "30669119",
+      "description": "GrimAge: DNAm surrogates for 7 plasma proteins plus DNAm pack-years",
+      "plasma_proteins": [
+        "adrenomedullin",
+        "beta-2-microglobulin",
+        "cystatin_C",
+        "GDF15",
+        "leptin",
+        "PAI-1",
+        "TIMP-1"
+      ],
+      "additional": ["DNAm_pack_years_smoking"]
+    },
+    "phenoage_note": "Clinical PhenoAge / phenotypic age (Levine 2018, PMID 29676998, Table 1 Gompertz weights) uses albumin, creatinine, glucose, CRP (log), lymphocyte%, MCV, RDW, alkaline phosphatase, WBC + chronological age — not GGT. CRP enters as log(CRP) continuously; it does not define an optimal 0.5 mg/L threshold."
+  },
+  "biomarkers": [
+    {
+      "biomarker_id": "fasting_insulin",
+      "display_name": "Fasting Insulin",
+      "unit": "uIU/mL",
+      "standard_range": { "min": 2.6, "max": 24.9, "source": "ADA/laboratory reference ranges (population-dependent)" },
+      "longevity_optimal": {
+        "max": 5.0,
+        "source": "clinical_consensus",
+        "source_note": "Derived from geroscience literature and clinical metabolic health targets; no single PMID establishes this specific cutoff for longevity.",
+        "verified": false
+      },
+      "hallmark_associations": [
+        {
+          "hallmark": "nutrient_sensing",
+          "association": "Hyperinsulinemia reflects mTOR/insulin/IGF-1 axis overactivation; chronically elevated insulin drives pro-aging anabolic signaling.",
+          "framework_pmid": "23746838",
+          "framework_note": "Lopez-Otin 2013 hallmarks framework — conceptual link to deregulated nutrient sensing, not insulin threshold values.",
+          "specific_pmid": null,
+          "evidence_strength": "ESTABLISHED"
+        }
+      ],
+      "direction": "HIGH_IS_VULNERABLE",
+      "thresholds": {
+        "optimal": { "max": 5.0 },
+        "moderate": { "min": 5.0, "max": 15.0 },
+        "high_risk": { "min": 15.0 }
+      },
+      "threshold_provenance": "clinical_consensus"
+    },
+    {
+      "biomarker_id": "homa_ir",
+      "display_name": "HOMA-IR",
+      "unit": "index",
+      "standard_range": {
+        "min": 0.5,
+        "max": 2.5,
+        "source": "Clinical endocrinology references; <1.0 often used as favorable; >2.5 suggests insulin resistance"
+      },
+      "longevity_optimal": {
+        "max": 1.0,
+        "source": "clinical_consensus",
+        "source_note": "Low HOMA-IR aligns with metabolic health in aging cohorts; no single longevity trial PMID fixes this cutoff.",
+        "verified": false
+      },
+      "hallmark_associations": [
+        {
+          "hallmark": "nutrient_sensing",
+          "association": "HOMA-IR indexes hepatic and peripheral insulin resistance; elevated values indicate deregulated insulin/IGF-1 signaling.",
+          "framework_pmid": "23746838",
+          "framework_note": "Framework-level nutrient-sensing hallmark; not a source for numeric HOMA-IR cutoffs.",
+          "specific_pmid": null,
+          "evidence_strength": "ESTABLISHED"
+        }
+      ],
+      "direction": "HIGH_IS_VULNERABLE",
+      "thresholds": {
+        "optimal": { "max": 1.0 },
+        "moderate": { "min": 1.0, "max": 2.5 },
+        "high_risk": { "min": 2.5 }
+      },
+      "threshold_provenance": "clinical_consensus"
+    },
+    {
+      "biomarker_id": "hba1c",
+      "display_name": "HbA1c",
+      "unit": "%",
+      "standard_range": {
+        "min": 4.0,
+        "max": 5.6,
+        "source": "ADA: <5.7% normal; 5.7–6.4% prediabetes; ≥6.5% diabetes"
+      },
+      "longevity_optimal": {
+        "max": 5.2,
+        "source": "clinical_consensus",
+        "source_note": "Tighter than ADA normal upper bound often used in healthy-aging discourse; not tied to a single centenarian PMID.",
+        "verified": false
+      },
+      "hallmark_associations": [
+        {
+          "hallmark": "nutrient_sensing",
+          "association": "Chronic hyperglycemia reflects sustained nutrient-sensing pathway activation and glycation stress.",
+          "framework_pmid": "23746838",
+          "framework_note": "Conceptual hallmarks framing; ADA defines diagnostic glycemic categories.",
+          "specific_pmid": null,
+          "evidence_strength": "ESTABLISHED"
+        },
+        {
+          "hallmark": "altered_intercellular_communication",
+          "association": "Advanced glycation and activation of inflammatory axes contribute to inflammaging.",
+          "framework_pmid": "36599349",
+          "framework_note": "Updated hallmarks include chronic inflammation as integrative process.",
+          "specific_pmid": null,
+          "evidence_strength": "MODERATE"
+        }
+      ],
+      "direction": "HIGH_IS_VULNERABLE",
+      "thresholds": {
+        "optimal": { "max": 5.2 },
+        "moderate": { "min": 5.2, "max": 5.7 },
+        "high_risk": { "min": 5.7 }
+      },
+      "threshold_provenance": "clinical_consensus"
+    },
+    {
+      "biomarker_id": "hscrp",
+      "display_name": "High-Sensitivity CRP",
+      "unit": "mg/L",
+      "standard_range": {
+        "min": 0,
+        "max": 3.0,
+        "source": "AHA/CDC cardiovascular risk strata: <1.0 low; 1.0–3.0 average; >3.0 high"
+      },
+      "longevity_optimal": {
+        "max": 0.5,
+        "source": "extrapolated_from_aha_cardiovascular_risk_stratification_and_healthy_aging_cohort_data",
+        "source_note": "PhenoAge (PMID 29676998) includes log(CRP) as a continuous predictor, not a 0.5 mg/L optimal rule. This threshold is extrapolated, not PMID-direct.",
+        "verified": false
+      },
+      "hallmark_associations": [
+        {
+          "hallmark": "altered_intercellular_communication",
+          "association": "hsCRP is a systemic inflammation marker aligned with inflammaging; IL-6/NF-κB pathways.",
+          "framework_pmid": "36599349",
+          "framework_note": "Chronic inflammation as updated hallmark context.",
+          "specific_pmid": "29676998",
+          "specific_note": "PhenoAge incorporates CRP continuously for mortality prediction — not this numeric cutoff.",
+          "evidence_strength": "ESTABLISHED"
+        }
+      ],
+      "direction": "HIGH_IS_VULNERABLE",
+      "thresholds": {
+        "optimal": { "max": 0.5 },
+        "moderate": { "min": 0.5, "max": 3.0 },
+        "high_risk": { "min": 3.0 }
+      },
+      "threshold_provenance": "extrapolated_from_aha_cardiovascular_risk_stratification_plus_healthy_aging_literature"
+    },
+    {
+      "biomarker_id": "il6",
+      "display_name": "IL-6",
+      "unit": "pg/mL",
+      "standard_range": { "min": 0, "max": 7.0, "source": "Assay/lab reference (variable)" },
+      "longevity_optimal": {
+        "max": 1.5,
+        "source": "clinical_consensus",
+        "source_note": "Inflammaging literature supports lower IL-6 as favorable; exact cutoff not from one PMID.",
+        "verified": false
+      },
+      "hallmark_associations": [
+        {
+          "hallmark": "altered_intercellular_communication",
+          "association": "IL-6 drives acute-phase response and systemic inflammatory tone in aging.",
+          "framework_pmid": "36599349",
+          "framework_note": "Inflammation as hallmark context.",
+          "specific_pmid": null,
+          "evidence_strength": "ESTABLISHED"
+        },
+        {
+          "hallmark": "cellular_senescence",
+          "association": "IL-6 is a canonical SASP factor; elevated levels may reflect higher senescent burden (context-dependent).",
+          "framework_pmid": "23746838",
+          "framework_note": "Senescence hallmark framing; not IL-6 threshold values.",
+          "specific_pmid": null,
+          "evidence_strength": "MODERATE"
+        }
+      ],
+      "direction": "HIGH_IS_VULNERABLE",
+      "thresholds": {
+        "optimal": { "max": 1.5 },
+        "moderate": { "min": 1.5, "max": 5.0 },
+        "high_risk": { "min": 5.0 }
+      },
+      "threshold_provenance": "clinical_consensus"
+    },
+    {
+      "biomarker_id": "tnf_alpha",
+      "display_name": "TNF-alpha",
+      "unit": "pg/mL",
+      "standard_range": { "min": 0, "max": 8.1, "source": "Laboratory reference (variable)" },
+      "longevity_optimal": {
+        "max": 2.0,
+        "source": "clinical_consensus",
+        "source_note": "Extrapolated from healthy cohort medians and inflammaging reviews; no single longevity PMID for this cutoff.",
+        "verified": false
+      },
+      "hallmark_associations": [
+        {
+          "hallmark": "altered_intercellular_communication",
+          "association": "TNF-α is a master pro-inflammatory cytokine in aged tissues.",
+          "framework_pmid": "36599349",
+          "framework_note": "Inflammaging / intercellular communication context.",
+          "specific_pmid": null,
+          "evidence_strength": "ESTABLISHED"
+        }
+      ],
+      "direction": "HIGH_IS_VULNERABLE",
+      "thresholds": {
+        "optimal": { "max": 2.0 },
+        "moderate": { "min": 2.0, "max": 6.0 },
+        "high_risk": { "min": 6.0 }
+      },
+      "threshold_provenance": "clinical_consensus"
+    },
+    {
+      "biomarker_id": "igf1",
+      "display_name": "IGF-1",
+      "unit": "ng/mL",
+      "standard_range": { "min": 53, "max": 331, "source": "Age- and sex-dependent laboratory norms" },
+      "longevity_optimal": {
+        "min": 100,
+        "max": 180,
+        "source": "clinical_consensus",
+        "source_note": "U-shaped mortality described across studies; moderate range often discussed in human aging — not from Lopez-Otin numeric tables.",
+        "verified": false
+      },
+      "hallmark_associations": [
+        {
+          "hallmark": "nutrient_sensing",
+          "association": "IGF-1 sits in the conserved insulin/IGF-1 nutrient-sensing axis implicated in aging biology.",
+          "framework_pmid": "23746838",
+          "framework_note": "Deregulated nutrient sensing hallmark; model-organism lifespan data do not map 1:1 to human IGF-1 cutoffs.",
+          "specific_pmid": null,
+          "evidence_strength": "ESTABLISHED"
+        }
+      ],
+      "direction": "U_SHAPED_EXTREMES_VULNERABLE",
+      "thresholds": {
+        "optimal": { "min": 100, "max": 180 },
+        "moderate_low": { "min": 80, "max": 100 },
+        "moderate_high": { "min": 180, "max": 250 },
+        "high_risk": { "low_band_max": 80, "high_band_min": 250 }
+      },
+      "threshold_provenance": "clinical_consensus"
+    },
+    {
+      "biomarker_id": "homocysteine",
+      "display_name": "Homocysteine",
+      "unit": "umol/L",
+      "standard_range": { "min": 4.0, "max": 15.0, "source": "Laboratory reference" },
+      "longevity_optimal": {
+        "max": 8.0,
+        "source": "literature_supported_cardiovascular_risk_thresholds",
+        "source_note": "PMID 19740080 supports one-carbon metabolism / methylation links; optimal cutoff still consensus-aligned.",
+        "verified": false
+      },
+      "hallmark_associations": [
+        {
+          "hallmark": "epigenetic_alterations",
+          "association": "Homocysteine reflects one-carbon metabolism and methylation donor balance.",
+          "framework_pmid": "23746838",
+          "framework_note": "Epigenetic alterations hallmark context.",
+          "specific_pmid": "19740080",
+          "evidence_strength": "ESTABLISHED"
+        },
+        {
+          "hallmark": "genomic_instability",
+          "association": "Elevated homocysteine linked to DNA repair/misincorporation pathways in mechanistic literature.",
+          "framework_pmid": "23746838",
+          "framework_note": "Genomic instability hallmark context.",
+          "specific_pmid": "19740080",
+          "evidence_strength": "MODERATE"
+        }
+      ],
+      "direction": "HIGH_IS_VULNERABLE",
+      "thresholds": {
+        "optimal": { "max": 8.0 },
+        "moderate": { "min": 8.0, "max": 15.0 },
+        "high_risk": { "min": 15.0 }
+      },
+      "threshold_provenance": "clinical_consensus_with_methylation_literature"
+    },
+    {
+      "biomarker_id": "25oh_vitamin_d",
+      "display_name": "25-Hydroxyvitamin D",
+      "unit": "ng/mL",
+      "standard_range": { "min": 30, "max": 100, "source": "Endocrine Society: >30 sufficient; 20–29 insufficient; <20 deficient" },
+      "longevity_optimal": {
+        "min": 40,
+        "max": 60,
+        "source": "hallmarks_review_corrected_pmid",
+        "source_note": "Vitamin D and aging hallmarks review PMID 38542817 (corrected from 38531377).",
+        "verified": true
+      },
+      "hallmark_associations": [
+        {
+          "hallmark": "altered_intercellular_communication",
+          "association": "Vitamin D/VDR modulates immune and inflammatory tone.",
+          "framework_pmid": "36599349",
+          "framework_note": "Immune/inflammation integration.",
+          "specific_pmid": "38542817",
+          "evidence_strength": "ESTABLISHED"
+        },
+        {
+          "hallmark": "epigenetic_alterations",
+          "association": "Vitamin D signaling intersects with immune cell epigenetic programs in mechanistic work.",
+          "framework_pmid": "23746838",
+          "framework_note": "Epigenetic hallmark context.",
+          "specific_pmid": "38285035",
+          "specific_verified": false,
+          "specific_note": "Immunocompetence review PMID flagged UNVERIFIED in audit — queued for manual confirmation.",
+          "evidence_strength": "MODERATE"
+        }
+      ],
+      "direction": "LOW_IS_VULNERABLE",
+      "thresholds": {
+        "optimal": { "min": 40, "max": 60 },
+        "moderate": { "min": 20, "max": 40 },
+        "high_risk": { "max": 20 }
+      },
+      "threshold_provenance": "review_pmid_38542817_plus_endocrine_sufficiency_bounds"
+    },
+    {
+      "biomarker_id": "leukocyte_telomere_length",
+      "display_name": "Leukocyte Telomere Length",
+      "unit": "kb or T/S ratio",
+      "standard_range": { "note": "Age-dependent; population reference curves", "source": "Epidemiological reference distributions" },
+      "longevity_optimal": {
+        "note": "Age-adjusted percentile >50th often associated with lower mortality in some cohorts",
+        "source": "cohort_literature",
+        "source_pmid": "20085953",
+        "source_note": "Omega-3/telomere JAMA-associated literature cluster; LTL-mortality associations are population-specific.",
+        "verified": true
+      },
+      "hallmark_associations": [
+        {
+          "hallmark": "telomere_attrition",
+          "association": "Direct leukocyte telomere measurement maps to telomere attrition hallmark.",
+          "framework_pmid": "23746838",
+          "framework_note": "Telomere attrition as hallmark.",
+          "specific_pmid": null,
+          "evidence_strength": "ESTABLISHED"
+        },
+        {
+          "hallmark": "cellular_senescence",
+          "association": "Critically short telomeres contribute to replicative senescence programs.",
+          "framework_pmid": "23746838",
+          "framework_note": "Senescence hallmark context.",
+          "specific_pmid": null,
+          "evidence_strength": "ESTABLISHED"
+        }
+      ],
+      "direction": "LOW_IS_VULNERABLE",
+      "thresholds": {
+        "optimal": { "note": "Age-adjusted >50th percentile" },
+        "moderate": { "note": "Age-adjusted ~20th–50th percentile" },
+        "high_risk": { "note": "Age-adjusted <20th percentile" }
+      },
+      "threshold_provenance": "population_percentile_clinical_consensus"
+    },
+    {
+      "biomarker_id": "dnam_epigenetic_age",
+      "display_name": "DNA Methylation Epigenetic Age",
+      "unit": "years (acceleration) or pace",
+      "standard_range": { "note": "Horvath/Hannum track chronological age; GrimAge/PACE predict morbidity/mortality", "source": "PMID 24138928; 29676998; 30669119; 35029144" },
+      "longevity_optimal": {
+        "note": "Negative age acceleration vs chronological; DunedinPACE <1.0 years/year (interpret per assay)",
+        "source": "pace_literature",
+        "source_pmid": "35029144",
+        "source_note": "DunedinPACE predicts pace of aging; thresholds are model-specific.",
+        "verified": true
+      },
+      "hallmark_associations": [
+        {
+          "hallmark": "epigenetic_alterations",
+          "association": "Epigenetic clocks summarize systemic CpG methylation patterns linked to aging processes.",
+          "framework_pmid": "36599349",
+          "framework_note": "Epigenetic alterations as hallmark.",
+          "specific_pmid": "30669119",
+          "specific_note": "GrimAge: 7 plasma protein surrogates + DNAm pack-years (see file header).",
+          "evidence_strength": "ESTABLISHED"
+        }
+      ],
+      "direction": "HIGH_ACCELERATION_OR_PACE_IS_VULNERABLE",
+      "thresholds": {
+        "optimal": { "note": "Age acceleration <0 years; DunedinPACE <0.95 (assay-specific)" },
+        "moderate": { "note": "Acceleration 0–5 years; PACE 0.95–1.10" },
+        "high_risk": { "note": "Acceleration >5 years; PACE >1.10" }
+      },
+      "threshold_provenance": "clock_specific_publications"
+    },
+    {
+      "biomarker_id": "ggt",
+      "display_name": "Gamma-Glutamyl Transferase",
+      "unit": "U/L",
+      "standard_range": { "min": 0, "max": 55, "source": "Laboratory ULN (~55 U/L men, ~38 U/L women) varies by lab" },
+      "longevity_optimal": {
+        "max": 20,
+        "source": "clinical_consensus",
+        "source_note": "Lower-normal GGT associated with better outcomes in epidemiology; **not** from PhenoAge (PhenoAge uses alkaline phosphatase, not GGT — PMID 29676998).",
+        "verified": false
+      },
+      "hallmark_associations": [
+        {
+          "hallmark": "mitochondrial_dysfunction",
+          "association": "GGT correlates with oxidative stress and glutathione turnover in population studies.",
+          "framework_pmid": "23746838",
+          "framework_note": "Mitochondrial/oxidative stress context at framework level.",
+          "specific_pmid": null,
+          "evidence_strength": "MODERATE"
+        },
+        {
+          "hallmark": "altered_intercellular_communication",
+          "association": "Elevated GGT tracks with metabolic-inflammatory comorbidity burden in observational data.",
+          "framework_pmid": "36599349",
+          "framework_note": "Integrative inflammation/metabolism context.",
+          "specific_pmid": null,
+          "evidence_strength": "MODERATE"
+        }
+      ],
+      "direction": "HIGH_IS_VULNERABLE",
+      "thresholds": {
+        "optimal": { "max": 20 },
+        "moderate": { "min": 20, "max": 55 },
+        "high_risk": { "min": 55 }
+      },
+      "threshold_provenance": "clinical_consensus_epidemiology_not_phenoage"
+    },
+    {
+      "biomarker_id": "ferritin",
+      "display_name": "Ferritin",
+      "unit": "ng/mL",
+      "standard_range": { "min": 12, "max": 300, "source": "Laboratory: men often 12–300; women 12–150 (lab-specific)" },
+      "longevity_optimal": {
+        "min": 40,
+        "max": 100,
+        "source": "clinical_consensus",
+        "source_note": "Iron status is U-shaped for risk; avoid deficiency and marked overload — no single longevity PMID for this band.",
+        "verified": false
+      },
+      "hallmark_associations": [
+        {
+          "hallmark": "genomic_instability",
+          "association": "Iron catalysis can amplify oxidative DNA damage in mechanistic models.",
+          "framework_pmid": "36599349",
+          "framework_note": "Oxidative/macromolecular damage themes in updated aging reviews.",
+          "specific_pmid": null,
+          "evidence_strength": "MODERATE"
+        },
+        {
+          "hallmark": "mitochondrial_dysfunction",
+          "association": "Iron mishandling contributes to mitochondrial ROS and lipid peroxidation in experimental systems.",
+          "framework_pmid": "23746838",
+          "framework_note": "Mitochondrial dysfunction hallmark context.",
+          "specific_pmid": null,
+          "evidence_strength": "MODERATE"
+        }
+      ],
+      "direction": "U_SHAPED_EXTREMES_VULNERABLE",
+      "thresholds": {
+        "optimal": { "min": 40, "max": 100 },
+        "moderate_low": { "min": 20, "max": 40 },
+        "moderate_high": { "min": 100, "max": 200 },
+        "high_risk": { "low_band_max": 20, "high_band_min": 200 }
+      },
+      "threshold_provenance": "clinical_consensus"
+    },
+    {
+      "biomarker_id": "apob",
+      "display_name": "Apolipoprotein B",
+      "unit": "mg/dL",
+      "standard_range": { "min": 40, "max": 120, "source": "Laboratory/guideline-dependent" },
+      "longevity_optimal": {
+        "max": 70,
+        "source": "dyslipidemia_guideline_consensus",
+        "source_note": "EAS/ESC-style targets often <65–80 mg/dL in high-risk patients; product uses conservative optimal cap for longevity framing.",
+        "verified": false
+      },
+      "hallmark_associations": [
+        {
+          "hallmark": "altered_intercellular_communication",
+          "association": "ApoB particles drive atherogenic inflammation and arterial wall biology.",
+          "framework_pmid": "36599349",
+          "framework_note": "Chronic inflammation / age-related disease integration.",
+          "specific_pmid": null,
+          "evidence_strength": "ESTABLISHED"
+        }
+      ],
+      "direction": "HIGH_IS_VULNERABLE",
+      "thresholds": {
+        "optimal": { "max": 70 },
+        "moderate": { "min": 70, "max": 100 },
+        "high_risk": { "min": 100 }
+      },
+      "threshold_provenance": "eas_esc_dyslipidemia_consensus"
+    },
+    {
+      "biomarker_id": "lp_a",
+      "display_name": "Lipoprotein (a)",
+      "unit": "nmol/L",
+      "standard_range": { "min": 0, "max": 75, "source": "Assay-specific; <75 nmol/L often cited as lower risk tier" },
+      "longevity_optimal": {
+        "max": 30,
+        "source": "lp_a_consensus_literature",
+        "source_note": "Highly genetically determined; thresholds from consensus statements — not modifiable by lifestyle alone.",
+        "verified": false
+      },
+      "hallmark_associations": [
+        {
+          "hallmark": "altered_intercellular_communication",
+          "association": "Lp(a) carries pro-inflammatory/oxidized phospholipid cargo linked to vascular risk.",
+          "framework_pmid": "36599349",
+          "framework_note": "Inflammation/vascular aging integration.",
+          "specific_pmid": null,
+          "evidence_strength": "ESTABLISHED"
+        }
+      ],
+      "direction": "HIGH_IS_VULNERABLE",
+      "thresholds": {
+        "optimal": { "max": 75 },
+        "moderate": { "min": 75, "max": 125 },
+        "high_risk": { "min": 125 }
+      },
+      "threshold_provenance": "eas_consensus_style_bands"
+    },
+    {
+      "biomarker_id": "dhea_s",
+      "display_name": "DHEA-S",
+      "unit": "ug/dL",
+      "standard_range": { "note": "Age- and sex-dependent; peaks in 20s then declines", "source": "Endocrine reference ranges" },
+      "longevity_optimal": {
+        "note": "Age-adjusted upper-middle quartile discussed in some cohorts",
+        "source": "clinical_consensus",
+        "source_note": "No single PMID fixes DHEA-S optimal for longevity; framework cites only conceptual aging biology.",
+        "verified": false
+      },
+      "hallmark_associations": [
+        {
+          "hallmark": "cellular_senescence",
+          "association": "DHEA/DHEA-S decline tracks with endocrine aging; mechanistic links to senescence markers are weaker in humans.",
+          "framework_pmid": "23746838",
+          "framework_note": "Endocrine aspect of aging biology at framework level.",
+          "specific_pmid": null,
+          "evidence_strength": "WEAK"
+        },
+        {
+          "hallmark": "altered_intercellular_communication",
+          "association": "Adrenal androgens modulate immune tone; decline implicated in immunosenescence narratives.",
+          "framework_pmid": "36599349",
+          "framework_note": "Immune aging integration.",
+          "specific_pmid": null,
+          "evidence_strength": "MODERATE"
+        }
+      ],
+      "direction": "LOW_IS_VULNERABLE",
+      "thresholds": {
+        "optimal": { "note": "Age-adjusted >50th percentile" },
+        "moderate": { "note": "Age-adjusted ~25th–50th percentile" },
+        "high_risk": { "note": "Age-adjusted <25th percentile" }
+      },
+      "threshold_provenance": "clinical_consensus"
+    },
+    {
+      "biomarker_id": "free_testosterone",
+      "display_name": "Free Testosterone",
+      "unit": "pg/mL",
+      "standard_range": { "note": "Sex- and age-specific (e.g., men ~5–21 pg/mL varies)", "source": "Endocrine Society laboratory norms" },
+      "longevity_optimal": {
+        "note": "Age-adjusted mid-range; avoid very low and supraphysiologic extremes",
+        "source": "clinical_consensus",
+        "source_note": "U-shaped mortality patterns in some observational studies; no single longevity PMID for cutoffs.",
+        "verified": false
+      },
+      "hallmark_associations": [
+        {
+          "hallmark": "stem_cell_exhaustion",
+          "association": "Sex steroids influence tissue maintenance and regenerative capacity in biology textbooks; human longevity linkage is indirect.",
+          "framework_pmid": "23746838",
+          "framework_note": "Stem cell exhaustion hallmark context.",
+          "specific_pmid": null,
+          "evidence_strength": "WEAK"
+        },
+        {
+          "hallmark": "cellular_senescence",
+          "association": "Low testosterone associated with adverse body-composition aging phenotypes in observational data.",
+          "framework_pmid": "36599349",
+          "framework_note": "Integrative aging phenotypes.",
+          "specific_pmid": null,
+          "evidence_strength": "WEAK"
+        }
+      ],
+      "direction": "U_SHAPED_EXTREMES_VULNERABLE",
+      "thresholds": {
+        "optimal": { "note": "Age-adjusted ~50th–75th percentile" },
+        "moderate": { "note": "25th–50th or 75th–90th" },
+        "high_risk": { "note": "<25th or concern for supraphysiologic use" }
+      },
+      "threshold_provenance": "clinical_consensus"
+    },
+    {
+      "biomarker_id": "serum_albumin_g_l",
+      "display_name": "Serum albumin (PhenoAge component)",
+      "unit": "g/L",
+      "standard_range": { "note": "~35–52 g/L typical adult (lab/assay dependent)", "source": "clinical laboratory reference ranges" },
+      "longevity_optimal": {
+        "min": 40,
+        "max": 52,
+        "source": "clinical_consensus",
+        "source_note": "PhenoAge uses albumin continuously (PMID 29676998); these bands are CrisPRO UX thresholds only (acceleration_method).",
+        "verified": false
+      },
+      "hallmark_associations": [
+        {
+          "hallmark": "loss_of_proteostasis",
+          "association": "Hypoalbuminemia commonly reflects systemic stressors integrated into biological aging metrics; PhenoAge lists albumin among predictors.",
+          "framework_pmid": "23746838",
+          "framework_note": "Proteostasis hallmark framework.",
+          "specific_pmid": "29676998",
+          "specific_note": "Albumin coefficient in published PhenoAge Gompertz model.",
+          "evidence_strength": "ESTABLISHED"
+        },
+        {
+          "hallmark": "nutrient_sensing",
+          "association": "Albumin integrates nutritional and metabolic reserve signals at a systems level (interpretive bridge, not a direct mTOR readout).",
+          "framework_pmid": "36599349",
+          "framework_note": "Updated hallmarks context.",
+          "specific_pmid": null,
+          "evidence_strength": "MODERATE"
+        }
+      ],
+      "direction": "LOW_IS_VULNERABLE",
+      "thresholds": {
+        "optimal": { "min": 40, "max": 52 },
+        "moderate": { "min": 35, "max": 40 },
+        "high_risk": { "max": 35 }
+      },
+      "threshold_provenance": "clinical_lab_reference_consensus"
+    },
+    {
+      "biomarker_id": "serum_creatinine_umol_l",
+      "display_name": "Serum creatinine (PhenoAge component)",
+      "unit": "µmol/L",
+      "standard_range": { "note": "~53–115 µmol/L typical adult female; ~70–130 male (lab dependent)", "source": "clinical laboratory reference" },
+      "longevity_optimal": {
+        "max": 110,
+        "source": "clinical_consensus",
+        "source_note": "PhenoAge uses creatinine continuously (PMID 29676998); bands are UX thresholds only.",
+        "verified": false
+      },
+      "hallmark_associations": [
+        {
+          "hallmark": "cellular_senescence",
+          "association": "Creatinine integrates renal clearance; declining renal reserve tracks tissue aging phenotypes in population mortality models.",
+          "framework_pmid": "36599349",
+          "framework_note": "Integrative aging phenotypes.",
+          "specific_pmid": "29676998",
+          "specific_note": "Creatinine coefficient in PhenoAge model.",
+          "evidence_strength": "ESTABLISHED"
+        }
+      ],
+      "direction": "HIGH_IS_VULNERABLE",
+      "thresholds": {
+        "optimal": { "max": 110 },
+        "moderate": { "min": 110, "max": 150 },
+        "high_risk": { "min": 150 }
+      },
+      "threshold_provenance": "clinical_lab_reference_consensus"
+    },
+    {
+      "biomarker_id": "serum_glucose_mmol",
+      "display_name": "Serum glucose (PhenoAge component)",
+      "unit": "mmol/L",
+      "standard_range": { "note": "Fasting ~3.9–5.6 mmol/L normal; diabetes diagnostic thresholds assay/context dependent", "source": "ADA/WHO frameworks (simplified for UX)" },
+      "longevity_optimal": {
+        "max": 5.6,
+        "source": "clinical_consensus",
+        "source_note": "PhenoAge uses glucose continuously (PMID 29676998).",
+        "verified": false
+      },
+      "hallmark_associations": [
+        {
+          "hallmark": "nutrient_sensing",
+          "association": "Glycemia intersects insulin/IGF–mTOR nutrient-sensing biology in aging canon.",
+          "framework_pmid": "23746838",
+          "framework_note": "Nutrient sensing hallmark.",
+          "specific_pmid": "29676998",
+          "specific_note": "Glucose coefficient in PhenoAge model.",
+          "evidence_strength": "ESTABLISHED"
+        }
+      ],
+      "direction": "HIGH_IS_VULNERABLE",
+      "thresholds": {
+        "optimal": { "max": 5.6 },
+        "moderate": { "min": 5.6, "max": 7.0 },
+        "high_risk": { "min": 7.0 }
+      },
+      "threshold_provenance": "clinical_consensus"
+    },
+    {
+      "biomarker_id": "lymphocyte_percent",
+      "display_name": "Lymphocyte percent (PhenoAge component)",
+      "unit": "%",
+      "standard_range": { "min": 20, "max": 45, "source": "CBC reference (variable)" },
+      "longevity_optimal": {
+        "min": 20,
+        "max": 40,
+        "source": "clinical_consensus",
+        "source_note": "PhenoAge uses lymphocyte percent continuously (PMID 29676998).",
+        "verified": false
+      },
+      "hallmark_associations": [
+        {
+          "hallmark": "altered_intercellular_communication",
+          "association": "Lymphocyte fraction shifts mirror adaptive immune remodeling/inflammaging context in population aging studies.",
+          "framework_pmid": "36599349",
+          "framework_note": "Immune aging / communication.",
+          "specific_pmid": "29676998",
+          "specific_note": "Lymphocyte % coefficient in PhenoAge model.",
+          "evidence_strength": "ESTABLISHED"
+        },
+        {
+          "hallmark": "cellular_senescence",
+          "association": "Immunosenescence narratives link lymphocyte compartment changes to senescent-cell burden (indirect).",
+          "framework_pmid": "23746838",
+          "framework_note": "Senescence hallmark framing.",
+          "specific_pmid": null,
+          "evidence_strength": "WEAK"
+        }
+      ],
+      "direction": "LOW_IS_VULNERABLE",
+      "thresholds": {
+        "optimal": { "min": 20, "max": 40 },
+        "moderate": { "min": 15, "max": 20 },
+        "high_risk": { "max": 15 }
+      },
+      "threshold_provenance": "clinical_consensus"
+    },
+    {
+      "biomarker_id": "mcv",
+      "display_name": "Mean corpuscular volume / MCV (PhenoAge component)",
+      "unit": "fL",
+      "standard_range": { "min": 80, "max": 100, "source": "CBC reference" },
+      "longevity_optimal": {
+        "min": 80,
+        "max": 100,
+        "source": "clinical_consensus",
+        "source_note": "PhenoAge uses MCV continuously with positive coefficient (higher MCV associates with higher mortality in model; PMID 29676998).",
+        "verified": false
+      },
+      "hallmark_associations": [
+        {
+          "hallmark": "mitochondrial_dysfunction",
+          "association": "Macrocytosis and RBC indices are often discussed alongside nutritional/mitochondrial erythropoietic stress (interpretive narrative only).",
+          "framework_pmid": "23746838",
+          "framework_note": "Mitochondrial dysfunction hallmark as aging biology context.",
+          "specific_pmid": "29676998",
+          "specific_note": "MCV coefficient in PhenoAge model.",
+          "evidence_strength": "MODERATE"
+        }
+      ],
+      "direction": "HIGH_IS_VULNERABLE",
+      "thresholds": {
+        "optimal": { "max": 100 },
+        "moderate": { "min": 100, "max": 105 },
+        "high_risk": { "min": 105 }
+      },
+      "threshold_provenance": "clinical_consensus"
+    },
+    {
+      "biomarker_id": "rdw",
+      "display_name": "Red cell distribution width / RDW (PhenoAge component)",
+      "unit": "%",
+      "standard_range": { "min": 11.5, "max": 14.5, "source": "CBC reference" },
+      "longevity_optimal": {
+        "max": 14,
+        "source": "clinical_consensus",
+        "source_note": "PhenoAge weights RDW heavily in published model (PMID 29676998).",
+        "verified": false
+      },
+      "hallmark_associations": [
+        {
+          "hallmark": "mitochondrial_dysfunction",
+          "association": "RDW reflects marrow stress and systemic reserve; elevated RDW is a mortality predictor in cohort literature.",
+          "framework_pmid": "36599349",
+          "framework_note": "Integrative aging phenotypes.",
+          "specific_pmid": "29676998",
+          "specific_note": "RDW coefficient in PhenoAge model.",
+          "evidence_strength": "ESTABLISHED"
+        },
+        {
+          "hallmark": "stem_cell_exhaustion",
+          "association": "Wider RBC size distribution can reflect hematopoietic stem/progenitor stress (indirect narrative).",
+          "framework_pmid": "23746838",
+          "framework_note": "Stem cell exhaustion context.",
+          "specific_pmid": null,
+          "evidence_strength": "WEAK"
+        }
+      ],
+      "direction": "HIGH_IS_VULNERABLE",
+      "thresholds": {
+        "optimal": { "max": 14 },
+        "moderate": { "min": 14, "max": 16 },
+        "high_risk": { "min": 16 }
+      },
+      "threshold_provenance": "clinical_consensus"
+    },
+    {
+      "biomarker_id": "alkaline_phosphatase",
+      "display_name": "Alkaline phosphatase (PhenoAge component)",
+      "unit": "U/L",
+      "standard_range": { "note": "Age/sex/lab-specific; ~40–130 U/L adult rule-of-thumb" },
+      "longevity_optimal": {
+        "max": 120,
+        "source": "clinical_consensus",
+        "source_note": "PhenoAge uses alkaline phosphatase continuously (PMID 29676998).",
+        "verified": false
+      },
+      "hallmark_associations": [
+        {
+          "hallmark": "mitochondrial_dysfunction",
+          "association": "Elevated alkaline phosphatase is a general tissue injury/cholestasis signal interpreted in broad aging-stress narratives (weak mechanistic specificity).",
+          "framework_pmid": "36599349",
+          "framework_note": "Systemic aging-related dysfunction context.",
+          "specific_pmid": "29676998",
+          "specific_note": "Alkaline phosphatase coefficient in PhenoAge model.",
+          "evidence_strength": "MODERATE"
+        }
+      ],
+      "direction": "HIGH_IS_VULNERABLE",
+      "thresholds": {
+        "optimal": { "max": 120 },
+        "moderate": { "min": 120, "max": 200 },
+        "high_risk": { "min": 200 }
+      },
+      "threshold_provenance": "clinical_consensus"
+    },
+    {
+      "biomarker_id": "wbc",
+      "display_name": "White blood cell count (PhenoAge component)",
+      "unit": "1000 cells/µL",
+      "standard_range": { "min": 4.0, "max": 10.0, "source": "CBC reference" },
+      "longevity_optimal": {
+        "min": 4.0,
+        "max": 10.0,
+        "source": "clinical_consensus",
+        "source_note": "PhenoAge uses WBC with positive coefficient (higher WBC associates with higher mortality; PMID 29676998).",
+        "verified": false
+      },
+      "hallmark_associations": [
+        {
+          "hallmark": "altered_intercellular_communication",
+          "association": "Leukocytosis integrates innate immune activation/inflammation tone in aging cohorts.",
+          "framework_pmid": "36599349",
+          "framework_note": "Inflammaging / communication.",
+          "specific_pmid": "29676998",
+          "specific_note": "WBC coefficient in PhenoAge model.",
+          "evidence_strength": "ESTABLISHED"
+        }
+      ],
+      "direction": "HIGH_IS_VULNERABLE",
+      "thresholds": {
+        "optimal": { "max": 10 },
+        "moderate": { "min": 10, "max": 11 },
+        "high_risk": { "min": 11 }
+      },
+      "threshold_provenance": "clinical_consensus"
+    },
+    {
+      "biomarker_id": "cystatin_c_egfr",
+      "display_name": "Cystatin C / eGFR (Kidney Function)",
+      "unit": "mg/L cystatin C; mL/min/1.73m2 eGFR",
+      "standard_range": {
+        "cystatin_c_mg_L": { "min": 0.5, "max": 1.0 },
+        "egfr": { "min": 90, "note": "KDIGO categories: G1 ≥90; G2 60–89; G3a 45–59; etc." },
+        "source": "KDIGO CKD guideline framework"
+      },
+      "longevity_optimal": {
+        "cystatin_c_max": 0.8,
+        "egfr_min": 90,
+        "source": "kdigo_and_functional_reserve_consensus",
+        "source_note": "Cystatin C is not a PhenoAge component as such; PhenoAge uses creatinine among other analytes (PMID 29676998). Kidney function bands follow KDIGO.",
+        "verified": false
+      },
+      "hallmark_associations": [
+        {
+          "hallmark": "cellular_senescence",
+          "association": "Kidney parenchyma accumulates senescent cells with age in mechanistic studies.",
+          "framework_pmid": "36599349",
+          "framework_note": "Senescence/tissue aging integration.",
+          "specific_pmid": null,
+          "evidence_strength": "MODERATE"
+        },
+        {
+          "hallmark": "altered_intercellular_communication",
+          "association": "Reduced clearance of uremic/inflammatory mediators propagates systemic aging-related phenotypes.",
+          "framework_pmid": "36599349",
+          "framework_note": "Systemic communication of aging-related dysfunction.",
+          "specific_pmid": null,
+          "evidence_strength": "MODERATE"
+        }
+      ],
+      "direction": "HIGH_CYSTATIN_LOW_EGFR_IS_VULNERABLE",
+      "thresholds": {
+        "optimal": { "cystatin_c_max": 0.8, "egfr_min": 90 },
+        "moderate": { "cystatin_c_band": "0.8–1.0", "egfr_band": "60–89" },
+        "high_risk": { "cystatin_c_min": 1.0, "egfr_max": 60 }
+      },
+      "threshold_provenance": "kdigo_guidelines"
+    }
+  ]
+}
+

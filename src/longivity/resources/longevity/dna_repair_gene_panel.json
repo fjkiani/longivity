@@ -1,0 +1,149 @@
+{
+  "version": "1.0",
+  "pathways": {
+    "homologous_recombination": {
+      "weight": 0.3,
+      "genes": {
+        "BRCA1": { "weight": 0.15, "polymorphisms": {} },
+        "BRCA2": { "weight": 0.15, "polymorphisms": {} },
+        "PALB2": { "weight": 0.1, "polymorphisms": {} },
+        "ATM": { "weight": 0.1, "polymorphisms": {} },
+        "CHEK2": {
+          "weight": 0.08,
+          "polymorphisms": {
+            "rs17879961": {
+              "hgvs": "p.Ile157Thr",
+              "enzyme_activity_score_het": 0.45,
+              "enzyme_activity_score_hom": 0.0,
+              "score_status": "VERIFIED",
+              "pmid": "28199506",
+              "note": "Kinase activity ~55% reduced in het carriers (Southey et al. NEJM 2021)"
+            }
+          }
+        },
+        "RAD51": { "weight": 0.06, "polymorphisms": {} },
+        "RAD51C": { "weight": 0.05, "polymorphisms": {} },
+        "RAD51D": { "weight": 0.05, "polymorphisms": {} },
+        "BRIP1": { "weight": 0.04, "polymorphisms": {} },
+        "BARD1": { "weight": 0.04, "polymorphisms": {} },
+        "ATR": { "weight": 0.04, "polymorphisms": {} },
+        "CHEK1": { "weight": 0.04, "polymorphisms": {} },
+        "MRE11": { "weight": 0.04, "polymorphisms": {} },
+        "RAD50": { "weight": 0.03, "polymorphisms": {} },
+        "NBN": { "weight": 0.03, "polymorphisms": {} }
+      }
+    },
+    "mismatch_repair": {
+      "weight": 0.25,
+      "genes": {
+        "MLH1": { "weight": 0.3, "polymorphisms": {} },
+        "MSH2": { "weight": 0.28, "polymorphisms": {} },
+        "MSH6": { "weight": 0.22, "polymorphisms": {} },
+        "PMS2": { "weight": 0.17, "polymorphisms": {} },
+        "EPCAM": { "weight": 0.03, "polymorphisms": {} }
+      }
+    },
+    "base_excision_repair": {
+      "weight": 0.15,
+      "genes": {
+        "MUTYH": {
+          "weight": 0.3,
+          "polymorphisms": {
+            "rs34612342": {
+              "hgvs": "p.Tyr179Cys",
+              "enzyme_activity_score_het": 0.65,
+              "enzyme_activity_score_hom": 0.0,
+              "score_status": "VERIFIED",
+              "pmid": "12606733",
+              "note": "Y179C European founder; biallelic = MAP (Al-Tassan 2002)"
+            },
+            "rs36053993": {
+              "hgvs": "p.Gly396Asp",
+              "enzyme_activity_score_het": 0.65,
+              "enzyme_activity_score_hom": 0.0,
+              "score_status": "VERIFIED",
+              "pmid": "12606733",
+              "note": "G396D European founder; same study as Y179C"
+            }
+          }
+        },
+        "OGG1": {
+          "weight": 0.22,
+          "polymorphisms": {
+            "rs1052133": {
+              "hgvs": "p.Ser326Cys",
+              "enzyme_activity_score_het": 0.75,
+              "enzyme_activity_score_hom": 0.5,
+              "score_status": "VERIFIED",
+              "pmid": "16181016",
+              "note": "Bravard et al. Free Radic Biol Med 2005; Cys326 ~50% reduced 8-oxoG excision"
+            }
+          }
+        },
+        "XRCC1": {
+          "weight": 0.22,
+          "polymorphisms": {
+            "rs25487": {
+              "hgvs": "p.Arg399Gln",
+              "enzyme_activity_score_het": 0.7,
+              "enzyme_activity_score_hom": 0.4,
+              "score_status": "VERIFIED",
+              "pmid": "11595016",
+              "note": "Lunn et al. Cancer Res 1999; increased DNA adducts. ~30% het / ~60% hom reduction across studies."
+            }
+          }
+        },
+        "PARP1": {
+          "weight": 0.18,
+          "polymorphisms": {
+            "rs1136410": {
+              "hgvs": "p.Val762Ala",
+              "enzyme_activity_score_het": null,
+              "enzyme_activity_score_hom": null,
+              "score_status": "UNVERIFIED",
+              "pmid": null,
+              "note": "Functional impact reported but no single paper quantifies activity reduction with sufficient rigor. Engine uses 0.75 default."
+            }
+          }
+        },
+        "APEX1": { "weight": 0.08, "polymorphisms": {} }
+      }
+    },
+    "nucleotide_excision_repair": {
+      "weight": 0.15,
+      "genes": {
+        "ERCC1": { "weight": 0.18, "polymorphisms": {} },
+        "ERCC2": {
+          "weight": 0.16,
+          "polymorphisms": {
+            "rs13181": {
+              "hgvs": "p.Lys751Gln",
+              "enzyme_activity_score_het": 0.88,
+              "enzyme_activity_score_hom": 0.75,
+              "score_status": "VERIFIED",
+              "pmid": "11557514",
+              "note": "Spitz et al. Cancer Res 2001; reduced host-cell reactivation capacity"
+            }
+          }
+        },
+        "ERCC3": { "weight": 0.12, "polymorphisms": {} },
+        "ERCC4": { "weight": 0.13, "polymorphisms": {} },
+        "ERCC5": { "weight": 0.12, "polymorphisms": {} },
+        "ERCC6": { "weight": 0.1, "polymorphisms": {} },
+        "XPA": { "weight": 0.1, "polymorphisms": {} },
+        "XPC": { "weight": 0.09, "polymorphisms": {} }
+      }
+    },
+    "nhej": {
+      "weight": 0.15,
+      "genes": {
+        "XRCC4": { "weight": 0.25, "polymorphisms": {} },
+        "LIG4": { "weight": 0.25, "polymorphisms": {} },
+        "DCLRE1C": { "weight": 0.2, "polymorphisms": {} },
+        "XRCC6": { "weight": 0.15, "polymorphisms": {} },
+        "XRCC5": { "weight": 0.15, "polymorphisms": {} }
+      }
+    }
+  }
+}
+
