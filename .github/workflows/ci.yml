@@ -1,0 +1,77 @@
+name: longivity CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e .
+          pip install pytest httpx
+
+      - name: Run golden snapshot tests
+        run: |
+          python -m pytest tests/ -v --tb=short
+
+      - name: Verify JSON resources parse cleanly
+        run: |
+          python -c "
+          import json, pathlib
+          resources = pathlib.Path('src/longivity/resources/longevity')
+          for f in resources.glob('*.json'):
+              with open(f) as fh:
+                  data = json.load(fh)
+              print(f'OK: {f.name} ({len(data)} top-level keys/entries)')
+          "
+
+      - name: Smoke test PhenoAge service
+        run: |
+          python -c "
+          from longivity.services.longevity_phenoage_level0 import run_longevity_assessment_level0
+          result = run_longevity_assessment_level0({
+              'age': 45,
+              'biomarkers': {
+                  'albumin': 4.8, 'creatinine': 0.85, 'glucose_mg_dl': 88.0,
+                  'crp_mg_l': 0.4, 'lymphocyte_percent': 32.0, 'mcv': 88.0,
+                  'rdw': 12.5, 'alkaline_phosphatase': 55.0, 'wbc': 5.2,
+              }
+          })
+          pa = result.get('phenoage_analysis', {})
+          estimate = pa.get('phenoage_estimate')
+          assert estimate is not None, 'PhenoAge estimate missing'
+          assert 28 <= estimate <= 42, f'PhenoAge out of expected range: {estimate}'
+          print(f'PhenoAge smoke test PASSED: estimate={estimate:.2f}')
+          "
+
+      - name: Smoke test ASCVD cardiovascular risk
+        run: |
+          python -c "
+          from longivity.services.cardiovascular_risk import compute_ascvd_from_biomarkers
+          result = compute_ascvd_from_biomarkers({
+              'age': 55, 'sex': 'M', 'race': 'white',
+              'biomarkers': {'total_cholesterol': 210.0, 'hdl_cholesterol': 45.0, 'systolic_bp': 130.0},
+              'bp_treatment': False, 'diabetes': False, 'smoker': False,
+          })
+          risk = result.get('ten_year_ascvd_risk_pct') or result.get('ten_year_ascvd_risk')
+          assert risk is not None, 'ASCVD risk missing'
+          assert 0 <= float(risk) <= 100, f'ASCVD risk out of range: {risk}'
+          print(f'ASCVD smoke test PASSED: 10yr risk={risk}%')
+          "

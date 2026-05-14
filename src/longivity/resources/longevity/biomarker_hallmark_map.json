@@ -27,16 +27,22 @@
         "PAI-1",
         "TIMP-1"
       ],
-      "additional": ["DNAm_pack_years_smoking"]
+      "additional": [
+        "DNAm_pack_years_smoking"
+      ]
     },
-    "phenoage_note": "Clinical PhenoAge / phenotypic age (Levine 2018, PMID 29676998, Table 1 Gompertz weights) uses albumin, creatinine, glucose, CRP (log), lymphocyte%, MCV, RDW, alkaline phosphatase, WBC + chronological age — not GGT. CRP enters as log(CRP) continuously; it does not define an optimal 0.5 mg/L threshold."
+    "phenoage_note": "Clinical PhenoAge / phenotypic age (Levine 2018, PMID 29676998, Table 1 Gompertz weights) uses albumin, creatinine, glucose, CRP (log), lymphocyte%, MCV, RDW, alkaline phosphatase, WBC + chronological age \u2014 not GGT. CRP enters as log(CRP) continuously; it does not define an optimal 0.5 mg/L threshold."
   },
   "biomarkers": [
     {
       "biomarker_id": "fasting_insulin",
       "display_name": "Fasting Insulin",
       "unit": "uIU/mL",
-      "standard_range": { "min": 2.6, "max": 24.9, "source": "ADA/laboratory reference ranges (population-dependent)" },
+      "standard_range": {
+        "min": 2.6,
+        "max": 24.9,
+        "source": "ADA/laboratory reference ranges (population-dependent)"
+      },
       "longevity_optimal": {
         "max": 5.0,
         "source": "clinical_consensus",
@@ -48,16 +54,23 @@
           "hallmark": "nutrient_sensing",
           "association": "Hyperinsulinemia reflects mTOR/insulin/IGF-1 axis overactivation; chronically elevated insulin drives pro-aging anabolic signaling.",
           "framework_pmid": "23746838",
-          "framework_note": "Lopez-Otin 2013 hallmarks framework — conceptual link to deregulated nutrient sensing, not insulin threshold values.",
+          "framework_note": "Lopez-Otin 2013 hallmarks framework \u2014 conceptual link to deregulated nutrient sensing, not insulin threshold values.",
           "specific_pmid": null,
           "evidence_strength": "ESTABLISHED"
         }
       ],
       "direction": "HIGH_IS_VULNERABLE",
       "thresholds": {
-        "optimal": { "max": 5.0 },
-        "moderate": { "min": 5.0, "max": 15.0 },
-        "high_risk": { "min": 15.0 }
+        "optimal": {
+          "max": 5.0
+        },
+        "moderate": {
+          "min": 5.0,
+          "max": 15.0
+        },
+        "high_risk": {
+          "min": 15.0
+        }
       },
       "threshold_provenance": "clinical_consensus"
     },
@@ -88,9 +101,16 @@
       ],
       "direction": "HIGH_IS_VULNERABLE",
       "thresholds": {
-        "optimal": { "max": 1.0 },
-        "moderate": { "min": 1.0, "max": 2.5 },
-        "high_risk": { "min": 2.5 }
+        "optimal": {
+          "max": 1.0
+        },
+        "moderate": {
+          "min": 1.0,
+          "max": 2.5
+        },
+        "high_risk": {
+          "min": 2.5
+        }
       },
       "threshold_provenance": "clinical_consensus"
     },
@@ -101,7 +121,7 @@
       "standard_range": {
         "min": 4.0,
         "max": 5.6,
-        "source": "ADA: <5.7% normal; 5.7–6.4% prediabetes; ≥6.5% diabetes"
+        "source": "ADA: <5.7% normal; 5.7\u20136.4% prediabetes; \u22656.5% diabetes"
       },
       "longevity_optimal": {
         "max": 5.2,
@@ -129,9 +149,16 @@
       ],
       "direction": "HIGH_IS_VULNERABLE",
       "thresholds": {
-        "optimal": { "max": 5.2 },
-        "moderate": { "min": 5.2, "max": 5.7 },
-        "high_risk": { "min": 5.7 }
+        "optimal": {
+          "max": 5.2
+        },
+        "moderate": {
+          "min": 5.2,
+          "max": 5.7
+        },
+        "high_risk": {
+          "min": 5.7
+        }
       },
       "threshold_provenance": "clinical_consensus"
     },
@@ -142,7 +169,7 @@
       "standard_range": {
         "min": 0,
         "max": 3.0,
-        "source": "AHA/CDC cardiovascular risk strata: <1.0 low; 1.0–3.0 average; >3.0 high"
+        "source": "AHA/CDC cardiovascular risk strata: <1.0 low; 1.0\u20133.0 average; >3.0 high"
       },
       "longevity_optimal": {
         "max": 0.5,
@@ -153,19 +180,26 @@
       "hallmark_associations": [
         {
           "hallmark": "altered_intercellular_communication",
-          "association": "hsCRP is a systemic inflammation marker aligned with inflammaging; IL-6/NF-κB pathways.",
+          "association": "hsCRP is a systemic inflammation marker aligned with inflammaging; IL-6/NF-\u03baB pathways.",
           "framework_pmid": "36599349",
           "framework_note": "Chronic inflammation as updated hallmark context.",
           "specific_pmid": "29676998",
-          "specific_note": "PhenoAge incorporates CRP continuously for mortality prediction — not this numeric cutoff.",
+          "specific_note": "PhenoAge incorporates CRP continuously for mortality prediction \u2014 not this numeric cutoff.",
           "evidence_strength": "ESTABLISHED"
         }
       ],
       "direction": "HIGH_IS_VULNERABLE",
       "thresholds": {
-        "optimal": { "max": 0.5 },
-        "moderate": { "min": 0.5, "max": 3.0 },
-        "high_risk": { "min": 3.0 }
+        "optimal": {
+          "max": 0.5
+        },
+        "moderate": {
+          "min": 0.5,
+          "max": 3.0
+        },
+        "high_risk": {
+          "min": 3.0
+        }
       },
       "threshold_provenance": "extrapolated_from_aha_cardiovascular_risk_stratification_plus_healthy_aging_literature"
     },
@@ -173,7 +207,11 @@
       "biomarker_id": "il6",
       "display_name": "IL-6",
       "unit": "pg/mL",
-      "standard_range": { "min": 0, "max": 7.0, "source": "Assay/lab reference (variable)" },
+      "standard_range": {
+        "min": 0,
+        "max": 7.0,
+        "source": "Assay/lab reference (variable)"
+      },
       "longevity_optimal": {
         "max": 1.5,
         "source": "clinical_consensus",
@@ -200,9 +238,16 @@
       ],
       "direction": "HIGH_IS_VULNERABLE",
       "thresholds": {
-        "optimal": { "max": 1.5 },
-        "moderate": { "min": 1.5, "max": 5.0 },
-        "high_risk": { "min": 5.0 }
+        "optimal": {
+          "max": 1.5
+        },
+        "moderate": {
+          "min": 1.5,
+          "max": 5.0
+        },
+        "high_risk": {
+          "min": 5.0
+        }
       },
       "threshold_provenance": "clinical_consensus"
     },
@@ -210,7 +255,11 @@
       "biomarker_id": "tnf_alpha",
       "display_name": "TNF-alpha",
       "unit": "pg/mL",
-      "standard_range": { "min": 0, "max": 8.1, "source": "Laboratory reference (variable)" },
+      "standard_range": {
+        "min": 0,
+        "max": 8.1,
+        "source": "Laboratory reference (variable)"
+      },
       "longevity_optimal": {
         "max": 2.0,
         "source": "clinical_consensus",
@@ -220,7 +269,7 @@
       "hallmark_associations": [
         {
           "hallmark": "altered_intercellular_communication",
-          "association": "TNF-α is a master pro-inflammatory cytokine in aged tissues.",
+          "association": "TNF-\u03b1 is a master pro-inflammatory cytokine in aged tissues.",
           "framework_pmid": "36599349",
           "framework_note": "Inflammaging / intercellular communication context.",
           "specific_pmid": null,
@@ -229,9 +278,16 @@
       ],
       "direction": "HIGH_IS_VULNERABLE",
       "thresholds": {
-        "optimal": { "max": 2.0 },
-        "moderate": { "min": 2.0, "max": 6.0 },
-        "high_risk": { "min": 6.0 }
+        "optimal": {
+          "max": 2.0
+        },
+        "moderate": {
+          "min": 2.0,
+          "max": 6.0
+        },
+        "high_risk": {
+          "min": 6.0
+        }
       },
       "threshold_provenance": "clinical_consensus"
     },
@@ -239,12 +295,16 @@
       "biomarker_id": "igf1",
       "display_name": "IGF-1",
       "unit": "ng/mL",
-      "standard_range": { "min": 53, "max": 331, "source": "Age- and sex-dependent laboratory norms" },
+      "standard_range": {
+        "min": 53,
+        "max": 331,
+        "source": "Age- and sex-dependent laboratory norms"
+      },
       "longevity_optimal": {
         "min": 100,
         "max": 180,
         "source": "clinical_consensus",
-        "source_note": "U-shaped mortality described across studies; moderate range often discussed in human aging — not from Lopez-Otin numeric tables.",
+        "source_note": "U-shaped mortality described across studies; moderate range often discussed in human aging \u2014 not from Lopez-Otin numeric tables.",
         "verified": false
       },
       "hallmark_associations": [
@@ -259,10 +319,22 @@
       ],
       "direction": "U_SHAPED_EXTREMES_VULNERABLE",
       "thresholds": {
-        "optimal": { "min": 100, "max": 180 },
-        "moderate_low": { "min": 80, "max": 100 },
-        "moderate_high": { "min": 180, "max": 250 },
-        "high_risk": { "low_band_max": 80, "high_band_min": 250 }
+        "optimal": {
+          "min": 100,
+          "max": 180
+        },
+        "moderate_low": {
+          "min": 80,
+          "max": 100
+        },
+        "moderate_high": {
+          "min": 180,
+          "max": 250
+        },
+        "high_risk": {
+          "low_band_max": 80,
+          "high_band_min": 250
+        }
       },
       "threshold_provenance": "clinical_consensus"
     },
@@ -270,7 +342,11 @@
       "biomarker_id": "homocysteine",
       "display_name": "Homocysteine",
       "unit": "umol/L",
-      "standard_range": { "min": 4.0, "max": 15.0, "source": "Laboratory reference" },
+      "standard_range": {
+        "min": 4.0,
+        "max": 15.0,
+        "source": "Laboratory reference"
+      },
       "longevity_optimal": {
         "max": 8.0,
         "source": "literature_supported_cardiovascular_risk_thresholds",
@@ -297,9 +373,16 @@
       ],
       "direction": "HIGH_IS_VULNERABLE",
       "thresholds": {
-        "optimal": { "max": 8.0 },
-        "moderate": { "min": 8.0, "max": 15.0 },
-        "high_risk": { "min": 15.0 }
+        "optimal": {
+          "max": 8.0
+        },
+        "moderate": {
+          "min": 8.0,
+          "max": 15.0
+        },
+        "high_risk": {
+          "min": 15.0
+        }
       },
       "threshold_provenance": "clinical_consensus_with_methylation_literature"
     },
@@ -307,7 +390,11 @@
       "biomarker_id": "25oh_vitamin_d",
       "display_name": "25-Hydroxyvitamin D",
       "unit": "ng/mL",
-      "standard_range": { "min": 30, "max": 100, "source": "Endocrine Society: >30 sufficient; 20–29 insufficient; <20 deficient" },
+      "standard_range": {
+        "min": 30,
+        "max": 100,
+        "source": "Endocrine Society: >30 sufficient; 20\u201329 insufficient; <20 deficient"
+      },
       "longevity_optimal": {
         "min": 40,
         "max": 60,
@@ -331,15 +418,23 @@
           "framework_note": "Epigenetic hallmark context.",
           "specific_pmid": "38285035",
           "specific_verified": false,
-          "specific_note": "Immunocompetence review PMID flagged UNVERIFIED in audit — queued for manual confirmation.",
+          "specific_note": "Immunocompetence review PMID flagged UNVERIFIED in audit \u2014 queued for manual confirmation.",
           "evidence_strength": "MODERATE"
         }
       ],
       "direction": "LOW_IS_VULNERABLE",
       "thresholds": {
-        "optimal": { "min": 40, "max": 60 },
-        "moderate": { "min": 20, "max": 40 },
-        "high_risk": { "max": 20 }
+        "optimal": {
+          "min": 40,
+          "max": 60
+        },
+        "moderate": {
+          "min": 20,
+          "max": 40
+        },
+        "high_risk": {
+          "max": 20
+        }
       },
       "threshold_provenance": "review_pmid_38542817_plus_endocrine_sufficiency_bounds"
     },
@@ -347,7 +442,10 @@
       "biomarker_id": "leukocyte_telomere_length",
       "display_name": "Leukocyte Telomere Length",
       "unit": "kb or T/S ratio",
-      "standard_range": { "note": "Age-dependent; population reference curves", "source": "Epidemiological reference distributions" },
+      "standard_range": {
+        "note": "Age-dependent; population reference curves",
+        "source": "Epidemiological reference distributions"
+      },
       "longevity_optimal": {
         "note": "Age-adjusted percentile >50th often associated with lower mortality in some cohorts",
         "source": "cohort_literature",
@@ -375,9 +473,15 @@
       ],
       "direction": "LOW_IS_VULNERABLE",
       "thresholds": {
-        "optimal": { "note": "Age-adjusted >50th percentile" },
-        "moderate": { "note": "Age-adjusted ~20th–50th percentile" },
-        "high_risk": { "note": "Age-adjusted <20th percentile" }
+        "optimal": {
+          "note": "Age-adjusted >50th percentile"
+        },
+        "moderate": {
+          "note": "Age-adjusted ~20th\u201350th percentile"
+        },
+        "high_risk": {
+          "note": "Age-adjusted <20th percentile"
+        }
       },
       "threshold_provenance": "population_percentile_clinical_consensus"
     },
@@ -385,7 +489,10 @@
       "biomarker_id": "dnam_epigenetic_age",
       "display_name": "DNA Methylation Epigenetic Age",
       "unit": "years (acceleration) or pace",
-      "standard_range": { "note": "Horvath/Hannum track chronological age; GrimAge/PACE predict morbidity/mortality", "source": "PMID 24138928; 29676998; 30669119; 35029144" },
+      "standard_range": {
+        "note": "Horvath/Hannum track chronological age; GrimAge/PACE predict morbidity/mortality",
+        "source": "PMID 24138928; 29676998; 30669119; 35029144"
+      },
       "longevity_optimal": {
         "note": "Negative age acceleration vs chronological; DunedinPACE <1.0 years/year (interpret per assay)",
         "source": "pace_literature",
@@ -406,9 +513,15 @@
       ],
       "direction": "HIGH_ACCELERATION_OR_PACE_IS_VULNERABLE",
       "thresholds": {
-        "optimal": { "note": "Age acceleration <0 years; DunedinPACE <0.95 (assay-specific)" },
-        "moderate": { "note": "Acceleration 0–5 years; PACE 0.95–1.10" },
-        "high_risk": { "note": "Acceleration >5 years; PACE >1.10" }
+        "optimal": {
+          "note": "Age acceleration <0 years; DunedinPACE <0.95 (assay-specific)"
+        },
+        "moderate": {
+          "note": "Acceleration 0\u20135 years; PACE 0.95\u20131.10"
+        },
+        "high_risk": {
+          "note": "Acceleration >5 years; PACE >1.10"
+        }
       },
       "threshold_provenance": "clock_specific_publications"
     },
@@ -416,11 +529,15 @@
       "biomarker_id": "ggt",
       "display_name": "Gamma-Glutamyl Transferase",
       "unit": "U/L",
-      "standard_range": { "min": 0, "max": 55, "source": "Laboratory ULN (~55 U/L men, ~38 U/L women) varies by lab" },
+      "standard_range": {
+        "min": 0,
+        "max": 55,
+        "source": "Laboratory ULN (~55 U/L men, ~38 U/L women) varies by lab"
+      },
       "longevity_optimal": {
         "max": 20,
         "source": "clinical_consensus",
-        "source_note": "Lower-normal GGT associated with better outcomes in epidemiology; **not** from PhenoAge (PhenoAge uses alkaline phosphatase, not GGT — PMID 29676998).",
+        "source_note": "Lower-normal GGT associated with better outcomes in epidemiology; **not** from PhenoAge (PhenoAge uses alkaline phosphatase, not GGT \u2014 PMID 29676998).",
         "verified": false
       },
       "hallmark_associations": [
@@ -443,9 +560,16 @@
       ],
       "direction": "HIGH_IS_VULNERABLE",
       "thresholds": {
-        "optimal": { "max": 20 },
-        "moderate": { "min": 20, "max": 55 },
-        "high_risk": { "min": 55 }
+        "optimal": {
+          "max": 20
+        },
+        "moderate": {
+          "min": 20,
+          "max": 55
+        },
+        "high_risk": {
+          "min": 55
+        }
       },
       "threshold_provenance": "clinical_consensus_epidemiology_not_phenoage"
     },
@@ -453,12 +577,16 @@
       "biomarker_id": "ferritin",
       "display_name": "Ferritin",
       "unit": "ng/mL",
-      "standard_range": { "min": 12, "max": 300, "source": "Laboratory: men often 12–300; women 12–150 (lab-specific)" },
+      "standard_range": {
+        "min": 12,
+        "max": 300,
+        "source": "Laboratory: men often 12\u2013300; women 12\u2013150 (lab-specific)"
+      },
       "longevity_optimal": {
         "min": 40,
         "max": 100,
         "source": "clinical_consensus",
-        "source_note": "Iron status is U-shaped for risk; avoid deficiency and marked overload — no single longevity PMID for this band.",
+        "source_note": "Iron status is U-shaped for risk; avoid deficiency and marked overload \u2014 no single longevity PMID for this band.",
         "verified": false
       },
       "hallmark_associations": [
@@ -481,10 +609,22 @@
       ],
       "direction": "U_SHAPED_EXTREMES_VULNERABLE",
       "thresholds": {
-        "optimal": { "min": 40, "max": 100 },
-        "moderate_low": { "min": 20, "max": 40 },
-        "moderate_high": { "min": 100, "max": 200 },
-        "high_risk": { "low_band_max": 20, "high_band_min": 200 }
+        "optimal": {
+          "min": 40,
+          "max": 100
+        },
+        "moderate_low": {
+          "min": 20,
+          "max": 40
+        },
+        "moderate_high": {
+          "min": 100,
+          "max": 200
+        },
+        "high_risk": {
+          "low_band_max": 20,
+          "high_band_min": 200
+        }
       },
       "threshold_provenance": "clinical_consensus"
     },
@@ -492,11 +632,15 @@
       "biomarker_id": "apob",
       "display_name": "Apolipoprotein B",
       "unit": "mg/dL",
-      "standard_range": { "min": 40, "max": 120, "source": "Laboratory/guideline-dependent" },
+      "standard_range": {
+        "min": 40,
+        "max": 120,
+        "source": "Laboratory/guideline-dependent"
+      },
       "longevity_optimal": {
         "max": 70,
         "source": "dyslipidemia_guideline_consensus",
-        "source_note": "EAS/ESC-style targets often <65–80 mg/dL in high-risk patients; product uses conservative optimal cap for longevity framing.",
+        "source_note": "EAS/ESC-style targets often <65\u201380 mg/dL in high-risk patients; product uses conservative optimal cap for longevity framing.",
         "verified": false
       },
       "hallmark_associations": [
@@ -511,9 +655,16 @@
       ],
       "direction": "HIGH_IS_VULNERABLE",
       "thresholds": {
-        "optimal": { "max": 70 },
-        "moderate": { "min": 70, "max": 100 },
-        "high_risk": { "min": 100 }
+        "optimal": {
+          "max": 70
+        },
+        "moderate": {
+          "min": 70,
+          "max": 100
+        },
+        "high_risk": {
+          "min": 100
+        }
       },
       "threshold_provenance": "eas_esc_dyslipidemia_consensus"
     },
@@ -521,11 +672,15 @@
       "biomarker_id": "lp_a",
       "display_name": "Lipoprotein (a)",
       "unit": "nmol/L",
-      "standard_range": { "min": 0, "max": 75, "source": "Assay-specific; <75 nmol/L often cited as lower risk tier" },
+      "standard_range": {
+        "min": 0,
+        "max": 75,
+        "source": "Assay-specific; <75 nmol/L often cited as lower risk tier"
+      },
       "longevity_optimal": {
         "max": 30,
         "source": "lp_a_consensus_literature",
-        "source_note": "Highly genetically determined; thresholds from consensus statements — not modifiable by lifestyle alone.",
+        "source_note": "Highly genetically determined; thresholds from consensus statements \u2014 not modifiable by lifestyle alone.",
         "verified": false
       },
       "hallmark_associations": [
@@ -540,9 +695,16 @@
       ],
       "direction": "HIGH_IS_VULNERABLE",
       "thresholds": {
-        "optimal": { "max": 75 },
-        "moderate": { "min": 75, "max": 125 },
-        "high_risk": { "min": 125 }
+        "optimal": {
+          "max": 75
+        },
+        "moderate": {
+          "min": 75,
+          "max": 125
+        },
+        "high_risk": {
+          "min": 125
+        }
       },
       "threshold_provenance": "eas_consensus_style_bands"
     },
@@ -550,7 +712,10 @@
       "biomarker_id": "dhea_s",
       "display_name": "DHEA-S",
       "unit": "ug/dL",
-      "standard_range": { "note": "Age- and sex-dependent; peaks in 20s then declines", "source": "Endocrine reference ranges" },
+      "standard_range": {
+        "note": "Age- and sex-dependent; peaks in 20s then declines",
+        "source": "Endocrine reference ranges"
+      },
       "longevity_optimal": {
         "note": "Age-adjusted upper-middle quartile discussed in some cohorts",
         "source": "clinical_consensus",
@@ -577,9 +742,15 @@
       ],
       "direction": "LOW_IS_VULNERABLE",
       "thresholds": {
-        "optimal": { "note": "Age-adjusted >50th percentile" },
-        "moderate": { "note": "Age-adjusted ~25th–50th percentile" },
-        "high_risk": { "note": "Age-adjusted <25th percentile" }
+        "optimal": {
+          "note": "Age-adjusted >50th percentile"
+        },
+        "moderate": {
+          "note": "Age-adjusted ~25th\u201350th percentile"
+        },
+        "high_risk": {
+          "note": "Age-adjusted <25th percentile"
+        }
       },
       "threshold_provenance": "clinical_consensus"
     },
@@ -587,7 +758,10 @@
       "biomarker_id": "free_testosterone",
       "display_name": "Free Testosterone",
       "unit": "pg/mL",
-      "standard_range": { "note": "Sex- and age-specific (e.g., men ~5–21 pg/mL varies)", "source": "Endocrine Society laboratory norms" },
+      "standard_range": {
+        "note": "Sex- and age-specific (e.g., men ~5\u201321 pg/mL varies)",
+        "source": "Endocrine Society laboratory norms"
+      },
       "longevity_optimal": {
         "note": "Age-adjusted mid-range; avoid very low and supraphysiologic extremes",
         "source": "clinical_consensus",
@@ -614,9 +788,15 @@
       ],
       "direction": "U_SHAPED_EXTREMES_VULNERABLE",
       "thresholds": {
-        "optimal": { "note": "Age-adjusted ~50th–75th percentile" },
-        "moderate": { "note": "25th–50th or 75th–90th" },
-        "high_risk": { "note": "<25th or concern for supraphysiologic use" }
+        "optimal": {
+          "note": "Age-adjusted ~50th\u201375th percentile"
+        },
+        "moderate": {
+          "note": "25th\u201350th or 75th\u201390th"
+        },
+        "high_risk": {
+          "note": "<25th or concern for supraphysiologic use"
+        }
       },
       "threshold_provenance": "clinical_consensus"
     },
@@ -624,7 +804,10 @@
       "biomarker_id": "serum_albumin_g_l",
       "display_name": "Serum albumin (PhenoAge component)",
       "unit": "g/L",
-      "standard_range": { "note": "~35–52 g/L typical adult (lab/assay dependent)", "source": "clinical laboratory reference ranges" },
+      "standard_range": {
+        "note": "~35\u201352 g/L typical adult (lab/assay dependent)",
+        "source": "clinical laboratory reference ranges"
+      },
       "longevity_optimal": {
         "min": 40,
         "max": 52,
@@ -653,17 +836,28 @@
       ],
       "direction": "LOW_IS_VULNERABLE",
       "thresholds": {
-        "optimal": { "min": 40, "max": 52 },
-        "moderate": { "min": 35, "max": 40 },
-        "high_risk": { "max": 35 }
+        "optimal": {
+          "min": 40,
+          "max": 52
+        },
+        "moderate": {
+          "min": 35,
+          "max": 40
+        },
+        "high_risk": {
+          "max": 35
+        }
       },
       "threshold_provenance": "clinical_lab_reference_consensus"
     },
     {
       "biomarker_id": "serum_creatinine_umol_l",
       "display_name": "Serum creatinine (PhenoAge component)",
-      "unit": "µmol/L",
-      "standard_range": { "note": "~53–115 µmol/L typical adult female; ~70–130 male (lab dependent)", "source": "clinical laboratory reference" },
+      "unit": "\u00b5mol/L",
+      "standard_range": {
+        "note": "~53\u2013115 \u00b5mol/L typical adult female; ~70\u2013130 male (lab dependent)",
+        "source": "clinical laboratory reference"
+      },
       "longevity_optimal": {
         "max": 110,
         "source": "clinical_consensus",
@@ -683,9 +877,16 @@
       ],
       "direction": "HIGH_IS_VULNERABLE",
       "thresholds": {
-        "optimal": { "max": 110 },
-        "moderate": { "min": 110, "max": 150 },
-        "high_risk": { "min": 150 }
+        "optimal": {
+          "max": 110
+        },
+        "moderate": {
+          "min": 110,
+          "max": 150
+        },
+        "high_risk": {
+          "min": 150
+        }
       },
       "threshold_provenance": "clinical_lab_reference_consensus"
     },
@@ -693,7 +894,10 @@
       "biomarker_id": "serum_glucose_mmol",
       "display_name": "Serum glucose (PhenoAge component)",
       "unit": "mmol/L",
-      "standard_range": { "note": "Fasting ~3.9–5.6 mmol/L normal; diabetes diagnostic thresholds assay/context dependent", "source": "ADA/WHO frameworks (simplified for UX)" },
+      "standard_range": {
+        "note": "Fasting ~3.9\u20135.6 mmol/L normal; diabetes diagnostic thresholds assay/context dependent",
+        "source": "ADA/WHO frameworks (simplified for UX)"
+      },
       "longevity_optimal": {
         "max": 5.6,
         "source": "clinical_consensus",
@@ -703,7 +907,7 @@
       "hallmark_associations": [
         {
           "hallmark": "nutrient_sensing",
-          "association": "Glycemia intersects insulin/IGF–mTOR nutrient-sensing biology in aging canon.",
+          "association": "Glycemia intersects insulin/IGF\u2013mTOR nutrient-sensing biology in aging canon.",
           "framework_pmid": "23746838",
           "framework_note": "Nutrient sensing hallmark.",
           "specific_pmid": "29676998",
@@ -713,9 +917,16 @@
       ],
       "direction": "HIGH_IS_VULNERABLE",
       "thresholds": {
-        "optimal": { "max": 5.6 },
-        "moderate": { "min": 5.6, "max": 7.0 },
-        "high_risk": { "min": 7.0 }
+        "optimal": {
+          "max": 5.6
+        },
+        "moderate": {
+          "min": 5.6,
+          "max": 7.0
+        },
+        "high_risk": {
+          "min": 7.0
+        }
       },
       "threshold_provenance": "clinical_consensus"
     },
@@ -723,7 +934,11 @@
       "biomarker_id": "lymphocyte_percent",
       "display_name": "Lymphocyte percent (PhenoAge component)",
       "unit": "%",
-      "standard_range": { "min": 20, "max": 45, "source": "CBC reference (variable)" },
+      "standard_range": {
+        "min": 20,
+        "max": 45,
+        "source": "CBC reference (variable)"
+      },
       "longevity_optimal": {
         "min": 20,
         "max": 40,
@@ -752,9 +967,17 @@
       ],
       "direction": "LOW_IS_VULNERABLE",
       "thresholds": {
-        "optimal": { "min": 20, "max": 40 },
-        "moderate": { "min": 15, "max": 20 },
-        "high_risk": { "max": 15 }
+        "optimal": {
+          "min": 20,
+          "max": 40
+        },
+        "moderate": {
+          "min": 15,
+          "max": 20
+        },
+        "high_risk": {
+          "max": 15
+        }
       },
       "threshold_provenance": "clinical_consensus"
     },
@@ -762,7 +985,11 @@
       "biomarker_id": "mcv",
       "display_name": "Mean corpuscular volume / MCV (PhenoAge component)",
       "unit": "fL",
-      "standard_range": { "min": 80, "max": 100, "source": "CBC reference" },
+      "standard_range": {
+        "min": 80,
+        "max": 100,
+        "source": "CBC reference"
+      },
       "longevity_optimal": {
         "min": 80,
         "max": 100,
@@ -783,9 +1010,16 @@
       ],
       "direction": "HIGH_IS_VULNERABLE",
       "thresholds": {
-        "optimal": { "max": 100 },
-        "moderate": { "min": 100, "max": 105 },
-        "high_risk": { "min": 105 }
+        "optimal": {
+          "max": 100
+        },
+        "moderate": {
+          "min": 100,
+          "max": 105
+        },
+        "high_risk": {
+          "min": 105
+        }
       },
       "threshold_provenance": "clinical_consensus"
     },
@@ -793,7 +1027,11 @@
       "biomarker_id": "rdw",
       "display_name": "Red cell distribution width / RDW (PhenoAge component)",
       "unit": "%",
-      "standard_range": { "min": 11.5, "max": 14.5, "source": "CBC reference" },
+      "standard_range": {
+        "min": 11.5,
+        "max": 14.5,
+        "source": "CBC reference"
+      },
       "longevity_optimal": {
         "max": 14,
         "source": "clinical_consensus",
@@ -821,9 +1059,16 @@
       ],
       "direction": "HIGH_IS_VULNERABLE",
       "thresholds": {
-        "optimal": { "max": 14 },
-        "moderate": { "min": 14, "max": 16 },
-        "high_risk": { "min": 16 }
+        "optimal": {
+          "max": 14
+        },
+        "moderate": {
+          "min": 14,
+          "max": 16
+        },
+        "high_risk": {
+          "min": 16
+        }
       },
       "threshold_provenance": "clinical_consensus"
     },
@@ -831,7 +1076,9 @@
       "biomarker_id": "alkaline_phosphatase",
       "display_name": "Alkaline phosphatase (PhenoAge component)",
       "unit": "U/L",
-      "standard_range": { "note": "Age/sex/lab-specific; ~40–130 U/L adult rule-of-thumb" },
+      "standard_range": {
+        "note": "Age/sex/lab-specific; ~40\u2013130 U/L adult rule-of-thumb"
+      },
       "longevity_optimal": {
         "max": 120,
         "source": "clinical_consensus",
@@ -851,17 +1098,28 @@
       ],
       "direction": "HIGH_IS_VULNERABLE",
       "thresholds": {
-        "optimal": { "max": 120 },
-        "moderate": { "min": 120, "max": 200 },
-        "high_risk": { "min": 200 }
+        "optimal": {
+          "max": 120
+        },
+        "moderate": {
+          "min": 120,
+          "max": 200
+        },
+        "high_risk": {
+          "min": 200
+        }
       },
       "threshold_provenance": "clinical_consensus"
     },
     {
       "biomarker_id": "wbc",
       "display_name": "White blood cell count (PhenoAge component)",
-      "unit": "1000 cells/µL",
-      "standard_range": { "min": 4.0, "max": 10.0, "source": "CBC reference" },
+      "unit": "1000 cells/\u00b5L",
+      "standard_range": {
+        "min": 4.0,
+        "max": 10.0,
+        "source": "CBC reference"
+      },
       "longevity_optimal": {
         "min": 4.0,
         "max": 10.0,
@@ -882,9 +1140,16 @@
       ],
       "direction": "HIGH_IS_VULNERABLE",
       "thresholds": {
-        "optimal": { "max": 10 },
-        "moderate": { "min": 10, "max": 11 },
-        "high_risk": { "min": 11 }
+        "optimal": {
+          "max": 10
+        },
+        "moderate": {
+          "min": 10,
+          "max": 11
+        },
+        "high_risk": {
+          "min": 11
+        }
       },
       "threshold_provenance": "clinical_consensus"
     },
@@ -893,8 +1158,14 @@
       "display_name": "Cystatin C / eGFR (Kidney Function)",
       "unit": "mg/L cystatin C; mL/min/1.73m2 eGFR",
       "standard_range": {
-        "cystatin_c_mg_L": { "min": 0.5, "max": 1.0 },
-        "egfr": { "min": 90, "note": "KDIGO categories: G1 ≥90; G2 60–89; G3a 45–59; etc." },
+        "cystatin_c_mg_L": {
+          "min": 0.5,
+          "max": 1.0
+        },
+        "egfr": {
+          "min": 90,
+          "note": "KDIGO categories: G1 \u226590; G2 60\u201389; G3a 45\u201359; etc."
+        },
         "source": "KDIGO CKD guideline framework"
       },
       "longevity_optimal": {
@@ -924,12 +1195,1001 @@
       ],
       "direction": "HIGH_CYSTATIN_LOW_EGFR_IS_VULNERABLE",
       "thresholds": {
-        "optimal": { "cystatin_c_max": 0.8, "egfr_min": 90 },
-        "moderate": { "cystatin_c_band": "0.8–1.0", "egfr_band": "60–89" },
-        "high_risk": { "cystatin_c_min": 1.0, "egfr_max": 60 }
+        "optimal": {
+          "cystatin_c_max": 0.8,
+          "egfr_min": 90
+        },
+        "moderate": {
+          "cystatin_c_band": "0.8\u20131.0",
+          "egfr_band": "60\u201389"
+        },
+        "high_risk": {
+          "cystatin_c_min": 1.0,
+          "egfr_max": 60
+        }
       },
       "threshold_provenance": "kdigo_guidelines"
+    },
+    {
+      "biomarker_id": "ldl_cholesterol",
+      "display_name": "LDL Cholesterol",
+      "unit": "mg/dL",
+      "standard_range": {
+        "min": 0,
+        "max": 130,
+        "source": "ACC/AHA 2018 (PMID 30586774)"
+      },
+      "longevity_optimal": {
+        "max": 100,
+        "source": "ACC/AHA 2018 (PMID 30586774)",
+        "verified": true
+      },
+      "hallmark_associations": [
+        {
+          "hallmark": "altered_intercellular_communication",
+          "association": "Elevated LDL drives atherogenic inflammation and endothelial dysfunction.",
+          "framework_pmid": "36599349",
+          "specific_pmid": "30586774",
+          "evidence_strength": "ESTABLISHED",
+          "human_evidence": true,
+          "include_in_scoring": true
+        },
+        {
+          "hallmark": "nutrient_sensing",
+          "association": "LDL-C reflects lipid metabolism and nutrient-sensing pathway activity.",
+          "framework_pmid": "23746838",
+          "specific_pmid": "30586774",
+          "evidence_strength": "ESTABLISHED",
+          "human_evidence": true,
+          "include_in_scoring": true
+        }
+      ],
+      "direction": "HIGH_IS_VULNERABLE",
+      "thresholds": {
+        "optimal": {
+          "max": 100
+        },
+        "moderate": {
+          "min": 100,
+          "max": 130
+        },
+        "high_risk": {
+          "min": 130
+        }
+      },
+      "threshold_provenance": "ACC/AHA 2018 (PMID 30586774)"
+    },
+    {
+      "biomarker_id": "hdl_cholesterol",
+      "display_name": "HDL Cholesterol",
+      "unit": "mg/dL",
+      "standard_range": {
+        "min": 40,
+        "max": 100,
+        "source": "ATP III (PMID 12485966)"
+      },
+      "longevity_optimal": {
+        "min": 60,
+        "source": "ATP III (PMID 12485966)",
+        "verified": true
+      },
+      "hallmark_associations": [
+        {
+          "hallmark": "altered_intercellular_communication",
+          "association": "Low HDL is associated with increased cardiovascular inflammation and impaired reverse cholesterol transport.",
+          "framework_pmid": "36599349",
+          "specific_pmid": "12485966",
+          "evidence_strength": "ESTABLISHED",
+          "human_evidence": true,
+          "include_in_scoring": true
+        },
+        {
+          "hallmark": "mitochondrial_dysfunction",
+          "association": "HDL particles carry antioxidant enzymes; low HDL correlates with mitochondrial oxidative stress.",
+          "framework_pmid": "23746838",
+          "specific_pmid": "12485966",
+          "evidence_strength": "MODERATE",
+          "human_evidence": true,
+          "include_in_scoring": true
+        }
+      ],
+      "direction": "LOW_IS_VULNERABLE",
+      "thresholds": {
+        "optimal": {
+          "min": 60
+        },
+        "moderate": {
+          "min": 40,
+          "max": 60
+        },
+        "high_risk": {
+          "max": 40
+        }
+      },
+      "threshold_provenance": "ATP III (PMID 12485966)"
+    },
+    {
+      "biomarker_id": "triglycerides",
+      "display_name": "Triglycerides",
+      "unit": "mg/dL",
+      "standard_range": {
+        "min": 0,
+        "max": 150,
+        "source": "AHA 2011 (PMID 21502576)"
+      },
+      "longevity_optimal": {
+        "max": 100,
+        "source": "AHA 2011 (PMID 21502576)",
+        "verified": true
+      },
+      "hallmark_associations": [
+        {
+          "hallmark": "nutrient_sensing",
+          "association": "Elevated triglycerides reflect deregulated lipid/nutrient-sensing pathways including insulin resistance.",
+          "framework_pmid": "23746838",
+          "specific_pmid": "21502576",
+          "evidence_strength": "ESTABLISHED",
+          "human_evidence": true,
+          "include_in_scoring": true
+        },
+        {
+          "hallmark": "altered_intercellular_communication",
+          "association": "Hypertriglyceridemia promotes pro-inflammatory signaling and endothelial dysfunction.",
+          "framework_pmid": "36599349",
+          "specific_pmid": "21502576",
+          "evidence_strength": "ESTABLISHED",
+          "human_evidence": true,
+          "include_in_scoring": true
+        }
+      ],
+      "direction": "HIGH_IS_VULNERABLE",
+      "thresholds": {
+        "optimal": {
+          "max": 100
+        },
+        "moderate": {
+          "min": 100,
+          "max": 150
+        },
+        "high_risk": {
+          "min": 150
+        }
+      },
+      "threshold_provenance": "AHA 2011 (PMID 21502576)"
+    },
+    {
+      "biomarker_id": "ast",
+      "display_name": "Aspartate Aminotransferase (AST)",
+      "unit": "U/L",
+      "standard_range": {
+        "min": 0,
+        "max": 40,
+        "source": "AASLD (PMID 18956290)"
+      },
+      "longevity_optimal": {
+        "max": 25,
+        "source": "AASLD (PMID 18956290)",
+        "verified": true
+      },
+      "hallmark_associations": [
+        {
+          "hallmark": "mitochondrial_dysfunction",
+          "association": "AST elevation reflects hepatic mitochondrial stress and oxidative damage.",
+          "framework_pmid": "23746838",
+          "specific_pmid": "18956290",
+          "evidence_strength": "ESTABLISHED",
+          "human_evidence": true,
+          "include_in_scoring": true
+        },
+        {
+          "hallmark": "cellular_senescence",
+          "association": "Chronic liver injury and elevated AST are associated with hepatocyte senescence accumulation.",
+          "framework_pmid": "23746838",
+          "specific_pmid": "18956290",
+          "evidence_strength": "MODERATE",
+          "human_evidence": true,
+          "include_in_scoring": true
+        }
+      ],
+      "direction": "HIGH_IS_VULNERABLE",
+      "thresholds": {
+        "optimal": {
+          "max": 25
+        },
+        "moderate": {
+          "min": 25,
+          "max": 40
+        },
+        "high_risk": {
+          "min": 40
+        }
+      },
+      "threshold_provenance": "AASLD (PMID 18956290)"
+    },
+    {
+      "biomarker_id": "alt",
+      "display_name": "Alanine Aminotransferase (ALT)",
+      "unit": "U/L",
+      "standard_range": {
+        "min": 0,
+        "max": 40,
+        "source": "AASLD (PMID 18956290)"
+      },
+      "longevity_optimal": {
+        "max": 25,
+        "source": "AASLD (PMID 18956290)",
+        "verified": true
+      },
+      "hallmark_associations": [
+        {
+          "hallmark": "mitochondrial_dysfunction",
+          "association": "ALT elevation is a sensitive marker of hepatocyte mitochondrial and metabolic stress.",
+          "framework_pmid": "23746838",
+          "specific_pmid": "18956290",
+          "evidence_strength": "ESTABLISHED",
+          "human_evidence": true,
+          "include_in_scoring": true
+        },
+        {
+          "hallmark": "cellular_senescence",
+          "association": "Chronic hepatic injury drives senescent cell accumulation and SASP-mediated inflammation.",
+          "framework_pmid": "23746838",
+          "specific_pmid": "18956290",
+          "evidence_strength": "MODERATE",
+          "human_evidence": true,
+          "include_in_scoring": true
+        },
+        {
+          "hallmark": "nutrient_sensing",
+          "association": "ALT tracks metabolic liver disease and nutrient-sensing dysregulation in NAFLD/MASLD.",
+          "framework_pmid": "23746838",
+          "specific_pmid": "18956290",
+          "evidence_strength": "MODERATE",
+          "human_evidence": true,
+          "include_in_scoring": true
+        }
+      ],
+      "direction": "HIGH_IS_VULNERABLE",
+      "thresholds": {
+        "optimal": {
+          "max": 25
+        },
+        "moderate": {
+          "min": 25,
+          "max": 40
+        },
+        "high_risk": {
+          "min": 40
+        }
+      },
+      "threshold_provenance": "AASLD (PMID 18956290)"
+    },
+    {
+      "biomarker_id": "tsh",
+      "display_name": "Thyroid-Stimulating Hormone (TSH)",
+      "unit": "mIU/L",
+      "standard_range": {
+        "min": 0.3,
+        "max": 4.0,
+        "source": "ATA guidelines (PMID 22954017)"
+      },
+      "longevity_optimal": {
+        "min": 0.5,
+        "max": 2.5,
+        "source": "ATA guidelines (PMID 22954017)",
+        "verified": true
+      },
+      "hallmark_associations": [
+        {
+          "hallmark": "mitochondrial_dysfunction",
+          "association": "Thyroid hormone regulates mitochondrial biogenesis and oxidative phosphorylation; TSH extremes reflect thyroid-mitochondrial axis disruption.",
+          "framework_pmid": "23746838",
+          "specific_pmid": "22954017",
+          "evidence_strength": "ESTABLISHED",
+          "human_evidence": true,
+          "include_in_scoring": true
+        },
+        {
+          "hallmark": "nutrient_sensing",
+          "association": "TSH and thyroid hormones modulate metabolic rate and nutrient utilization pathways.",
+          "framework_pmid": "23746838",
+          "specific_pmid": "22954017",
+          "evidence_strength": "MODERATE",
+          "human_evidence": true,
+          "include_in_scoring": true
+        }
+      ],
+      "direction": "BIDIRECTIONAL",
+      "thresholds": {
+        "optimal": {
+          "min": 0.5,
+          "max": 2.5
+        },
+        "moderate_high": {
+          "min": 2.5,
+          "max": 4.0
+        },
+        "moderate_low": {
+          "min": 0.3,
+          "max": 0.5
+        },
+        "high_risk_high": {
+          "min": 4.0
+        },
+        "high_risk_low": {
+          "max": 0.3
+        }
+      },
+      "threshold_provenance": "ATA guidelines (PMID 22954017)"
+    },
+    {
+      "biomarker_id": "free_t3",
+      "display_name": "Free Triiodothyronine (Free T3)",
+      "unit": "pg/mL",
+      "standard_range": {
+        "min": 2.3,
+        "max": 4.2,
+        "source": "Thyroid 2014 (PMID 24670685)"
+      },
+      "longevity_optimal": {
+        "min": 3.0,
+        "max": 4.2,
+        "source": "Thyroid 2014 (PMID 24670685)",
+        "verified": true
+      },
+      "hallmark_associations": [
+        {
+          "hallmark": "mitochondrial_dysfunction",
+          "association": "Free T3 is the active thyroid hormone driving mitochondrial biogenesis and ATP production; low levels impair mitochondrial function.",
+          "framework_pmid": "23746838",
+          "specific_pmid": "24670685",
+          "evidence_strength": "ESTABLISHED",
+          "human_evidence": true,
+          "include_in_scoring": true
+        },
+        {
+          "hallmark": "nutrient_sensing",
+          "association": "T3 modulates metabolic rate and nutrient-sensing pathways including glucose and lipid metabolism.",
+          "framework_pmid": "23746838",
+          "specific_pmid": "24670685",
+          "evidence_strength": "MODERATE",
+          "human_evidence": true,
+          "include_in_scoring": true
+        }
+      ],
+      "direction": "LOW_IS_VULNERABLE",
+      "thresholds": {
+        "optimal": {
+          "min": 3.0,
+          "max": 4.2
+        },
+        "moderate": {
+          "min": 2.3,
+          "max": 3.0
+        },
+        "high_risk": {
+          "max": 2.3
+        }
+      },
+      "threshold_provenance": "Thyroid 2014 (PMID 24670685)"
+    },
+    {
+      "biomarker_id": "cortisol_am",
+      "display_name": "Morning Cortisol (AM Cortisol)",
+      "unit": "mcg/dL",
+      "standard_range": {
+        "min": 5,
+        "max": 25,
+        "source": "Endocrine Society (PMID 26760044)"
+      },
+      "longevity_optimal": {
+        "min": 8,
+        "max": 15,
+        "source": "Endocrine Society (PMID 26760044)",
+        "verified": true
+      },
+      "hallmark_associations": [
+        {
+          "hallmark": "cellular_senescence",
+          "association": "Chronic cortisol excess accelerates cellular senescence via glucocorticoid receptor-mediated stress pathways.",
+          "framework_pmid": "23746838",
+          "specific_pmid": "26760044",
+          "evidence_strength": "ESTABLISHED",
+          "human_evidence": true,
+          "include_in_scoring": true
+        },
+        {
+          "hallmark": "altered_intercellular_communication",
+          "association": "Elevated cortisol drives systemic immunosuppression and disrupts cytokine signaling networks.",
+          "framework_pmid": "36599349",
+          "specific_pmid": "26760044",
+          "evidence_strength": "ESTABLISHED",
+          "human_evidence": true,
+          "include_in_scoring": true
+        },
+        {
+          "hallmark": "epigenetic_alterations",
+          "association": "Glucocorticoid excess induces epigenetic reprogramming of stress-response genes.",
+          "framework_pmid": "23746838",
+          "specific_pmid": "26760044",
+          "evidence_strength": "MODERATE",
+          "human_evidence": true,
+          "include_in_scoring": true
+        }
+      ],
+      "direction": "HIGH_IS_VULNERABLE",
+      "thresholds": {
+        "optimal": {
+          "min": 8,
+          "max": 15
+        },
+        "moderate": {
+          "min": 15,
+          "max": 20
+        },
+        "high_risk_high": {
+          "min": 20
+        },
+        "high_risk_low": {
+          "max": 5
+        }
+      },
+      "threshold_provenance": "Endocrine Society (PMID 26760044)"
+    },
+    {
+      "biomarker_id": "uric_acid",
+      "display_name": "Uric Acid",
+      "unit": "mg/dL",
+      "standard_range": {
+        "min": 2.5,
+        "max": 7.0,
+        "source": "EULAR 2016 (PMID 27457514)"
+      },
+      "longevity_optimal": {
+        "max": 5.5,
+        "source": "EULAR 2016 (PMID 27457514)",
+        "verified": true
+      },
+      "hallmark_associations": [
+        {
+          "hallmark": "chronic_inflammation",
+          "association": "Hyperuricemia activates NLRP3 inflammasome and drives chronic sterile inflammation.",
+          "framework_pmid": "36599349",
+          "specific_pmid": "27457514",
+          "evidence_strength": "ESTABLISHED",
+          "human_evidence": true,
+          "include_in_scoring": true
+        },
+        {
+          "hallmark": "mitochondrial_dysfunction",
+          "association": "Uric acid is the end product of purine catabolism; elevated levels reflect mitochondrial oxidative stress and xanthine oxidase activity.",
+          "framework_pmid": "23746838",
+          "specific_pmid": "27457514",
+          "evidence_strength": "MODERATE",
+          "human_evidence": true,
+          "include_in_scoring": true
+        }
+      ],
+      "direction": "HIGH_IS_VULNERABLE",
+      "thresholds": {
+        "optimal": {
+          "max": 5.5
+        },
+        "moderate": {
+          "min": 5.5,
+          "max": 7.0
+        },
+        "high_risk": {
+          "min": 7.0
+        }
+      },
+      "threshold_provenance": "EULAR 2016 (PMID 27457514)"
+    },
+    {
+      "biomarker_id": "adiponectin",
+      "display_name": "Adiponectin",
+      "unit": "mcg/mL",
+      "standard_range": {
+        "min": 5,
+        "max": 30,
+        "source": "JCEM 2004 (PMID 15181022)"
+      },
+      "longevity_optimal": {
+        "min": 10,
+        "source": "JCEM 2004 (PMID 15181022)",
+        "verified": true
+      },
+      "hallmark_associations": [
+        {
+          "hallmark": "nutrient_sensing",
+          "association": "Adiponectin activates AMPK and improves insulin sensitivity; low levels indicate nutrient-sensing dysregulation.",
+          "framework_pmid": "23746838",
+          "specific_pmid": "15181022",
+          "evidence_strength": "ESTABLISHED",
+          "human_evidence": true,
+          "include_in_scoring": true
+        },
+        {
+          "hallmark": "altered_intercellular_communication",
+          "association": "Adiponectin is an anti-inflammatory adipokine; low levels promote pro-inflammatory intercellular signaling.",
+          "framework_pmid": "36599349",
+          "specific_pmid": "15181022",
+          "evidence_strength": "ESTABLISHED",
+          "human_evidence": true,
+          "include_in_scoring": true
+        },
+        {
+          "hallmark": "chronic_inflammation",
+          "association": "Low adiponectin is associated with elevated inflammatory markers and metabolic syndrome.",
+          "framework_pmid": "36599349",
+          "specific_pmid": "15181022",
+          "evidence_strength": "ESTABLISHED",
+          "human_evidence": true,
+          "include_in_scoring": true
+        }
+      ],
+      "direction": "LOW_IS_VULNERABLE",
+      "thresholds": {
+        "optimal": {
+          "min": 10
+        },
+        "moderate": {
+          "min": 5,
+          "max": 10
+        },
+        "high_risk": {
+          "max": 5
+        }
+      },
+      "threshold_provenance": "JCEM 2004 (PMID 15181022)"
+    },
+    {
+      "biomarker_id": "shbg",
+      "display_name": "Sex Hormone-Binding Globulin (SHBG)",
+      "unit": "nmol/L",
+      "standard_range": {
+        "min": 20,
+        "max": 150,
+        "source": "JCEM 2010 (PMID 20501690)"
+      },
+      "longevity_optimal": {
+        "min": 35,
+        "max": 100,
+        "source": "JCEM 2010 (PMID 20501690)",
+        "verified": true
+      },
+      "hallmark_associations": [
+        {
+          "hallmark": "nutrient_sensing",
+          "association": "SHBG is inversely regulated by insulin; low SHBG reflects insulin resistance and nutrient-sensing dysregulation.",
+          "framework_pmid": "23746838",
+          "specific_pmid": "20501690",
+          "evidence_strength": "ESTABLISHED",
+          "human_evidence": true,
+          "include_in_scoring": true
+        },
+        {
+          "hallmark": "cellular_senescence",
+          "association": "SHBG levels modulate bioavailable sex hormones that influence tissue maintenance and senescence programs.",
+          "framework_pmid": "23746838",
+          "specific_pmid": "20501690",
+          "evidence_strength": "MODERATE",
+          "human_evidence": true,
+          "include_in_scoring": true
+        }
+      ],
+      "direction": "BIDIRECTIONAL",
+      "thresholds": {
+        "optimal": {
+          "min": 35,
+          "max": 100
+        },
+        "moderate_low": {
+          "min": 20,
+          "max": 35
+        },
+        "moderate_high": {
+          "min": 100,
+          "max": 150
+        },
+        "high_risk_low": {
+          "max": 20
+        },
+        "high_risk_high": {
+          "min": 150
+        }
+      },
+      "threshold_provenance": "JCEM 2010 (PMID 20501690)"
+    },
+    {
+      "biomarker_id": "omega3_index",
+      "display_name": "Omega-3 Index (EPA+DHA % of RBC fatty acids)",
+      "unit": "%",
+      "standard_range": {
+        "min": 4,
+        "max": 12,
+        "source": "Harris & Von Schacky 2004 (PMID 15208005)"
+      },
+      "longevity_optimal": {
+        "min": 8,
+        "source": "Harris & Von Schacky 2004 (PMID 15208005)",
+        "verified": true
+      },
+      "hallmark_associations": [
+        {
+          "hallmark": "mitochondrial_dysfunction",
+          "association": "Omega-3 fatty acids support mitochondrial membrane integrity and reduce mitochondrial oxidative stress.",
+          "framework_pmid": "23746838",
+          "specific_pmid": "15208005",
+          "evidence_strength": "ESTABLISHED",
+          "human_evidence": true,
+          "include_in_scoring": true
+        },
+        {
+          "hallmark": "altered_intercellular_communication",
+          "association": "EPA/DHA generate specialized pro-resolving mediators that modulate inflammatory intercellular signaling.",
+          "framework_pmid": "36599349",
+          "specific_pmid": "15208005",
+          "evidence_strength": "ESTABLISHED",
+          "human_evidence": true,
+          "include_in_scoring": true
+        },
+        {
+          "hallmark": "chronic_inflammation",
+          "association": "Low omega-3 index is associated with elevated inflammatory markers and cardiovascular risk.",
+          "framework_pmid": "36599349",
+          "specific_pmid": "15208005",
+          "evidence_strength": "ESTABLISHED",
+          "human_evidence": true,
+          "include_in_scoring": true
+        }
+      ],
+      "direction": "LOW_IS_VULNERABLE",
+      "thresholds": {
+        "optimal": {
+          "min": 8
+        },
+        "moderate": {
+          "min": 4,
+          "max": 8
+        },
+        "high_risk": {
+          "max": 4
+        }
+      },
+      "threshold_provenance": "Harris & Von Schacky 2004 (PMID 15208005)"
+    },
+    {
+      "biomarker_id": "vo2max",
+      "display_name": "VO2 Max (Cardiorespiratory Fitness)",
+      "unit": "mL/kg/min",
+      "standard_range": {
+        "min": 20,
+        "max": 60,
+        "source": "AHA 2016 (PMID 27881567)"
+      },
+      "longevity_optimal": {
+        "min": 45,
+        "source": "AHA 2016 (PMID 27881567)",
+        "verified": true,
+        "note": "Age-adjusted; 45 mL/kg/min used as general longevity threshold"
+      },
+      "hallmark_associations": [
+        {
+          "hallmark": "mitochondrial_dysfunction",
+          "association": "VO2max directly reflects mitochondrial oxidative capacity in skeletal muscle; low VO2max indicates mitochondrial dysfunction.",
+          "framework_pmid": "23746838",
+          "specific_pmid": "27881567",
+          "evidence_strength": "ESTABLISHED",
+          "human_evidence": true,
+          "include_in_scoring": true
+        },
+        {
+          "hallmark": "stem_cell_exhaustion",
+          "association": "Cardiorespiratory fitness reflects hematopoietic and muscle stem cell reserve and regenerative capacity.",
+          "framework_pmid": "23746838",
+          "specific_pmid": "27881567",
+          "evidence_strength": "MODERATE",
+          "human_evidence": true,
+          "include_in_scoring": true
+        },
+        {
+          "hallmark": "cellular_senescence",
+          "association": "Low VO2max correlates with higher senescent cell burden in skeletal muscle and systemic tissues.",
+          "framework_pmid": "23746838",
+          "specific_pmid": "27881567",
+          "evidence_strength": "MODERATE",
+          "human_evidence": true,
+          "include_in_scoring": true
+        }
+      ],
+      "direction": "LOW_IS_VULNERABLE",
+      "thresholds": {
+        "optimal": {
+          "min": 45
+        },
+        "moderate": {
+          "min": 30,
+          "max": 45
+        },
+        "high_risk": {
+          "max": 30
+        }
+      },
+      "threshold_provenance": "AHA 2016 (PMID 27881567)"
+    },
+    {
+      "biomarker_id": "grip_strength",
+      "display_name": "Grip Strength",
+      "unit": "kg",
+      "standard_range": {
+        "min": 15,
+        "max": 60,
+        "source": "Lancet 2015 (PMID 25982160)"
+      },
+      "longevity_optimal": {
+        "min": 35,
+        "source": "Lancet 2015 (PMID 25982160)",
+        "verified": true,
+        "note": "Single threshold: >40 kg men / >25 kg women; 35 kg used as general threshold"
+      },
+      "hallmark_associations": [
+        {
+          "hallmark": "stem_cell_exhaustion",
+          "association": "Grip strength reflects muscle stem cell (satellite cell) reserve and regenerative capacity; low grip indicates stem cell exhaustion.",
+          "framework_pmid": "23746838",
+          "specific_pmid": "25982160",
+          "evidence_strength": "ESTABLISHED",
+          "human_evidence": true,
+          "include_in_scoring": true
+        },
+        {
+          "hallmark": "cellular_senescence",
+          "association": "Sarcopenia and low grip strength are associated with accumulation of senescent cells in muscle tissue.",
+          "framework_pmid": "23746838",
+          "specific_pmid": "25982160",
+          "evidence_strength": "ESTABLISHED",
+          "human_evidence": true,
+          "include_in_scoring": true
+        }
+      ],
+      "direction": "LOW_IS_VULNERABLE",
+      "thresholds": {
+        "optimal": {
+          "min": 35
+        },
+        "moderate": {
+          "min": 20,
+          "max": 35
+        },
+        "high_risk": {
+          "max": 20
+        }
+      },
+      "threshold_provenance": "Lancet 2015 (PMID 25982160)"
+    },
+    {
+      "biomarker_id": "klotho_serum",
+      "display_name": "Serum Klotho",
+      "unit": "pg/mL",
+      "standard_range": {
+        "min": 500,
+        "max": 1200,
+        "source": "JCI 2020 (PMID 32484793)"
+      },
+      "longevity_optimal": {
+        "min": 800,
+        "source": "JCI 2020 (PMID 32484793)",
+        "verified": true
+      },
+      "hallmark_associations": [
+        {
+          "hallmark": "cellular_senescence",
+          "association": "Klotho is an anti-aging hormone; low serum klotho is associated with accelerated cellular senescence and aging phenotypes.",
+          "framework_pmid": "23746838",
+          "specific_pmid": "32484793",
+          "evidence_strength": "ESTABLISHED",
+          "human_evidence": true,
+          "include_in_scoring": true
+        },
+        {
+          "hallmark": "altered_intercellular_communication",
+          "association": "Klotho modulates FGF23 signaling and systemic intercellular communication networks.",
+          "framework_pmid": "36599349",
+          "specific_pmid": "32484793",
+          "evidence_strength": "ESTABLISHED",
+          "human_evidence": true,
+          "include_in_scoring": true
+        },
+        {
+          "hallmark": "epigenetic_alterations",
+          "association": "Klotho expression is regulated by epigenetic mechanisms; low klotho reflects epigenetic silencing in aging.",
+          "framework_pmid": "23746838",
+          "specific_pmid": "32484793",
+          "evidence_strength": "MODERATE",
+          "human_evidence": true,
+          "include_in_scoring": true
+        }
+      ],
+      "direction": "LOW_IS_VULNERABLE",
+      "thresholds": {
+        "optimal": {
+          "min": 800
+        },
+        "moderate": {
+          "min": 500,
+          "max": 800
+        },
+        "high_risk": {
+          "max": 500
+        }
+      },
+      "threshold_provenance": "JCI 2020 (PMID 32484793)"
+    },
+    {
+      "biomarker_id": "bdnf_serum",
+      "display_name": "Brain-Derived Neurotrophic Factor (BDNF)",
+      "unit": "ng/mL",
+      "standard_range": {
+        "min": 5,
+        "max": 35,
+        "source": "Neuroscience 2016 (PMID 27033685)"
+      },
+      "longevity_optimal": {
+        "min": 20,
+        "source": "Neuroscience 2016 (PMID 27033685)",
+        "verified": true
+      },
+      "hallmark_associations": [
+        {
+          "hallmark": "altered_intercellular_communication",
+          "association": "BDNF is a key neurotrophic factor mediating intercellular communication in the brain and periphery; low levels impair neuroplasticity.",
+          "framework_pmid": "36599349",
+          "specific_pmid": "27033685",
+          "evidence_strength": "ESTABLISHED",
+          "human_evidence": true,
+          "include_in_scoring": true
+        },
+        {
+          "hallmark": "cellular_senescence",
+          "association": "Declining BDNF is associated with neuronal senescence and cognitive aging.",
+          "framework_pmid": "23746838",
+          "specific_pmid": "27033685",
+          "evidence_strength": "MODERATE",
+          "human_evidence": true,
+          "include_in_scoring": true
+        }
+      ],
+      "direction": "LOW_IS_VULNERABLE",
+      "thresholds": {
+        "optimal": {
+          "min": 20
+        },
+        "moderate": {
+          "min": 10,
+          "max": 20
+        },
+        "high_risk": {
+          "max": 10
+        }
+      },
+      "threshold_provenance": "Neuroscience 2016 (PMID 27033685)"
+    },
+    {
+      "biomarker_id": "microbiome_diversity",
+      "display_name": "Gut Microbiome Diversity (Shannon Index)",
+      "unit": "Shannon index",
+      "standard_range": {
+        "min": 2.0,
+        "max": 5.0,
+        "source": "Nature 2022 (PMID 35296864)"
+      },
+      "longevity_optimal": {
+        "min": 3.5,
+        "source": "Nature 2022 (PMID 35296864)",
+        "verified": true
+      },
+      "hallmark_associations": [
+        {
+          "hallmark": "dysbiosis",
+          "association": "Low microbiome diversity is the defining feature of gut dysbiosis, associated with aging and disease.",
+          "framework_pmid": "36599349",
+          "specific_pmid": "35296864",
+          "evidence_strength": "ESTABLISHED",
+          "human_evidence": true,
+          "include_in_scoring": true
+        },
+        {
+          "hallmark": "altered_intercellular_communication",
+          "association": "Microbiome diversity influences gut-immune axis and systemic intercellular signaling via metabolites.",
+          "framework_pmid": "36599349",
+          "specific_pmid": "35296864",
+          "evidence_strength": "ESTABLISHED",
+          "human_evidence": true,
+          "include_in_scoring": true
+        },
+        {
+          "hallmark": "chronic_inflammation",
+          "association": "Low microbiome diversity is associated with increased intestinal permeability and systemic inflammation.",
+          "framework_pmid": "36599349",
+          "specific_pmid": "35296864",
+          "evidence_strength": "ESTABLISHED",
+          "human_evidence": true,
+          "include_in_scoring": true
+        }
+      ],
+      "direction": "LOW_IS_VULNERABLE",
+      "thresholds": {
+        "optimal": {
+          "min": 3.5
+        },
+        "moderate": {
+          "min": 2.5,
+          "max": 3.5
+        },
+        "high_risk": {
+          "max": 2.5
+        }
+      },
+      "threshold_provenance": "Nature 2022 (PMID 35296864)"
+    },
+    {
+      "biomarker_id": "plasma_taurine",
+      "display_name": "Plasma Taurine",
+      "unit": "mcmol/L",
+      "standard_range": {
+        "min": 40,
+        "max": 200,
+        "source": "Science 2023 (PMID 35580047)"
+      },
+      "longevity_optimal": {
+        "min": 150,
+        "source": "Science 2023 (PMID 35580047)",
+        "verified": true
+      },
+      "hallmark_associations": [
+        {
+          "hallmark": "mitochondrial_dysfunction",
+          "association": "Taurine supports mitochondrial function and reduces mitochondrial ROS; taurine deficiency accelerates mitochondrial aging.",
+          "framework_pmid": "23746838",
+          "specific_pmid": "35580047",
+          "evidence_strength": "ESTABLISHED",
+          "human_evidence": true,
+          "include_in_scoring": true
+        },
+        {
+          "hallmark": "cellular_senescence",
+          "association": "Taurine supplementation reduces senescence markers in multiple tissues; plasma taurine declines with age.",
+          "framework_pmid": "23746838",
+          "specific_pmid": "35580047",
+          "evidence_strength": "ESTABLISHED",
+          "human_evidence": true,
+          "include_in_scoring": true
+        },
+        {
+          "hallmark": "nutrient_sensing",
+          "association": "Taurine modulates nutrient-sensing pathways including mTOR and AMPK in aging tissues.",
+          "framework_pmid": "23746838",
+          "specific_pmid": "35580047",
+          "evidence_strength": "MODERATE",
+          "human_evidence": true,
+          "include_in_scoring": true
+        }
+      ],
+      "direction": "LOW_IS_VULNERABLE",
+      "thresholds": {
+        "optimal": {
+          "min": 150
+        },
+        "moderate": {
+          "min": 80,
+          "max": 150
+        },
+        "high_risk": {
+          "max": 80
+        }
+      },
+      "threshold_provenance": "Science 2023 (PMID 35580047)"
     }
   ]
 }
-
