@@ -1,9 +1,10 @@
 from __future__ import annotations
 
 import uuid
-from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 
+from datetime import datetime, timezone, timedelta
+from threading import Lock
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field, model_validator
 
@@ -14,6 +15,33 @@ from .services.longitudinal_service import compute_longitudinal_delta
 from .services.wearable_service import score_wearables
 
 router = APIRouter(prefix="/api/v1/longevity", tags=["longevity"])
+
+# ─────────────────────────────────────────────────────────────────────────────
+# In-memory run registry (TTL: 1 hour)
+# ─────────────────────────────────────────────────────────────────────────────
+
+_RUN_REGISTRY: dict = {}
+_REGISTRY_LOCK = Lock()
+_REGISTRY_TTL_HOURS = 1
+
+
+def _register_run(run_id: str, audit_log: list, pipeline_health: dict) -> None:
+    with _REGISTRY_LOCK:
+        _evict_expired()
+        _RUN_REGISTRY[run_id] = {
+            "run_id": run_id,
+            "audit_log": audit_log,
+            "pipeline_health": pipeline_health,
+            "registered_at": datetime.now(timezone.utc).isoformat(),
+        }
+
+
+def _evict_expired() -> None:
+    cutoff = datetime.now(timezone.utc) - timedelta(hours=_REGISTRY_TTL_HOURS)
+    expired = [k for k, v in _RUN_REGISTRY.items()
+               if datetime.fromisoformat(v["registered_at"]) < cutoff]
+    for k in expired:
+        del _RUN_REGISTRY[k]
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -78,6 +106,24 @@ class WearableRequest(BaseModel):
     patient_id: Optional[str] = None
 
 
+class EpigeneticClockRequest(BaseModel):
+    """
+    Pre-computed epigenetic clock values for normalization (RUO).
+
+    Accepts values from external methylation array analysis (e.g., Illumina EPIC array).
+    Supported clocks: grimAge, dunedinPACE, horvath, hannum, phenoAgeDNAm
+    """
+    clock_values: Dict[str, float] = Field(
+        ...,
+        description="Clock name -> value. e.g. {'grimAge': 65.0, 'dunedinPACE': 1.12}",
+        example={"grimAge": 65.0, "dunedinPACE": 1.12},
+    )
+    chronological_age: Optional[int] = Field(
+        default=None,
+        description="Chronological age in years (used for acceleration calculation)",
+    )
+
+
 class AgenticAssessRequest(BaseModel):
     """
     Full agentic assessment via LangGraph multi-agent pipeline.
@@ -99,6 +145,10 @@ class AgenticAssessRequest(BaseModel):
     visit_history: Optional[List[Dict[str, Any]]] = Field(default=None, description="Prior visit records")
     compound_queries: Optional[List[str]] = Field(default=None, description="Compounds to evaluate")
     patient_medications: Optional[List[str]] = Field(default=None, description="Current medications")
+    epigenetic_clocks: Optional[Dict[str, float]] = Field(
+        default=None,
+        description="Pre-computed epigenetic clock values (grimAge, dunedinPACE, etc.)"
+    )
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -140,6 +190,18 @@ async def wearable_integration(body: WearableRequest) -> Dict[str, Any]:
     return score_wearables(body.wearable_data)
 
 
+@router.post("/epigenetic_clock")
+async def epigenetic_clock(body: EpigeneticClockRequest) -> Dict[str, Any]:
+    """
+    Normalize pre-computed epigenetic clock values against published population references (RUO).
+
+    Accepts values from external methylation array analysis.
+    Returns clock_acceleration, pace_interpretation, and hallmark_implications.
+    """
+    from .services.epigenetic_clock_service import score_epigenetic_clocks
+    return score_epigenetic_clocks(body.clock_values, body.chronological_age)
+
+
 @router.post("/agent/assess")
 async def agentic_assess(body: AgenticAssessRequest) -> Dict[str, Any]:
     """
@@ -173,6 +235,7 @@ async def agentic_assess(body: AgenticAssessRequest) -> Dict[str, Any]:
         "body_composition": body.body_composition,
         "compound_queries": body.compound_queries,
         "patient_medications": body.patient_medications,
+        "epigenetic_clocks": body.epigenetic_clocks,
     }
     # Remove None values
     current_input = {k: v for k, v in current_input.items() if v is not None}
@@ -192,6 +255,9 @@ async def agentic_assess(body: AgenticAssessRequest) -> Dict[str, Any]:
         "cardiovascular_risk": None,
         "wearable_result": None,
         "body_composition_result": None,
+        "audit_log": [],
+        "pipeline_health": None,
+        "epigenetic_clock_result": None,
         "detected_gaps": None,
         "gap_priority_order": None,
         "longitudinal_delta": None,
@@ -206,9 +272,27 @@ async def agentic_assess(body: AgenticAssessRequest) -> Dict[str, Any]:
         graph = get_longevity_graph()
         final_state = graph.invoke(initial_state)
         report = final_state.get("final_report") or {}
+        # Register run for status polling
+        audit_log = final_state.get("audit_log") or []
+        pipeline_health = final_state.get("pipeline_health") or {}
+        _register_run(run_id, audit_log, pipeline_health)
+        report["audit_log"] = audit_log
+        report["pipeline_health"] = pipeline_health
+        report["run_id"] = run_id
         return report
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Agent pipeline error: {e}")
+
+
+@router.get("/pipeline/status/{run_id}")
+async def pipeline_status(run_id: str) -> Dict[str, Any]:
+    """Return audit_log and pipeline_health for a completed run (TTL: 1 hour)."""
+    with _REGISTRY_LOCK:
+        _evict_expired()
+        record = _RUN_REGISTRY.get(run_id)
+    if record is None:
+        raise HTTPException(status_code=404, detail=f"Run '{run_id}' not found or expired.")
+    return record
 
 
 @router.get("/healthz")

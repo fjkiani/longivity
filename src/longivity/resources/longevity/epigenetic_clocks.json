@@ -1,0 +1,71 @@
+{
+  "clocks": {
+    "grimAge": {
+      "full_name": "GrimAge",
+      "type": "mortality_predictor",
+      "cpg_count": 1030,
+      "tissue": "blood",
+      "output_unit": "years",
+      "population_mean": 60.2,
+      "population_sd": 12.1,
+      "pmid": "31451800",
+      "reference": "Lu AT et al. Nat Aging 2019",
+      "hallmarks": ["epigenetic_alterations", "chronic_inflammation", "loss_of_proteostasis"],
+      "notes": "Trained on time-to-death; strongest mortality predictor among DNAm clocks"
+    },
+    "dunedinPACE": {
+      "full_name": "DunedinPACE",
+      "type": "pace_of_aging",
+      "cpg_count": 173,
+      "tissue": "blood",
+      "output_unit": "pace_ratio",
+      "population_mean": 1.00,
+      "population_sd": 0.10,
+      "pmid": "35236523",
+      "reference": "Belsky DW et al. eLife 2022",
+      "hallmarks": ["epigenetic_alterations", "mitochondrial_dysfunction", "cellular_senescence"],
+      "notes": "Measures pace of biological aging; 1.0 = average; >1.0 = faster aging"
+    },
+    "horvath": {
+      "full_name": "Horvath Multi-Tissue Clock",
+      "type": "biological_age",
+      "cpg_count": 353,
+      "tissue": "multi-tissue",
+      "output_unit": "years",
+      "population_mean": null,
+      "population_sd": 3.6,
+      "pmid": "24138928",
+      "reference": "Horvath S. Genome Biol 2013",
+      "hallmarks": ["epigenetic_alterations", "genomic_instability"],
+      "notes": "Mean \u2248 chronological age; SD ~3.6 years in healthy adults"
+    },
+    "hannum": {
+      "full_name": "Hannum Blood Clock",
+      "type": "biological_age",
+      "cpg_count": 71,
+      "tissue": "blood",
+      "output_unit": "years",
+      "population_mean": null,
+      "population_sd": 4.0,
+      "pmid": "23177740",
+      "reference": "Hannum G et al. Mol Cell 2013",
+      "hallmarks": ["epigenetic_alterations", "genomic_instability"],
+      "notes": "Blood-specific; mean \u2248 chronological age"
+    },
+    "phenoAgeDNAm": {
+      "full_name": "PhenoAge DNAm",
+      "type": "biological_age",
+      "cpg_count": 513,
+      "tissue": "blood",
+      "output_unit": "years",
+      "population_mean": null,
+      "population_sd": 5.0,
+      "pmid": "29676998",
+      "reference": "Levine ME et al. Aging 2018",
+      "hallmarks": ["epigenetic_alterations", "chronic_inflammation", "loss_of_proteostasis"],
+      "notes": "DNAm-based version of PhenoAge; correlated with blood biomarker PhenoAge"
+    }
+  },
+  "ruo_disclaimer": "Research Use Only. Not for clinical diagnosis or treatment decisions.",
+  "version": "1.0.0"
+}

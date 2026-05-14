@@ -39,6 +39,11 @@ class PatientState(TypedDict):
     wearable_result: Optional[Dict[str, Any]]
     body_composition_result: Optional[Dict[str, Any]]
 
+    # OverseerAgent fields
+    audit_log: List[Dict[str, Any]]          # one entry per agent: {agent, duration_ms, status, error}
+    pipeline_health: Optional[Dict[str, Any]]  # summary: agents_completed, agents_errored, total_duration_ms, overall_status
+    epigenetic_clock_result: Optional[Dict[str, Any]]  # from epigenetic_clock_agent (Phase 3)
+
     # Gap detection output
     detected_gaps: List[Dict[str, Any]]
     gap_priority_order: List[str]

@@ -2190,6 +2190,54 @@
         }
       },
       "threshold_provenance": "Science 2023 (PMID 35580047)"
+    },
+    {
+      "biomarker_id": "telomere_length",
+      "display_name": "Telomere Length",
+      "unit": "kb or T/S ratio",
+      "standard_range": {
+        "note": "Age-adjusted; population percentile preferred",
+        "source": "Epidemiological reference distributions"
+      },
+      "longevity_optimal": {
+        "note": "Age-adjusted >50th percentile; higher T/S ratio or longer kb associated with lower mortality in cohort studies",
+        "source": "cohort_literature",
+        "source_pmid": "20972438",
+        "source_note": "TERT rs7726159 and telomere length associations; LTL-mortality associations are population-specific.",
+        "verified": true
+      },
+      "hallmark_associations": [
+        {
+          "hallmark": "telomere_attrition",
+          "association": "Direct telomere length measurement maps to telomere attrition hallmark; declines ~50-100 bp/year.",
+          "framework_pmid": "23746838",
+          "framework_note": "Telomere attrition as hallmark.",
+          "specific_pmid": "20972438",
+          "evidence_strength": "ESTABLISHED"
+        },
+        {
+          "hallmark": "genomic_instability",
+          "association": "Critically short telomeres trigger DNA damage response and contribute to genomic instability.",
+          "framework_pmid": "23746838",
+          "framework_note": "Genomic instability hallmark context.",
+          "specific_pmid": "20972438",
+          "evidence_strength": "ESTABLISHED"
+        }
+      ],
+      "direction": "LOW_IS_VULNERABLE",
+      "thresholds": {
+        "optimal": {
+          "note": "Age-adjusted >50th percentile"
+        },
+        "moderate": {
+          "note": "Age-adjusted ~20th-50th percentile"
+        },
+        "high_risk": {
+          "note": "Age-adjusted <20th percentile"
+        }
+      },
+      "threshold_provenance": "population_percentile_clinical_consensus",
+      "notes": "Measured by qPCR (T/S ratio) or Southern blot; declines ~50-100 bp/year"
     }
   ]
 }

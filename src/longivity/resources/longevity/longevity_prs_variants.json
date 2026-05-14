@@ -14,6 +14,7 @@
     "prs5_centenarian_meta_note": "Multi-SNP longevity/centenarian PRS meta-analyses (e.g. van der Lee et al., J Gerontol A Biol Sci Med Sci 2021, PMID 33216869; related PRS-5 centenarian OR≈1.27 with APOE excluded) validate the general approach at larger SNP counts. This 27-SNP panel is a reduced instrument for demonstration; it is not numerically calibrated to PRS-5 ORs."
   },
   "min_loci_for_tertile": 10,
+  "expanded_loci_note": "5 additional longevity-associated loci (FOXO3, CETP, KLOTHO, TERT, SOD2) appended below the Timmers 27-SNP panel. These use candidate-gene effect sizes (OR-derived betas) and are annotated separately in genetic_annotator.py LONGEVITY_VARIANT_ANNOTATIONS.",
   "variants": [
     { "rsid": "rs117791490", "chromosome": 6, "position_grch37": 160916058, "effect_allele": "T", "beta_years_per_allele": -0.9114099, "locus_label": "near HLA region" },
     { "rsid": "rs9986540", "chromosome": 6, "position_grch37": 160242487, "effect_allele": "T", "beta_years_per_allele": -0.8698921, "locus_label": "near HLA region" },
@@ -41,7 +42,12 @@
     { "rsid": "rs59234174", "chromosome": 9, "position_grch37": 16730258, "effect_allele": "T", "beta_years_per_allele": -0.2764555, "locus_label": "9p21.3" },
     { "rsid": "rs57301765", "chromosome": 7, "position_grch37": 19052733, "effect_allele": "A", "beta_years_per_allele": -0.2676652, "locus_label": "7p22.1" },
     { "rsid": "rs2272168", "chromosome": 7, "position_grch37": 99102777, "effect_allele": "C", "beta_years_per_allele": 0.2665403, "locus_label": "7q22.1" },
-    { "rsid": "rs56165099", "chromosome": 12, "position_grch37": 21357731, "effect_allele": "T", "beta_years_per_allele": 0.2648498, "locus_label": "12p12.1" }
+    { "rsid": "rs56165099", "chromosome": 12, "position_grch37": 21357731, "effect_allele": "T", "beta_years_per_allele": 0.2648498, "locus_label": "12p12.1" },
+    { "rsid": "rs2802292", "chromosome": 6, "position_grch37": 108979788, "effect_allele": "G", "beta_years_per_allele": -0.163, "locus_label": "FOXO3", "gene": "FOXO3", "protective_allele": "G", "risk_allele": "T", "odds_ratio": 0.85, "pmid": "18765803", "hallmarks": ["altered_intercellular_communication", "deregulated_nutrient_sensing"], "function": "Forkhead transcription factor; regulates insulin/IGF-1 signaling and stress resistance", "population_frequency_G": 0.35 },
+    { "rsid": "rs5882", "chromosome": 16, "position_grch37": 56995236, "effect_allele": "A", "beta_years_per_allele": -0.128, "locus_label": "CETP", "gene": "CETP", "protective_allele": "A", "risk_allele": "G", "odds_ratio": 0.88, "pmid": "20686565", "hallmarks": ["chronic_inflammation", "deregulated_nutrient_sensing"], "function": "Cholesteryl ester transfer protein; A allele associated with higher HDL and longevity", "population_frequency_A": 0.42 },
+    { "rsid": "rs9536314", "chromosome": 13, "position_grch37": 33628138, "effect_allele": "T", "beta_years_per_allele": -0.198, "locus_label": "KLOTHO/KL", "gene": "KL", "protective_allele": "T", "risk_allele": "C", "odds_ratio": 0.82, "pmid": "15520388", "hallmarks": ["altered_intercellular_communication", "epigenetic_alterations"], "function": "Anti-aging hormone; T allele (KL-VS haplotype) associated with longevity and cognitive protection", "population_frequency_T": 0.16 },
+    { "rsid": "rs7726159", "chromosome": 5, "position_grch37": 1295228, "effect_allele": "C", "beta_years_per_allele": -0.094, "locus_label": "TERT", "gene": "TERT", "protective_allele": "C", "risk_allele": "A", "odds_ratio": 0.91, "pmid": "20972438", "hallmarks": ["telomere_attrition", "genomic_instability"], "function": "Telomerase reverse transcriptase; C allele associated with longer telomeres", "population_frequency_C": 0.55 },
+    { "rsid": "rs4880", "chromosome": 6, "position_grch37": 160113872, "effect_allele": "T", "beta_years_per_allele": -0.117, "locus_label": "SOD2", "gene": "SOD2", "protective_allele": "T", "risk_allele": "C", "odds_ratio": 0.89, "pmid": "12522134", "hallmarks": ["mitochondrial_dysfunction", "oxidative_stress"], "function": "Mitochondrial superoxide dismutase; T allele (Ala16Val) associated with reduced ROS and longevity", "population_frequency_T": 0.48 }
   ]
 }
 

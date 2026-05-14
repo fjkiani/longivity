@@ -1,0 +1,37 @@
+{
+  "pearson_r": 0.9337,
+  "pearson_p": 0.0,
+  "n_patients": 1000,
+  "n_valid": 1000,
+  "pct_accelerated_overall": 25.9,
+  "by_decade": {
+    "40s": {
+      "n": 250,
+      "mean_phenoage": 37.01,
+      "mean_chronological_age": 44.76,
+      "mean_acceleration": -7.74,
+      "pct_accelerated": 6.8
+    },
+    "50s": {
+      "n": 250,
+      "mean_phenoage": 49.55,
+      "mean_chronological_age": 54.85,
+      "mean_acceleration": -5.29,
+      "pct_accelerated": 14.8
+    },
+    "60s": {
+      "n": 250,
+      "mean_phenoage": 62.07,
+      "mean_chronological_age": 65.05,
+      "mean_acceleration": -2.96,
+      "pct_accelerated": 30.0
+    },
+    "70s": {
+      "n": 250,
+      "mean_phenoage": 75.37,
+      "mean_chronological_age": 75.09,
+      "mean_acceleration": 0.29,
+      "pct_accelerated": 52.0
+    }
+  }
+}

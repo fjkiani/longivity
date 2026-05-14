@@ -28,12 +28,21 @@ from typing import Optional
 from langgraph.graph import StateGraph, END
 
 from .state import PatientState
+from .overseer_agent import overseer_wrap
 from .biomarker_agent import biomarker_agent
 from .genetic_agent import genetic_agent
 from .cardiovascular_agent import cardiovascular_agent
 from .gap_detection_agent import gap_detection_agent
 from .longitudinal_agent import longitudinal_agent
 from .report_assembler_agent import report_assembler_agent
+
+# Optional Phase 3 agent — degrades gracefully if not yet implemented
+_EPIGENETIC_CLOCK_AVAILABLE = False
+try:
+    from .epigenetic_clock_agent import epigenetic_clock_agent
+    _EPIGENETIC_CLOCK_AVAILABLE = True
+except ImportError:
+    epigenetic_clock_agent = None
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -87,12 +96,16 @@ def build_longevity_graph() -> StateGraph:
     graph = StateGraph(PatientState)
 
     # ── Register all nodes ────────────────────────────────────────────────────
-    graph.add_node("biomarker_agent", biomarker_agent)
-    graph.add_node("genetic_agent", genetic_agent)
-    graph.add_node("cardiovascular_agent", cardiovascular_agent)
-    graph.add_node("longitudinal_agent", longitudinal_agent)
-    graph.add_node("gap_detection_agent", gap_detection_agent)
-    graph.add_node("report_assembler_agent", report_assembler_agent)
+    graph.add_node("biomarker_agent", overseer_wrap(biomarker_agent, "biomarker_agent"))
+    graph.add_node("genetic_agent", overseer_wrap(genetic_agent, "genetic_agent"))
+    graph.add_node("cardiovascular_agent", overseer_wrap(cardiovascular_agent, "cardiovascular_agent"))
+    graph.add_node("longitudinal_agent", overseer_wrap(longitudinal_agent, "longitudinal_agent"))
+    graph.add_node("gap_detection_agent", overseer_wrap(gap_detection_agent, "gap_detection_agent"))
+    graph.add_node("report_assembler_agent", overseer_wrap(report_assembler_agent, "report_assembler_agent"))
+
+    # ── Optional: epigenetic_clock_agent (Phase 3) ────────────────────────────
+    if _EPIGENETIC_CLOCK_AVAILABLE:
+        graph.add_node("epigenetic_clock_agent", overseer_wrap(epigenetic_clock_agent, "epigenetic_clock_agent"))
 
     # ── Entry point ───────────────────────────────────────────────────────────
     graph.set_entry_point("biomarker_agent")
@@ -117,8 +130,12 @@ def build_longevity_graph() -> StateGraph:
         },
     )
 
-    # ── Cardiovascular → longitudinal (always) ────────────────────────────────
-    graph.add_edge("cardiovascular_agent", "longitudinal_agent")
+    # ── Cardiovascular → longitudinal (or epigenetic_clock if available) ───────
+    if _EPIGENETIC_CLOCK_AVAILABLE:
+        graph.add_edge("cardiovascular_agent", "epigenetic_clock_agent")
+        graph.add_edge("epigenetic_clock_agent", "longitudinal_agent")
+    else:
+        graph.add_edge("cardiovascular_agent", "longitudinal_agent")
 
     # ── Longitudinal → gap detection ──────────────────────────────────────────
     graph.add_edge("longitudinal_agent", "gap_detection_agent")
@@ -135,7 +152,7 @@ def build_longevity_graph() -> StateGraph:
 # ─────────────────────────────────────────────────────────────────────────────
 # Singleton compiled graph (lazy init)
 # ─────────────────────────────────────────────────────────────────────────────
-_GRAPH: Optional[object] = None
+_GRAPH: Optional[object] = None  # reset on module reload to pick up new graph
 
 
 def get_longevity_graph():

@@ -88,6 +88,120 @@ MTHFR_A1298C_ACTIVITY = {
 MTHFR_SOURCE_PMID = "8554066"  # Frosst et al. Nat Genet 1995
 
 
+# ── LONGEVITY VARIANT ANNOTATIONS ────────────────────────────────────────────
+# Expanded longevity-associated loci beyond APOE/MTHFR.
+# Sources: published GWAS and candidate-gene studies (PMIDs listed per entry).
+
+LONGEVITY_VARIANT_ANNOTATIONS = {
+    "rs2802292": {
+        "gene": "FOXO3",
+        "function": "Forkhead transcription factor; regulates insulin/IGF-1 signaling and stress resistance",
+        "hallmarks": ["altered_intercellular_communication", "deregulated_nutrient_sensing"],
+        "protective_allele": "G",
+        "risk_allele": "T",
+        "effect_size_beta": -0.163,
+        "odds_ratio": 0.85,
+        "pmid": "18765803",
+        "population_frequency_protective": 0.35,
+        "note": "G allele associated with longevity in multiple centenarian cohorts (Willcox et al. PNAS 2008).",
+    },
+    "rs5882": {
+        "gene": "CETP",
+        "function": "Cholesteryl ester transfer protein; A allele associated with higher HDL and longevity",
+        "hallmarks": ["chronic_inflammation", "deregulated_nutrient_sensing"],
+        "protective_allele": "A",
+        "risk_allele": "G",
+        "effect_size_beta": -0.128,
+        "odds_ratio": 0.88,
+        "pmid": "20686565",
+        "population_frequency_protective": 0.42,
+        "note": "A allele (Ile405Val) associated with higher HDL-C and longevity in Ashkenazi Jewish centenarians.",
+    },
+    "rs9536314": {
+        "gene": "KL",
+        "function": "Anti-aging hormone; T allele (KL-VS haplotype) associated with longevity and cognitive protection",
+        "hallmarks": ["altered_intercellular_communication", "epigenetic_alterations"],
+        "protective_allele": "T",
+        "risk_allele": "C",
+        "effect_size_beta": -0.198,
+        "odds_ratio": 0.82,
+        "pmid": "15520388",
+        "population_frequency_protective": 0.16,
+        "note": "KL-VS haplotype (T allele) associated with longevity and reduced cognitive decline (Arking et al. PNAS 2002).",
+    },
+    "rs7726159": {
+        "gene": "TERT",
+        "function": "Telomerase reverse transcriptase; C allele associated with longer telomeres",
+        "hallmarks": ["telomere_attrition", "genomic_instability"],
+        "protective_allele": "C",
+        "risk_allele": "A",
+        "effect_size_beta": -0.094,
+        "odds_ratio": 0.91,
+        "pmid": "20972438",
+        "population_frequency_protective": 0.55,
+        "note": "C allele associated with longer telomere length and reduced age-related disease risk.",
+    },
+    "rs4880": {
+        "gene": "SOD2",
+        "function": "Mitochondrial superoxide dismutase; T allele (Ala16Val) associated with reduced ROS and longevity",
+        "hallmarks": ["mitochondrial_dysfunction", "oxidative_stress"],
+        "protective_allele": "T",
+        "risk_allele": "C",
+        "effect_size_beta": -0.117,
+        "odds_ratio": 0.89,
+        "pmid": "12522134",
+        "population_frequency_protective": 0.48,
+        "note": "Ala16Val (T allele) associated with improved mitochondrial antioxidant capacity and longevity.",
+    },
+}
+
+
+def annotate_longevity_variants(variants: dict) -> dict:
+    """Annotate longevity-associated variants (FOXO3, CETP, KLOTHO, TERT, SOD2)."""
+    results = {}
+    for rsid, annotation in LONGEVITY_VARIANT_ANNOTATIONS.items():
+        entry = variants.get(rsid)
+        if entry is None:
+            continue
+        geno_raw = entry.get("genotype") if isinstance(entry, dict) else None
+        if not geno_raw:
+            continue
+        geno = "".join(sorted(str(geno_raw).upper()))
+        protective = annotation["protective_allele"].upper()
+        risk = annotation["risk_allele"].upper()
+        dosage_protective = sum(1 for b in geno if b == protective)
+        dosage_risk = sum(1 for b in geno if b == risk)
+        if dosage_protective == 2:
+            zygosity = "homozygous_protective"
+            impact = "FAVORABLE"
+        elif dosage_protective == 1:
+            zygosity = "heterozygous"
+            impact = "INTERMEDIATE"
+        elif dosage_risk == 2:
+            zygosity = "homozygous_risk"
+            impact = "UNFAVORABLE"
+        else:
+            zygosity = "unknown"
+            impact = "UNKNOWN"
+        results[rsid] = {
+            "rsid": rsid,
+            "gene": annotation["gene"],
+            "genotype": geno,
+            "zygosity": zygosity,
+            "impact": impact,
+            "protective_allele": annotation["protective_allele"],
+            "risk_allele": annotation["risk_allele"],
+            "dosage_protective": dosage_protective,
+            "function": annotation["function"],
+            "hallmarks": annotation["hallmarks"],
+            "effect_size_beta": annotation["effect_size_beta"],
+            "odds_ratio": annotation["odds_ratio"],
+            "source_pmid": annotation["pmid"],
+            "note": annotation["note"],
+        }
+    return results
+
+
 # ── BRCA CLASSIFICATION ACTIONS ──────────────────────────────────────────────
 BRCA_ACTIONS = {
     "Pathogenic": {
@@ -291,16 +405,19 @@ def annotate_genetics(request_body):
     apoe = annotate_apoe(variants)
     mthfr = annotate_mthfr(variants)
     brca = annotate_brca(variants)
+    longevity_variants = annotate_longevity_variants(variants)
 
     return {
         "patient_id": request_body.get("patient_id"),
         "apoe_status": apoe,
         "mthfr_status": mthfr,
         "brca_status": brca,
+        "variant_annotations": longevity_variants,
         "provenance": {
             "apoe_method": "rs429358 + rs7412 diplotype lookup (PMID:8346443)",
             "mthfr_method": "Published enzyme activity data (PMID:8554066)",
             "brca_method": "ClinVar classification passthrough + PMID:28632866 risk estimates",
+            "longevity_variants_method": "Expanded longevity loci lookup (FOXO3/CETP/KLOTHO/TERT/SOD2)",
             "framework": "CrisPRO Genetic Annotation v1.0",
         },
         "disclaimer": "Research Use Only. Not a diagnostic. Consult a genetic counselor for clinical interpretation.",

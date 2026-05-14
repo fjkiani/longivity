@@ -2543,6 +2543,68 @@
         "Immunocompromised caution.",
         "RUO longevity framing."
       ]
+    },
+    {
+      "compound_id": "astragalus_extract",
+      "display_name": "Astragalus Extract (TA-65)",
+      "hallmark_links": [
+        {
+          "hallmark": "telomere_attrition",
+          "weight": 0.45,
+          "mechanism": "Telomerase activator; cycloastragenol activates TERT expression, potentially slowing telomere attrition.",
+          "db_pathways": [],
+          "pmids": [
+            "21426483"
+          ],
+          "pmid_verified": [
+            true
+          ],
+          "evidence_strength": "MODERATE",
+          "human_evidence": true,
+          "study_types": [
+            "pilot_clinical"
+          ],
+          "include_in_scoring": true
+        },
+        {
+          "hallmark": "genomic_instability",
+          "weight": 0.35,
+          "mechanism": "Telomere maintenance via TERT activation may reduce genomic instability from critically short telomeres.",
+          "db_pathways": [],
+          "pmids": [
+            "21426483"
+          ],
+          "pmid_verified": [
+            true
+          ],
+          "evidence_strength": "WEAK",
+          "human_evidence": true,
+          "study_types": [
+            "pilot_clinical"
+          ],
+          "include_in_scoring": true
+        }
+      ],
+      "dose": {
+        "range_mg": "5",
+        "frequency": "daily",
+        "source_pmid": "21426483",
+        "source_verified": true,
+        "context": "Harley CB et al. Rejuvenation Res 2011; TA-65 is a proprietary cycloastragenol formulation. Evidence is preliminary."
+      },
+      "interactions": [],
+      "safety_notes": [
+        "Research Use Only. Not for clinical use.",
+        "Autoimmune disease: contraindicated — immune stimulation risk.",
+        "Evidence is preliminary; not standard of care.",
+        "RUO."
+      ],
+      "contraindications": [
+        "autoimmune_disease"
+      ],
+      "evidence_level": "preliminary",
+      "reference": "Harley CB et al. Rejuvenation Res 2011",
+      "ruo_note": "Research Use Only. Not for clinical use."
     }
   ]
 }
