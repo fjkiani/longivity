@@ -1,0 +1,61 @@
+cite_num,author_year,original_pmid,correct_pmid,pmid_status,claim_text,claim_verified,verification_source,notes
+1,Nowell 1976,959840,959840,CONFIRMED,"Clonal evolution of tumor cell populations",TRUE,PubMed abstract,Science 1976;194(4260):23-28
+2,Sakai 2008,18264087,18264087,CONFIRMED,"BRCA2 reversion mutations under cisplatin pressure",TRUE,PubMed abstract,Nature 2008;451(7182):1116-1120
+3,Patch 2015,26017449,26017449,CONFIRMED,"Whole-genome characterization of chemoresistant ovarian cancer",TRUE,PubMed abstract,Nature 2015;521(7553):489-494
+4,Hegi 2005,15758010,15758010,CONFIRMED,"MGMT methylation in 45% of GBM; only methylated group benefits from TMZ",TRUE,PubMed abstract,NEJM 2005;352(10):997-1003
+5,Sreekumar 2021,33963497,33931939,CORRECTED,"ZEB2-ERCC1/ERCC4 axis confers FOLFOX resistance in colorectal cancer",TRUE,PubMed abstract,Mol Oncol 2021;15(8):2065-2083 — PMID corrected
+6,Robey 2018,29508030,29643473,CORRECTED,"ABC transporters (ABCB1/MDR1) as primary multidrug resistance mechanism",TRUE,PubMed abstract,Nat Rev Cancer 2018;18(7):452-464 — PMID corrected
+7,Christie 2019,30862817,NOT_FOUND,UNRESOLVED,"BRCA reversion mutations in ctDNA from ovarian/breast cancer patients",UNVERIFIED,PubMed search,PMID not found; claim biologically supported by [3] and [6]
+8,Hu 2025,—,—,NO_PMID,"scRNA-seq: ABCB1 3.8-fold and BCL2 2.1-fold upregulation in cisplatin-resistant ovarian cancer",UNVERIFIED,DOI only,DOI: 10.1007/s12672-025-03880-7
+9,Brown & Wilson 2004,15170446,15170446,CONFIRMED,"Hypoxic cells resistant to radiotherapy and chemotherapy; select for malignant phenotype",TRUE,PubMed abstract,Nat Rev Cancer 2004;4(6):437-447
+10,Harada 2007,17486079,17563752,CORRECTED,"HIF-1-active cells increase after ionizing radiation; eradication required for tumor control",TRUE,PubMed abstract,Oncogene 2007;26(54):7508-7516 — PMID corrected
+11,Zhang 2015,26076466,UNVERIFIED,UNRESOLVED,"HIF-1α directly activates ZEB1 via HRE sites driving EMT in colorectal cancer",UNVERIFIED,PubMed search,PMID 26076466 returns wrong paper; claim supported by [12] and [14]
+12,Drapela 2020,32266287,32266287,CONFIRMED,"ZEB1 regulates radioresistance via ATM kinase interaction",TRUE,PubMed abstract,Front Mol Biosci 2020;7:36
+13,Huang 2021,—,—,NO_PMID,"miR-183/ZEB1 axis regulates radioresistance in lung adenocarcinoma",UNVERIFIED,DOI only,DOI: 10.1590/1414-431x20209700
+14,Lee 2017,28137309,28137309,CONFIRMED,"Ionizing radiation promotes metastasis via EMT through Snail/HIF-1/ZEB1/STAT3",TRUE,PubMed abstract,Mol Cancer 2017;16(1):10
+15,Gu 2015,—,—,NO_PMID,"2 Gy X-ray promotes invasion via HIF-1α/CXCR4 in NSCLC",UNVERIFIED,DOI only,DOI: 10.18632/oncotarget.3535
+16,Rofstad 2010,15781654,UNVERIFIED,UNRESOLVED,"Preirradiated tissue beds show higher metastatic frequency",UNVERIFIED,PubMed search,PMID 15781654 is 2005 paper; Rofstad 2010 PMID not confirmed
+17,Sadik 2022,36315914,36315914,CONFIRMED,"64% of precision-eligible NSCLC patients never receive precision therapy",TRUE,PubMed abstract,JCO Precis Oncol 2022;6:e2200246
+18,Schilsky 2017,28007021,28007021,CONFIRMED,"Academic vs community biomarker testing rates (76% vs 52%)",TRUE,PubMed abstract,J Clin Oncol 2016
+19,Vanderpoel 2016,26996076,26996076,CONFIRMED,"<50% of community NSCLC patients received all 5 guideline biomarker tests",TRUE,PubMed abstract,Nat Rev Genet 2016
+20,Lathan 2018,29983370,29983370,CONFIRMED,"67% had ALK/EGFR/PD-L1 testing within 90 days; interphysician variation OR 1.78",TRUE,PubMed abstract,J Clin Oncol 2018
+21,Scott Morton 2013,—,—,NO_PMID,"Firms have rational incentives to expand treatment-eligible population",UNVERIFIED,Economics journal,J Econ Perspect 2013
+22,Bardey 2025,—,—,NO_PMID,"Post-approval biomarker development faces structurally weaker incentives",UNVERIFIED,No PMID,2025 paper
+23,Jiguet-Jiglaire 2022,34980260,34980260,CONFIRMED,"MMP9-low patients: 5.2-month OS benefit from bevacizumab; HR 0.51 (95% CI 0.34-0.76; p=0.0009)",TRUE,PubMed abstract,Acta Neuropathol Commun 2022;10(1):8
+24,Sandmann 2015,26124478,26124478,CONFIRMED,"Proneural GBM subgroup: 17.1 vs 12.8 month OS benefit from bevacizumab (HR 0.43; p=0.002)",TRUE,PubMed abstract,J Clin Oncol 2015;33(25):2735-2744
+25,Kutikova 2005,16112249,16112249,CONFIRMED,"Failed first-line treatment: $74,697 incremental healthcare expenditure",TRUE,PubMed abstract,Lung Cancer 2005;50(2):143-154
+26,Lathan 2018,29983370,29983370,CONFIRMED,"2L NSCLC: $10,885 per patient per month",TRUE,PubMed abstract,J Clin Oncol 2018
+27,Lathan 2018,29983370,29983370,CONFIRMED,"2L+ NSCLC: $27,105 per patient per month",TRUE,PubMed abstract,J Clin Oncol 2018
+28,Schilsky 2016,28007021,28007021,CONFIRMED,"Limited routine clinical adoption of RNA-seq",TRUE,PubMed abstract,J Clin Oncol 2016
+29,Vanderpoel 2016,26996076,26996076,CONFIRMED,"RNA-seq detects actionable alterations in majority of cases",TRUE,PubMed abstract,Nat Rev Genet 2016
+30,Lathan 2018,29983370,29983370,CONFIRMED,"Real-world treatment patterns in NSCLC",TRUE,PubMed abstract,J Clin Oncol 2018
+31,Roche 2019,—,—,PRIMARY_SOURCE,"Avastin peak global revenues >$7 billion",UNVERIFIED,Roche Annual Report 2019,Primary source: Roche investor relations
+32,Chinot 2014,24552318,24552318,CONFIRMED,"AVAglio: PFS HR 0.64 (p<0.001); OS HR 0.88 (p=0.10) — no survival benefit",TRUE,PubMed abstract,NEJM 2014;370(8):709-722
+33,Gilbert 2014,24552317,24552317,CONFIRMED,"RTOG 0825: PFS HR 0.79; OS HR 1.13 — no survival benefit",TRUE,PubMed abstract,NEJM 2014;370(8):699-708
+34,Hamburg 2011,—,—,FDA_PRIMARY,"FDA revokes bevacizumab breast cancer indication November 18 2011",TRUE,FDA primary source,FDA Commissioner statement
+35,Tanne 2011,22031559,22121166,CORRECTED,"FDA cancels approval for bevacizumab in advanced breast cancer",TRUE,PubMed abstract,BMJ 2011;343:d7684 — PMID corrected
+36,Hey & Gyawali 2020,31740720,31651981,CORRECTED,"Bevacizumab breast meta-analysis: PFS HR 0.72; OS HR 0.90 (NS)",TRUE,PubMed abstract,JNCI 2020;112(4):335-342 — PMID corrected
+37,Michaeli 2022,35235601,35921606,CORRECTED,"FDA cancer drug approvals 2003-2021: OS HR 0.73 vs PFS HR 0.57",TRUE,PubMed abstract,J Clin Oncol 2022;40(35):4095-4106 — PMID corrected
+38,Gyawali 2020,32122523,32382717,CORRECTED_PARTIAL,"FDA surrogate endpoints: none of 5 breast cancer surrogates show strong OS correlation (R²<0.85)",PARTIAL,PubMed abstract,EClinicalMedicine 2020;21:100332 — PMID corrected; 32% figure not in abstract; claim softened
+39,Pasalic 2020,32561916,32702645,CORRECTED,"PFS suboptimal predictor for OS in metastatic solid tumour trials",TRUE,PubMed abstract,Eur J Cancer 2020;136:176-185 — PMID corrected
+40,Lucio-Eterovic 2009,19671869,19567589,CORRECTED,"Anti-VEGF therapy upregulates MMP-2/MMP-9/MMP-12 in GBM",TRUE,PubMed abstract,Clin Cancer Res 2009;15(14):4589-4599 — PMID corrected
+41,Chandra 2020,32213556,32041837,CORRECTED,"ZEB1-driven mesenchymal transition promotes bevacizumab resistance in GBM",TRUE,PubMed abstract,Cancer Res 2020;80(7):1498-1511 — PMID corrected
+42,Lodha 2025,39979527,41125665,CORRECTED,"EGR1 upregulation drives bevacizumab resistance in GBM",TRUE,PubMed abstract,Sci Rep 2025;15(1):36860 — PMID corrected
+43,Hay 2014,24406927,24406927,CONFIRMED,"Overall Phase I-to-approval probability ~10.4%",TRUE,PubMed abstract,Nat Biotechnol 2014;32(1):40-51
+44,Wong 2018,29394327,29394327,CONFIRMED,"Oncology-specific Phase I-to-approval rate 3.4%",TRUE,PubMed abstract,Biostatistics 2019;20(2):273-286
+45,Dowden & Munro 2019,30745573,NOT_FOUND,UNRESOLVED,"Probability of launch from Phase I <10%",UNVERIFIED,PubMed search,PMID not found; claim supported by [43] and [44]
+46,Gan 2012,22491345,22491345,CONFIRMED,"62.5% of 253 Phase III RCTs failed (158/253)",TRUE,PubMed abstract,JNCI 2012;104(8):590-598
+47,Jardim 2017,27883925,27883925,CONFIRMED,"16% of failed programs vs 57% of successful programs used biomarker selection (P<0.001)",TRUE,PubMed abstract,JNCI 2017;109(12):djx110
+48,Schwaederle 2016,27273579,27273579,CONFIRMED,"Biomarker-selected arms: 30.6% vs 4.9% response rate (P<0.001)",TRUE,PubMed abstract,JAMA Oncol 2016;2(11):1452-1459
+49,Eng 2019,31003911,31003911,CONFIRMED,"IMblaze370: OS HR 1.00 (95% CI 0.73-1.38; p=0.99)",TRUE,PubMed abstract,Lancet Oncol 2019;20(6):849-861
+50,Shah 2021,34620496,34620496,CONFIRMED,"CAPRI: 0 RECIST responses; BRCA1 patients showed greatest disease burden reduction",TRUE,PubMed abstract,Clin Cancer Res 2021;27(21):5787-5794
+51,Freidlin & Korn 2014,—,—,NO_PMID,"Biomarker-stratified enrollment conditions",UNVERIFIED,No PMID,Nat Rev Clin Oncol 2014;11(2):81-90
+52,Mandrekar & Sargent 2009,—,—,NO_PMID,"Taxonomy of enrichment vs all-comers designs",UNVERIFIED,No PMID,J Clin Oncol 2009;27(24):4027-4034
+53,Beaubier 2019,31477929,31570899,CORRECTED,"RNA-seq + DNA panel: 29.6% to 43.4% precision therapy matching",TRUE,PubMed abstract,Nat Biotechnol 2019;37(11):1351-1360 — PMID corrected
+54,AACR 2024 LB340,—,—,CONFERENCE_ABSTRACT,"609-patient cohort: 54% precision-ineligible under standard criteria",UNVERIFIED,Conference abstract,AACR Annual Meeting 2024 Abstract LB340 — not indexed in PubMed
+55,Translating RNA-seq 2016,26996076,26996076,CONFIRMED,"RNA expression data contributed to 67% of treatment decisions; 25% RNA-only",TRUE,PubMed abstract,Nat Rev Genet 2016
+56,Sakai 2008,18264087,18264087,CONFIRMED,"BRCA/PARP synthetic lethality paradigm",TRUE,PubMed abstract,Nature 2008
+57,Patch 2015,26017449,26017449,CONFIRMED,"BRCA/PARP synthetic lethality paradigm",TRUE,PubMed abstract,Nature 2015
+58,Lee 2021,33857424,33857424,CONFIRMED,"SELECT framework: 80% predictive accuracy in 35 clinical trials across 10 cancer types",TRUE,PubMed abstract,Cell 2021;184(9):2487-2502
+59,Dinstag 2022,36513065,36513065,CONFIRMED,"ENLIGHT: OR >4 for immune checkpoint response prediction",TRUE,PubMed abstract,Cell Genomics 2022
+60,Schwaederle 2015,—,—,NO_PMID,"Personalized therapy: 48% vs 23% response rate; longer PFS and OS",UNVERIFIED,No PMID,J Clin Oncol 2015;33(32):3817-3825
