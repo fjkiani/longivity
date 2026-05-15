@@ -111,6 +111,142 @@ export interface Assessment {
   };
 }
 
+// ── Test Orders ───────────────────────────────────────────────────────────────
+
+export interface RecommendedPanel {
+  panel_id: string;
+  display_name: string;
+  domain: string;
+  ordering_tier: string;
+  markers: string[];
+  specimen_types: string[];
+  fasting_required: boolean;
+  turnaround_days: number | null;
+  approximate_cost_usd: number;
+  quest_panel_code: string | null;
+  labcorp_panel_code: string | null;
+  priority: "urgent" | "high" | "routine";
+  reasons: string[];
+}
+
+export interface TestOrderSummary {
+  total_panels_recommended: number;
+  total_markers_to_collect: number;
+  total_estimated_cost_usd: number;
+  fasting_required: boolean;
+  specimen_types_required: string[];
+  tier1_coverage_pct: number;
+  active_hallmarks: string[];
+  escalation_rules_triggered: number;
+}
+
+export interface TestOrder {
+  patient_id: string;
+  generated_at: string;
+  status: string;
+  summary: TestOrderSummary;
+  ordering_rationale: {
+    gap_detection: {
+      missing_tier1_count: number;
+      missing_tier2_count: number;
+      missing_tier3_count: number;
+      missing_tier1_markers: string[];
+      missing_panels: string[];
+    };
+    hallmark_driven: {
+      active_hallmarks: string[];
+      panels_from_hallmarks: string[];
+    };
+    escalation: {
+      triggered_rules: Array<{
+        rule_id: string;
+        trigger_marker: string;
+        trigger_value: number;
+        condition: string;
+        severity: string;
+        recommended_panels: string[];
+        rationale: string;
+      }>;
+      panels_from_escalation: string[];
+    };
+  };
+  recommended_panels: RecommendedPanel[];
+  requisition: {
+    panels: Array<{
+      panel_id: string;
+      display_name: string;
+      quest_code: string | null;
+      labcorp_code: string | null;
+      fasting_required: boolean;
+      specimen_types: string[];
+    }>;
+    total_panels: number;
+    total_estimated_cost_usd: number;
+    fasting_required: boolean;
+    specimen_requirements: string[];
+  };
+}
+
+export interface SavedOrderSummary {
+  order_id: string;
+  status: string;
+  generated_at: string;
+  approved_at: string | null;
+  summary: TestOrderSummary;
+  notes: string | null;
+}
+
+export interface BiomarkerGaps {
+  patient_id: string;
+  tier1_coverage_pct: number;
+  missing_tier1: Array<{ marker_key: string; display_name: string; domain: string; panel: string; clinical_significance: string }>;
+  missing_tier2: Array<{ marker_key: string; display_name: string; domain: string; panel: string; clinical_significance: string }>;
+  missing_tier3: Array<{ marker_key: string; display_name: string; domain: string; panel: string; clinical_significance: string }>;
+  missing_panels_tier1: string[];
+  existing_marker_count: number;
+  total_tier1_markers: number;
+}
+
+export interface MarkerDetail {
+  marker_key: string;
+  display_name: string;
+  aliases: string[];
+  loinc_code: string | null;
+  domain: string;
+  panel: string;
+  specimen: string;
+  unit: string;
+  clinical_low: number | null;
+  clinical_high: number | null;
+  longevity_optimal_low: number | null;
+  longevity_optimal_high: number | null;
+  sex_specific: boolean;
+  ordering_tier: string;
+  hallmarks: string[];
+  escalation_triggers: Array<{ condition: string; order_markers: string[] }>;
+  notes: string;
+  clinical_significance: string;
+}
+
+export interface PanelDetail {
+  panel_id: string;
+  display_name: string;
+  description: string;
+  domain: string;
+  markers: string[];
+  specimen_types: string[];
+  fasting_required: boolean;
+  turnaround_days: number;
+  approximate_cost_usd: number;
+  quest_panel_code: string | null;
+  labcorp_panel_code: string | null;
+  ordering_tier: string;
+  hallmarks_covered: string[];
+  clinical_indication: string;
+  longevity_relevance: string;
+  marker_details?: MarkerDetail[];
+}
+
 // ── HTTP helpers ──────────────────────────────────────────────────────────────
 
 function getToken(): string | null {
@@ -232,4 +368,72 @@ export const assessmentApi = {
 
   getNof1: (patientId: string, compoundId: string) =>
     request<any>(`/api/v1/patients/${patientId}/nof1/${compoundId}`),
+};
+
+// ── Test Orders API ───────────────────────────────────────────────────────────
+
+export const testOrdersApi = {
+  /** Run the 3-step agent and return recommendations (does NOT save). */
+  generate: (patientId: string) =>
+    request<TestOrder>(`/api/v1/patients/${patientId}/test-order`),
+
+  /** Approve and save an order to the database. */
+  approve: (patientId: string, notes?: string, panelIdsToInclude?: string[]) =>
+    request<SavedOrderSummary>(`/api/v1/patients/${patientId}/test-order`, {
+      method: "POST",
+      body: JSON.stringify({
+        notes: notes || null,
+        panel_ids_to_include: panelIdsToInclude || null,
+      }),
+    }),
+
+  /** List all saved orders for a patient. */
+  list: (patientId: string) =>
+    request<SavedOrderSummary[]>(`/api/v1/patients/${patientId}/test-orders`),
+
+  /** Get a specific saved order. */
+  get: (patientId: string, orderId: string) =>
+    request<TestOrder & { order_id: string }>(`/api/v1/patients/${patientId}/test-order/${orderId}`),
+
+  /** Get the requisition for a saved order. */
+  getRequisition: (patientId: string, orderId: string) =>
+    request<any>(`/api/v1/patients/${patientId}/test-order/${orderId}/requisition`),
+
+  /** Get biomarker gaps for a patient (Step A only). */
+  getGaps: (patientId: string) =>
+    request<BiomarkerGaps>(`/api/v1/patients/${patientId}/biomarker-gaps`),
+};
+
+// ── Registry API ──────────────────────────────────────────────────────────────
+
+export const registryApi = {
+  /** List all markers with optional filtering. */
+  listMarkers: (params?: { domain?: string; tier?: string; search?: string; limit?: number }) => {
+    const qs = new URLSearchParams();
+    if (params?.domain) qs.set("domain", params.domain);
+    if (params?.tier) qs.set("tier", params.tier);
+    if (params?.search) qs.set("search", params.search);
+    if (params?.limit) qs.set("limit", String(params.limit));
+    return request<{ total: number; markers: MarkerDetail[] }>(`/api/v1/markers?${qs}`);
+  },
+
+  /** Get a single marker by key. */
+  getMarker: (markerKey: string) =>
+    request<MarkerDetail>(`/api/v1/markers/${markerKey}`),
+
+  /** List all orderable panels. */
+  listPanels: (params?: { tier?: string; domain?: string; search?: string }) => {
+    const qs = new URLSearchParams();
+    if (params?.tier) qs.set("tier", params.tier);
+    if (params?.domain) qs.set("domain", params.domain);
+    if (params?.search) qs.set("search", params.search);
+    return request<{ total: number; panels: PanelDetail[] }>(`/api/v1/panels?${qs}`);
+  },
+
+  /** Get a single panel by ID. */
+  getPanel: (panelId: string) =>
+    request<PanelDetail>(`/api/v1/panels/${panelId}`),
+
+  /** Get registry metadata. */
+  getMetadata: () => request<any>("/api/v1/registry/metadata"),
 };

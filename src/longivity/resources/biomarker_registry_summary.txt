@@ -1,0 +1,703 @@
+======================================================================
+BIOMARKER REGISTRY SUMMARY
+======================================================================
+Version: 1.0.0
+Total Biomarkers: 313
+Total Domains: 16
+
+DOMAIN COUNTS
+----------------------------------------
+  metabolic_core                       25 markers
+  hematology                           22 markers
+  cardiovascular                       28 markers
+  hormones_male                        22 markers
+  hormones_female                      26 markers
+  thyroid                              10 markers
+  inflammation_immune                  20 markers
+  nutrients_micronutrients             35 markers
+  liver_function                       12 markers
+  kidney_function                      10 markers
+  gut_microbiome                       18 markers
+  toxicology_heavy_metals              30 markers
+  cancer_markers                       15 markers
+  epigenetic_aging                      8 markers
+  genetics_pharmacogenomics            12 markers
+  specialty_functional                 20 markers
+  TOTAL                               313 markers
+
+DOMAIN: METABOLIC_CORE (25 markers)
+----------------------------------------
+  sodium
+  potassium
+  chloride
+  co2_bicarbonate
+  bun
+  creatinine
+  glucose
+  calcium
+  total_protein
+  albumin
+  total_bilirubin
+  alt
+  ast
+  alp
+  gfr_estimated
+  fasting_glucose
+  fasting_insulin
+  hba1c
+  homa_ir
+  uric_acid
+  c_peptide
+  lactate_dehydrogenase
+  phosphorus
+  magnesium_serum
+  ggt
+
+DOMAIN: HEMATOLOGY (22 markers)
+----------------------------------------
+  wbc
+  rbc
+  hemoglobin
+  hematocrit
+  mcv
+  mch
+  mchc
+  rdw
+  platelets
+  neutrophils_abs
+  lymphocytes_abs
+  monocytes_abs
+  eosinophils_abs
+  basophils_abs
+  neutrophil_pct
+  lymphocyte_pct
+  reticulocytes
+  iron_serum
+  tibc
+  transferrin_saturation
+  ferritin
+  soluble_transferrin_receptor
+
+DOMAIN: CARDIOVASCULAR (28 markers)
+----------------------------------------
+  total_cholesterol
+  ldl_c
+  hdl_c
+  triglycerides
+  vldl
+  non_hdl_c
+  apob
+  apoa1
+  lpa
+  nmr_ldl_p
+  nmr_hdl_p
+  nmr_ldl_size
+  lp_pla2
+  hscrp
+  fibrinogen
+  homocysteine
+  nt_probnp
+  troponin_i
+  troponin_t
+  d_dimer
+  prothrombin_time
+  inr
+  ptt
+  myeloperoxidase
+  oxidized_ldl
+  sdldl
+  lipoprotein_fractionation
+  omega3_index
+
+DOMAIN: HORMONES_MALE (22 markers)
+----------------------------------------
+  testosterone_total
+  testosterone_free
+  testosterone_bioavailable
+  shbg
+  dht
+  lh
+  fsh
+  estradiol
+  prolactin
+  dhea_s
+  cortisol_am
+  cortisol_pm
+  pregnenolone
+  igf1
+  igfbp3
+  growth_hormone
+  psa_total
+  psa_free
+  inhibin_b
+  sex_hormone_binding_globulin
+  androstenedione
+  progesterone_male
+
+DOMAIN: HORMONES_FEMALE (26 markers)
+----------------------------------------
+  testosterone_total_f
+  testosterone_free_f
+  shbg_f
+  lh_f
+  fsh_f
+  estradiol_f
+  estrone
+  progesterone
+  prolactin_f
+  dhea_s_f
+  cortisol_am_f
+  amh
+  inhibin_b_f
+  igf1_f
+  pregnenolone_f
+  androstenedione_f
+  dutch_cortisol_metabolites
+  dutch_estrogen_metabolites
+  dutch_progesterone_metabolites
+  dutch_androgen_metabolites
+  dutch_melatonin
+  dutch_oat_markers
+  pcos_panel_flag
+  menopause_panel_flag
+  perimenopause_panel_flag
+  hcg_quantitative
+
+DOMAIN: THYROID (10 markers)
+----------------------------------------
+  tsh
+  free_t3
+  free_t4
+  reverse_t3
+  t3_total
+  t4_total
+  tpo_antibodies
+  thyroglobulin_antibodies
+  thyroglobulin
+  tbg
+
+DOMAIN: INFLAMMATION_IMMUNE (20 markers)
+----------------------------------------
+  hscrp_inflam
+  il6
+  tnf_alpha
+  esr
+  ferritin_inflam
+  complement_c3
+  complement_c4
+  ana_screen
+  dsdna_antibodies
+  nk_cells_abs
+  nk_cells_pct
+  cd4_count
+  cd8_count
+  cd4_cd8_ratio
+  lymphocyte_subsets
+  immunoglobulin_g
+  immunoglobulin_a
+  immunoglobulin_m
+  calprotectin_serum
+  fibrinogen_inflam
+
+DOMAIN: NUTRIENTS_MICRONUTRIENTS (35 markers)
+----------------------------------------
+  vitamin_d_25oh
+  vitamin_b12
+  folate_serum
+  folate_rbc
+  vitamin_b6
+  vitamin_b2
+  vitamin_b1
+  vitamin_a
+  vitamin_e
+  vitamin_k2
+  magnesium_rbc
+  zinc_serum
+  copper_serum
+  selenium_serum
+  chromium
+  molybdenum
+  manganese
+  iodine_urine
+  coq10
+  omega3_index_nut
+  omega6_omega3_ratio
+  epa
+  dha
+  carnitine_total
+  carnitine_free
+  taurine
+  alpha_lipoic_acid
+  glutathione
+  nad_levels
+  niacin_b3
+  pantothenic_acid_b5
+  biotin_b7
+  choline
+  inositol
+  betaine
+
+DOMAIN: LIVER_FUNCTION (12 markers)
+----------------------------------------
+  alt_liver
+  ast_liver
+  ggt_liver
+  alp_liver
+  total_bilirubin_liver
+  direct_bilirubin
+  indirect_bilirubin
+  albumin_liver
+  total_protein_liver
+  ldh_liver
+  pt_inr
+  ammonia
+
+DOMAIN: KIDNEY_FUNCTION (10 markers)
+----------------------------------------
+  creatinine_kidney
+  bun_kidney
+  egfr_ckd_epi
+  cystatin_c
+  egfr_cystatin
+  uric_acid_kidney
+  urine_albumin_creatinine_ratio
+  urine_protein_creatinine_ratio
+  phosphorus_kidney
+  calcium_kidney
+
+DOMAIN: GUT_MICROBIOME (18 markers)
+----------------------------------------
+  calprotectin_stool
+  pancreatic_elastase
+  zonulin
+  secretory_iga
+  h_pylori_stool
+  h_pylori_breath
+  sibo_hydrogen
+  sibo_methane
+  lactulose_mannitol_ratio
+  butyrate_stool
+  propionate_stool
+  acetate_stool
+  total_scfa
+  beta_glucuronidase
+  calprotectin_serum_gut
+  gi_map_pathogens_flag
+  microbiome_diversity_index
+  dysbiosis_index
+
+DOMAIN: TOXICOLOGY_HEAVY_METALS (30 markers)
+----------------------------------------
+  lead_blood
+  mercury_blood
+  arsenic_urine
+  cadmium_blood
+  aluminum_serum
+  nickel_urine
+  tin_urine
+  thallium_urine
+  chromium_urine
+  cobalt_urine
+  aflatoxin_b1
+  ochratoxin_a
+  trichothecene_t2
+  zearalenone
+  gliotoxin
+  bpa_urine
+  phthalate_dehp
+  phthalate_mep
+  pfoa
+  pfos
+  pfna
+  pfhxs
+  benzene_metabolite
+  toluene_metabolite
+  xylene_metabolite
+  styrene_metabolite
+  acrylamide_metabolite
+  glyphosate_urine
+  paraquat_urine
+  organophosphate_metabolites
+
+DOMAIN: CANCER_MARKERS (15 markers)
+----------------------------------------
+  psa_total_cancer
+  cea
+  ca_125
+  ca_19_9
+  afp_tumor
+  ca_15_3
+  hcg_tumor
+  ca_72_4
+  cyfra_21_1
+  nse
+  s100b
+  chromogranin_a
+  calcitonin
+  thyroglobulin_tumor
+  galleri_ctdna_flag
+
+DOMAIN: EPIGENETIC_AGING (8 markers)
+----------------------------------------
+  grimage_biological_age
+  dunedinpace_epigenetic_pace
+  horvath_clock_age
+  hannum_clock_age
+  phenoage_biological_age
+  telomere_length_leukocyte
+  p16_ink4a_expression
+  methylation_age_acceleration
+
+DOMAIN: GENETICS_PHARMACOGENOMICS (12 markers)
+----------------------------------------
+  apoe_genotype
+  mthfr_c677t
+  mthfr_a1298c
+  comt_val158met
+  cyp2d6_phenotype
+  cyp2c19_phenotype
+  cyp3a4_phenotype
+  brca1_brca2_flag
+  pcsk9_variant
+  fto_rs9939609
+  actn3_r577x
+  pharmacogenomics_panel_flag
+
+DOMAIN: SPECIALTY_FUNCTIONAL (20 markers)
+----------------------------------------
+  organic_acids_oat
+  amino_acid_panel
+  fatty_acid_profile
+  neurotransmitter_metabolites
+  adrenal_stress_index
+  dutch_complete
+  cortisol_4point_saliva
+  dhea_saliva
+  melatonin_urine
+  serotonin_urine
+  dopamine_urine
+  norepinephrine_urine
+  epinephrine_urine
+  5hiaa_urine
+  hva_urine
+  vma_urine
+  kryptopyrroles_urine
+  methylmalonic_acid
+  homocysteine_functional
+  oxalate_urine
+
+ALL MARKER KEYS (alphabetical)
+----------------------------------------
+  5hiaa_urine
+  acetate_stool
+  acrylamide_metabolite
+  actn3_r577x
+  adrenal_stress_index
+  aflatoxin_b1
+  afp_tumor
+  albumin
+  albumin_liver
+  alp
+  alp_liver
+  alpha_lipoic_acid
+  alt
+  alt_liver
+  aluminum_serum
+  amh
+  amino_acid_panel
+  ammonia
+  ana_screen
+  androstenedione
+  androstenedione_f
+  apoa1
+  apob
+  apoe_genotype
+  arsenic_urine
+  ast
+  ast_liver
+  basophils_abs
+  benzene_metabolite
+  beta_glucuronidase
+  betaine
+  biotin_b7
+  bpa_urine
+  brca1_brca2_flag
+  bun
+  bun_kidney
+  butyrate_stool
+  c_peptide
+  ca_125
+  ca_15_3
+  ca_19_9
+  ca_72_4
+  cadmium_blood
+  calcitonin
+  calcium
+  calcium_kidney
+  calprotectin_serum
+  calprotectin_serum_gut
+  calprotectin_stool
+  carnitine_free
+  carnitine_total
+  cd4_cd8_ratio
+  cd4_count
+  cd8_count
+  cea
+  chloride
+  choline
+  chromium
+  chromium_urine
+  chromogranin_a
+  co2_bicarbonate
+  cobalt_urine
+  complement_c3
+  complement_c4
+  comt_val158met
+  copper_serum
+  coq10
+  cortisol_4point_saliva
+  cortisol_am
+  cortisol_am_f
+  cortisol_pm
+  creatinine
+  creatinine_kidney
+  cyfra_21_1
+  cyp2c19_phenotype
+  cyp2d6_phenotype
+  cyp3a4_phenotype
+  cystatin_c
+  d_dimer
+  dha
+  dhea_s
+  dhea_s_f
+  dhea_saliva
+  dht
+  direct_bilirubin
+  dopamine_urine
+  dsdna_antibodies
+  dunedinpace_epigenetic_pace
+  dutch_androgen_metabolites
+  dutch_complete
+  dutch_cortisol_metabolites
+  dutch_estrogen_metabolites
+  dutch_melatonin
+  dutch_oat_markers
+  dutch_progesterone_metabolites
+  dysbiosis_index
+  egfr_ckd_epi
+  egfr_cystatin
+  eosinophils_abs
+  epa
+  epinephrine_urine
+  esr
+  estradiol
+  estradiol_f
+  estrone
+  fasting_glucose
+  fasting_insulin
+  fatty_acid_profile
+  ferritin
+  ferritin_inflam
+  fibrinogen
+  fibrinogen_inflam
+  folate_rbc
+  folate_serum
+  free_t3
+  free_t4
+  fsh
+  fsh_f
+  fto_rs9939609
+  galleri_ctdna_flag
+  gfr_estimated
+  ggt
+  ggt_liver
+  gi_map_pathogens_flag
+  gliotoxin
+  glucose
+  glutathione
+  glyphosate_urine
+  grimage_biological_age
+  growth_hormone
+  h_pylori_breath
+  h_pylori_stool
+  hannum_clock_age
+  hba1c
+  hcg_quantitative
+  hcg_tumor
+  hdl_c
+  hematocrit
+  hemoglobin
+  homa_ir
+  homocysteine
+  homocysteine_functional
+  horvath_clock_age
+  hscrp
+  hscrp_inflam
+  hva_urine
+  igf1
+  igf1_f
+  igfbp3
+  il6
+  immunoglobulin_a
+  immunoglobulin_g
+  immunoglobulin_m
+  indirect_bilirubin
+  inhibin_b
+  inhibin_b_f
+  inositol
+  inr
+  iodine_urine
+  iron_serum
+  kryptopyrroles_urine
+  lactate_dehydrogenase
+  lactulose_mannitol_ratio
+  ldh_liver
+  ldl_c
+  lead_blood
+  lh
+  lh_f
+  lipoprotein_fractionation
+  lp_pla2
+  lpa
+  lymphocyte_pct
+  lymphocyte_subsets
+  lymphocytes_abs
+  magnesium_rbc
+  magnesium_serum
+  manganese
+  mch
+  mchc
+  mcv
+  melatonin_urine
+  menopause_panel_flag
+  mercury_blood
+  methylation_age_acceleration
+  methylmalonic_acid
+  microbiome_diversity_index
+  molybdenum
+  monocytes_abs
+  mthfr_a1298c
+  mthfr_c677t
+  myeloperoxidase
+  nad_levels
+  neurotransmitter_metabolites
+  neutrophil_pct
+  neutrophils_abs
+  niacin_b3
+  nickel_urine
+  nk_cells_abs
+  nk_cells_pct
+  nmr_hdl_p
+  nmr_ldl_p
+  nmr_ldl_size
+  non_hdl_c
+  norepinephrine_urine
+  nse
+  nt_probnp
+  ochratoxin_a
+  omega3_index
+  omega3_index_nut
+  omega6_omega3_ratio
+  organic_acids_oat
+  organophosphate_metabolites
+  oxalate_urine
+  oxidized_ldl
+  p16_ink4a_expression
+  pancreatic_elastase
+  pantothenic_acid_b5
+  paraquat_urine
+  pcos_panel_flag
+  pcsk9_variant
+  perimenopause_panel_flag
+  pfhxs
+  pfna
+  pfoa
+  pfos
+  pharmacogenomics_panel_flag
+  phenoage_biological_age
+  phosphorus
+  phosphorus_kidney
+  phthalate_dehp
+  phthalate_mep
+  platelets
+  potassium
+  pregnenolone
+  pregnenolone_f
+  progesterone
+  progesterone_male
+  prolactin
+  prolactin_f
+  propionate_stool
+  prothrombin_time
+  psa_free
+  psa_total
+  psa_total_cancer
+  pt_inr
+  ptt
+  rbc
+  rdw
+  reticulocytes
+  reverse_t3
+  s100b
+  sdldl
+  secretory_iga
+  selenium_serum
+  serotonin_urine
+  sex_hormone_binding_globulin
+  shbg
+  shbg_f
+  sibo_hydrogen
+  sibo_methane
+  sodium
+  soluble_transferrin_receptor
+  styrene_metabolite
+  t3_total
+  t4_total
+  taurine
+  tbg
+  telomere_length_leukocyte
+  testosterone_bioavailable
+  testosterone_free
+  testosterone_free_f
+  testosterone_total
+  testosterone_total_f
+  thallium_urine
+  thyroglobulin
+  thyroglobulin_antibodies
+  thyroglobulin_tumor
+  tibc
+  tin_urine
+  tnf_alpha
+  toluene_metabolite
+  total_bilirubin
+  total_bilirubin_liver
+  total_cholesterol
+  total_protein
+  total_protein_liver
+  total_scfa
+  tpo_antibodies
+  transferrin_saturation
+  trichothecene_t2
+  triglycerides
+  troponin_i
+  troponin_t
+  tsh
+  uric_acid
+  uric_acid_kidney
+  urine_albumin_creatinine_ratio
+  urine_protein_creatinine_ratio
+  vitamin_a
+  vitamin_b1
+  vitamin_b12
+  vitamin_b2
+  vitamin_b6
+  vitamin_d_25oh
+  vitamin_e
+  vitamin_k2
+  vldl
+  vma_urine
+  wbc
+  xylene_metabolite
+  zearalenone
+  zinc_serum
+  zonulin

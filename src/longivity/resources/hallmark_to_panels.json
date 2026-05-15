@@ -1,0 +1,58 @@
+{
+  "_metadata": {
+    "version": "1.0.0",
+    "created": "2025-01-01",
+    "description": "Maps each of the 6 longevity hallmarks (Lopez-Otin et al. 2023) to the test panels that assess them, organized by ordering tier",
+    "source_notes": "Hallmark associations based on Lopez-Otin et al. 2023 Hallmarks of Aging framework. Panel assignments reflect clinical evidence for biomarker-hallmark relationships."
+  },
+  "hallmark_panel_map": {
+    "genomic_instability": {
+      "description": "DNA damage, repair capacity, oxidative stress, and chromosomal instability",
+      "tier_1_panels": ["cbc_with_diff", "iron_panel"],
+      "tier_2_panels": ["coagulation_panel", "nutrients_basic", "cancer_markers_male", "cancer_markers_female", "cancer_markers_gi", "vitamins_fat_soluble"],
+      "tier_3_panels": ["epigenetic_aging_panel", "genetics_longevity", "organic_acids_oat", "heavy_metals_basic", "heavy_metals_extended", "mycotoxins_panel", "environmental_toxins", "telomere_senescence", "pharmacogenomics_basic"],
+      "key_markers": ["telomere_length_leukocyte", "p16_ink4a_expression", "mthfr_c677t", "apoe_genotype", "lead_blood", "mercury_blood", "aflatoxin_b1", "rdw", "wbc"],
+      "clinical_rationale": "Genomic instability manifests as elevated cancer markers, abnormal CBC (RDW, WBC), and accelerated epigenetic aging. Heavy metals and mycotoxins are direct DNA-damaging agents. MTHFR variants impair DNA repair via folate metabolism."
+    },
+    "epigenetic_alterations": {
+      "description": "DNA methylation drift, histone modification changes, and chromatin remodeling dysregulation",
+      "tier_1_panels": ["metabolic_markers"],
+      "tier_2_panels": ["nutrients_basic", "b_vitamins_extended", "omega_fatty_acids"],
+      "tier_3_panels": ["epigenetic_aging_panel", "genetics_longevity", "dutch_hormones", "gut_microbiome_advanced", "environmental_toxins"],
+      "key_markers": ["grimage_biological_age", "dunedinpace_epigenetic_pace", "horvath_clock_age", "phenoage_biological_age", "methylation_age_acceleration", "vitamin_b12", "folate_serum", "mthfr_c677t", "mthfr_a1298c"],
+      "clinical_rationale": "Epigenetic clocks directly measure biological age acceleration. Methyl donors (B12, folate, B6) support DNA methylation maintenance. MTHFR variants impair methylation capacity. Environmental toxins (PFAS, BPA) alter epigenetic patterns."
+    },
+    "nutrient_sensing": {
+      "description": "mTOR, AMPK, insulin/IGF-1 signaling dysregulation, and sirtuin pathway impairment",
+      "tier_1_panels": ["cmp", "metabolic_markers", "standard_lipids"],
+      "tier_2_panels": ["igf_axis", "adrenal_basic", "omega_fatty_acids", "advanced_lipids"],
+      "tier_3_panels": ["organic_acids_oat", "amino_acids_panel"],
+      "key_markers": ["fasting_insulin", "homa_ir", "hba1c", "igf1", "uric_acid", "triglycerides", "glucose", "fasting_glucose", "c_peptide"],
+      "clinical_rationale": "Insulin resistance and IGF-1 dysregulation are primary drivers of accelerated aging via mTOR/AMPK pathway imbalance. HOMA-IR >2.0 indicates significant insulin resistance. Uric acid elevation reflects purine metabolism dysregulation linked to mTOR activation."
+    },
+    "mitochondrial_dysfunction": {
+      "description": "Impaired ATP production, reactive oxygen species generation, mitophagy failure, and electron transport chain defects",
+      "tier_1_panels": ["cmp", "cbc_with_diff", "iron_panel", "thyroid_basic"],
+      "tier_2_panels": ["nutrients_basic", "omega_fatty_acids", "thyroid_full", "adrenal_basic"],
+      "tier_3_panels": ["organic_acids_oat", "neurotransmitter_panel", "heavy_metals_basic"],
+      "key_markers": ["coq10", "ferritin", "magnesium_rbc", "lactate_dehydrogenase", "tsh", "free_t3", "vitamin_b1", "niacin_b3", "selenium_serum"],
+      "clinical_rationale": "Mitochondrial function requires CoQ10, magnesium, iron, and thyroid hormone for optimal electron transport chain activity. Organic acids (OAT) reveal Krebs cycle dysfunction. Heavy metals directly inhibit mitochondrial enzymes. Thyroid hormones regulate mitochondrial biogenesis."
+    },
+    "cellular_senescence": {
+      "description": "Accumulation of senescent cells, senescence-associated secretory phenotype (SASP), p16/p21 elevation, and paracrine senescence",
+      "tier_1_panels": ["inflammation_basic", "cbc_with_diff"],
+      "tier_2_panels": ["inflammation_extended", "immune_basic", "igf_axis", "kidney_extended", "cardiac_biomarkers"],
+      "tier_3_panels": ["telomere_senescence", "epigenetic_aging_panel"],
+      "key_markers": ["p16_ink4a_expression", "il6", "tnf_alpha", "hscrp", "cd4_cd8_ratio", "telomere_length_leukocyte", "rdw", "lymphocyte_pct", "wbc"],
+      "clinical_rationale": "Senescent cells drive SASP (IL-6, TNF-alpha, hsCRP elevation). Telomere shortening and p16-INK4a elevation are direct senescence markers. CD4:CD8 ratio inversion reflects T-cell immunosenescence. RDW and lymphocyte % are PhenoAge components reflecting senescent burden."
+    },
+    "altered_intercellular_communication": {
+      "description": "Chronic inflammation (inflammaging), hormonal decline, microbiome dysbiosis, and impaired paracrine/endocrine signaling",
+      "tier_1_panels": ["inflammation_basic", "standard_lipids", "thyroid_basic", "cmp"],
+      "tier_2_panels": ["inflammation_extended", "hormones_male_basic", "hormones_female_basic", "immune_basic", "cardiovascular_inflammation", "adrenal_basic", "autoimmune_basic"],
+      "tier_3_panels": ["gut_microbiome_basic", "gut_microbiome_advanced", "dutch_hormones", "neurotransmitter_panel", "adrenal_stress_index"],
+      "key_markers": ["il6", "tnf_alpha", "hscrp", "testosterone_total", "dhea_s", "cortisol_am", "microbiome_diversity_index", "zonulin", "secretory_iga", "serotonin_urine"],
+      "clinical_rationale": "Inflammaging, hormonal decline (testosterone, DHEA-S, estrogen), and gut dysbiosis are the primary intercellular communication failures in aging. Gut microbiome diversity and SCFA production regulate systemic inflammation. Neurotransmitter balance affects neuroendocrine signaling."
+    }
+  }
+}

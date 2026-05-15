@@ -189,6 +189,12 @@ export default function PatientPage() {
                 {t.label}
               </button>
             ))}
+            <Link
+              href={`/patients/${id}/test-orders`}
+              className="flex-1 py-2 text-sm font-medium rounded-lg transition-all text-center text-gray-500 hover:text-gray-700 hover:bg-gray-50 border border-dashed border-gray-300"
+            >
+              Test Orders
+            </Link>
           </div>
 
           {/* Tab content */}

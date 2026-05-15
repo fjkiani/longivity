@@ -12,6 +12,7 @@ from .routers.patients import router as patients_router
 from .routers.panels import router as panels_router
 from .routers.upload import router as upload_router
 from .routers.assessment import router as assessment_router
+from .routers.test_orders import router as test_orders_router
 
 
 @asynccontextmanager
@@ -30,12 +31,12 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(
     title="Longivity — Longevity Patient Platform",
-    version="0.3.0",
+    version="0.4.0",
     description=(
         "End-to-end longevity clinic platform. "
         "Patient management, biomarker tracking, PDF lab import, "
         "PhenoAge assessment, MR-validated compound recommendations, "
-        "and N-of-1 trial protocols. (RUO)"
+        "N-of-1 trial protocols, and agent-driven test ordering. (RUO)"
     ),
     lifespan=lifespan,
 )
@@ -53,19 +54,22 @@ app.add_middleware(
 # Existing science endpoints (unchanged)
 app.include_router(longevity_router)
 
-# New patient platform endpoints
+# Patient platform endpoints
 app.include_router(auth_router)
 app.include_router(patients_router)
 app.include_router(panels_router)
 app.include_router(upload_router)
 app.include_router(assessment_router)
 
+# Test ordering agent endpoints (new)
+app.include_router(test_orders_router)
+
 
 @app.get("/", tags=["root"])
 async def root():
     return {
         "service": "Longivity Patient Platform",
-        "version": "0.3.0",
+        "version": "0.4.0",
         "docs": "/docs",
         "redoc": "/redoc",
         "endpoints": {
@@ -77,6 +81,19 @@ async def root():
                 "/api/v1/patients/{id}/assessment",
                 "/api/v1/patients/{id}/longitudinal",
                 "/api/v1/patients/{id}/nof1/{compound_id}",
+            ],
+            "test_ordering": [
+                "GET  /api/v1/patients/{id}/test-order",
+                "POST /api/v1/patients/{id}/test-order",
+                "GET  /api/v1/patients/{id}/test-order/{order_id}",
+                "GET  /api/v1/patients/{id}/test-order/{order_id}/requisition",
+                "GET  /api/v1/patients/{id}/test-orders",
+                "GET  /api/v1/patients/{id}/biomarker-gaps",
+                "GET  /api/v1/markers",
+                "GET  /api/v1/markers/{marker_key}",
+                "GET  /api/v1/panels",
+                "GET  /api/v1/panels/{panel_id}",
+                "GET  /api/v1/registry/metadata",
             ],
             "science": [
                 "/api/v1/longevity/assessment_level0",
