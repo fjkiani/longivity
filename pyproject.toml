@@ -22,13 +22,21 @@ dependencies = [
 Repository = "https://github.com/fjkiani/longivity"
 
 [tool.setuptools]
-package-dir = { "" = "src" }
+# src/ contains the longivity package; repo root contains the agents/ package
+package-dir = { "" = "src", "longivity.agents" = "agents" }
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.packages]
+find = { where = ["src"] }
 
 [tool.setuptools.package-data]
 longivity = [
   "resources/longevity/*.json",
   "resources/longevity/*.md",
 ]
+
+[tool.pytest.ini_options]
+# Allow agents/ to be importable during tests by adding repo root to sys.path
+pythonpath = ["."]

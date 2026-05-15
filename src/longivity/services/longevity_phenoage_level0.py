@@ -16,6 +16,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
 from .longevity_hallmark_scorer import _SHIPPABLE, get_longevity_hallmark_scorer
+from .mr_evidence_registry import annotate_compound_recommendation, get_evidence_tier, get_best_mr_record
 
 _RESOURCES = Path(__file__).resolve().parent.parent / "resources" / "longevity"
 
@@ -213,7 +214,7 @@ def extract_phenoage_marker_values(payload: Dict[str, Any]) -> Tuple[Dict[str, f
                 "alp_u_l",
             ),
         ),
-        ("wbc", ("wbc", "white_blood_cell_count", "wbc_thousand", "white_blood_cells")),
+        ("wbc", ("wbc", "white_blood_cell_count", "wbc_thousand", "white_blood_cells", "wbc_1000_ul", "wbc_k_ul", "leukocytes", "leukocyte_count")),
     ):
         for a in aliases:
             v = _coerce_float(L.get(a))
@@ -658,6 +659,9 @@ def run_longevity_assessment_level0(body: Dict[str, Any]) -> Dict[str, Any]:
         d = r.as_dict()
         matches = d.get("hallmark_matches") or []
         primary = matches[0]["hallmark"] if matches else None
+        _cid = d.get("compound") or ""
+        _tier = get_evidence_tier(_cid)
+        _mr = get_best_mr_record(_cid)
         compound_out.append(
             {
                 "compound": d["compound"],
@@ -668,6 +672,22 @@ def run_longevity_assessment_level0(body: Dict[str, Any]) -> Dict[str, Any]:
                 "dose": d.get("dose"),
                 "interactions": d.get("interactions"),
                 "safety_flags": d.get("safety_flags"),
+                "evidence_tier": _tier,
+                "evidence_tier_label": {
+                    "MR_VALIDATED": "Mendelian Randomization — causal evidence for aging clock endpoint",
+                    "RCT": "Randomized Controlled Trial — human interventional evidence",
+                    "OBSERVATIONAL": "Observational / mechanistic / preclinical evidence",
+                }.get(_tier, _tier),
+                "mr_anchor": {
+                    "clock": _mr["clock"],
+                    "method": _mr["method"],
+                    "p_value": _mr["p_value"],
+                    "direction": _mr["direction"],
+                    "citation": _mr["citation"],
+                    "doi": _mr.get("doi"),
+                    "pmid": _mr.get("pmid"),
+                    "note": _mr["note"],
+                } if _mr else None,
                 "scoring_note": (
                     "Per hallmark_match: PhenoAge-calibrated when scoring_source=phenoage; "
                     "threshold-based when scoring_source=supplementary (not mortality-calibrated). Never blended without labels."

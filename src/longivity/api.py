@@ -214,7 +214,12 @@ async def agentic_assess(body: AgenticAssessRequest) -> Dict[str, Any]:
     Returns unified patient report with data completeness score (0–100).
     """
     try:
-        from longivity.agents import get_longevity_graph, PatientState
+        # Try packaged path first (editable install with repo root on sys.path),
+        # then fall back to bare 'agents' module (repo root on PYTHONPATH)
+        try:
+            from longivity.agents import get_longevity_graph, PatientState
+        except ModuleNotFoundError:
+            from agents import get_longevity_graph, PatientState  # type: ignore[no-redef]
     except ImportError as e:
         raise HTTPException(
             status_code=503,
@@ -294,6 +299,46 @@ async def pipeline_status(run_id: str) -> Dict[str, Any]:
         raise HTTPException(status_code=404, detail=f"Run '{run_id}' not found or expired.")
     return record
 
+
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# N-of-1 Trial Engine
+# ─────────────────────────────────────────────────────────────────────────────
+
+class Nof1Request(BaseModel):
+    patient_id: str = Field(default="ANON", description="De-identified patient ID")
+    age: int = Field(..., ge=18, le=120)
+    biomarkers: Dict[str, float] = Field(..., description="Current biomarker values (canonical keys)")
+    compound_id: str = Field(..., description="Compound to test (e.g. omega_3, berberine)")
+    compound_display_name: Optional[str] = None
+    dose_info: Optional[Dict[str, Any]] = None
+    crossover_compound_id: Optional[str] = Field(
+        default=None,
+        description="Optional second compound for crossover arm"
+    )
+    notes: Optional[str] = None
+
+
+@router.post("/nof1/protocol")
+async def nof1_protocol(body: Nof1Request) -> Dict[str, Any]:
+    """
+    Generate a personalized N-of-1 trial protocol for a given compound.
+
+    Returns a complete 4-phase crossover design (Baseline → Treatment → Washout → Re-measure)
+    with expected biomarker deltas, monitoring schedule, and MR causal anchor if available.
+    """
+    from .services.nof1_trial_engine import generate_nof1_protocol
+    return generate_nof1_protocol(
+        patient_id=body.patient_id,
+        age=body.age,
+        baseline_biomarkers=body.biomarkers,
+        compound_id=body.compound_id,
+        compound_display_name=body.compound_display_name,
+        dose_info=body.dose_info,
+        crossover_compound_id=body.crossover_compound_id,
+        notes=body.notes,
+    )
 
 @router.get("/healthz")
 async def healthz() -> Dict[str, Any]:
