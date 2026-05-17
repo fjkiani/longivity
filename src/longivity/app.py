@@ -1,6 +1,7 @@
 """Longivity FastAPI application — full patient platform."""
 from __future__ import annotations
 
+import os
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
@@ -44,9 +45,20 @@ app = FastAPI(
 )
 
 # ── CORS ──────────────────────────────────────────────────────────────────────
+# Read comma-separated origins from env var; fall back to localhost for dev.
+_origins_env = os.getenv("ALLOWED_ORIGINS", "")
+_origins: list[str] = (
+    [o.strip() for o in _origins_env.split(",") if o.strip()]
+    if _origins_env
+    else [
+        "http://localhost:3000",
+        "http://localhost:3001",
+    ]
+)
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://localhost:3001", "https://*.railway.app"],
+    allow_origins=_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
