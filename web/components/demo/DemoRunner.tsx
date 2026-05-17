@@ -3,7 +3,10 @@
 import { useState } from "react";
 import ScenarioCard, { Scenario } from "./ScenarioCard";
 import PipelineOutput from "./PipelineOutput";
-import { SCENARIO_OUTPUTS } from "./scenario_outputs";
+import scenarioOutputs from "./scenario_outputs.json";
+
+// Hardcoded outputs captured from production API 2026-05-17
+const SCENARIO_OUTPUTS = scenarioOutputs as Record<string, unknown>;
 
 interface DemoRunnerProps {
   scenarios: Scenario[];
@@ -13,7 +16,6 @@ export default function DemoRunner({ scenarios }: DemoRunnerProps) {
   const [selected, setSelected] = useState<Scenario>(scenarios[0]);
   const [showRaw, setShowRaw] = useState(false);
 
-  // Hardcoded outputs — captured from production API 2026-05-17
   const result = SCENARIO_OUTPUTS[selected.id] as Record<string, unknown> | null;
 
   function selectScenario(s: Scenario) {

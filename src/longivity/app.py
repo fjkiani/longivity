@@ -6,7 +6,6 @@ import logging
 import os
 from contextlib import asynccontextmanager
 
-import httpx
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -34,6 +33,13 @@ _KEEPALIVE_INTERVAL = int(os.getenv("KEEPALIVE_INTERVAL_SECONDS", "600"))  # 10 
 
 async def _keepalive_loop() -> None:
     """Ping own healthz endpoint every KEEPALIVE_INTERVAL_SECONDS."""
+    # Lazy import — httpx may not be installed in all environments
+    try:
+        import httpx  # noqa: PLC0415
+    except ImportError:
+        logger.warning("httpx not installed — keep-alive disabled")
+        return
+
     await asyncio.sleep(30)  # wait for startup to settle
     async with httpx.AsyncClient(timeout=20) as client:
         while True:
@@ -48,11 +54,15 @@ async def _keepalive_loop() -> None:
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Create DB tables on startup, then start keep-alive background task."""
-    # Start keep-alive pinger (only in production — skip if KEEPALIVE_URL is unset)
+    # Start keep-alive pinger (only in production — activated by RENDER or KEEPALIVE_URL env var)
     task: asyncio.Task | None = None
     if os.getenv("KEEPALIVE_URL") or os.getenv("RENDER"):
         task = asyncio.create_task(_keepalive_loop())
-        logger.info("keep-alive task started (interval=%ds, url=%s)", _KEEPALIVE_INTERVAL, _KEEPALIVE_URL)
+        logger.info(
+            "keep-alive task started (interval=%ds, url=%s)",
+            _KEEPALIVE_INTERVAL,
+            _KEEPALIVE_URL,
+        )
 
     try:
         from .db.database import lifespan_db
