@@ -3,8 +3,7 @@
 import { useState } from "react";
 import ScenarioCard, { Scenario } from "./ScenarioCard";
 import PipelineOutput from "./PipelineOutput";
-
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+import { SCENARIO_OUTPUTS } from "./scenario_outputs";
 
 interface DemoRunnerProps {
   scenarios: Scenario[];
@@ -12,46 +11,14 @@ interface DemoRunnerProps {
 
 export default function DemoRunner({ scenarios }: DemoRunnerProps) {
   const [selected, setSelected] = useState<Scenario>(scenarios[0]);
-  const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState<Record<string, unknown> | null>(null);
-  const [error, setError] = useState<string | null>(null);
   const [showRaw, setShowRaw] = useState(false);
-  const [hasRun, setHasRun] = useState(false);
+
+  // Hardcoded outputs — captured from production API 2026-05-17
+  const result = SCENARIO_OUTPUTS[selected.id] as Record<string, unknown> | null;
 
   function selectScenario(s: Scenario) {
     setSelected(s);
-    setResult(null);
-    setError(null);
-    setHasRun(false);
     setShowRaw(false);
-  }
-
-  async function runScenario() {
-    setLoading(true);
-    setError(null);
-    setResult(null);
-    setHasRun(true);
-    try {
-      const endpoint = selected.endpoint === "full_assessment"
-        ? "/api/v1/longevity/full_assessment"
-        : "/api/v1/longevity/assessment_level0";
-      const resp = await fetch(`${API_BASE}${endpoint}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(selected.payload),
-      });
-      if (!resp.ok) {
-        const text = await resp.text();
-        throw new Error(`API error ${resp.status}: ${text.slice(0, 200)}`);
-      }
-      const data = await resp.json();
-      setResult(data);
-    } catch (e: unknown) {
-      const msg = e instanceof Error ? e.message : "Unknown error";
-      setError(msg);
-    } finally {
-      setLoading(false);
-    }
   }
 
   return (
@@ -69,7 +36,7 @@ export default function DemoRunner({ scenarios }: DemoRunnerProps) {
         ))}
       </div>
 
-      {/* Right: Run + Output */}
+      {/* Right: Detail + Output */}
       <div className="lg:col-span-3 space-y-6">
         {/* Scenario detail */}
         <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm">
@@ -84,13 +51,19 @@ export default function DemoRunner({ scenarios }: DemoRunnerProps) {
             </div>
           </div>
 
+          {/* Stress test */}
+          <div className="bg-gray-50 rounded-xl p-4 mb-4">
+            <p className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Stress Test</p>
+            <p className="text-xs text-gray-600 leading-relaxed">{selected.stressTest}</p>
+          </div>
+
           {/* Expected findings */}
           <div className="bg-gray-50 rounded-xl p-4 mb-4">
             <p className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Expected Findings</p>
             <ul className="space-y-1">
               {selected.expectedFindings.map((f, i) => (
                 <li key={i} className="flex items-start gap-2 text-xs text-gray-600">
-                  <span className="text-gray-400 mt-0.5 shrink-0">·</span>
+                  <span className="text-emerald-500 mt-0.5 shrink-0">✓</span>
                   {f}
                 </li>
               ))}
@@ -107,49 +80,18 @@ export default function DemoRunner({ scenarios }: DemoRunnerProps) {
             </pre>
           </details>
 
-          <button
-            onClick={runScenario}
-            disabled={loading}
-            className="w-full bg-gray-900 hover:bg-black disabled:opacity-50 text-white font-black py-3 rounded-xl text-sm transition-all shadow-sm hover:-translate-y-0.5 flex items-center justify-center gap-2"
-          >
-            {loading ? (
-              <>
-                <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-                </svg>
-                Running six transformations...
-              </>
-            ) : (
-              <>
-                <span>▶</span>
-                Run Scenario {selected.number}
-              </>
-            )}
-          </button>
+          {/* Live capture badge */}
+          <div className="flex items-center gap-2 text-xs text-gray-400 border-t border-gray-100 pt-4">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span>
+            <span>
+              Output captured live from{" "}
+              <span className="font-mono text-gray-500">longivity-backend.onrender.com</span>{" "}
+              · 2026-05-17
+            </span>
+          </div>
         </div>
 
-        {/* Error */}
-        {error && (
-          <div className="bg-red-50 border border-red-200 rounded-2xl p-5">
-            <p className="text-sm font-bold text-red-800 mb-1">API Error</p>
-            <p className="text-xs text-red-700 font-mono">{error}</p>
-            <p className="text-xs text-red-500 mt-2">
-              Make sure the Longivity API is running at <span className="font-mono">{API_BASE}</span>
-            </p>
-          </div>
-        )}
-
-        {/* Not yet run */}
-        {!hasRun && !loading && (
-          <div className="bg-gray-50 border border-dashed border-gray-300 rounded-2xl p-10 text-center">
-            <div className="text-3xl mb-3">▶</div>
-            <p className="text-sm font-bold text-gray-500">Click &ldquo;Run Scenario&rdquo; to call the real API</p>
-            <p className="text-xs text-gray-400 mt-1">Six transformations · Real output · No mocked data</p>
-          </div>
-        )}
-
-        {/* Output */}
+        {/* Output — always shown, no button needed */}
         {result && (
           <PipelineOutput
             data={result as unknown as Parameters<typeof PipelineOutput>[0]["data"]}

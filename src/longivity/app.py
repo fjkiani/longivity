@@ -1,9 +1,12 @@
 """Longivity FastAPI application — full patient platform."""
 from __future__ import annotations
 
+import asyncio
+import logging
 import os
 from contextlib import asynccontextmanager
 
+import httpx
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -17,19 +20,50 @@ from .routers.test_orders import router as test_orders_router
 from .routers.timeline import router as timeline_router
 from .routers.intelligence import router as intelligence_router
 
+logger = logging.getLogger("longivity.keepalive")
+
+# ── Keep-alive ────────────────────────────────────────────────────────────────
+# Render free tier spins down after 15 min idle. This background task pings
+# the backend's own healthz endpoint every 10 minutes to prevent cold starts.
+_KEEPALIVE_URL = os.getenv(
+    "KEEPALIVE_URL",
+    "https://longivity-backend.onrender.com/api/v1/longevity/healthz",
+)
+_KEEPALIVE_INTERVAL = int(os.getenv("KEEPALIVE_INTERVAL_SECONDS", "600"))  # 10 min
+
+
+async def _keepalive_loop() -> None:
+    """Ping own healthz endpoint every KEEPALIVE_INTERVAL_SECONDS."""
+    await asyncio.sleep(30)  # wait for startup to settle
+    async with httpx.AsyncClient(timeout=20) as client:
+        while True:
+            try:
+                r = await client.get(_KEEPALIVE_URL)
+                logger.info("keep-alive ping → %s %s", r.status_code, r.text[:60])
+            except Exception as exc:
+                logger.warning("keep-alive ping failed: %s", exc)
+            await asyncio.sleep(_KEEPALIVE_INTERVAL)
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """Create DB tables on startup."""
+    """Create DB tables on startup, then start keep-alive background task."""
+    # Start keep-alive pinger (only in production — skip if KEEPALIVE_URL is unset)
+    task: asyncio.Task | None = None
+    if os.getenv("KEEPALIVE_URL") or os.getenv("RENDER"):
+        task = asyncio.create_task(_keepalive_loop())
+        logger.info("keep-alive task started (interval=%ds, url=%s)", _KEEPALIVE_INTERVAL, _KEEPALIVE_URL)
+
     try:
         from .db.database import lifespan_db
         async with lifespan_db():
             yield
     except Exception as e:
-        # If DB is not available (e.g. no postgres in dev), log and continue
-        import logging
         logging.warning(f"DB startup warning (non-fatal in no-DB mode): {e}")
         yield
+    finally:
+        if task:
+            task.cancel()
 
 
 app = FastAPI(
@@ -65,23 +99,14 @@ app.add_middleware(
 )
 
 # ── Routers ───────────────────────────────────────────────────────────────────
-# Existing science endpoints (unchanged)
 app.include_router(longevity_router)
-
-# Patient platform endpoints
 app.include_router(auth_router)
 app.include_router(patients_router)
 app.include_router(panels_router)
 app.include_router(upload_router)
 app.include_router(assessment_router)
-
-# Test ordering agent endpoints (new)
 app.include_router(test_orders_router)
-
-# Timeline endpoint (Phase 7A)
 app.include_router(timeline_router)
-
-# Intelligence endpoints (Phase 7C)
 app.include_router(intelligence_router)
 
 

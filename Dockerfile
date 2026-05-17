@@ -13,21 +13,25 @@ COPY src/ src/
 COPY agents/ agents/
 
 RUN pip install --no-cache-dir \
-    fastapi>=0.104.0 \
-    uvicorn[standard]>=0.24.0 \
-    pydantic>=2.0.0 \
-    langgraph>=0.2.0 \
-    langchain-core>=0.3.0 \
-    sqlalchemy[asyncio]>=2.0.0 \
+    "fastapi>=0.104.0" \
+    "uvicorn[standard]>=0.24.0" \
+    "pydantic>=2.0.0" \
+    "langgraph>=0.2.0" \
+    "langchain-core>=0.3.0" \
+    "sqlalchemy[asyncio]>=2.0.0" \
     asyncpg \
     alembic \
-    python-jose[cryptography] \
-    passlib[bcrypt] \
+    "python-jose[cryptography]" \
+    "passlib[bcrypt]" \
     pdfplumber \
     python-multipart \
     aiofiles \
     psycopg2-binary \
+    "httpx>=0.27.0" \
     && pip install --no-cache-dir -e .
+
+# Render injects RENDER=true in production — used by keep-alive task
+ENV RENDER=""
 
 EXPOSE 8000
 
