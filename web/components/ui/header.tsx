@@ -17,13 +17,19 @@ export default function Header() {
                 </Link>
               </li>
               <li>
-                <Link href="/#science" className="text-gray-600 hover:text-gray-900 font-medium transition-colors">
-                  Science
+                <Link href="/how-it-works" className="text-gray-600 hover:text-gray-900 font-medium transition-colors">
+                  How It Works
                 </Link>
               </li>
               <li>
-                <Link href="/#workflow" className="text-gray-600 hover:text-gray-900 font-medium transition-colors">
-                  How It Works
+                <Link href="/demo" className="text-gray-600 hover:text-gray-900 font-medium transition-colors flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                  Demo
+                </Link>
+              </li>
+              <li>
+                <Link href="/#science" className="text-gray-600 hover:text-gray-900 font-medium transition-colors">
+                  Science
                 </Link>
               </li>
             </ul>
