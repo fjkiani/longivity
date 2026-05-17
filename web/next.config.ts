@@ -1,8 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Required for Docker deployment — emits .next/standalone/server.js
-  output: "standalone",
+  // output: "standalone" removed — using Render native Node.js runtime
+  // which runs `next start` directly (reads PORT env var automatically)
 };
 
 export default nextConfig;
