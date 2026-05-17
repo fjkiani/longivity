@@ -14,6 +14,7 @@ from .routers.upload import router as upload_router
 from .routers.assessment import router as assessment_router
 from .routers.test_orders import router as test_orders_router
 from .routers.timeline import router as timeline_router
+from .routers.intelligence import router as intelligence_router
 
 
 @asynccontextmanager
@@ -68,6 +69,9 @@ app.include_router(test_orders_router)
 # Timeline endpoint (Phase 7A)
 app.include_router(timeline_router)
 
+# Intelligence endpoints (Phase 7C)
+app.include_router(intelligence_router)
+
 
 @app.get("/", tags=["root"])
 async def root():
@@ -100,6 +104,10 @@ async def root():
                 "GET  /api/v1/registry/metadata",
             ],
             "timeline": ["/api/v1/patients/{id}/timeline"],
+            "intelligence": [
+                "GET /api/v1/patients/{id}/intelligence",
+                "GET /api/v1/clinic/intelligence",
+            ],
             "science": [
                 "/api/v1/longevity/assessment_level0",
                 "/api/v1/longevity/full_assessment",
