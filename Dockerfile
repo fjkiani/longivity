@@ -2,14 +2,11 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# System deps for pdfplumber
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    libpoppler-cpp-dev \
-    && rm -rf /var/lib/apt/lists/*
+# pdfplumber is pure-Python (uses pdfminer.six) — no system deps needed.
+# psycopg2-binary bundles its own libpq — no system deps needed.
 
-# Python deps — install core deps first, then the full package via -e .
-# langgraph/langchain-core are intentionally omitted here to avoid version
-# conflicts; they are installed as part of `pip install -e .` below.
+# Python deps — install core deps first for better layer caching,
+# then the full package via -e .
 COPY pyproject.toml .
 COPY src/ src/
 COPY agents/ agents/
@@ -27,6 +24,7 @@ RUN pip install --no-cache-dir \
     python-multipart \
     aiofiles \
     psycopg2-binary \
+    httpx>=0.27.0 \
     && pip install --no-cache-dir -e .
 
 EXPOSE 8000
