@@ -20,8 +20,7 @@ COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 COPY --from=builder /app/public ./public
 
-# Render injects PORT at runtime (default 10000). Next.js standalone server.js
-# reads process.env.PORT automatically — no hardcoded port needed.
-EXPOSE 3000
-ENV PORT=3000
+# Render injects PORT at runtime. Next.js standalone server.js reads
+# process.env.PORT automatically. Do NOT hardcode PORT here.
+EXPOSE 10000
 CMD ["node", "server.js"]
