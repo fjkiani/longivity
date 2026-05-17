@@ -3,15 +3,37 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 
-from fastapi import APIRouter, HTTPException, UploadFile, File, Form
+from fastapi import APIRouter, BackgroundTasks, HTTPException, UploadFile, File, Form
 from sqlalchemy import select
 from sqlalchemy.orm import selectinload
 
 from ..core.deps import CurrentUser, DB
 from ..db.models import BiomarkerPanel, Patient, PanelValue
 from ..services.lab_pdf_parser import parse_lab_pdf
+from ..services.patient_event_service import record_panel_uploaded
 
 router = APIRouter(prefix="/api/v1/patients", tags=["upload"])
+
+
+async def _trigger_recompute_bg(patient_id: str, clinic_id: str) -> None:
+    """Fire-and-forget: recompute patient intelligence after new panel."""
+    import logging
+    logger = logging.getLogger(__name__)
+    try:
+        from ..db.database import AsyncSessionLocal
+        from ..db.models import Patient
+        from sqlalchemy import select
+        from ..services.patient_intelligence_service import compute_patient_intelligence
+        async with AsyncSessionLocal() as db:
+            result = await db.execute(
+                select(Patient).where(Patient.id == patient_id, Patient.clinic_id == clinic_id)
+            )
+            patient = result.scalar_one_or_none()
+            if patient:
+                await compute_patient_intelligence(patient, db, force_refresh=True)
+                await db.commit()
+    except Exception as e:
+        logger.warning(f"Background recompute failed for patient {patient_id}: {e}")
 
 MAX_PDF_SIZE = 20 * 1024 * 1024  # 20 MB
 
@@ -21,6 +43,7 @@ async def upload_lab_pdf(
     patient_id: str,
     current_user: CurrentUser,
     db: DB,
+    background_tasks: BackgroundTasks,
     file: UploadFile = File(..., description="Lab report PDF"),
     drawn_at: str = Form(default=None, description="Draw date ISO string (defaults to now)"),
     notes: str = Form(default=None),
@@ -115,6 +138,22 @@ async def upload_lab_pdf(
         .options(selectinload(BiomarkerPanel.values))
     )
     panel = result.scalar_one()
+
+    # Record clinical event
+    await record_panel_uploaded(
+        db=db,
+        patient_id=patient_id,
+        clinic_id=current_user.clinic_id,
+        panel_id=panel.id,
+        source=panel.source,
+        marker_count=len(panel.values) if hasattr(panel, 'values') else 0,
+        drawn_at=panel.drawn_at.isoformat() if panel.drawn_at else "",
+        actor_id=current_user.id,
+    )
+    await db.commit()
+
+    # Trigger background intelligence recompute
+    background_tasks.add_task(_trigger_recompute_bg, patient_id, current_user.clinic_id)
 
     return {
         "panel_id": panel.id,

@@ -4,15 +4,37 @@ from __future__ import annotations
 from datetime import datetime, timezone
 from typing import Any
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, BackgroundTasks, HTTPException
 from pydantic import BaseModel
 from sqlalchemy import select
 from sqlalchemy.orm import selectinload
 
 from ..core.deps import CurrentUser, DB
 from ..db.models import BiomarkerPanel, Patient, PanelValue
+from ..services.patient_event_service import record_panel_created_manual
 
 router = APIRouter(prefix="/api/v1/patients", tags=["panels"])
+
+
+async def _trigger_recompute_bg(patient_id: str, clinic_id: str) -> None:
+    """Fire-and-forget: recompute patient intelligence after new panel."""
+    import logging
+    logger = logging.getLogger(__name__)
+    try:
+        from ..db.database import AsyncSessionLocal
+        from ..db.models import Patient
+        from sqlalchemy import select
+        from ..services.patient_intelligence_service import compute_patient_intelligence
+        async with AsyncSessionLocal() as db:
+            result = await db.execute(
+                select(Patient).where(Patient.id == patient_id, Patient.clinic_id == clinic_id)
+            )
+            patient = result.scalar_one_or_none()
+            if patient:
+                await compute_patient_intelligence(patient, db, force_refresh=True)
+                await db.commit()
+    except Exception as e:
+        logger.warning(f"Background recompute failed for patient {patient_id}: {e}")
 
 
 # ── Schemas ──────────────────────────────────────────────────────────────────
@@ -85,7 +107,7 @@ async def list_panels(patient_id: str, current_user: CurrentUser, db: DB):
 
 
 @router.post("/{patient_id}/panels", response_model=dict, status_code=201)
-async def create_panel(patient_id: str, body: PanelCreate, current_user: CurrentUser, db: DB):
+async def create_panel(patient_id: str, body: PanelCreate, current_user: CurrentUser, db: DB, background_tasks: BackgroundTasks):
     """Manually create a biomarker panel for a patient."""
     p_result = await db.execute(
         select(Patient).where(
@@ -124,6 +146,21 @@ async def create_panel(patient_id: str, body: PanelCreate, current_user: Current
         .options(selectinload(BiomarkerPanel.values))
     )
     panel = result.scalar_one()
+
+    # Record clinical event
+    await record_panel_created_manual(
+        db=db,
+        patient_id=patient_id,
+        clinic_id=current_user.clinic_id,
+        panel_id=panel.id,
+        marker_count=len(body.values) if hasattr(body, 'values') else 0,
+        actor_id=current_user.id,
+    )
+    await db.commit()
+
+    # Trigger background intelligence recompute
+    background_tasks.add_task(_trigger_recompute_bg, patient_id, current_user.clinic_id)
+
     return _panel_to_dict(panel)
 
 

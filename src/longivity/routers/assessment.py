@@ -12,6 +12,7 @@ from ..db.models import BiomarkerPanel, Patient
 from ..services.longevity_phenoage_level0 import run_longevity_assessment_level0
 from ..services.longitudinal_service import compute_longitudinal_delta
 from ..services.nof1_trial_engine import generate_nof1_protocol
+from ..services.patient_event_service import record_assessment_run
 
 router = APIRouter(prefix="/api/v1/patients", tags=["assessment"])
 
@@ -97,6 +98,30 @@ async def get_patient_assessment(
         "source": panel.source,
         "lab_name": panel.lab_name,
     }
+
+    # Record clinical event (side effect on GET — records that assessment was run)
+    try:
+        pa = result.get("phenoage_result") or result.get("phenoage_analysis") or {}
+        hallmark_narrative = result.get("hallmark_narrative", {})
+        hallmarks_activated = [
+            h for h, v in hallmark_narrative.items()
+            if isinstance(v, dict) and v.get("status") in ("PRIMARY_DRIVER", "SECONDARY_DRIVER")
+        ]
+        await record_assessment_run(
+            db=db,
+            patient_id=patient_id,
+            clinic_id=current_user.clinic_id,
+            panel_id=panel.id,
+            phenoage_estimate=pa.get("phenoage_estimate"),
+            age_acceleration=pa.get("age_acceleration"),
+            hallmarks_activated=hallmarks_activated,
+            actor_id=current_user.id,
+        )
+        await db.commit()
+    except Exception as e:
+        import logging
+        logging.getLogger(__name__).warning(f"Failed to record assessment_run event: {e}")
+
     return result
 
 

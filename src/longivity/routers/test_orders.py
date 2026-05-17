@@ -37,6 +37,7 @@ from ..services.test_ordering_agent import (
     detect_gaps,
     run_test_ordering_agent,
 )
+from ..services.patient_event_service import record_test_order_generated, record_test_order_approved
 
 logger = logging.getLogger(__name__)
 
@@ -157,6 +158,24 @@ async def generate_test_order(
         sex=patient.sex,
         age=age,
     )
+
+    # Record clinical event
+    try:
+        summary = result.get("summary", {})
+        await record_test_order_generated(
+            db=db,
+            patient_id=patient_id,
+            clinic_id=user.clinic_id,
+            order_id=result.get("patient_id", patient_id) + "_draft",  # draft — no DB ID yet
+            panels_recommended=summary.get("total_panels_recommended", 0),
+            total_cost=summary.get("total_estimated_cost_usd", 0.0),
+            actor_id=user.id,
+        )
+        await db.commit()
+    except Exception as e:
+        import logging
+        logging.getLogger(__name__).warning(f"Failed to record test_order_generated event: {e}")
+
     return result
 
 
@@ -223,6 +242,21 @@ async def approve_test_order(
     db.add(order)
     await db.commit()
     await db.refresh(order)
+
+    # Record clinical event
+    try:
+        await record_test_order_approved(
+            db=db,
+            patient_id=patient_id,
+            clinic_id=user.clinic_id,
+            order_id=order.id,
+            panels_approved=len(recommended),
+            actor_id=user.id,
+        )
+        await db.commit()
+    except Exception as e:
+        import logging
+        logging.getLogger(__name__).warning(f"Failed to record test_order_approved event: {e}")
 
     return {
         "order_id": order.id,
