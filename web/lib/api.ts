@@ -404,6 +404,140 @@ export const testOrdersApi = {
     request<BiomarkerGaps>(`/api/v1/patients/${patientId}/biomarker-gaps`),
 };
 
+
+// ─── Intelligence Types ───────────────────────────────────────────────────────
+
+export interface ScoredAction {
+  type: string;
+  score: number;
+  label: string;
+  reason: string;
+  urgency: "high" | "medium" | "low" | "routine";
+  cta_url?: string;
+  cta_label?: string;
+}
+
+export interface BiologicalSummary {
+  phenoage_estimate: number | null;
+  chronological_age: number | null;
+  age_acceleration: number | null;
+  accel_tier: string | null;
+  hallmarks_activated: string[];
+  top_accelerator: string | null;
+  data_completeness_pct: number;
+}
+
+export interface GapSummaryIntel {
+  tier1_coverage_pct: number;
+  missing_tier1_count: number;
+  missing_panels: string[];
+  escalation_rules_firing: number;
+}
+
+export interface TopCompound {
+  compound_id: string;
+  display_name: string;
+  relevance_score: number;
+  hallmark: string;
+  evidence_tier: string;
+}
+
+export interface TimelineSummary {
+  first_panel_date: string | null;
+  latest_panel_date: string | null;
+  panel_count: number;
+  last_assessment_date: string | null;
+  last_order_date: string | null;
+  days_since_last_action: number | null;
+}
+
+export interface ScoringBreakdown {
+  data_urgency: number;
+  phenoage_urgency: number;
+  escalation_severity: number;
+  time_decay: number;
+  hallmark_signal: number;
+  weights: Record<string, number>;
+}
+
+export interface IntelligenceResponse {
+  patient_id: string;
+  computed_at: string;
+  cache_hit: boolean;
+  current_state: string;
+  current_state_label: string;
+  current_state_color: string;
+  urgency_score: number;
+  next_action: ScoredAction | null;
+  available_actions: ScoredAction[];
+  biological_summary: BiologicalSummary;
+  gap_summary: GapSummaryIntel;
+  top_compound: TopCompound | null;
+  timeline_summary: TimelineSummary;
+  scoring_breakdown: ScoringBreakdown;
+}
+
+export interface TimelineEvent {
+  id: string;
+  event_type: string;
+  event_at: string;
+  source: string;
+  actor_name: string | null;
+  summary: string;
+  payload: Record<string, unknown>;
+}
+
+export interface PatientTimeline {
+  patient_id: string;
+  events: TimelineEvent[];
+}
+
+// ─── Intelligence API ─────────────────────────────────────────────────────────
+
+export const intelligenceApi = {
+  getPatientIntelligence: async (
+    patientId: string,
+    forceRefresh = false
+  ): Promise<IntelligenceResponse> => {
+    const token = getToken();
+    const headers: Record<string, string> = {};
+    if (token) headers["Authorization"] = `Bearer ${token}`;
+    const url = `${BASE}/api/v1/patients/${patientId}/intelligence${forceRefresh ? "?force_refresh=true" : ""}`;
+    const res = await fetch(url, { headers });
+    if (!res.ok) throw new Error(`Intelligence fetch failed: ${res.status}`);
+    return res.json();
+  },
+
+  getClinicIntelligence: async (params?: {
+    state?: string;
+    min_urgency?: number;
+    limit?: number;
+    offset?: number;
+  }): Promise<IntelligenceResponse[]> => {
+    const token = getToken();
+    const headers: Record<string, string> = {};
+    if (token) headers["Authorization"] = `Bearer ${token}`;
+    const qs = new URLSearchParams();
+    if (params?.state) qs.set("state", params.state);
+    if (params?.min_urgency != null) qs.set("min_urgency", String(params.min_urgency));
+    if (params?.limit != null) qs.set("limit", String(params.limit));
+    if (params?.offset != null) qs.set("offset", String(params.offset));
+    const url = `${BASE}/api/v1/clinic/intelligence${qs.toString() ? "?" + qs.toString() : ""}`;
+    const res = await fetch(url, { headers });
+    if (!res.ok) throw new Error(`Clinic intelligence fetch failed: ${res.status}`);
+    return res.json();
+  },
+
+  getPatientTimeline: async (patientId: string): Promise<PatientTimeline> => {
+    const token = getToken();
+    const headers: Record<string, string> = {};
+    if (token) headers["Authorization"] = `Bearer ${token}`;
+    const res = await fetch(`${BASE}/api/v1/patients/${patientId}/timeline`, { headers });
+    if (!res.ok) throw new Error(`Timeline fetch failed: ${res.status}`);
+    return res.json();
+  },
+};
+
 // ── Registry API ──────────────────────────────────────────────────────────────
 
 export const registryApi = {

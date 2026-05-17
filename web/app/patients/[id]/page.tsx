@@ -10,6 +10,8 @@ import BiomarkerTrendChart from "@/components/BiomarkerTrendChart";
 import PhenoAgeGauge from "@/components/PhenoAgeGauge";
 import CompoundRecsTable from "@/components/CompoundRecsTable";
 import { formatDate, formatAge, tierColor } from "@/lib/utils";
+import IntelligencePanel from "@/components/IntelligencePanel";
+import PatientTimeline from "@/components/PatientTimeline";
 
 type Tab = "overview" | "biomarkers" | "assessment" | "trends" | "nof1";
 
@@ -121,6 +123,8 @@ export default function PatientPage() {
           <div className="flex items-center gap-2 mb-6 text-sm">
             <Link href="/dashboard" className="text-gray-400 hover:text-gray-600">Dashboard</Link>
             <span className="text-gray-300">/</span>
+            <Link href="/clinic/dashboard" className="text-sm text-blue-600 hover:underline">← Clinic Dashboard</Link>
+            <span className="text-gray-300">/</span>
             <span className="text-gray-700">{patient.first_name} {patient.last_name}</span>
           </div>
 
@@ -199,88 +203,14 @@ export default function PatientPage() {
 
           {/* Tab content */}
           {tab === "overview" && (
-            <div className="space-y-4">
-              {panels.length === 0 ? (
-                <div className="bg-white rounded-xl border border-gray-200 p-8 text-center">
-                  <p className="text-gray-400 text-sm mb-3">No lab panels yet.</p>
-                  <Link
-                    href={`/patients/${id}/upload`}
-                    className="text-sm text-green-600 hover:text-green-700 font-medium"
-                  >
-                    Upload first lab report →
-                  </Link>
-                </div>
-              ) : (
-                <>
-                  <div className="grid grid-cols-2 gap-4">
-                    {/* Latest panel summary */}
-                    <div className="bg-white rounded-xl border border-gray-200 p-4">
-                      <h3 className="text-sm font-semibold text-gray-700 mb-3">Latest Panel</h3>
-                      <div className="text-xs text-gray-400 mb-2">{formatDate(latestPanel?.drawn_at)}</div>
-                      <div className="space-y-1.5">
-                        {latestPanel?.values.slice(0, 6).map((v) => (
-                          <div key={v.marker_key} className="flex justify-between text-sm">
-                            <span className="text-gray-600">{v.marker_display || v.marker_key}</span>
-                            <span className={`font-medium ${
-                              v.flag === "H" || v.flag === "HH" ? "text-red-600" :
-                              v.flag === "L" || v.flag === "LL" ? "text-yellow-600" :
-                              "text-gray-900"
-                            }`}>
-                              {v.value} {v.unit}
-                            </span>
-                          </div>
-                        ))}
-                        {(latestPanel?.values.length || 0) > 6 && (
-                          <button
-                            onClick={() => handleTabChange("biomarkers")}
-                            className="text-xs text-green-600 hover:text-green-700 mt-1"
-                          >
-                            +{(latestPanel?.values.length || 0) - 6} more →
-                          </button>
-                        )}
-                      </div>
-                    </div>
-
-                    {/* Panel history */}
-                    <div className="bg-white rounded-xl border border-gray-200 p-4">
-                      <h3 className="text-sm font-semibold text-gray-700 mb-3">Panel History</h3>
-                      <div className="space-y-2">
-                        {panels.map((panel) => (
-                          <div key={panel.id} className="flex items-center justify-between text-sm">
-                            <div>
-                              <div className="font-medium text-gray-900">{formatDate(panel.drawn_at)}</div>
-                              <div className="text-xs text-gray-400 capitalize">
-                                {panel.lab_name || panel.source} · {panel.values.length} markers
-                              </div>
-                            </div>
-                            <button
-                              onClick={() => handleTabChange("biomarkers")}
-                              className="text-xs text-green-600 hover:text-green-700"
-                            >
-                              View
-                            </button>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="bg-white rounded-xl border border-gray-200 p-4">
-                    <div className="flex items-center justify-between mb-3">
-                      <h3 className="text-sm font-semibold text-gray-700">Quick Assessment</h3>
-                      <button
-                        onClick={() => handleTabChange("assessment")}
-                        className="text-xs text-green-600 hover:text-green-700 font-medium"
-                      >
-                        Full Assessment →
-                      </button>
-                    </div>
-                    <p className="text-sm text-gray-500">
-                      Click "Assessment" tab to run PhenoAge analysis, hallmark scoring, and compound recommendations.
-                    </p>
-                  </div>
-                </>
-              )}
+            <div className="space-y-8">
+              <IntelligencePanel patientId={patient.id} />
+              <div>
+                <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-4">
+                  Clinical Timeline
+                </h2>
+                <PatientTimeline patientId={patient.id} />
+              </div>
             </div>
           )}
 
