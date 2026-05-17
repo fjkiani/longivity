@@ -24,6 +24,7 @@ logger = logging.getLogger("longivity.keepalive")
 # ── Keep-alive ────────────────────────────────────────────────────────────────
 # Render free tier spins down after 15 min idle. This background task pings
 # the backend's own healthz endpoint every 10 minutes to prevent cold starts.
+# Uses only stdlib (urllib) — no extra dependencies.
 _KEEPALIVE_URL = os.getenv(
     "KEEPALIVE_URL",
     "https://longivity-backend.onrender.com/api/v1/longevity/healthz",
@@ -33,30 +34,25 @@ _KEEPALIVE_INTERVAL = int(os.getenv("KEEPALIVE_INTERVAL_SECONDS", "600"))  # 10 
 
 async def _keepalive_loop() -> None:
     """Ping own healthz endpoint every KEEPALIVE_INTERVAL_SECONDS."""
-    # Lazy import — httpx may not be installed in all environments
-    try:
-        import httpx  # noqa: PLC0415
-    except ImportError:
-        logger.warning("httpx not installed — keep-alive disabled")
-        return
+    import urllib.request  # stdlib — always available
 
     await asyncio.sleep(30)  # wait for startup to settle
-    async with httpx.AsyncClient(timeout=20) as client:
-        while True:
-            try:
-                r = await client.get(_KEEPALIVE_URL)
-                logger.info("keep-alive ping → %s %s", r.status_code, r.text[:60])
-            except Exception as exc:
-                logger.warning("keep-alive ping failed: %s", exc)
-            await asyncio.sleep(_KEEPALIVE_INTERVAL)
+    while True:
+        try:
+            with urllib.request.urlopen(_KEEPALIVE_URL, timeout=20) as resp:
+                body = resp.read(100).decode("utf-8", errors="replace")
+                logger.info("keep-alive ping → %s %s", resp.status, body)
+        except Exception as exc:
+            logger.warning("keep-alive ping failed: %s", exc)
+        await asyncio.sleep(_KEEPALIVE_INTERVAL)
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Create DB tables on startup, then start keep-alive background task."""
-    # Start keep-alive pinger (only in production — activated by RENDER or KEEPALIVE_URL env var)
+    # Start keep-alive pinger only in production (RENDER env var set by Render platform)
     task: asyncio.Task | None = None
-    if os.getenv("KEEPALIVE_URL") or os.getenv("RENDER"):
+    if os.getenv("RENDER") or os.getenv("KEEPALIVE_URL"):
         task = asyncio.create_task(_keepalive_loop())
         logger.info(
             "keep-alive task started (interval=%ds, url=%s)",
