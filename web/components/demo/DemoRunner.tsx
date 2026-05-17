@@ -3,10 +3,7 @@
 import { useState } from "react";
 import ScenarioCard, { Scenario } from "./ScenarioCard";
 import PipelineOutput from "./PipelineOutput";
-import scenarioOutputs from "./scenario_outputs.json";
-
-// Hardcoded outputs captured from production API 2026-05-17
-const SCENARIO_OUTPUTS = scenarioOutputs as Record<string, unknown>;
+import { SCENARIO_OUTPUTS } from "./scenario_outputs";
 
 interface DemoRunnerProps {
   scenarios: Scenario[];
@@ -16,7 +13,7 @@ export default function DemoRunner({ scenarios }: DemoRunnerProps) {
   const [selected, setSelected] = useState<Scenario>(scenarios[0]);
   const [showRaw, setShowRaw] = useState(false);
 
-  const result = SCENARIO_OUTPUTS[selected.id] as Record<string, unknown> | null;
+  const result = (SCENARIO_OUTPUTS[selected.id] ?? null) as Record<string, unknown> | null;
 
   function selectScenario(s: Scenario) {
     setSelected(s);
@@ -40,7 +37,6 @@ export default function DemoRunner({ scenarios }: DemoRunnerProps) {
 
       {/* Right: Detail + Output */}
       <div className="lg:col-span-3 space-y-6">
-        {/* Scenario detail */}
         <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm">
           <div className="flex items-start justify-between gap-4 mb-4">
             <div>
@@ -53,13 +49,11 @@ export default function DemoRunner({ scenarios }: DemoRunnerProps) {
             </div>
           </div>
 
-          {/* Stress test */}
           <div className="bg-gray-50 rounded-xl p-4 mb-4">
             <p className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Stress Test</p>
             <p className="text-xs text-gray-600 leading-relaxed">{selected.stressTest}</p>
           </div>
 
-          {/* Expected findings */}
           <div className="bg-gray-50 rounded-xl p-4 mb-4">
             <p className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Expected Findings</p>
             <ul className="space-y-1">
@@ -72,7 +66,6 @@ export default function DemoRunner({ scenarios }: DemoRunnerProps) {
             </ul>
           </div>
 
-          {/* Payload preview */}
           <details className="mb-4">
             <summary className="text-xs font-medium text-gray-500 cursor-pointer hover:text-gray-700">
               View API payload →
@@ -82,18 +75,16 @@ export default function DemoRunner({ scenarios }: DemoRunnerProps) {
             </pre>
           </details>
 
-          {/* Live capture badge */}
           <div className="flex items-center gap-2 text-xs text-gray-400 border-t border-gray-100 pt-4">
             <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span>
             <span>
               Output captured live from{" "}
-              <span className="font-mono text-gray-500">longivity-backend.onrender.com</span>{" "}
-              · 2026-05-17
+              <span className="font-mono text-gray-500">longivity-backend.onrender.com</span>
+              {" "}· 2026-05-17
             </span>
           </div>
         </div>
 
-        {/* Output — always shown, no button needed */}
         {result && (
           <PipelineOutput
             data={result as unknown as Parameters<typeof PipelineOutput>[0]["data"]}
