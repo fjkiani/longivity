@@ -79,12 +79,21 @@ class Patient(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)
     updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now, onupdate=_now)
 
+    # Intelligence cache (written by PatientIntelligenceService)
+    intelligence_cache: Mapped[dict | None] = mapped_column(JSON, nullable=True)
+    intelligence_computed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    current_state: Mapped[str | None] = mapped_column(String(50), nullable=True)  # PatientState enum value
+    urgency_score: Mapped[float | None] = mapped_column(Float, nullable=True)  # 0.0–1.0
+
     clinic: Mapped["Clinic"] = relationship("Clinic", back_populates="patients")
     panels: Mapped[list["BiomarkerPanel"]] = relationship(
         "BiomarkerPanel", back_populates="patient", order_by="BiomarkerPanel.drawn_at"
     )
     test_orders: Mapped[list["TestOrder"]] = relationship(
         "TestOrder", back_populates="patient", order_by="TestOrder.generated_at"
+    )
+    events: Mapped[list["PatientEvent"]] = relationship(
+        "PatientEvent", back_populates="patient", order_by="PatientEvent.event_at"
     )
 
 
@@ -183,3 +192,40 @@ class TestOrderResult(Base):
 
     order: Mapped["TestOrder"] = relationship("TestOrder", back_populates="results")
     result_panel: Mapped["BiomarkerPanel | None"] = relationship("BiomarkerPanel")
+
+
+class PatientEvent(Base):
+    """
+    Immutable audit log of every significant clinical event for a patient.
+    The PatientIntelligenceService reads this timeline to reason about
+    what has already happened and what the next action should be.
+    """
+    __tablename__ = "patient_events"
+
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=_uuid)
+    patient_id: Mapped[str] = mapped_column(String(36), ForeignKey("patients.id"), nullable=False)
+    clinic_id: Mapped[str] = mapped_column(String(36), ForeignKey("clinics.id"), nullable=False)
+
+    # Event classification
+    event_type: Mapped[str] = mapped_column(String(100), nullable=False)
+    # Valid types: panel_uploaded | panel_created_manual | assessment_run |
+    #   test_order_generated | test_order_approved | test_order_sent |
+    #   test_order_resulted | compound_started | compound_stopped |
+    #   intelligence_computed | clinician_note
+
+    event_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now, nullable=False)
+    source: Mapped[str] = mapped_column(String(50), default="system", nullable=False)
+    # 'clinician' | 'system' | 'agent'
+
+    actor_id: Mapped[str | None] = mapped_column(
+        String(36), ForeignKey("clinic_users.id"), nullable=True
+    )  # who triggered it (null = system/agent)
+
+    payload: Mapped[dict | None] = mapped_column(JSON, nullable=True)
+    # Event-specific data — see plan for per-type payload keys
+
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)
+
+    # Relationships
+    patient: Mapped["Patient"] = relationship("Patient", back_populates="events")
+    actor: Mapped["ClinicUser | None"] = relationship("ClinicUser", foreign_keys=[actor_id])

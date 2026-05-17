@@ -13,6 +13,7 @@ from .routers.panels import router as panels_router
 from .routers.upload import router as upload_router
 from .routers.assessment import router as assessment_router
 from .routers.test_orders import router as test_orders_router
+from .routers.timeline import router as timeline_router
 
 
 @asynccontextmanager
@@ -64,6 +65,9 @@ app.include_router(assessment_router)
 # Test ordering agent endpoints (new)
 app.include_router(test_orders_router)
 
+# Timeline endpoint (Phase 7A)
+app.include_router(timeline_router)
+
 
 @app.get("/", tags=["root"])
 async def root():
@@ -95,6 +99,7 @@ async def root():
                 "GET  /api/v1/panels/{panel_id}",
                 "GET  /api/v1/registry/metadata",
             ],
+            "timeline": ["/api/v1/patients/{id}/timeline"],
             "science": [
                 "/api/v1/longevity/assessment_level0",
                 "/api/v1/longevity/full_assessment",
