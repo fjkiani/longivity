@@ -1,16 +1,17 @@
 databases:
   - name: longivity-db
-    databaseName: longivity
-    user: longivity
+    databaseName: longivity_db
+    user: longivity_db_user
     plan: free
 
 services:
   # ── FastAPI Backend ──────────────────────────────────────────────────────────
   - type: web
     name: longivity-backend
-    runtime: docker
-    dockerfilePath: ./Dockerfile
+    runtime: python
     plan: free
+    buildCommand: pip install -r requirements.txt && pip install -e .
+    startCommand: uvicorn longivity.app:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /api/v1/longevity/healthz
     envVars:
       - key: DATABASE_URL
@@ -20,15 +21,26 @@ services:
       - key: JWT_SECRET
         generateValue: true
       - key: ALLOWED_ORIGINS
-        value: https://longivity-web.onrender.com
+        value: https://longivity-web-h41q.onrender.com
+      - key: RENDER
+        value: "true"
+      - key: KEEPALIVE_URL
+        value: https://longivity-backend-4i8e.onrender.com/api/v1/longevity/healthz
+      - key: KEEPALIVE_INTERVAL_SECONDS
+        value: "600"
 
   # ── Next.js Frontend ─────────────────────────────────────────────────────────
   - type: web
     name: longivity-web
-    runtime: docker
-    dockerfilePath: ./web/Dockerfile
+    runtime: node
     plan: free
-    dockerContext: ./web
+    rootDir: web
+    buildCommand: npm install && npm run build
+    startCommand: npm start
     envVars:
       - key: NEXT_PUBLIC_API_URL
-        value: https://longivity-backend.onrender.com
+        value: https://longivity-backend-4i8e.onrender.com
+      - key: NODE_ENV
+        value: production
+      - key: NODE_OPTIONS
+        value: --max-old-space-size=512
