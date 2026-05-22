@@ -6,7 +6,7 @@ WORKDIR /app
 # psycopg2-binary bundles its own libpq — no system deps needed.
 
 # Copy pinned requirements first for better layer caching
-COPY requirements.txt .
+COPY requirements-pinned.txt requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy source and install the package itself (no deps, already installed above)
