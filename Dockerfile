@@ -2,14 +2,9 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# pdfplumber is pure-Python (uses pdfminer.six) — no system deps needed.
-# psycopg2-binary bundles its own libpq — no system deps needed.
+COPY requirements-app.txt .
+RUN pip install --no-cache-dir -r requirements-app.txt
 
-# Copy pinned requirements first for better layer caching
-COPY requirements-pinned.txt requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy source and install the package itself (no deps, already installed above)
 COPY pyproject.toml .
 COPY src/ src/
 COPY agents/ agents/
