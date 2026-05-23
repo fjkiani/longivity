@@ -1,9 +1,13 @@
-"""Render entry point — adds src/ to sys.path so longivity is importable without pip install -e ."""
+"""Render entry point — Render clones to /opt/render/project/src/ which IS the repo root."""
 import sys
 import os
 
-# Make src/ importable without editable install
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "src"))
+# Render's working directory is the repo root (/opt/render/project/src/)
+# Add src/ subdirectory so 'longivity' package is importable
+_repo_root = os.path.dirname(os.path.abspath(__file__))
+_src_dir = os.path.join(_repo_root, "src")
+if _src_dir not in sys.path:
+    sys.path.insert(0, _src_dir)
 
 from longivity.app import app  # noqa: F401, E402
 
