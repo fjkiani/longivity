@@ -13,5 +13,4 @@ dist/
 # local envs
 .venv/
 venv/
-.python-version
 
