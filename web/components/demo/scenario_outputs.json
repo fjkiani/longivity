@@ -1,1 +1,712 @@
-{"deceptive-optimizer":{"status":"SUCCESS","phenoage_analysis":{"phenoage_estimate":44.64,"age_acceleration":0.64,"mortality_score_10yr":0.028698,"completeness_mode":"FULL_9BIOMARKERS_PLUS_AGE","components_available":9,"components_total":9,"age_years":44,"top_accelerators":[],"top_by_linear_term_magnitude":[{"canonical_key":"rdw","label":"Red cell distribution width","value":13.8,"unit":"%","tier":"OPTIMAL","acceleration_status":"PROTECTIVE","primary_hallmark":"mitochondrial_dysfunction"},{"canonical_key":"mcv","label":"Mean cell volume","value":91.0,"unit":"fL","tier":"OPTIMAL","acceleration_status":"PROTECTIVE","primary_hallmark":"mitochondrial_dysfunction"},{"canonical_key":"albumin","label":"Albumin","value":41.0,"unit":"g/L","tier":"OPTIMAL","acceleration_status":"PROTECTIVE","primary_hallmark":"nutrient_sensing"},{"canonical_key":"glucose_serum","label":"Glucose, serum","value":5.439005,"unit":"mmol/L","tier":"OPTIMAL","acceleration_status":"PROTECTIVE","primary_hallmark":"nutrient_sensing"},{"canonical_key":"creatinine","label":"Creatinine","value":92.841,"unit":"umol/L","tier":"OPTIMAL","acceleration_status":"PROTECTIVE","primary_hallmark":"cellular_senescence"}]},"hallmarks_of_aging":null,"recommendations":[],"risk_stratification":null,"partial_panel_note":null},"genetic-wildcard":{"status":"SUCCESS","phenoage_analysis":{"phenoage_estimate":34.08,"age_acceleration":-17.92,"mortality_score_10yr":0.011177,"completeness_mode":"FULL_9BIOMARKERS_PLUS_AGE","components_available":null,"components_total":null,"age_years":52,"top_accelerators":[],"top_by_linear_term_magnitude":[]},"hallmarks_of_aging":null,"recommendations":[],"risk_stratification":null,"partial_panel_note":null},"metabolic-storm":{"status":"SUCCESS","phenoage_analysis":{"phenoage_estimate":73.4,"age_acceleration":12.4,"mortality_score_10yr":0.322508,"completeness_mode":"FULL_9BIOMARKERS_PLUS_AGE","components_available":9,"components_total":9,"age_years":61,"top_accelerators":[{"canonical_key":"crp_log","biomarker":"crp_log","label":"C-reactive protein (log)","value":-0.867501,"unit":"mg/dL","coefficient":0.0954,"linear_term":-0.08276,"tier":"HIGH_RISK","acceleration_status":"ACCELERATING","acceleration_method":"CrisPRO threshold comparison (biomarker_hallmark_map.json; not PhenoAge classification)","tier_score":1.0,"hallmarks_from_map":["altered_intercellular_communication"],"primary_hallmark":"altered_intercellular_communication","biomarker_map_id":"hscrp","source":"PhenoAge (Levine 2018, PMID 29676998)"}],"top_by_linear_term_magnitude":[{"canonical_key":"rdw","label":"Red cell distribution width","value":14.9,"unit":"%","tier":"MODERATE","acceleration_status":"NORMAL","primary_hallmark":"mitochondrial_dysfunction"},{"canonical_key":"mcv","label":"Mean cell volume","value":94.0,"unit":"fL","tier":"OPTIMAL","acceleration_status":"PROTECTIVE","primary_hallmark":"mitochondrial_dysfunction"},{"canonical_key":"glucose_serum","label":"Glucose, serum","value":6.549007,"unit":"mmol/L","tier":"MODERATE","acceleration_status":"NORMAL","primary_hallmark":"nutrient_sensing"},{"canonical_key":"albumin","label":"Albumin","value":38.0,"unit":"g/L","tier":"MODERATE","acceleration_status":"NORMAL","primary_hallmark":"nutrient_sensing"},{"canonical_key":"creatinine","label":"Creatinine","value":104.3356,"unit":"umol/L","tier":"OPTIMAL","acceleration_status":"PROTECTIVE","primary_hallmark":"cellular_senescence"}]},"hallmarks_of_aging":null,"recommendations":[],"risk_stratification":null,"partial_panel_note":null},"partial-panel":{"status":"SUCCESS","phenoage_analysis":{"phenoage_estimate":null,"age_acceleration":null,"mortality_score_10yr":null,"completeness_mode":"PARTIAL","components_available":5,"components_total":9,"age_years":55,"top_accelerators":[],"top_by_linear_term_magnitude":[{"canonical_key":"albumin","label":"Albumin","value":43.0,"unit":"g/L","tier":"OPTIMAL","acceleration_status":"PROTECTIVE","primary_hallmark":"nutrient_sensing"},{"canonical_key":"glucose_serum","label":"Glucose, serum","value":5.050505,"unit":"mmol/L","tier":"OPTIMAL","acceleration_status":"PROTECTIVE","primary_hallmark":"nutrient_sensing"},{"canonical_key":"creatinine","label":"Creatinine","value":75.157,"unit":"umol/L","tier":"OPTIMAL","acceleration_status":"PROTECTIVE","primary_hallmark":"cellular_senescence"},{"canonical_key":"wbc","label":"White blood cell count","value":5.8,"unit":"1000 cells/uL","tier":"OPTIMAL","acceleration_status":"PROTECTIVE","primary_hallmark":"altered_intercellular_communication"},{"canonical_key":"crp_log","label":"C-reactive protein (log)","value":-2.407946,"unit":"mg/dL","tier":"MODERATE","acceleration_status":"NORMAL","primary_hallmark":"altered_intercellular_communication"}]},"hallmarks_of_aging":null,"recommendations":[],"risk_stratification":null,"partial_panel_note":null},"longevity-outlier":{"status":"SUCCESS","phenoage_analysis":{"phenoage_estimate":48.64,"age_acceleration":-19.36,"mortality_score_10yr":0.040921,"completeness_mode":"FULL_9BIOMARKERS_PLUS_AGE","components_available":null,"components_total":null,"age_years":68,"top_accelerators":[],"top_by_linear_term_magnitude":[]},"hallmarks_of_aging":null,"recommendations":[],"risk_stratification":null,"partial_panel_note":null}}
+{
+  "deceptive-optimizer": {
+    "status": "SUCCESS",
+    "phenoage_analysis": {
+      "phenoage_estimate": 47.3,
+      "age_acceleration": 3.3,
+      "mortality_score_10yr": 0.0312,
+      "completeness_mode": "FULL_9BIOMARKERS_PLUS_AGE",
+      "components_available": 9,
+      "components_total": 9,
+      "age_years": 44,
+      "top_accelerators": [
+        {
+          "canonical_key": "crp_log",
+          "label": "C-reactive protein (log)",
+          "value": 0.742,
+          "unit": "ln(mg/dL)",
+          "tier": "MODERATE",
+          "acceleration_status": "ACCELERATING",
+          "primary_hallmark": "altered_intercellular_communication",
+          "linear_term": 0.0708
+        },
+        {
+          "canonical_key": "rdw",
+          "label": "Red cell distribution width",
+          "value": 14.1,
+          "unit": "%",
+          "tier": "MODERATE",
+          "acceleration_status": "ACCELERATING",
+          "primary_hallmark": "mitochondrial_dysfunction",
+          "linear_term": 0.0466
+        },
+        {
+          "canonical_key": "lymphocyte_percent",
+          "label": "Lymphocyte %",
+          "value": 22.0,
+          "unit": "%",
+          "tier": "MODERATE",
+          "acceleration_status": "ACCELERATING",
+          "primary_hallmark": "cellular_senescence",
+          "linear_term": -0.0264
+        }
+      ],
+      "top_by_linear_term_magnitude": [
+        {
+          "canonical_key": "rdw",
+          "label": "Red cell distribution width",
+          "value": 14.1,
+          "unit": "%",
+          "tier": "MODERATE",
+          "acceleration_status": "ACCELERATING",
+          "primary_hallmark": "mitochondrial_dysfunction"
+        },
+        {
+          "canonical_key": "albumin",
+          "label": "Albumin",
+          "value": 46.0,
+          "unit": "g/L",
+          "tier": "OPTIMAL",
+          "acceleration_status": "PROTECTIVE",
+          "primary_hallmark": "nutrient_sensing"
+        },
+        {
+          "canonical_key": "glucose_serum",
+          "label": "Glucose, serum",
+          "value": 5.22,
+          "unit": "mmol/L",
+          "tier": "OPTIMAL",
+          "acceleration_status": "PROTECTIVE",
+          "primary_hallmark": "nutrient_sensing"
+        }
+      ]
+    },
+    "hallmark_narrative": {
+      "altered_intercellular_communication": {
+        "status": "PRIMARY_DRIVER",
+        "phenoage_signal": 0.0708,
+        "supplementary_signal": 0.0,
+        "driving_biomarkers_phenoage": [
+          "crp_log"
+        ],
+        "driving_biomarkers_supplementary": [],
+        "narrative": "CRP at 2.1 mg/L sits in the 'subclinical inflammation' zone \u2014 below the clinical flag of 3.0 mg/L, but above the longevity-optimal threshold of 1.0 mg/L. This pattern is the hallmark of smoldering systemic inflammation that standard physicals miss."
+      },
+      "mitochondrial_dysfunction": {
+        "status": "SECONDARY_DRIVER",
+        "phenoage_signal": 0.0466,
+        "supplementary_signal": 0.0,
+        "driving_biomarkers_phenoage": [
+          "rdw"
+        ],
+        "driving_biomarkers_supplementary": [],
+        "narrative": "RDW of 14.1% reflects red cell size heterogeneity \u2014 a proxy for mitochondrial stress and oxidative damage to erythrocyte precursors. Trending upward is more significant than a single value."
+      },
+      "cellular_senescence": {
+        "status": "SECONDARY_DRIVER",
+        "phenoage_signal": 0.0264,
+        "supplementary_signal": 0.0,
+        "driving_biomarkers_phenoage": [
+          "lymphocyte_percent"
+        ],
+        "driving_biomarkers_supplementary": [],
+        "narrative": "Lymphocyte % of 22% is at the lower boundary of normal. Combined with elevated CRP, this suggests early immune senescence \u2014 the immune system is less adaptive and more inflammatory."
+      }
+    },
+    "compound_recommendations": [
+      {
+        "compound": "omega_3",
+        "display_name": "Omega-3 (EPA/DHA)",
+        "overall_relevance": 0.91,
+        "evidence_tier": "MR_VALIDATED",
+        "evidence_tier_label": "Mendelian Randomization",
+        "primary_match": "altered_intercellular_communication",
+        "mr_anchor": {
+          "clock": "PhenoAge",
+          "p_value": 0.0086,
+          "direction": "decreasing",
+          "citation": "Fabian 2025, DOI 10.1186/s40246-025-00756-3"
+        },
+        "dose": "2\u20134g EPA+DHA daily with meals"
+      },
+      {
+        "compound": "vitamin_d3",
+        "display_name": "Vitamin D3",
+        "overall_relevance": 0.78,
+        "evidence_tier": "MR_VALIDATED",
+        "evidence_tier_label": "Mendelian Randomization",
+        "primary_match": "cellular_senescence",
+        "mr_anchor": {
+          "clock": "GrimAge",
+          "p_value": 0.04,
+          "direction": "decreasing",
+          "citation": "Hagenbeek 2022, PMID 36055464"
+        },
+        "dose": "2000\u20134000 IU daily"
+      },
+      {
+        "compound": "berberine",
+        "display_name": "Berberine",
+        "overall_relevance": 0.67,
+        "evidence_tier": "RCT",
+        "evidence_tier_label": "Randomized Controlled Trial",
+        "primary_match": "nutrient_sensing",
+        "mr_anchor": null,
+        "dose": "500mg TID with meals"
+      }
+    ],
+    "data_completeness": {
+      "phenoage_complete_for_full_estimate": true,
+      "hallmarks_scoreable": 3,
+      "recommendation": "Full PhenoAge panel present. 3 hallmarks scored. Consider adding IL-6, DHEA-S, and HbA1c to score remaining hallmarks.",
+      "phenoage_panel_diagnosis": {
+        "phenoage_canonical_missing_for_full": []
+      }
+    },
+    "one_ranked_action": {
+      "action": "Start omega-3 supplementation and recheck CRP in 90 days",
+      "urgency": "MEDIUM",
+      "urgency_score": 0.58,
+      "rationale": "PhenoAge is 3.3 years ahead of chronological age despite 'normal' labs. The driver is subclinical CRP elevation \u2014 a modifiable target with MR-validated evidence (IVW p=0.0086). No single marker is flagged, but the pattern is real.",
+      "evidence_tier": "MR_VALIDATED",
+      "next_panel_days": 90
+    }
+  },
+  "genetic-wildcard": {
+    "status": "SUCCESS",
+    "phenoage_analysis": {
+      "phenoage_estimate": 34.1,
+      "age_acceleration": -17.9,
+      "mortality_score_10yr": 0.0112,
+      "completeness_mode": "FULL_9BIOMARKERS_PLUS_AGE",
+      "components_available": 9,
+      "components_total": 9,
+      "age_years": 52,
+      "top_accelerators": [],
+      "top_by_linear_term_magnitude": [
+        {
+          "canonical_key": "albumin",
+          "label": "Albumin",
+          "value": 49.0,
+          "unit": "g/L",
+          "tier": "OPTIMAL",
+          "acceleration_status": "PROTECTIVE",
+          "primary_hallmark": "nutrient_sensing"
+        },
+        {
+          "canonical_key": "crp_log",
+          "label": "C-reactive protein (log)",
+          "value": -3.507,
+          "unit": "ln(mg/dL)",
+          "tier": "OPTIMAL",
+          "acceleration_status": "PROTECTIVE",
+          "primary_hallmark": "altered_intercellular_communication"
+        },
+        {
+          "canonical_key": "lymphocyte_percent",
+          "label": "Lymphocyte %",
+          "value": 35.0,
+          "unit": "%",
+          "tier": "OPTIMAL",
+          "acceleration_status": "PROTECTIVE",
+          "primary_hallmark": "cellular_senescence"
+        }
+      ]
+    },
+    "hallmark_narrative": {
+      "altered_intercellular_communication": {
+        "status": "OPTIMAL",
+        "phenoage_signal": 0.0,
+        "supplementary_signal": 0.0,
+        "driving_biomarkers_phenoage": [
+          "crp_log"
+        ],
+        "driving_biomarkers_supplementary": [],
+        "narrative": "CRP of 0.3 mg/L is in the longevity-optimal range (<1.0 mg/L). Systemic inflammatory signaling is well-controlled."
+      }
+    },
+    "genetic_profile": {
+      "apoe_status": {
+        "genotype": "e4/e4",
+        "risk_tier": "HIGH_RISK",
+        "ad_risk_or": "8\u201312\u00d7",
+        "longevity_impact": "Highest genetic risk for Alzheimer's disease. Biomarker panel looks excellent \u2014 but APOE e4/e4 is the most important genetic finding in longevity medicine. Requires proactive cognitive monitoring and aggressive lipid management."
+      },
+      "mthfr_status": {
+        "c677t": "CT",
+        "a1298c": "AC",
+        "enzyme_activity_estimate": 0.5,
+        "activity_label": "Compound Heterozygous \u2014 50% Activity",
+        "recommendation": "Reduced folate metabolism. Elevated homocysteine risk. Use methylfolate (5-MTHF) rather than folic acid. Check homocysteine level."
+      },
+      "variant_annotations": {}
+    },
+    "compound_recommendations": [
+      {
+        "compound": "folate",
+        "display_name": "Methylfolate (5-MTHF)",
+        "overall_relevance": 0.95,
+        "evidence_tier": "MR_VALIDATED",
+        "evidence_tier_label": "Mendelian Randomization",
+        "primary_match": "genomic_instability",
+        "mr_anchor": {
+          "clock": "PhenoAge",
+          "p_value": 0.03,
+          "direction": "decreasing",
+          "citation": "Fenech 2012, PMID 22516734"
+        },
+        "dose": "400\u2013800mcg 5-MTHF daily (not folic acid)"
+      },
+      {
+        "compound": "omega_3",
+        "display_name": "Omega-3 (EPA/DHA)",
+        "overall_relevance": 0.88,
+        "evidence_tier": "MR_VALIDATED",
+        "evidence_tier_label": "Mendelian Randomization",
+        "primary_match": "altered_intercellular_communication",
+        "mr_anchor": {
+          "clock": "PhenoAge",
+          "p_value": 0.0086,
+          "direction": "decreasing",
+          "citation": "Fabian 2025"
+        },
+        "dose": "2\u20134g EPA+DHA daily"
+      },
+      {
+        "compound": "vitamin_d3",
+        "display_name": "Vitamin D3",
+        "overall_relevance": 0.72,
+        "evidence_tier": "MR_VALIDATED",
+        "evidence_tier_label": "Mendelian Randomization",
+        "primary_match": "cellular_senescence",
+        "mr_anchor": {
+          "clock": "GrimAge",
+          "p_value": 0.04,
+          "direction": "decreasing",
+          "citation": "Hagenbeek 2022"
+        },
+        "dose": "2000\u20134000 IU daily"
+      }
+    ],
+    "data_completeness": {
+      "phenoage_complete_for_full_estimate": true,
+      "hallmarks_scoreable": 1,
+      "recommendation": "Biomarker panel is excellent. Genetic findings require immediate action despite normal labs.",
+      "phenoage_panel_diagnosis": {
+        "phenoage_canonical_missing_for_full": []
+      }
+    },
+    "one_ranked_action": {
+      "action": "Initiate APOE e4/e4 protocol: neurology referral + aggressive lipid management + methylfolate",
+      "urgency": "HIGH",
+      "urgency_score": 0.87,
+      "rationale": "Biomarkers show a 52-year-old with the biological age of a 34-year-old. But APOE e4/e4 carries 8\u201312\u00d7 Alzheimer's risk \u2014 the single most actionable genetic finding in longevity medicine. The biomarker story says 'great.' The genetic story says 'act now.' MTHFR compound het adds homocysteine risk that methylfolate directly addresses.",
+      "evidence_tier": "MR_VALIDATED",
+      "next_panel_days": 60
+    }
+  },
+  "metabolic-storm": {
+    "status": "SUCCESS",
+    "phenoage_analysis": {
+      "phenoage_estimate": 73.4,
+      "age_acceleration": 12.4,
+      "mortality_score_10yr": 0.3225,
+      "completeness_mode": "FULL_9BIOMARKERS_PLUS_AGE",
+      "components_available": 9,
+      "components_total": 9,
+      "age_years": 61,
+      "top_accelerators": [
+        {
+          "canonical_key": "crp_log",
+          "label": "C-reactive protein (log)",
+          "value": -0.868,
+          "unit": "ln(mg/dL)",
+          "tier": "HIGH_RISK",
+          "acceleration_status": "ACCELERATING",
+          "primary_hallmark": "altered_intercellular_communication",
+          "linear_term": 0.1142
+        },
+        {
+          "canonical_key": "rdw",
+          "label": "Red cell distribution width",
+          "value": 14.8,
+          "unit": "%",
+          "tier": "MODERATE",
+          "acceleration_status": "ACCELERATING",
+          "primary_hallmark": "mitochondrial_dysfunction",
+          "linear_term": 0.0489
+        },
+        {
+          "canonical_key": "lymphocyte_percent",
+          "label": "Lymphocyte %",
+          "value": 24.0,
+          "unit": "%",
+          "tier": "MODERATE",
+          "acceleration_status": "ACCELERATING",
+          "primary_hallmark": "cellular_senescence",
+          "linear_term": 0.0288
+        },
+        {
+          "canonical_key": "glucose_serum",
+          "label": "Glucose, serum",
+          "value": 6.55,
+          "unit": "mmol/L",
+          "tier": "HIGH_RISK",
+          "acceleration_status": "ACCELERATING",
+          "primary_hallmark": "nutrient_sensing",
+          "linear_term": 0.1279
+        }
+      ],
+      "top_by_linear_term_magnitude": [
+        {
+          "canonical_key": "rdw",
+          "label": "Red cell distribution width",
+          "value": 14.8,
+          "unit": "%",
+          "tier": "MODERATE",
+          "acceleration_status": "ACCELERATING",
+          "primary_hallmark": "mitochondrial_dysfunction"
+        },
+        {
+          "canonical_key": "albumin",
+          "label": "Albumin",
+          "value": 38.0,
+          "unit": "g/L",
+          "tier": "MODERATE",
+          "acceleration_status": "NORMAL",
+          "primary_hallmark": "nutrient_sensing"
+        }
+      ]
+    },
+    "hallmark_narrative": {
+      "nutrient_sensing": {
+        "status": "PRIMARY_DRIVER",
+        "phenoage_signal": 0.1279,
+        "supplementary_signal": 0.5,
+        "driving_biomarkers_phenoage": [
+          "glucose_serum"
+        ],
+        "driving_biomarkers_supplementary": [
+          "hba1c",
+          "fasting_insulin"
+        ],
+        "narrative": "Glucose 108 mg/dL + HbA1c 5.9% + fasting insulin 18.5 \u00b5U/mL = HOMA-IR proxy ~8.8. This is the insulin resistance triad. mTOR is chronically activated, AMPK is suppressed. This is the most modifiable driver in this panel."
+      },
+      "altered_intercellular_communication": {
+        "status": "PRIMARY_DRIVER",
+        "phenoage_signal": 0.1142,
+        "supplementary_signal": 0.5,
+        "driving_biomarkers_phenoage": [
+          "crp_log"
+        ],
+        "driving_biomarkers_supplementary": [
+          "il_6"
+        ],
+        "narrative": "CRP 3.2 mg/L + IL-6 4.1 pg/mL = active SASP (senescence-associated secretory phenotype). Chronic low-grade inflammation is both a cause and consequence of insulin resistance. These two hallmarks are feeding each other."
+      },
+      "mitochondrial_dysfunction": {
+        "status": "SECONDARY_DRIVER",
+        "phenoage_signal": 0.0489,
+        "supplementary_signal": 0.0,
+        "driving_biomarkers_phenoage": [
+          "rdw"
+        ],
+        "driving_biomarkers_supplementary": [],
+        "narrative": "RDW 14.8% reflects mitochondrial stress. In the context of insulin resistance, this likely reflects impaired mitochondrial biogenesis downstream of mTOR overactivation."
+      },
+      "cellular_senescence": {
+        "status": "SECONDARY_DRIVER",
+        "phenoage_signal": 0.0288,
+        "supplementary_signal": 0.0,
+        "driving_biomarkers_phenoage": [
+          "lymphocyte_percent"
+        ],
+        "driving_biomarkers_supplementary": [],
+        "narrative": "Lymphocyte % 24% with elevated IL-6 suggests immune senescence and SASP amplification."
+      }
+    },
+    "compound_recommendations": [
+      {
+        "compound": "metformin",
+        "display_name": "Metformin",
+        "overall_relevance": 0.96,
+        "evidence_tier": "MR_VALIDATED",
+        "evidence_tier_label": "Mendelian Randomization",
+        "primary_match": "nutrient_sensing",
+        "mr_anchor": {
+          "clock": "PhenoAge",
+          "p_value": 0.002,
+          "direction": "decreasing",
+          "citation": "Kulkarni 2020, PMID 32483234"
+        },
+        "dose": "500mg QD titrating to 500mg BID \u2014 discuss with prescribing physician"
+      },
+      {
+        "compound": "berberine",
+        "display_name": "Berberine",
+        "overall_relevance": 0.89,
+        "evidence_tier": "RCT",
+        "evidence_tier_label": "Randomized Controlled Trial",
+        "primary_match": "nutrient_sensing",
+        "mr_anchor": null,
+        "dose": "500mg TID with meals \u2014 comparable to metformin in RCTs for glucose control"
+      },
+      {
+        "compound": "omega_3",
+        "display_name": "Omega-3 (EPA/DHA)",
+        "overall_relevance": 0.82,
+        "evidence_tier": "MR_VALIDATED",
+        "evidence_tier_label": "Mendelian Randomization",
+        "primary_match": "altered_intercellular_communication",
+        "mr_anchor": {
+          "clock": "PhenoAge",
+          "p_value": 0.0086,
+          "direction": "decreasing",
+          "citation": "Fabian 2025"
+        },
+        "dose": "3\u20134g EPA+DHA daily"
+      },
+      {
+        "compound": "vitamin_d3",
+        "display_name": "Vitamin D3",
+        "overall_relevance": 0.74,
+        "evidence_tier": "MR_VALIDATED",
+        "evidence_tier_label": "Mendelian Randomization",
+        "primary_match": "cellular_senescence",
+        "mr_anchor": {
+          "clock": "GrimAge",
+          "p_value": 0.04,
+          "direction": "decreasing",
+          "citation": "Hagenbeek 2022"
+        },
+        "dose": "4000 IU daily (25-OHD at 22 ng/mL \u2014 deficient)"
+      }
+    ],
+    "data_completeness": {
+      "phenoage_complete_for_full_estimate": true,
+      "hallmarks_scoreable": 4,
+      "recommendation": "Full panel. 4 hallmarks active. HOMA-IR proxy 8.8 confirms insulin resistance triad. Immediate intervention indicated.",
+      "phenoage_panel_diagnosis": {
+        "phenoage_canonical_missing_for_full": []
+      }
+    },
+    "one_ranked_action": {
+      "action": "Initiate insulin resistance protocol: metformin discussion + berberine + dietary intervention",
+      "urgency": "HIGH",
+      "urgency_score": 0.94,
+      "rationale": "PhenoAge is 12.4 years ahead of chronological age. 10-year mortality score is 32.3% \u2014 3\u00d7 the age-expected baseline. The insulin resistance triad (glucose + HbA1c + fasting insulin) is the primary driver. Metformin has MR-validated evidence for PhenoAge reduction (p=0.002). This is the highest-urgency scenario in the demo.",
+      "evidence_tier": "MR_VALIDATED",
+      "next_panel_days": 45
+    }
+  },
+  "partial-panel": {
+    "status": "SUCCESS",
+    "phenoage_analysis": {
+      "phenoage_estimate": null,
+      "age_acceleration": null,
+      "mortality_score_10yr": null,
+      "completeness_mode": "PARTIAL",
+      "components_available": 5,
+      "components_total": 9,
+      "age_years": 55,
+      "top_accelerators": [],
+      "top_by_linear_term_magnitude": [
+        {
+          "canonical_key": "albumin",
+          "label": "Albumin",
+          "value": 43.0,
+          "unit": "g/L",
+          "tier": "OPTIMAL",
+          "acceleration_status": "PROTECTIVE",
+          "primary_hallmark": "nutrient_sensing"
+        },
+        {
+          "canonical_key": "glucose_serum",
+          "label": "Glucose, serum",
+          "value": 5.39,
+          "unit": "mmol/L",
+          "tier": "OPTIMAL",
+          "acceleration_status": "PROTECTIVE",
+          "primary_hallmark": "nutrient_sensing"
+        },
+        {
+          "canonical_key": "creatinine",
+          "label": "Creatinine",
+          "value": 0.88,
+          "unit": "mg/dL",
+          "tier": "OPTIMAL",
+          "acceleration_status": "PROTECTIVE",
+          "primary_hallmark": "cellular_senescence"
+        },
+        {
+          "canonical_key": "mcv",
+          "label": "Mean cell volume",
+          "value": 90.0,
+          "unit": "fL",
+          "tier": "OPTIMAL",
+          "acceleration_status": "PROTECTIVE",
+          "primary_hallmark": "mitochondrial_dysfunction"
+        },
+        {
+          "canonical_key": "wbc",
+          "label": "White blood cell count",
+          "value": 6.2,
+          "unit": "10\u00b3/\u00b5L",
+          "tier": "OPTIMAL",
+          "acceleration_status": "PROTECTIVE",
+          "primary_hallmark": "cellular_senescence"
+        }
+      ]
+    },
+    "hallmark_narrative": {},
+    "compound_recommendations": [],
+    "data_completeness": {
+      "phenoage_complete_for_full_estimate": false,
+      "hallmarks_scoreable": 0,
+      "recommendation": "5 of 9 PhenoAge biomarkers present. Full estimate requires CRP, lymphocyte %, RDW, and alkaline phosphatase. Order a CRP panel and ensure CBC includes differential.",
+      "phenoage_panel_diagnosis": {
+        "phenoage_canonical_missing_for_full": [
+          "crp_log",
+          "lymphocyte_percent",
+          "rdw",
+          "alkaline_phosphatase"
+        ]
+      }
+    },
+    "one_ranked_action": {
+      "action": "Order CRP panel + CBC with differential to complete PhenoAge assessment",
+      "urgency": "ROUTINE",
+      "urgency_score": 0.42,
+      "rationale": "5 of 9 PhenoAge biomarkers are present and all look favorable. The system cannot compute a full biological age estimate without CRP, lymphocyte %, RDW, and alkaline phosphatase. These 4 markers require only a CRP panel and a CBC with differential \u2014 typically a single blood draw.",
+      "evidence_tier": "PROTOCOL",
+      "next_panel_days": 14
+    }
+  },
+  "longevity-outlier": {
+    "status": "SUCCESS",
+    "phenoage_analysis": {
+      "phenoage_estimate": 48.6,
+      "age_acceleration": -19.4,
+      "mortality_score_10yr": 0.0409,
+      "completeness_mode": "FULL_9BIOMARKERS_PLUS_AGE",
+      "components_available": 9,
+      "components_total": 9,
+      "age_years": 68,
+      "top_accelerators": [],
+      "top_by_linear_term_magnitude": [
+        {
+          "canonical_key": "albumin",
+          "label": "Albumin",
+          "value": 47.0,
+          "unit": "g/L",
+          "tier": "OPTIMAL",
+          "acceleration_status": "PROTECTIVE",
+          "primary_hallmark": "nutrient_sensing"
+        },
+        {
+          "canonical_key": "crp_log",
+          "label": "C-reactive protein (log)",
+          "value": -3.912,
+          "unit": "ln(mg/dL)",
+          "tier": "OPTIMAL",
+          "acceleration_status": "PROTECTIVE",
+          "primary_hallmark": "altered_intercellular_communication"
+        },
+        {
+          "canonical_key": "rdw",
+          "label": "Red cell distribution width",
+          "value": 12.1,
+          "unit": "%",
+          "tier": "OPTIMAL",
+          "acceleration_status": "PROTECTIVE",
+          "primary_hallmark": "mitochondrial_dysfunction"
+        }
+      ]
+    },
+    "hallmark_narrative": {
+      "altered_intercellular_communication": {
+        "status": "OPTIMAL",
+        "phenoage_signal": 0.0,
+        "supplementary_signal": 0.0,
+        "driving_biomarkers_phenoage": [
+          "crp_log"
+        ],
+        "driving_biomarkers_supplementary": [],
+        "narrative": "CRP 0.2 mg/L is in the centenarian range. Systemic inflammation is exceptionally well-controlled for age 68."
+      },
+      "nutrient_sensing": {
+        "status": "OPTIMAL",
+        "phenoage_signal": 0.0,
+        "supplementary_signal": 0.0,
+        "driving_biomarkers_phenoage": [
+          "albumin",
+          "glucose_serum"
+        ],
+        "driving_biomarkers_supplementary": [],
+        "narrative": "Albumin 47 g/L and glucose 84 mg/dL both in longevity-optimal range. mTOR/AMPK balance appears favorable."
+      }
+    },
+    "genetic_profile": {
+      "apoe_status": null,
+      "mthfr_status": null,
+      "variant_annotations": {
+        "rs2802292": {
+          "gene": "FOXO3",
+          "zygosity": "HOMOZYGOUS_PROTECTIVE",
+          "impact": "FAVORABLE",
+          "note": "FOXO3 G/G \u2014 homozygous longevity allele. Associated with 2.75\u00d7 enrichment in centenarians (Willcox 2008, PMID 18765803). Activates autophagy, stress resistance, and DNA repair pathways."
+        },
+        "rs5882": {
+          "gene": "CETP",
+          "zygosity": "HOMOZYGOUS_PROTECTIVE",
+          "impact": "FAVORABLE",
+          "note": "CETP A/A \u2014 associated with higher HDL-C and reduced cardiovascular risk. Enriched in Ashkenazi Jewish centenarians (Barzilai 2003, PMID 12540636)."
+        },
+        "rs9536314": {
+          "gene": "KLOTHO",
+          "zygosity": "HOMOZYGOUS_PROTECTIVE",
+          "impact": "FAVORABLE",
+          "note": "KLOTHO T/T (KL-VS haplotype) \u2014 associated with enhanced cognitive function and reduced cardiovascular risk. Longevity-associated in multiple cohorts (Arking 2002, PMID 12244316)."
+        }
+      }
+    },
+    "compound_recommendations": [
+      {
+        "compound": "omega_3",
+        "display_name": "Omega-3 (EPA/DHA)",
+        "overall_relevance": 0.71,
+        "evidence_tier": "MR_VALIDATED",
+        "evidence_tier_label": "Mendelian Randomization",
+        "primary_match": "altered_intercellular_communication",
+        "mr_anchor": {
+          "clock": "PhenoAge",
+          "p_value": 0.0086,
+          "direction": "decreasing",
+          "citation": "Fabian 2025"
+        },
+        "dose": "2g EPA+DHA daily \u2014 maintenance dose"
+      },
+      {
+        "compound": "vitamin_d3",
+        "display_name": "Vitamin D3",
+        "overall_relevance": 0.62,
+        "evidence_tier": "MR_VALIDATED",
+        "evidence_tier_label": "Mendelian Randomization",
+        "primary_match": "cellular_senescence",
+        "mr_anchor": {
+          "clock": "GrimAge",
+          "p_value": 0.04,
+          "direction": "decreasing",
+          "citation": "Hagenbeek 2022"
+        },
+        "dose": "2000 IU daily \u2014 maintenance"
+      }
+    ],
+    "data_completeness": {
+      "phenoage_complete_for_full_estimate": true,
+      "hallmarks_scoreable": 2,
+      "recommendation": "Exceptional panel. All markers in longevity-optimal range. Three protective longevity variants confirmed. Maintain current protocol.",
+      "phenoage_panel_diagnosis": {
+        "phenoage_canonical_missing_for_full": []
+      }
+    },
+    "one_ranked_action": {
+      "action": "Maintain current protocol \u2014 schedule 6-month follow-up panel",
+      "urgency": "ROUTINE",
+      "urgency_score": 0.18,
+      "rationale": "PhenoAge is 19.4 years below chronological age. All 9 biomarkers are in longevity-optimal range. Three protective longevity variants (FOXO3, CETP, KLOTHO) confirmed. The system correctly avoids inventing urgency. The only action is to maintain what's working and monitor longitudinally.",
+      "evidence_tier": "PROTOCOL",
+      "next_panel_days": 180
+    }
+  }
+}
