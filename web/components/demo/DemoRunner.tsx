@@ -111,7 +111,7 @@ export default function DemoRunner({ scenarios }: DemoRunnerProps) {
         <div className="lg:col-span-3">
           {result ? (
             <PipelineOutput
-              data={result as Parameters<typeof PipelineOutput>[0]["data"]}
+              data={result as unknown as Parameters<typeof PipelineOutput>[0]["data"]}
               rawJson={JSON.stringify(result, null, 2)}
               showRaw={showRaw}
               onToggleRaw={() => setShowRaw((v) => !v)}
