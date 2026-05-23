@@ -2,7 +2,51 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const STEPS = [
+// ── Discriminated union for demo shapes ──────────────────────────────────────
+type DemoConversion = {
+  type: "conversion";
+  rows: { label: string; input: string; arrow: string; output: string; color: string }[];
+};
+type DemoPhenoAge = {
+  type: "phenoage";
+  rows: { label: string; value: string; color: string }[];
+};
+type DemoHallmarks = {
+  type: "hallmarks";
+  rows: { label: string; status: string; color: string; pct: number }[];
+};
+type DemoGaps = {
+  type: "gaps";
+  coverage: number;
+  present: string[];
+  missing: string[];
+};
+type DemoStates = {
+  type: "states";
+  states: string[];
+  active: number;
+};
+type DemoAction = {
+  type: "action";
+  action: string;
+  urgency: string;
+  score: number;
+  rationale: string;
+  tier: string;
+};
+type Demo = DemoConversion | DemoPhenoAge | DemoHallmarks | DemoGaps | DemoStates | DemoAction;
+
+type Step = {
+  n: number;
+  label: string;
+  color: string;
+  tagline: string;
+  doctorNote: string;
+  demo: Demo;
+  failMode: string;
+};
+
+const STEPS: Step[] = [
   {
     n: 1,
     label: "Normalize",
@@ -109,8 +153,7 @@ const COLOR_MAP: Record<string, { bg: string; text: string; border: string; pill
   red:     { bg: "bg-red-50",      text: "text-red-700",     border: "border-red-200",     pill: "bg-red-100 text-red-800 border-red-300",     bar: "bg-red-500",     num: "bg-red-100 text-red-700" },
 };
 
-function DemoWidget({ step }: { step: typeof STEPS[0] }) {
-  const c = COLOR_MAP[step.color];
+function DemoWidget({ step }: { step: Step }) {
   const d = step.demo;
 
   if (d.type === "conversion") {
@@ -127,7 +170,7 @@ function DemoWidget({ step }: { step: typeof STEPS[0] }) {
             <span className="font-mono text-xs text-gray-500 w-20 shrink-0">{row.label}</span>
             <span className="font-mono text-sm font-bold text-gray-800">{row.input}</span>
             <span className="text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded-lg font-mono mx-1">{row.arrow}</span>
-            <span className={`font-mono text-sm font-black ${COLOR_MAP[row.color].text}`}>{row.output}</span>
+            <span className={`font-mono text-sm font-black ${COLOR_MAP[row.color]?.text ?? "text-gray-800"}`}>{row.output}</span>
           </motion.div>
         ))}
       </div>
@@ -143,9 +186,9 @@ function DemoWidget({ step }: { step: typeof STEPS[0] }) {
             initial={{ opacity: 0, scale: 0.92 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: i * 0.1, duration: 0.35 }}
-            className={`rounded-xl border p-3 ${COLOR_MAP[row.color].bg} ${COLOR_MAP[row.color].border}`}
+            className={`rounded-xl border p-3 ${COLOR_MAP[row.color]?.bg ?? "bg-gray-50"} ${COLOR_MAP[row.color]?.border ?? "border-gray-200"}`}
           >
-            <div className={`text-xl font-black tabular-nums ${COLOR_MAP[row.color].text}`}>{row.value}</div>
+            <div className={`text-xl font-black tabular-nums ${COLOR_MAP[row.color]?.text ?? "text-gray-800"}`}>{row.value}</div>
             <div className="text-xs text-gray-600 font-medium mt-0.5">{row.label}</div>
           </motion.div>
         ))}
@@ -165,14 +208,14 @@ function DemoWidget({ step }: { step: typeof STEPS[0] }) {
           >
             <div className="flex items-center justify-between mb-1">
               <span className="text-sm font-bold text-gray-800">{row.label}</span>
-              <span className={`text-[10px] font-black px-2 py-0.5 rounded-full border ${COLOR_MAP[row.color].pill}`}>
+              <span className={`text-[10px] font-black px-2 py-0.5 rounded-full border ${COLOR_MAP[row.color]?.pill ?? "bg-gray-100 text-gray-700 border-gray-300"}`}>
                 {row.status}
               </span>
             </div>
             {row.pct > 0 && (
               <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
                 <motion.div
-                  className={`h-full rounded-full ${COLOR_MAP[row.color].bar}`}
+                  className={`h-full rounded-full ${COLOR_MAP[row.color]?.bar ?? "bg-gray-400"}`}
                   initial={{ width: 0 }}
                   animate={{ width: `${row.pct}%` }}
                   transition={{ delay: i * 0.1 + 0.2, duration: 0.6, ease: "easeOut" }}
