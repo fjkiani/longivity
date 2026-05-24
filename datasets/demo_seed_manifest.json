@@ -1,0 +1,186 @@
+{
+  "_meta": {
+    "version": "1.0.0",
+    "created": "2026-05-23",
+    "description": "Audit trail for demo patient profiles. Every biomarker value is grounded in a published dataset reference.",
+    "ruo_notice": "Research Use Only. Synthetic data derived from published reference distributions. Not real patient data."
+  },
+  "data_sources": {
+    "NHANES": {
+      "pmid": "29676998",
+      "description": "Levine 2018 PhenoAge paper. NHANES III/IV reference distributions used for biomarker sampling.",
+      "validation": "Pearson r=0.93 (N=1000 synthetic cohort, nhanes_validation_results.csv)"
+    },
+    "LonGenity": {
+      "accession": "phs000451",
+      "description": "Ashkenazi Jewish centenarian families. APOE e4/e4 frequency and FOXO3/CETP/KLOTHO protective allele data."
+    },
+    "MESA": {
+      "pmid": "12397006",
+      "description": "Multi-Ethnic Study of Atherosclerosis. ASCVD risk calibration, ApoB/LDL reference values."
+    },
+    "InCHIANTI": {
+      "pmid": "10843354",
+      "description": "Italian aging cohort. Sarcopenia biomarker reference values (albumin, testosterone, grip strength)."
+    },
+    "BLSA": {
+      "pmid": "22451492",
+      "description": "Baltimore Longitudinal Study of Aging. Longitudinal biomarker trajectory reference."
+    },
+    "DNA_Repair_Panel": {
+      "source": "src/longivity/resources/longevity/dna_repair_gene_panel.json",
+      "description": "BRCA1/2, MLH1/2, MUTYH, ATM, CHEK2 pathways. Cancer risk layer."
+    }
+  },
+  "patients": [
+    {
+      "mrn": "DEMO-001",
+      "name": "Robert Chen",
+      "age": 58,
+      "sex": "M",
+      "condition": "Pre-diabetes progressing to Type 2 Diabetes",
+      "symptoms": "Fatigue, increased thirst, blurred vision, slow wound healing",
+      "dataset_source": "NHANES 50s reference distributions + ESC-001/002/003 escalation rules",
+      "phenoage_expected": 72.8,
+      "acceleration_expected": 14.8,
+      "hallmarks_expected": [
+        "nutrient_sensing",
+        "altered_intercellular_communication"
+      ],
+      "key_flags": [
+        "glucose 118 H",
+        "HbA1c 6.2% H",
+        "CRP 4.8 H",
+        "RDW 15.6% H",
+        "Vitamin D 18 L"
+      ],
+      "top_compound": "metformin (MR_VALIDATED, IVW p=0.002)",
+      "panels": 2,
+      "notes": "Baseline + 6-month follow-up showing improvement after metformin + berberine"
+    },
+    {
+      "mrn": "DEMO-002",
+      "name": "Elena Vasquez",
+      "age": 52,
+      "sex": "F",
+      "condition": "Alzheimer's Disease Risk \u2014 Silent (APOE e4/e4 + MTHFR compound het)",
+      "symptoms": "No current symptoms. Genetic risk window \u2014 act before cognitive decline begins.",
+      "dataset_source": "LonGenity APOE e4/e4 frequency data + MTHFR compound het from genetics panel",
+      "phenoage_expected": 33.1,
+      "acceleration_expected": -18.9,
+      "hallmarks_expected": [
+        "epigenetic_alterations",
+        "genomic_instability"
+      ],
+      "key_flags": [
+        "APOE e4/e4 (8-12x AD risk)",
+        "MTHFR compound het (50% enzyme activity)",
+        "Homocysteine 14.2 H"
+      ],
+      "top_compound": "folate/5-MTHF (MR_VALIDATED, IVW p=0.03)",
+      "panels": 1,
+      "notes": "Stress test: great labs hide dangerous genetics. Platform must surface genetic risk."
+    },
+    {
+      "mrn": "DEMO-003",
+      "name": "Marcus Webb",
+      "age": 47,
+      "sex": "M",
+      "condition": "Cardiovascular Disease \u2014 Early Subclinical",
+      "symptoms": "Occasional chest tightness on exertion. Annual physical 'normal'. No diagnosis yet.",
+      "dataset_source": "NHANES 40s reference + MESA ASCVD calibration + ESC-009 through ESC-017",
+      "phenoage_expected": 51.9,
+      "acceleration_expected": 4.9,
+      "hallmarks_expected": [
+        "altered_intercellular_communication",
+        "mitochondrial_dysfunction"
+      ],
+      "key_flags": [
+        "CRP 3.8 H",
+        "LDL 168 H",
+        "ApoB 115 H",
+        "Triglycerides 220 H",
+        "Omega-3 index 4.2% L"
+      ],
+      "top_compound": "omega_3 (MR_VALIDATED, IVW p=0.0086)",
+      "panels": 1,
+      "notes": "Multi-marker CVD pattern the annual physical missed"
+    },
+    {
+      "mrn": "DEMO-004",
+      "name": "Diana Park",
+      "age": 54,
+      "sex": "F",
+      "condition": "Cancer Risk Pattern \u2014 Genomic Instability + Chronic Inflammation",
+      "symptoms": "Unexplained fatigue, night sweats, 8lb weight loss over 3 months. BRCA2 pathogenic het.",
+      "dataset_source": "DNA repair gene panel (BRCA2/CHEK2) + biomarker_registry cancer_markers + ESC-030/033",
+      "phenoage_expected": 66.8,
+      "acceleration_expected": 12.8,
+      "hallmarks_expected": [
+        "genomic_instability",
+        "altered_intercellular_communication",
+        "cellular_senescence"
+      ],
+      "key_flags": [
+        "Ferritin 320 H",
+        "IL-6 7.8 H",
+        "CEA 4.2 H",
+        "CA-125 38 H",
+        "RDW 15.9% H",
+        "BRCA2 pathogenic het",
+        "CHEK2 rs17879961 CT (45% activity)"
+      ],
+      "top_compound": "sulforaphane (OBSERVATIONAL \u2014 NRF2/DNA repair) + vitamin_d3 (MR_VALIDATED)",
+      "panels": 2,
+      "notes": "Baseline + 6-month follow-up. Cancer risk synthesis via DNA repair panel + inflammatory biomarkers."
+    },
+    {
+      "mrn": "DEMO-005",
+      "name": "Thomas Rivera",
+      "age": 72,
+      "sex": "M",
+      "condition": "Sarcopenia + Multi-System Aging",
+      "symptoms": "Muscle weakness, falls risk, fatigue, decreased appetite. Grip strength 22kg (below threshold).",
+      "dataset_source": "InCHIANTI/BLSA sarcopenia reference values + NHANES 70s distributions",
+      "phenoage_expected": 92.4,
+      "acceleration_expected": 20.4,
+      "hallmarks_expected": [
+        "stem_cell_exhaustion",
+        "mitochondrial_dysfunction",
+        "cellular_senescence"
+      ],
+      "key_flags": [
+        "Albumin 3.4 L",
+        "Testosterone 245 L",
+        "DHEA-S 52 L",
+        "RDW 16.2% H",
+        "Vitamin D 14 L",
+        "Grip strength 22kg L"
+      ],
+      "top_compound": "urolithin_a (RCT \u2014 mitophagy) + l_carnitine (RCT)",
+      "panels": 2,
+      "notes": "Highest urgency patient. Baseline + 6-month follow-up showing partial improvement."
+    },
+    {
+      "mrn": "DEMO-006",
+      "name": "James Okafor",
+      "age": 68,
+      "sex": "M",
+      "condition": "Exceptional Aging \u2014 Centenarian Pattern",
+      "symptoms": "No symptoms. Stress test: does the system avoid false positives when everything is genuinely optimal?",
+      "dataset_source": "LonGenity centenarian biomarker ranges + longevity_prs_variants.json (FOXO3/CETP/KLOTHO)",
+      "phenoage_expected": 48.2,
+      "acceleration_expected": -19.8,
+      "hallmarks_expected": [],
+      "key_flags": [
+        "FOXO3 G/G (homozygous protective)",
+        "CETP A/A (high HDL genotype)",
+        "KLOTHO T/T (KL-VS haplotype)",
+        "All biomarkers in longevity-optimal range"
+      ],
+      "top_compound": "maintain_current_protocol",
+      "panels": 1,
+      "notes": "Should return MONITORING state with no urgent actions. Validates false-positive avoidance."
+    }
+  ]
+}
