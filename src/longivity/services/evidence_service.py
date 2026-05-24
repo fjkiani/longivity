@@ -9,7 +9,7 @@ Provides 4 high-level methods:
   - get_cancer_risk_summary(dna_repair_score, biomarkers) → cancer risk synthesis
 
 All results are cached in memory (TTL 1h) to avoid hammering PubMed.
-Falls back gracefully if PubMed/Groq unavailable.
+Falls back gracefully if PubMed/LLM unavailable.
 """
 from __future__ import annotations
 
@@ -416,8 +416,8 @@ def _fallback_response(query: str, context: dict) -> dict:
     """Return a minimal fallback when the orchestrator is unavailable."""
     return {
         "synthesis": (
-            "Evidence synthesis unavailable — PubMed/Groq service not configured. "
-            "Set NCBI_USER_EMAIL and GROQ_API_KEY environment variables to enable live literature."
+            "Evidence synthesis unavailable — PubMed/LLM service not configured. "
+            "Set NCBI_USER_EMAIL and OPENROUTER_API_KEY environment variables to enable live literature."
         ),
         "papers": [],
         "evidence_tier": "INSUFFICIENT",

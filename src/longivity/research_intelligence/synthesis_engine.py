@@ -34,11 +34,11 @@ class ResearchSynthesisEngine:
         if LLM_AVAILABLE:
             try:
                 # Use LLM abstraction layer (defaults to Cohere)
-                provider_str = os.getenv("DEFAULT_LLM_PROVIDER", LLMProvider.GROQ.value)
+                provider_str = os.getenv("DEFAULT_LLM_PROVIDER", LLMProvider.OPENROUTER.value)
                 try:
                     provider_enum = LLMProvider(provider_str.lower())
                 except ValueError:
-                    provider_enum = LLMProvider.GROQ
+                    provider_enum = LLMProvider.OPENROUTER
                 
                 self.llm_provider = get_llm_provider(provider=provider_enum)
                 if not self.llm_provider.is_available():

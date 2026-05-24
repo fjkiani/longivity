@@ -20,7 +20,7 @@ class ValueSynthesizer:
     
     def __init__(self):
         try:
-            self.llm = get_llm_provider(provider=LLMProvider.GROQ)
+            self.llm = get_llm_provider(provider=LLMProvider.OPENROUTER)
             self.llm_available = self.llm and self.llm.is_available()
         except Exception as e:
             logger.warning(f"LLM provider not available for value synthesis: {e}")

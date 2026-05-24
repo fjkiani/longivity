@@ -194,7 +194,7 @@ async def research_passthrough(
             "query": request.query,
             "synthesis": (
                 "Research intelligence service unavailable. "
-                "Set NCBI_USER_EMAIL and GROQ_API_KEY to enable."
+                "Set NCBI_USER_EMAIL and OPENROUTER_API_KEY to enable."
             ),
             "papers": [],
             "evidence_tier": "INSUFFICIENT",
