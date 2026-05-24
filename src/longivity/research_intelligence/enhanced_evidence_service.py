@@ -245,6 +245,7 @@ Rules:
                 # Deterministic confidence replaces LLM float
                 "overall_confidence": confidence_result["overall_confidence"],
                 "evidence_tier": confidence_result["evidence_tier"],
+                "clinical_phase_ceiling": confidence_result["clinical_phase_ceiling"],
                 "confidence_breakdown": confidence_result["breakdown"],
             }
         except Exception as e:
@@ -484,6 +485,7 @@ Rules:
                 # Deterministic confidence — LLM float discarded
                 "overall_confidence": confidence_result["overall_confidence"],
                 "evidence_tier": confidence_result["evidence_tier"],
+                "clinical_phase_ceiling": confidence_result["clinical_phase_ceiling"],
                 "confidence_breakdown": confidence_result["breakdown"],
                 "method": "llm_deep_research",
             }

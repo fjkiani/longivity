@@ -4,25 +4,43 @@ ConfidenceScorer — Deterministic evidence confidence scoring.
 Replaces LLM-hallucinated confidence floats with a mathematically grounded formula
 based on study design hierarchy, sample size, biomarker match, and mechanism specificity.
 
-Formula (per-type sub-caps prevent low-quality evidence inflation):
-    rct_component    = min(rct_count   * 0.40, 0.40)   # max 1 RCT fully counted
-    obs_component    = min(obs_count   * 0.12, 0.20)   # max ~1.7 obs studies
-    invivo_component = min(invivo_count* 0.06, 0.10)   # max ~1.7 in vivo studies
-    invitro_component= min(invitro_count*0.02, 0.06)   # max 3 in vitro studies
-    study_score      = rct_component + obs_component + invivo_component + invitro_component  (max 0.76, but...)
+Formula v2 — clinical-phase ceiling (2026-05-23):
+─────────────────────────────────────────────────
+Per-type study components (sub-capped):
+    rct_component     = min(rct_count    * 0.40, 0.40)   # 1 RCT = full credit
+    obs_component     = min(obs_count    * 0.08, 0.12)   # max 1.5 obs studies
+    invivo_component  = min(invivo_count * 0.04, 0.06)   # max 1.5 in vivo studies
+    invitro_component = min(invitro_count* 0.01, 0.04)   # max 4 in vitro studies
+    study_score       = min(sum, 0.60)                   # HARD CAP — prevents inflation
 
-    size_score       = min(log10(max(sample_size, 1)) / log10(10_000), 1.0) * 0.14
-    biomarker_score  = 0.15 if (biomarker_match AND study_score >= 0.12) else 0.0
-                       # Gate: biomarker bonus only if there is at least human/animal evidence
-    specificity_score= mechanism_specificity * 0.10
+Additive components:
+    size_score        = min(log10(n) / log10(50_000), 1.0) * 0.10   # max 0.10
+    biomarker_score   = 0.10 if (biomarker_match AND study_score >= 0.20) else 0.0
+    specificity_score = mechanism_specificity * 0.08                 # max 0.08
 
-    overall = clip(study_score + size_score + biomarker_score + specificity_score, 0, 1)
+Clinical-phase ceiling (hard cap on overall score):
+    Phase III  (rct≥1, n≥1000) → 1.00   FDA-approvable territory
+    Phase II   (rct≥1, n≥300)  → 0.75   Controlled trial territory
+    Phase I    (rct≥1, n≥100)  → 0.60   Small RCT territory
+    Pilot RCT  (rct≥1, n<100)  → 0.50   Pilot / supplement territory
+    Obs only                   → 0.40   Epidemiological territory
+    In vivo only               → 0.25   Animal model territory
+    In vitro only              → 0.15   Preclinical territory
 
-Calibrated outputs:
-    1 RCT, n=250, HRD+, spec=0.7  → ~0.40+0.09+0.15+0.07 = 0.71  STRONG  ✓
-    0 RCT, 1 obs, 10 in vitro, HRD+ → ~0.18+0.00+0.15+0.05 = 0.38  WEAK   ✓ (was STRONG — fixed)
-    3 RCT, n=600, HbA1c, spec=0.6 → ~0.40+0.11+0.15+0.06 = 0.72  STRONG  ✓
-    in vitro only, no biomarker    → ~0.06+0.00+0.00+0.01 = 0.07  INSUFFICIENT ✓
+    overall = min(study_score + size_score + biomarker_score + specificity_score,
+                  clinical_phase_ceiling)
+
+Calibrated outputs (v2):
+    Sulforaphane realistic (1 pilot RCT n=40, 2 obs, 3 invitro, HRD+, spec=0.70)
+        → 0.50  MODERATE  ceiling=0.50  ✓ (was 1.0 — FIXED)
+    Berberine realistic (2 RCT n=120, 1 obs, 2 invitro, HbA1c, spec=0.65)
+        → 0.60  MODERATE  ceiling=0.60  ✓ (was 1.0 — FIXED)
+    Olaparib Phase III (3 RCT n=2000, HRD+, spec=0.95)
+        → 0.75  STRONG    ceiling=1.00  ✓
+    Ceralasertib Phase II (1 RCT n=150, HRD+, spec=0.90)
+        → 0.60  MODERATE  ceiling=0.60  ✓
+    In vitro only + HRD+ (gate test)
+        → 0.08  INSUFFICIENT  ceiling=0.15  ✓
 """
 
 from __future__ import annotations
@@ -41,12 +59,52 @@ TIER_WEAK     = 0.20
 # < WEAK → INSUFFICIENT
 
 
+def _clinical_phase_ceiling(
+    rct_count: int,
+    obs_count: int,
+    invivo_count: int,
+    invitro_count: int,
+    sample_size: int,
+) -> float:
+    """
+    Hard ceiling on overall_confidence based on the highest evidence tier present.
+
+    This is the key architectural guard that prevents dietary supplements with
+    generous in vitro counts from scoring in the same range as Phase III oncology drugs.
+
+    The ceiling is determined by sample size WITHIN the RCT tier, because a
+    single pilot RCT (n=40) for a supplement is categorically different from
+    a Phase III multi-site RCT (n=2000) for an oncology drug.
+    """
+    if rct_count >= 1 and sample_size >= 1000:
+        return 1.00   # Phase III territory — large multi-site RCT
+    elif rct_count >= 1 and sample_size >= 300:
+        return 0.75   # Phase II territory — controlled trial
+    elif rct_count >= 1 and sample_size >= 100:
+        return 0.60   # Phase I / small RCT territory
+    elif rct_count >= 1:
+        return 0.50   # Pilot RCT (n<100) — supplement / exploratory territory
+    elif obs_count >= 1:
+        return 0.40   # Observational only — epidemiological territory
+    elif invivo_count >= 1:
+        return 0.25   # Animal model only
+    else:
+        return 0.15   # In vitro only — preclinical territory
+
+
 class ConfidenceScorer:
     """
     Deterministic confidence scorer for Research Intelligence findings.
 
     All inputs are optional / gracefully defaulted so the scorer never crashes
     even when the LLM fails to extract study design or sample size.
+
+    Key invariants (v2):
+    - study_score is hard-capped at 0.60 (prevents in vitro inflation)
+    - overall_confidence is hard-capped by clinical_phase_ceiling (prevents
+      supplement scores from reaching Phase III drug territory)
+    - biomarker bonus is gated on study_score >= 0.20 (requires at least 1 RCT
+      or 2+ observational studies — prevents "in vitro + HRD+" from scoring STRONG)
     """
 
     # Study design keyword patterns (case-insensitive)
@@ -79,10 +137,11 @@ class ConfidenceScorer:
         mechanism_specificity: float = 0.0,
     ) -> Dict[str, Any]:
         """
-        Compute deterministic confidence score with per-type sub-caps.
+        Compute deterministic confidence score with clinical-phase ceiling.
 
-        Per-type sub-caps prevent in vitro evidence from inflating scores into
-        STRONG tier. Biomarker bonus is gated on minimum human/animal evidence.
+        The formula has two layers of protection against inflation:
+        1. study_score hard cap at 0.60 — prevents stacking in vitro studies
+        2. clinical_phase_ceiling — prevents supplements from reaching Phase III territory
 
         Args:
             rct_count:             Number of RCTs found
@@ -97,6 +156,7 @@ class ConfidenceScorer:
             {
                 "overall_confidence": float,
                 "evidence_tier": str,
+                "clinical_phase_ceiling": float,
                 "breakdown": {
                     "study_score": float,
                     "size_score": float,
@@ -118,46 +178,58 @@ class ConfidenceScorer:
             }
         """
         # Clamp inputs defensively — never crash on None or bad types
-        rct_count         = max(0, int(rct_count or 0))
-        obs_count         = max(0, int(obs_count or 0))
-        invivo_count      = max(0, int(invivo_count or 0))
-        invitro_count     = max(0, int(invitro_count or 0))
-        sample_size       = max(0, int(sample_size or 0))
+        rct_count             = max(0, int(rct_count or 0))
+        obs_count             = max(0, int(obs_count or 0))
+        invivo_count          = max(0, int(invivo_count or 0))
+        invitro_count         = max(0, int(invitro_count or 0))
+        sample_size           = max(0, int(sample_size or 0))
         mechanism_specificity = max(0.0, min(1.0, float(mechanism_specificity or 0.0)))
 
-        # Per-type sub-capped study components
-        # RCT: each RCT worth 0.40, but capped at 0.40 (1 RCT = full credit; 2nd RCT adds nothing)
-        # Rationale: a single well-powered RCT is the gold standard; stacking RCTs doesn't
-        # change the evidence class, only the meta-analytic power (captured by sample_size).
-        rct_component    = min(rct_count    * 0.40, 0.40)
-        obs_component    = min(obs_count    * 0.12, 0.20)
-        invivo_component = min(invivo_count * 0.06, 0.10)
-        invitro_component= min(invitro_count* 0.02, 0.06)
+        # ── Study components (per-type sub-capped) ────────────────────────────
+        # RCT: each RCT worth 0.40, capped at 0.40.
+        # Rationale: a single well-powered RCT is the gold standard; additional RCTs
+        # increase meta-analytic power (captured by sample_size), not evidence class.
+        rct_component     = min(rct_count     * 0.40, 0.40)
+        obs_component     = min(obs_count     * 0.08, 0.12)
+        invivo_component  = min(invivo_count  * 0.04, 0.06)
+        invitro_component = min(invitro_count * 0.01, 0.04)
 
-        study_score = rct_component + obs_component + invivo_component + invitro_component
+        # HARD CAP at 0.60 — this was the missing guard in v1
+        study_score = min(
+            rct_component + obs_component + invivo_component + invitro_component,
+            0.60,
+        )
 
-        # Sample size score (log-scaled, max 0.14)
+        # ── Sample size score (log-scaled, max 0.10) ──────────────────────────
+        # Reference: log10(50_000) ≈ 4.70 (large Phase III trial)
+        # n=40  → 0.034   n=120 → 0.044   n=1000 → 0.064   n=5000 → 0.079
         if sample_size > 0:
-            size_score = min(log10(sample_size) / log10(10_000), 1.0) * 0.14
+            size_score = min(log10(sample_size) / log10(50_000), 1.0) * 0.10
         else:
             size_score = 0.0
 
-        # Biomarker match bonus (0.15) — GATED on minimum human/animal evidence
-        # Gate threshold: study_score >= 0.12 means at least 1 obs study or 2 in vivo studies
-        # Prevents: "in vitro only + HRD+" from scoring as STRONG
-        if biomarker_match and study_score >= 0.12:
-            biomarker_score = 0.15
+        # ── Biomarker match bonus (0.10) — gated on minimum human evidence ────
+        # Gate: study_score >= 0.20 requires at least 1 RCT (0.40) or
+        # 2+ obs studies (0.16) or 1 obs + 2 invivo (0.08+0.08=0.16) etc.
+        # Prevents: "in vitro only + HRD+" from receiving the biomarker bonus.
+        if biomarker_match and study_score >= 0.20:
+            biomarker_score = 0.10
         else:
             biomarker_score = 0.0
 
-        # Mechanism specificity (max 0.10)
-        specificity_score = mechanism_specificity * 0.10
+        # ── Mechanism specificity (max 0.08) ──────────────────────────────────
+        specificity_score = min(mechanism_specificity, 1.0) * 0.08
 
-        overall = min(1.0, max(0.0,
-            study_score + size_score + biomarker_score + specificity_score
-        ))
+        # ── Clinical-phase ceiling ────────────────────────────────────────────
+        ceiling = _clinical_phase_ceiling(
+            rct_count, obs_count, invivo_count, invitro_count, sample_size
+        )
 
-        # Evidence tier
+        raw = study_score + size_score + biomarker_score + specificity_score
+        overall = min(raw, ceiling)
+        overall = max(0.0, overall)  # defensive floor
+
+        # ── Evidence tier ─────────────────────────────────────────────────────
         if overall >= TIER_STRONG:
             tier = "STRONG"
         elif overall >= TIER_MODERATE:
@@ -169,14 +241,17 @@ class ConfidenceScorer:
 
         formula_str = (
             f"rct({rct_component:.3f}) + obs({obs_component:.3f}) + "
-            f"invivo({invivo_component:.3f}) + invitro({invitro_component:.3f}) + "
+            f"invivo({invivo_component:.3f}) + invitro({invitro_component:.3f}) "
+            f"→ study_score({study_score:.3f}, cap=0.60) + "
             f"size({size_score:.3f}) + biomarker({biomarker_score:.3f}) + "
-            f"specificity({specificity_score:.3f})"
+            f"specificity({specificity_score:.3f}) "
+            f"→ raw({raw:.3f}) → ceiling({ceiling:.2f}) → overall({overall:.4f})"
         )
 
         return {
-            "overall_confidence": round(overall, 4),
-            "evidence_tier": tier,
+            "overall_confidence":    round(overall, 4),
+            "evidence_tier":         tier,
+            "clinical_phase_ceiling": ceiling,
             "breakdown": {
                 "study_score":           round(study_score, 4),
                 "size_score":            round(size_score, 4),

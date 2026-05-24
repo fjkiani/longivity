@@ -161,6 +161,7 @@ async def research_intelligence(body: ResearchRequest) -> Dict[str, Any]:
         # Convenience top-level fields
         "overall_confidence": synthesized.get("overall_confidence"),
         "evidence_tier": synthesized.get("evidence_tier"),
+        "clinical_phase_ceiling": synthesized.get("clinical_phase_ceiling"),
         "confidence_breakdown": confidence_breakdown,
     }
 

@@ -108,16 +108,20 @@ class ResearchSynthesisEngine:
         merged["evidence_tier"] = evidence_classification["evidence_tier"]
         merged["badges"] = evidence_classification["badges"]
 
-        # [FIX] Override evidence_tier from ConfidenceScorer overall_confidence if available
-        # Ensures tier is consistent with the deterministic formula, not just heuristic pathway scores
+        # [FIX v2] Override evidence_tier from ConfidenceScorer overall_confidence if available.
+        # Uses ConfidenceScorer tier labels (STRONG/MODERATE/WEAK/INSUFFICIENT) — NOT the old
+        # heuristic labels (Supported/Consider/Insufficient) which had different thresholds.
+        # This runs AFTER _classify_evidence_tier so it always wins.
         oc = merged.get("overall_confidence")
         if oc is not None:
-            if oc >= 0.75:
-                merged["evidence_tier"] = "Supported"
-            elif oc >= 0.50:
-                merged["evidence_tier"] = "Consider"
+            if oc >= 0.70:
+                merged["evidence_tier"] = "STRONG"
+            elif oc >= 0.45:
+                merged["evidence_tier"] = "MODERATE"
+            elif oc >= 0.20:
+                merged["evidence_tier"] = "WEAK"
             else:
-                merged["evidence_tier"] = "Insufficient"
+                merged["evidence_tier"] = "INSUFFICIENT"
             # Add RCT badge if rct_count >= 1 (from confidence_breakdown)
             cb = merged.get("confidence_breakdown") or {}
             if cb.get("rct_count", 0) >= 1 and "RCT" not in merged["badges"]:
@@ -201,9 +205,10 @@ class ResearchSynthesisEngine:
                         "safety": comprehensive_synthesis.get("safety", {}),
                         "outcomes": comprehensive_synthesis.get("outcomes", []),
                         "method": "llm_deep_research",
-                        # Propagate deterministic confidence fields
+                        # Propagate deterministic confidence fields from ConfidenceScorer
                         "overall_confidence": comprehensive_synthesis.get("overall_confidence"),
                         "evidence_tier": comprehensive_synthesis.get("evidence_tier"),
+                        "clinical_phase_ceiling": comprehensive_synthesis.get("clinical_phase_ceiling"),
                         "confidence_breakdown": comprehensive_synthesis.get("confidence_breakdown"),
                     },
                     "article_summaries": comprehensive_synthesis.get("article_summaries", []),
@@ -490,6 +495,8 @@ Return JSON only:
                 merged["overall_confidence"] = llm_extraction["overall_confidence"]
             if llm_extraction.get("evidence_tier"):
                 merged["evidence_tier"] = llm_extraction["evidence_tier"]
+            if llm_extraction.get("clinical_phase_ceiling") is not None:
+                merged["clinical_phase_ceiling"] = llm_extraction["clinical_phase_ceiling"]
             if llm_extraction.get("confidence_breakdown"):
                 merged["confidence_breakdown"] = llm_extraction["confidence_breakdown"]
         else:
