@@ -224,6 +224,7 @@ Rules:
                 biomarkers=biomarkers,
             )
             # Override with LLM-extracted counts if available
+            is_fda_approved = bool(parsed.get("is_fda_approved", False))
             if any(v > 0 for v in study_counts.values()):
                 confidence_result = _scorer.score(
                     **{k: v for k, v in study_counts.items() if k != "sample_size"},
@@ -232,6 +233,7 @@ Rules:
                     mechanism_specificity=_scorer.score_mechanism_specificity(
                         mechanisms, disease, biomarkers
                     ),
+                    is_fda_approved=is_fda_approved,
                 )
 
             return {
@@ -462,6 +464,7 @@ Rules:
                     sample_size = _scorer.extract_sample_size(articles)
 
             # Deterministic confidence — replaces any LLM-returned float
+            is_fda_approved = bool(parsed.get("is_fda_approved", False))
             biomarker_match = _scorer.check_biomarker_match(mechanisms, biomarkers)
             specificity = _scorer.score_mechanism_specificity(mechanisms, disease, biomarkers)
             confidence_result = _scorer.score(
@@ -472,6 +475,7 @@ Rules:
                 sample_size=sample_size,
                 biomarker_match=biomarker_match,
                 mechanism_specificity=specificity,
+                is_fda_approved=is_fda_approved,
             )
 
             result: Dict[str, Any] = {

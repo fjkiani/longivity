@@ -123,6 +123,7 @@ def _make_llm_response(compound: str, disease: str) -> str:
                 "invitro_count": 3,
                 "total_sample_size": 40,
             },
+            "is_fda_approved": False,
             "dosage": {
                 "recommended_dose": "30-60mg sulforaphane daily (broccoli sprout extract)",
                 "evidence": "Phase II RCT used 60mg/day for 12 weeks",
@@ -181,6 +182,7 @@ def _make_llm_response(compound: str, disease: str) -> str:
                 "invitro_count": 2,
                 "total_sample_size": 120,
             },
+            "is_fda_approved": False,
             "dosage": {
                 "recommended_dose": "500mg berberine 3x daily with meals",
                 "evidence": "Meta-analysis of 3 RCTs used 500mg TID",
@@ -640,6 +642,10 @@ async def main():
              lambda r: "rct_count" in (r.get("confidence_breakdown") or {})),
             ("rct_count >= 1 (berberine has RCT evidence)",
              lambda r: (r.get("confidence_breakdown") or {}).get("rct_count", 0) >= 1),
+            ("biomarker_match is True (HbA1c=8.2 > 6.5 threshold — numeric parser fixed)",
+             lambda r: (r.get("confidence_breakdown") or {}).get("biomarker_match") == True),
+            ("biomarker_score > 0 (numeric biomarker bonus applied)",
+             lambda r: (r.get("confidence_breakdown") or {}).get("biomarker_score", 0) > 0),
             # Mechanisms
             ("synthesized_findings.mechanisms is non-empty",
              lambda r: len(r.get("synthesized_findings", {}).get("mechanisms", [])) > 0),
