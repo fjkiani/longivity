@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "longivity"
-version = "0.4.0"
-description = "Longivity — End-to-end longevity patient platform (PhenoAge + hallmarks + patient management + PDF lab import + agent test ordering) (RUO)"
+version = "0.5.0"
+description = "Longivity — End-to-end longevity patient platform with research intelligence (PhenoAge + hallmarks + patient management + PDF lab import + agent test ordering) (RUO)"
 readme = "README.md"
 requires-python = ">=3.9"
 license = { text = "Proprietary" }
