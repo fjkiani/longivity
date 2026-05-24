@@ -18,6 +18,8 @@ from .routers.assessment import router as assessment_router
 from .routers.test_orders import router as test_orders_router
 from .routers.timeline import router as timeline_router
 from .routers.intelligence import router as intelligence_router
+from .routers.demo import router as demo_router
+from .routers.evidence import router as evidence_router
 
 logger = logging.getLogger("longivity.keepalive")
 
@@ -74,9 +76,9 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(
     title="Longivity — Longevity Patient Platform",
-    version="0.4.0",
+    version="0.5.0",
     description=(
-        "End-to-end longevity clinic platform. "
+        "End-to-end longevity clinic platform with research intelligence. "
         "Patient management, biomarker tracking, PDF lab import, "
         "PhenoAge assessment, MR-validated compound recommendations, "
         "N-of-1 trial protocols, and agent-driven test ordering. (RUO)"
@@ -114,13 +116,15 @@ app.include_router(assessment_router)
 app.include_router(test_orders_router)
 app.include_router(timeline_router)
 app.include_router(intelligence_router)
+app.include_router(demo_router)
+app.include_router(evidence_router)
 
 
 @app.get("/", tags=["root"])
 async def root():
     return {
         "service": "Longivity Patient Platform",
-        "version": "0.4.0",
+        "version": "0.5.0",
         "docs": "/docs",
         "redoc": "/redoc",
         "endpoints": {
@@ -147,6 +151,16 @@ async def root():
                 "GET  /api/v1/registry/metadata",
             ],
             "timeline": ["/api/v1/patients/{id}/timeline"],
+            "demo": [
+                "GET  /api/v1/demo/status",
+                "POST /api/v1/demo/reset",
+            ],
+            "evidence": [
+                "GET /api/v1/patients/{id}/evidence/compound/{compound_id}",
+                "GET /api/v1/patients/{id}/evidence/hallmark/{hallmark}",
+                "GET /api/v1/patients/{id}/evidence/cancer-risk",
+                "POST /api/v1/research-intelligence/research",
+            ],
             "intelligence": [
                 "GET /api/v1/patients/{id}/intelligence",
                 "GET /api/v1/clinic/intelligence",
