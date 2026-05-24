@@ -571,3 +571,129 @@ export const registryApi = {
   /** Get registry metadata. */
   getMetadata: () => request<any>("/api/v1/registry/metadata"),
 };
+
+// ── Demo API ──────────────────────────────────────────────────────────────────
+
+export interface DemoPatientSummary {
+  mrn: string;
+  name: string;
+  age: number | null;
+  sex: string | null;
+  condition: string;
+}
+
+export interface DemoStatus {
+  seeded: boolean;
+  message?: string;
+  seeded_at?: string | null;
+  credentials?: {
+    email: string;
+    password: string;
+    note: string;
+  } | null;
+  clinic?: string;
+  patient_count?: number;
+  patients?: DemoPatientSummary[];
+  data_sources?: string[];
+}
+
+export const demoApi = {
+  getStatus: async (): Promise<DemoStatus> => {
+    const res = await fetch(`${BASE}/api/v1/demo/status`);
+    if (!res.ok) throw new Error(`Demo status failed: ${res.status}`);
+    return res.json();
+  },
+};
+
+// ── Evidence API ──────────────────────────────────────────────────────────────
+
+export interface EvidencePaper {
+  pmid?: string;
+  title?: string;
+  year?: number;
+  study_type?: string;
+  journal?: string;
+}
+
+export interface CompoundEvidence {
+  compound: string;
+  hallmark: string;
+  evidence_tier: string;
+  summary: string;
+  papers: EvidencePaper[];
+  confidence: number;
+  cached: boolean;
+  fallback?: boolean;
+}
+
+export interface HallmarkNarrative {
+  hallmark: string;
+  headline: string;
+  narrative: string;
+  key_biomarkers: string[];
+  citations: string[];
+  evidence_tier: string;
+  cached: boolean;
+}
+
+export interface CancerRiskSummary {
+  overall_risk_tier: "HIGH" | "MODERATE" | "LOW" | "UNKNOWN";
+  genomic_instability_score: number | null;
+  inflammatory_burden_score: number | null;
+  synthesis: string;
+  recommended_surveillance: string[];
+  citations: string[];
+  evidence_tier: string;
+  message?: string;
+}
+
+function authHeaders(): Record<string, string> {
+  const token = typeof window !== "undefined" ? localStorage.getItem("longivity_token") : null;
+  return token ? { Authorization: `Bearer ${token}` } : {};
+}
+
+export const evidenceApi = {
+  getCompoundEvidence: async (
+    patientId: string,
+    compoundId: string,
+    hallmark = "longevity"
+  ): Promise<CompoundEvidence> => {
+    const res = await fetch(
+      `${BASE}/api/v1/patients/${patientId}/evidence/compound/${compoundId}?hallmark=${hallmark}`,
+      { headers: authHeaders() }
+    );
+    if (!res.ok) throw new Error(`Evidence fetch failed: ${res.status}`);
+    return res.json();
+  },
+
+  getHallmarkNarrative: async (
+    patientId: string,
+    hallmark: string
+  ): Promise<HallmarkNarrative> => {
+    const res = await fetch(
+      `${BASE}/api/v1/patients/${patientId}/evidence/hallmark/${hallmark}`,
+      { headers: authHeaders() }
+    );
+    if (!res.ok) throw new Error(`Hallmark evidence failed: ${res.status}`);
+    return res.json();
+  },
+
+  getCancerRisk: async (patientId: string): Promise<CancerRiskSummary> => {
+    const res = await fetch(
+      `${BASE}/api/v1/patients/${patientId}/evidence/cancer-risk`,
+      { headers: authHeaders() }
+    );
+    if (!res.ok) throw new Error(`Cancer risk fetch failed: ${res.status}`);
+    return res.json();
+  },
+
+  research: async (query: string, context?: Record<string, unknown>) => {
+    const res = await fetch(`${BASE}/api/v1/research-intelligence/research`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", ...authHeaders() },
+      body: JSON.stringify({ query, context }),
+    });
+    if (!res.ok) throw new Error(`Research failed: ${res.status}`);
+    return res.json();
+  },
+};

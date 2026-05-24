@@ -66,8 +66,8 @@ export default function DemoPage() {
             <a href="/how-it-works" className="text-sm font-bold text-gray-700 hover:text-gray-900 border border-gray-300 rounded-xl px-4 py-2.5 transition-colors hover:bg-white">
               How It Works →
             </a>
-            <a href="/login" className="text-sm font-bold text-white bg-gray-900 hover:bg-black rounded-xl px-4 py-2.5 transition-colors">
-              Enter Dashboard →
+            <a href="/demo-login" className="text-sm font-bold text-white bg-gray-900 hover:bg-black rounded-xl px-4 py-2.5 transition-colors">
+              Try Live System →
             </a>
           </div>
         </div>
