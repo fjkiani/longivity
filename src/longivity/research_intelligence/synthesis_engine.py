@@ -52,7 +52,8 @@ class ResearchSynthesisEngine:
         self,
         portal_results: Dict[str, Any],
         parsed_content: Dict[str, Any],
-        research_plan: Dict[str, Any]
+        research_plan: Dict[str, Any],
+        context: Optional[Dict[str, Any]] = None,
     ) -> Dict[str, Any]:
         """
         Synthesize findings using LLM deep research + generic LLM.
@@ -76,7 +77,8 @@ class ResearchSynthesisEngine:
         comprehensive_result = await self._comprehensive_llm_extraction(
             portal_results,
             parsed_content,
-            research_plan
+            research_plan,
+            context=context,
         )
         
         # Step 2: Combine with generic LLM synthesis (fallback if comprehensive extraction fails)
@@ -105,14 +107,32 @@ class ResearchSynthesisEngine:
         )
         merged["evidence_tier"] = evidence_classification["evidence_tier"]
         merged["badges"] = evidence_classification["badges"]
-        
+
+        # [FIX] Override evidence_tier from ConfidenceScorer overall_confidence if available
+        # Ensures tier is consistent with the deterministic formula, not just heuristic pathway scores
+        oc = merged.get("overall_confidence")
+        if oc is not None:
+            if oc >= 0.75:
+                merged["evidence_tier"] = "Supported"
+            elif oc >= 0.50:
+                merged["evidence_tier"] = "Consider"
+            else:
+                merged["evidence_tier"] = "Insufficient"
+            # Add RCT badge if rct_count >= 1 (from confidence_breakdown)
+            cb = merged.get("confidence_breakdown") or {}
+            if cb.get("rct_count", 0) >= 1 and "RCT" not in merged["badges"]:
+                merged["badges"].append("RCT")
+            if cb.get("biomarker_match") and "Biomarker-Matched" not in merged["badges"]:
+                merged["badges"].append("Biomarker-Matched")
+
         return merged
     
     async def _comprehensive_llm_extraction(
         self,
         portal_results: Dict[str, Any],
         parsed_content: Dict[str, Any],
-        research_plan: Dict[str, Any]
+        research_plan: Dict[str, Any],
+        context: Optional[Dict[str, Any]] = None,
     ) -> Dict[str, Any]:
         """
         OPTIMIZED: ONE comprehensive LLM call that handles:
@@ -169,7 +189,8 @@ class ResearchSynthesisEngine:
                 disease=disease,
                 papers_text=papers_text,
                 articles=articles,  # Pass articles for per-article summaries
-                sub_questions=sub_questions  # Pass sub-questions for batch answering
+                sub_questions=sub_questions,  # Pass sub-questions for batch answering
+                context=context,  # Disease-context-aware prompt
             )
             
             if comprehensive_synthesis:
@@ -179,7 +200,11 @@ class ResearchSynthesisEngine:
                         "dosage": comprehensive_synthesis.get("dosage", {}),
                         "safety": comprehensive_synthesis.get("safety", {}),
                         "outcomes": comprehensive_synthesis.get("outcomes", []),
-                        "method": "llm_deep_research"
+                        "method": "llm_deep_research",
+                        # Propagate deterministic confidence fields
+                        "overall_confidence": comprehensive_synthesis.get("overall_confidence"),
+                        "evidence_tier": comprehensive_synthesis.get("evidence_tier"),
+                        "confidence_breakdown": comprehensive_synthesis.get("confidence_breakdown"),
                     },
                     "article_summaries": comprehensive_synthesis.get("article_summaries", []),
                     "sub_question_answers": comprehensive_synthesis.get("sub_question_answers", [])
@@ -435,15 +460,20 @@ Return JSON only:
                             "source": "llm"
                         })
                 
-                # Combine with generic mechanisms (deduplicate)
-                existing_mechs = {m.get("mechanism", "") if isinstance(m, dict) else str(m): m for m in merged.get("mechanisms", [])}
-                for llm_mech in llm_mechs:
-                    mech_name = llm_mech.get("mechanism", "") if isinstance(llm_mech, dict) else str(llm_mech)
-                    if mech_name and mech_name not in existing_mechs:
-                        existing_mechs[mech_name] = llm_mech
-                
-                # Use LLM mechanisms as primary, add generic as supplement
-                merged["mechanisms"] = list(existing_mechs.values())
+                # LLM mechanisms are PRIMARY — start from LLM set, supplement with generic
+                # (not the other way around: generic base + LLM append puts generic first)
+                llm_mech_names = {
+                    m.get("mechanism", "") if isinstance(m, dict) else str(m)
+                    for m in llm_mechs
+                }
+                # Only add generic mechanisms not already covered by LLM
+                generic_mechs = merged.get("mechanisms", [])
+                for gen_mech in generic_mechs:
+                    gen_name = gen_mech.get("mechanism", "") if isinstance(gen_mech, dict) else str(gen_mech)
+                    if gen_name and gen_name not in llm_mech_names:
+                        llm_mechs.append(gen_mech)
+                # LLM mechanisms lead; generic supplements trail
+                merged["mechanisms"] = llm_mechs
             elif merged.get("mechanisms"):
                 # LLM failed but generic has mechanisms - keep generic
                 pass
@@ -455,6 +485,13 @@ Return JSON only:
                 merged["safety"] = llm_extraction["safety"]
             if llm_extraction.get("outcomes"):
                 merged["outcomes"] = llm_extraction["outcomes"]
+            # Propagate deterministic confidence fields from ConfidenceScorer
+            if llm_extraction.get("overall_confidence") is not None:
+                merged["overall_confidence"] = llm_extraction["overall_confidence"]
+            if llm_extraction.get("evidence_tier"):
+                merged["evidence_tier"] = llm_extraction["evidence_tier"]
+            if llm_extraction.get("confidence_breakdown"):
+                merged["confidence_breakdown"] = llm_extraction["confidence_breakdown"]
         else:
             merged["method"] = generic_synthesis.get("method", "generic_llm_synthesis")
         

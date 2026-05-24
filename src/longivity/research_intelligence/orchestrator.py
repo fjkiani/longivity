@@ -146,7 +146,8 @@ class ResearchIntelligenceOrchestrator:
         synthesized_findings = await self.synthesis_engine.synthesize_findings(
             portal_results,
             parsed_content,
-            research_plan
+            research_plan,
+            context=context,  # Pass patient context for disease-aware LLM prompt
         )
         if synthesized_findings.get("method") == "llm_deep_research":
             methods_used.append("llm_deep_research")
