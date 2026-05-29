@@ -5,7 +5,7 @@ import PlatformSteps from "@/components/homepage/PlatformSteps";
 import ScienceSection from "@/components/homepage/ScienceSection";
 
 export const metadata = {
-  title: "Longivity — Clinical Intelligence for Longevity Medicine",
+  title: "Longevity — Clinical Intelligence for Longevity Medicine",
   description: "One ranked clinical action per patient. PhenoAge acceleration, hallmark scoring, and a deterministic state machine — built for longevity clinicians.",
 };
 
@@ -37,7 +37,7 @@ export default function LandingPage() {
 
           <FadeIn delay={0.16}>
             <Lead className="max-w-3xl mx-auto mb-12">
-              Longivity normalizes your lab inputs, computes{" "}
+              Longevity normalizes your lab inputs, computes{" "}
               <Highlight color="emerald">PhenoAge acceleration</Highlight>, scores{" "}
               <Highlight color="violet">6 hallmarks of aging</Highlight>, detects missing markers,
               routes the patient through a deterministic state machine, and returns{" "}
@@ -181,7 +181,7 @@ export default function LandingPage() {
               Built for Clinicians Who Want to Reason Faster, Not Harder.
             </h2>
             <p className="text-lg text-gray-700 font-medium max-w-3xl mx-auto mb-12 leading-relaxed">
-              Longivity does not replace clinical judgment. It eliminates the 20 minutes of manual cross-referencing before you can exercise it.
+              Longevity does not replace clinical judgment. It eliminates the 20 minutes of manual cross-referencing before you can exercise it.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link

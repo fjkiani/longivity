@@ -8,8 +8,8 @@ import ActionScorer from "@/components/how-it-works/ActionScorer";
 import BenchmarkPanel from "@/components/demo/BenchmarkPanel";
 
 export const metadata = {
-  title: "How It Works — Longivity",
-  description: "Six interactive demos showing exactly how Longivity converts biomarker inputs into ranked clinical actions.",
+  title: "How It Works — Longevity",
+  description: "Six interactive demos showing exactly how Longevity converts biomarker inputs into ranked clinical actions.",
 };
 
 function StepBadge({ n, color }: { n: number; color: string }) {

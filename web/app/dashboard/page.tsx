@@ -96,7 +96,7 @@ export default function DashboardPage() {
   // Stats
   const withLabs = patients.filter((p) => p.panel_count > 0).length;
   const accelerated = Object.values(intelligence).filter(
-    (i) => (i.phenoage_result?.acceleration ?? 0) > 5
+    (i) => (i.biological_summary?.age_acceleration ?? 0) > 5
   ).length;
   const recentLabs = patients.filter((p) => {
     if (!p.latest_panel_date) return false;
@@ -197,8 +197,8 @@ export default function DashboardPage() {
                   <tbody>
                     {filtered.map((p) => {
                       const intel = intelligence[p.id];
-                      const accel = intel?.phenoage_result?.acceleration;
-                      const state = intel?.state;
+                      const accel = intel?.biological_summary?.age_acceleration;
+                      const state = intel?.current_state;
                       const sl = stateLabel(state);
                       const condition = conditionHeadline(p.notes);
 

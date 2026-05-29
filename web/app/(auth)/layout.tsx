@@ -28,7 +28,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           </div>
         </div>
 
-        {/* Right: Longivity branded panel */}
+        {/* Right: Longevity branded panel */}
         <div className="relative my-6 mr-6 hidden w-[540px] shrink-0 overflow-hidden rounded-2xl lg:block bg-gray-900">
           <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-900 to-emerald-950" />
           <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-600/10 blur-3xl rounded-full" />
@@ -46,7 +46,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
                 <span className="text-emerald-400">Your Patients Deserve.</span>
               </h2>
               <p className="text-gray-400 font-medium mb-10 leading-relaxed">
-                Longivity turns 315 biomarkers into one ranked clinical action. PhenoAge acceleration. Hallmark scoring. Deterministic state machine. No guessing.
+                Longevity turns 315 biomarkers into one ranked clinical action. PhenoAge acceleration. Hallmark scoring. Deterministic state machine. No guessing.
               </p>
 
               <div className="grid grid-cols-2 gap-4 mb-10">
@@ -94,7 +94,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
                 ))}
               </div>
               <p className="text-gray-300 font-medium leading-relaxed mb-4 text-sm">
-                &ldquo;Before Longivity, I was spending 20 minutes per patient cross-referencing PhenoAge calculators, hallmark literature, and escalation rules. Now I open the dashboard and the next action is already ranked. The science is the same — the time is not.&rdquo;
+                &ldquo;Before Longevity, I was spending 20 minutes per patient cross-referencing PhenoAge calculators, hallmark literature, and escalation rules. Now I open the dashboard and the next action is already ranked. The science is the same — the time is not.&rdquo;
               </p>
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-white font-black text-sm">JP</div>

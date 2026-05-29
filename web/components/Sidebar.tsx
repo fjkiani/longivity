@@ -27,7 +27,7 @@ export default function Sidebar() {
           <div className="w-7 h-7 bg-green-600 rounded-md flex items-center justify-center">
             <span className="text-white font-bold text-xs">L</span>
           </div>
-          <span className="font-semibold text-gray-900 text-sm">Longivity</span>
+          <span className="font-semibold text-gray-900 text-sm">Longevity</span>
         </div>
         <p className="text-xs text-gray-400 mt-0.5 ml-9">Longevity Platform</p>
       </div>

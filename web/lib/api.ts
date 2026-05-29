@@ -1,5 +1,5 @@
 /**
- * API client — typed wrappers around the Longivity FastAPI backend.
+ * API client — typed wrappers around the Longevity FastAPI backend.
  */
 
 const BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";

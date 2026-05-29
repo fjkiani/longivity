@@ -54,7 +54,7 @@ export default function LoginPage() {
         </h1>
         <p className="text-sm text-gray-500 font-medium">
           {mode === "login"
-            ? "Sign in to your Longivity clinic dashboard."
+            ? "Sign in to your Longevity clinic dashboard."
             : "Start your longevity practice intelligence layer."}
         </p>
       </div>

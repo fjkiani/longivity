@@ -2,8 +2,8 @@ import DemoRunner from "@/components/demo/DemoRunner";
 import { SCENARIOS } from "@/components/demo/scenarios";
 
 export const metadata = {
-  title: "Demo — Longivity",
-  description: "Five patient scenarios. Real API output. One ranked action per patient. See how Longivity works for longevity clinicians.",
+  title: "Demo — Longevity",
+  description: "Five patient scenarios. Real API output. One ranked action per patient. See how Longevity works for longevity clinicians.",
 };
 
 export default function DemoPage() {
@@ -73,7 +73,7 @@ export default function DemoPage() {
         </div>
         <div className="max-w-6xl mx-auto mt-6">
           <p className="text-xs text-gray-500">
-            Research Use Only (RUO). Longivity is not a medical device. PhenoAge acceleration labels are CrisPRO UX thresholds, not PhenoAge classifications. Do not use for clinical decisions without a qualified clinician.
+            Research Use Only (RUO). Longevity is not a medical device. PhenoAge acceleration labels are CrisPRO UX thresholds, not PhenoAge classifications. Do not use for clinical decisions without a qualified clinician.
           </p>
         </div>
       </section>

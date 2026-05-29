@@ -11,7 +11,7 @@ export default function Footer({ border = false }: { border?: boolean }) {
             <p className="text-sm text-gray-500 leading-relaxed">
               Clinical intelligence for longevity medicine. One decision per patient, every time.
             </p>
-            <p className="text-xs text-gray-400">© 2026 Longivity. All rights reserved.</p>
+            <p className="text-xs text-gray-400">© Built by JediLabs.org.</p>
           </div>
           <div className="space-y-3">
             <h3 className="text-sm font-semibold text-gray-900">Platform</h3>
@@ -25,7 +25,7 @@ export default function Footer({ border = false }: { border?: boolean }) {
             <h3 className="text-sm font-semibold text-gray-900">Company</h3>
             <ul className="space-y-2 text-sm">
               <li><Link href="/about" className="text-gray-500 hover:text-gray-900 transition-colors">About</Link></li>
-              <li><a href="mailto:hello@longivity.com" className="text-gray-500 hover:text-gray-900 transition-colors">Contact</a></li>
+              <li><a href="mailto:jedi@jedilabs.org" className="text-gray-500 hover:text-gray-900 transition-colors">Contact</a></li>
             </ul>
           </div>
           <div className="space-y-3">
@@ -38,7 +38,7 @@ export default function Footer({ border = false }: { border?: boolean }) {
         </div>
         <div className="mt-10 pt-6 border-t border-gray-100">
           <p className="text-xs text-gray-400 text-center">
-            Research Use Only (RUO). Longivity is not a medical device and is not intended for clinical diagnosis, treatment, or prevention of disease.
+            Research Use Only (RUO). Longevity is not a medical device and is not intended for clinical diagnosis, treatment, or prevention of disease.
           </p>
         </div>
       </div>

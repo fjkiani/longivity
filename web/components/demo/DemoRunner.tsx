@@ -103,7 +103,7 @@ export default function DemoRunner({ scenarios }: DemoRunnerProps) {
 
           <div className="flex items-center gap-2 text-xs text-gray-400 px-1">
             <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0 animate-pulse" />
-            <span>Output from <span className="font-mono text-gray-500">longivity-backend.onrender.com</span> · 2026-05-17</span>
+            <span>Output from <span className="font-mono text-gray-500">longevity-backend.onrender.com</span> · 2026-05-17</span>
           </div>
         </div>
 

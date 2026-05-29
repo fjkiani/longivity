@@ -9,7 +9,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Longivity — Clinical Intelligence for Longevity Medicine",
+  title: "Longevity — Clinical Intelligence for Longevity Medicine",
   description: "One ranked clinical action per patient. PhenoAge acceleration, hallmark scoring, and a deterministic state machine — built for longevity clinicians.",
 };
 
