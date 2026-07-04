@@ -1,0 +1,484 @@
+{
+  "generated_at": "2026-07-04",
+  "total": 30,
+  "clinics": [
+    {
+      "rank": 1,
+      "name": "Fountain Life",
+      "city": "Naples, FL",
+      "website": "https://fountainlife.com",
+      "linkedin": "https://www.linkedin.com/company/fountain-life",
+      "focus": "Full-body diagnostics, longevity optimization",
+      "target_customer": "concierge/enterprise",
+      "signals": [
+        "biomarker_practice",
+        "active_hiring",
+        "no_ai_clinical_decision"
+      ],
+      "score": 3,
+      "decision_maker_title": "Chief Medical Officer",
+      "notes": "Peter Diamandis co-founder. Heavy diagnostics (MRI, DEXA, bloodwork) but no AI clinical decision layer. Actively hiring longevity physicians. ~$25K/yr membership."
+    },
+    {
+      "rank": 2,
+      "name": "Human Longevity Inc.",
+      "city": "San Diego, CA",
+      "website": "https://humanlongevity.com",
+      "linkedin": "https://www.linkedin.com/company/human-longevity-inc-",
+      "focus": "Genomics + whole-body MRI + biomarker panels",
+      "target_customer": "concierge/enterprise",
+      "signals": [
+        "biomarker_practice",
+        "active_hiring",
+        "no_ai_clinical_decision"
+      ],
+      "score": 3,
+      "decision_maker_title": "Chief Medical Officer",
+      "notes": "Craig Venter founded. Genomics-heavy but no longitudinal AI engine for compound protocols. Hiring data scientists. ~$25K Health Nucleus program."
+    },
+    {
+      "rank": 3,
+      "name": "Cleveland Clinic Center for Functional Medicine",
+      "city": "Cleveland, OH",
+      "website": "https://my.clevelandclinic.org/departments/functional-medicine",
+      "linkedin": "https://www.linkedin.com/company/cleveland-clinic",
+      "focus": "Functional medicine, root-cause biomarker analysis",
+      "target_customer": "health_system",
+      "signals": [
+        "biomarker_practice",
+        "active_hiring",
+        "no_ai_clinical_decision"
+      ],
+      "score": 3,
+      "decision_maker_title": "Director, Center for Functional Medicine",
+      "notes": "Mark Hyman MD founded. 10,000+ patients/yr. No AI longevity engine. Actively expanding. High-volume biomarker ordering \u2014 perfect fit for PhenoAge + hallmark scoring."
+    },
+    {
+      "rank": 4,
+      "name": "Lifespan.io / Lifespan Medicine",
+      "city": "Los Angeles, CA",
+      "website": "https://www.lifespanmedicine.com",
+      "linkedin": "https://www.linkedin.com/company/lifespan-medicine",
+      "focus": "Longevity medicine, biological age testing",
+      "target_customer": "clinic",
+      "signals": [
+        "biomarker_practice",
+        "active_hiring",
+        "no_ai_clinical_decision"
+      ],
+      "score": 3,
+      "decision_maker_title": "Medical Director",
+      "notes": "Dedicated longevity clinic. Uses biological age testing but no AI decision support layer. Publicly advocates for PhenoAge-style metrics. Strong fit."
+    },
+    {
+      "rank": 5,
+      "name": "Parsley Health",
+      "city": "New York, NY (+ remote)",
+      "website": "https://www.parsleyhealth.com",
+      "linkedin": "https://www.linkedin.com/company/parsley-health",
+      "focus": "Functional medicine, root-cause chronic disease",
+      "target_customer": "clinic/enterprise",
+      "signals": [
+        "biomarker_practice",
+        "active_hiring",
+        "no_ai_clinical_decision"
+      ],
+      "score": 3,
+      "decision_maker_title": "Chief Medical Officer",
+      "notes": "Robin Berzin MD CEO. 50K+ members. Heavy biomarker ordering, no AI longevity engine. Raised $26M Series B. Actively hiring. High-volume = high ROI for Longivity."
+    },
+    {
+      "rank": 6,
+      "name": "Wild Health",
+      "city": "Lexington, KY (remote-first)",
+      "website": "https://www.wildhealth.com",
+      "linkedin": "https://www.linkedin.com/company/wild-health",
+      "focus": "Precision medicine, genomics + biomarkers",
+      "target_customer": "clinic/enterprise",
+      "signals": [
+        "biomarker_practice",
+        "active_hiring",
+        "no_ai_clinical_decision"
+      ],
+      "score": 3,
+      "decision_maker_title": "Chief Medical Officer",
+      "notes": "Matt Dawson MD CEO. Genomics + biomarker-driven. No AI longevity engine. Raised $9M. Remote-first = scalable. Strong genomics overlap with Longivity APOE/MTHFR layer."
+    },
+    {
+      "rank": 7,
+      "name": "Sollis Health",
+      "city": "New York, NY / Los Angeles, CA",
+      "website": "https://www.sollishealth.com",
+      "linkedin": "https://www.linkedin.com/company/sollis-health",
+      "focus": "Concierge primary care + longevity",
+      "target_customer": "concierge",
+      "signals": [
+        "biomarker_practice",
+        "active_hiring",
+        "no_ai_clinical_decision"
+      ],
+      "score": 3,
+      "decision_maker_title": "Chief Medical Officer",
+      "notes": "High-end concierge. $3,500/yr membership. Expanding longevity services. No AI clinical decision layer. Backed by General Atlantic."
+    },
+    {
+      "rank": 8,
+      "name": "Cenegenics",
+      "city": "Las Vegas, NV (national)",
+      "website": "https://www.cenegenics.com",
+      "linkedin": "https://www.linkedin.com/company/cenegenics",
+      "focus": "Age management medicine, hormone optimization",
+      "target_customer": "clinic/franchise",
+      "signals": [
+        "biomarker_practice",
+        "active_hiring",
+        "no_ai_clinical_decision"
+      ],
+      "score": 3,
+      "decision_maker_title": "Chief Medical Officer",
+      "notes": "30+ locations. Heavy biomarker + hormone panels. No AI longevity engine. Franchise model = platform sale opportunity. ~$5K initial assessment."
+    },
+    {
+      "rank": 9,
+      "name": "Superpower",
+      "city": "San Francisco, CA",
+      "website": "https://www.superpower.com",
+      "linkedin": "https://www.linkedin.com/company/superpower-health",
+      "focus": "Consumer biomarker tracking + longevity",
+      "target_customer": "consumer/clinic",
+      "signals": [
+        "biomarker_practice",
+        "no_ai_clinical_decision"
+      ],
+      "score": 2,
+      "decision_maker_title": "CEO / Co-founder",
+      "notes": "Consumer-facing. No clinical decision support. $99/mo. Could white-label Longivity's AI layer. Raised $30M."
+    },
+    {
+      "rank": 10,
+      "name": "Marek Health",
+      "city": "Dallas, TX (remote)",
+      "website": "https://marekhealth.com",
+      "linkedin": "https://www.linkedin.com/company/marek-health",
+      "focus": "Hormone optimization, performance medicine",
+      "target_customer": "clinic",
+      "signals": [
+        "biomarker_practice",
+        "no_ai_clinical_decision"
+      ],
+      "score": 2,
+      "decision_maker_title": "Medical Director",
+      "notes": "Derek MPMD community. Heavy testosterone/hormone panels. No AI longevity engine. Large online following = distribution. Remote-first."
+    },
+    {
+      "rank": 11,
+      "name": "Hone Health",
+      "city": "New York, NY (remote)",
+      "website": "https://www.honehealth.com",
+      "linkedin": "https://www.linkedin.com/company/hone-health",
+      "focus": "Hormone optimization, men's health",
+      "target_customer": "clinic",
+      "signals": [
+        "biomarker_practice",
+        "no_ai_clinical_decision"
+      ],
+      "score": 2,
+      "decision_maker_title": "Chief Medical Officer",
+      "notes": "Telehealth hormone clinic. Raised $50M. Heavy lab ordering. No AI longevity engine. High patient volume."
+    },
+    {
+      "rank": 12,
+      "name": "Tally Health",
+      "city": "New York, NY",
+      "website": "https://www.tallyhealth.com",
+      "linkedin": "https://www.linkedin.com/company/tally-health",
+      "focus": "Biological age testing + longevity coaching",
+      "target_customer": "consumer/clinic",
+      "signals": [
+        "biomarker_practice",
+        "no_ai_clinical_decision"
+      ],
+      "score": 2,
+      "decision_maker_title": "CEO / Co-founder",
+      "notes": "David Sinclair co-founded. Epigenetic age testing. No clinical decision support. Could integrate Longivity's hallmark scoring layer."
+    },
+    {
+      "rank": 13,
+      "name": "Ora Biomedical",
+      "city": "Seattle, WA",
+      "website": "https://www.orabiomedical.com",
+      "linkedin": "https://www.linkedin.com/company/ora-biomedical",
+      "focus": "Longevity drug trials, N-of-1 research",
+      "target_customer": "research/clinic",
+      "signals": [
+        "biomarker_practice",
+        "active_hiring"
+      ],
+      "score": 2,
+      "decision_maker_title": "CEO / Co-founder",
+      "notes": "WormBot N-of-1 trial platform. Directly aligned with Longivity's N-of-1 trial engine. Research-to-clinic bridge opportunity."
+    },
+    {
+      "rank": 14,
+      "name": "Longevity Lab (Dr. Peter Attia's practice)",
+      "city": "Austin, TX",
+      "website": "https://peterattiamd.com",
+      "linkedin": "https://www.linkedin.com/in/peterattiamd",
+      "focus": "Longevity medicine, performance optimization",
+      "target_customer": "concierge",
+      "signals": [
+        "biomarker_practice",
+        "no_ai_clinical_decision"
+      ],
+      "score": 2,
+      "decision_maker_title": "Founder / Medical Director",
+      "notes": "Peter Attia MD. Highly influential. Heavy biomarker + wearable integration. No AI clinical decision layer. Endorsement = massive distribution."
+    },
+    {
+      "rank": 15,
+      "name": "Biohm Health / Biohm Longevity",
+      "city": "Cleveland, OH",
+      "website": "https://biohmhealth.com",
+      "linkedin": "https://www.linkedin.com/company/biohm-health",
+      "focus": "Microbiome + longevity",
+      "target_customer": "consumer/clinic",
+      "signals": [
+        "biomarker_practice",
+        "no_ai_clinical_decision"
+      ],
+      "score": 2,
+      "decision_maker_title": "CEO / Co-founder",
+      "notes": "Microbiome testing + supplements. No AI longevity engine. Microbiome diversity is a Longivity wearable hallmark signal."
+    },
+    {
+      "rank": 16,
+      "name": "Prenuvo",
+      "city": "Vancouver, BC / US expansion",
+      "website": "https://www.prenuvo.com",
+      "linkedin": "https://www.linkedin.com/company/prenuvo",
+      "focus": "Full-body MRI screening",
+      "target_customer": "clinic/consumer",
+      "signals": [
+        "active_hiring",
+        "no_ai_clinical_decision"
+      ],
+      "score": 2,
+      "decision_maker_title": "Chief Medical Officer",
+      "notes": "Full-body MRI. No biomarker AI layer. Raised $70M. Expanding US locations. Complementary to Longivity \u2014 imaging + biomarker AI bundle."
+    },
+    {
+      "rank": 17,
+      "name": "Neko Health",
+      "city": "Stockholm, Sweden / US expansion",
+      "website": "https://www.nekohealth.com",
+      "linkedin": "https://www.linkedin.com/company/neko-health",
+      "focus": "Full-body health scan + biomarkers",
+      "target_customer": "clinic/consumer",
+      "signals": [
+        "active_hiring",
+        "no_ai_clinical_decision"
+      ],
+      "score": 2,
+      "decision_maker_title": "CEO / Co-founder",
+      "notes": "Spotify founders. Full-body scan. No AI longevity engine. Raised $65M. US expansion = partnership opportunity."
+    },
+    {
+      "rank": 18,
+      "name": "Elysium Health",
+      "city": "New York, NY",
+      "website": "https://www.elysiumhealth.com",
+      "linkedin": "https://www.linkedin.com/company/elysium-health",
+      "focus": "Biological age testing + supplements",
+      "target_customer": "consumer/clinic",
+      "signals": [
+        "biomarker_practice",
+        "no_ai_clinical_decision"
+      ],
+      "score": 2,
+      "decision_maker_title": "CEO / Co-founder",
+      "notes": "Index biological age test. No clinical decision support. Could integrate Longivity's hallmark scoring as clinical layer on top of their testing."
+    },
+    {
+      "rank": 19,
+      "name": "Dossier Health",
+      "city": "San Francisco, CA",
+      "website": "https://www.dossierhealth.com",
+      "linkedin": "https://www.linkedin.com/company/dossier-health",
+      "focus": "Longevity report generation",
+      "target_customer": "clinic",
+      "signals": [
+        "biomarker_practice",
+        "no_ai_clinical_decision"
+      ],
+      "score": 2,
+      "decision_maker_title": "CEO / Co-founder",
+      "notes": "Report generation only. No real-time assessment engine. No N-of-1 trial engine. Direct competitor but weaker on AI depth."
+    },
+    {
+      "rank": 20,
+      "name": "Arivale (legacy) / Viome",
+      "city": "Bellevue, WA",
+      "website": "https://www.viome.com",
+      "linkedin": "https://www.linkedin.com/company/viome",
+      "focus": "Microbiome + multi-omics",
+      "target_customer": "consumer/clinic",
+      "signals": [
+        "biomarker_practice",
+        "no_ai_clinical_decision"
+      ],
+      "score": 2,
+      "decision_maker_title": "Chief Medical Officer",
+      "notes": "Multi-omics testing. No clinical decision support layer. Raised $86M. Clinic channel underdeveloped."
+    },
+    {
+      "rank": 21,
+      "name": "Restore Hyper Wellness",
+      "city": "Austin, TX (national franchise)",
+      "website": "https://www.restorehyperwellness.com",
+      "linkedin": "https://www.linkedin.com/company/restore-hyper-wellness",
+      "focus": "Wellness services (IV, cryotherapy, hyperbaric)",
+      "target_customer": "franchise",
+      "signals": [
+        "active_hiring"
+      ],
+      "score": 1,
+      "decision_maker_title": "Chief Medical Officer",
+      "notes": "200+ locations. Adding biomarker testing. No AI engine. Franchise = platform sale. Raised $140M."
+    },
+    {
+      "rank": 22,
+      "name": "Next Health",
+      "city": "Los Angeles, CA",
+      "website": "https://www.next-health.com",
+      "linkedin": "https://www.linkedin.com/company/next-health",
+      "focus": "Optimization medicine, IV therapy, biomarkers",
+      "target_customer": "clinic",
+      "signals": [
+        "biomarker_practice"
+      ],
+      "score": 1,
+      "decision_maker_title": "Medical Director",
+      "notes": "LA-based optimization clinic. Biomarker panels. No AI longevity engine. Growing franchise model."
+    },
+    {
+      "rank": 23,
+      "name": "Biote Medical",
+      "city": "Irving, TX (national)",
+      "website": "https://biotemedical.com",
+      "linkedin": "https://www.linkedin.com/company/biote-medical",
+      "focus": "Hormone pellet therapy, biomarker monitoring",
+      "target_customer": "clinic/franchise",
+      "signals": [
+        "biomarker_practice"
+      ],
+      "score": 1,
+      "decision_maker_title": "Chief Medical Officer",
+      "notes": "6,000+ certified providers. Heavy hormone + biomarker panels. No AI longevity engine. Massive distribution network."
+    },
+    {
+      "rank": 24,
+      "name": "Innovative Medicine",
+      "city": "New York, NY",
+      "website": "https://www.innovativemedicine.com",
+      "linkedin": "https://www.linkedin.com/company/innovative-medicine",
+      "focus": "Integrative medicine, chronic disease reversal",
+      "target_customer": "clinic",
+      "signals": [
+        "biomarker_practice"
+      ],
+      "score": 1,
+      "decision_maker_title": "Medical Director",
+      "notes": "Integrative medicine. Heavy biomarker ordering. No AI longevity engine."
+    },
+    {
+      "rank": 25,
+      "name": "The UltraWellness Center",
+      "city": "Lenox, MA",
+      "website": "https://www.ultrawellnesscenter.com",
+      "linkedin": "https://www.linkedin.com/in/mark-hyman-md",
+      "focus": "Functional medicine, Mark Hyman MD",
+      "target_customer": "clinic",
+      "signals": [
+        "biomarker_practice"
+      ],
+      "score": 1,
+      "decision_maker_title": "Founder / Medical Director",
+      "notes": "Mark Hyman MD private practice. Influential. Heavy biomarker ordering. No AI engine. Endorsement value high."
+    },
+    {
+      "rank": 26,
+      "name": "Rupa Health",
+      "city": "San Francisco, CA",
+      "website": "https://www.rupahealth.com",
+      "linkedin": "https://www.linkedin.com/company/rupa-health",
+      "focus": "Lab ordering platform for functional medicine",
+      "target_customer": "platform/clinic",
+      "signals": [
+        "active_hiring"
+      ],
+      "score": 1,
+      "decision_maker_title": "CEO / Co-founder",
+      "notes": "Lab ordering aggregator. 3,000+ practitioners. No AI longevity engine. Integration = distribution to their entire practitioner network."
+    },
+    {
+      "rank": 27,
+      "name": "Levels Health",
+      "city": "San Francisco, CA (remote)",
+      "website": "https://www.levelshealth.com",
+      "linkedin": "https://www.linkedin.com/company/levels-health",
+      "focus": "CGM + metabolic health",
+      "target_customer": "consumer/clinic",
+      "signals": [
+        "biomarker_practice"
+      ],
+      "score": 1,
+      "decision_maker_title": "CEO / Co-founder",
+      "notes": "CGM + metabolic tracking. No AI longevity engine. Wearable data = direct input to Longivity's wearable hallmark scoring."
+    },
+    {
+      "rank": 28,
+      "name": "Joi Women's Wellness",
+      "city": "Tampa, FL (remote)",
+      "website": "https://www.askjoi.com",
+      "linkedin": "https://www.linkedin.com/company/joi-women-s-wellness",
+      "focus": "Women's hormone optimization",
+      "target_customer": "clinic",
+      "signals": [
+        "biomarker_practice"
+      ],
+      "score": 1,
+      "decision_maker_title": "Medical Director",
+      "notes": "Women's hormone + biomarker clinic. No AI longevity engine. Growing telehealth model."
+    },
+    {
+      "rank": 29,
+      "name": "Maximus",
+      "city": "Austin, TX (remote)",
+      "website": "https://www.maximustribe.com",
+      "linkedin": "https://www.linkedin.com/company/maximus-tribe",
+      "focus": "Men's testosterone optimization",
+      "target_customer": "clinic",
+      "signals": [
+        "biomarker_practice"
+      ],
+      "score": 1,
+      "decision_maker_title": "CEO / Co-founder",
+      "notes": "Men's hormone optimization. Heavy biomarker panels. No AI longevity engine. Growing DTC model."
+    },
+    {
+      "rank": 30,
+      "name": "Calibrate",
+      "city": "New York, NY (remote)",
+      "website": "https://www.joincalibrate.com",
+      "linkedin": "https://www.linkedin.com/company/calibrate-health",
+      "focus": "Metabolic health, GLP-1 + lifestyle",
+      "target_customer": "clinic/enterprise",
+      "signals": [
+        "active_hiring"
+      ],
+      "score": 1,
+      "decision_maker_title": "Chief Medical Officer",
+      "notes": "GLP-1 + metabolic health. Raised $100M. Heavy biomarker monitoring. No AI longevity engine. Large patient volume."
+    }
+  ]
+}
