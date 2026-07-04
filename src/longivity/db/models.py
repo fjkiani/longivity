@@ -37,10 +37,13 @@ class Clinic(Base):
 
     id: Mapped[str] = mapped_column(String(36), primary_key=True, default=_uuid)
     name: Mapped[str] = mapped_column(String(255), nullable=False)
+    plan: Mapped[str] = mapped_column(String(50), default="trial")  # trial | pro | enterprise
+    onboarding_completed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)
 
     users: Mapped[list["ClinicUser"]] = relationship("ClinicUser", back_populates="clinic")
     patients: Mapped[list["Patient"]] = relationship("Patient", back_populates="clinic")
+    onboarding_jobs: Mapped[list["OnboardingJob"]] = relationship("OnboardingJob", back_populates="clinic")
 
 
 class ClinicUser(Base):
@@ -229,3 +232,30 @@ class PatientEvent(Base):
     # Relationships
     patient: Mapped["Patient"] = relationship("Patient", back_populates="events")
     actor: Mapped["ClinicUser | None"] = relationship("ClinicUser", foreign_keys=[actor_id])
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Onboarding
+# ─────────────────────────────────────────────────────────────────────────────
+
+class OnboardingJob(Base):
+    """
+    Tracks async clinic onboarding: demo patient seeding, checklist state.
+    Created by POST /api/v1/onboarding/start.
+    Polled by GET /api/v1/onboarding/{id}/status.
+    """
+    __tablename__ = "onboarding_jobs"
+
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=_uuid)
+    clinic_id: Mapped[str] = mapped_column(String(36), ForeignKey("clinics.id"), nullable=False)
+
+    # Status lifecycle: seeding → complete | failed
+    status: Mapped[str] = mapped_column(String(50), default="seeding")
+    plan: Mapped[str] = mapped_column(String(50), default="trial")
+    seed_demo: Mapped[bool] = mapped_column(Boolean, default=True)
+    patients_created: Mapped[int] = mapped_column(default=0)
+    error: Mapped[str | None] = mapped_column(Text, nullable=True)
+
+    started_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)
+    completed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+
+    clinic: Mapped["Clinic"] = relationship("Clinic", back_populates="onboarding_jobs")

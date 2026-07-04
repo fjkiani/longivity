@@ -697,3 +697,73 @@ export const evidenceApi = {
     return res.json();
   },
 };
+
+// ── Onboarding ────────────────────────────────────────────────────────────────
+
+export interface OnboardingStartResponse {
+  onboarding_id: string;
+  status: string;
+  eta_seconds: number;
+  message: string;
+}
+
+export interface OnboardingStatus {
+  onboarding_id: string;
+  status: "seeding" | "complete" | "failed";
+  patients_created: number;
+  error: string | null;
+  started_at: string;
+  completed_at: string | null;
+  next_step: string;
+}
+
+export interface ChecklistStep {
+  id: string;
+  label: string;
+  description: string;
+  completed: boolean;
+  count: number;
+}
+
+export interface ChecklistResponse {
+  clinic_id: string;
+  onboarding_complete: boolean;
+  steps: ChecklistStep[];
+}
+
+export const onboardingApi = {
+  start: async (plan: "trial" | "pro" | "enterprise" = "trial", seedDemo = true): Promise<OnboardingStartResponse> => {
+    const res = await fetch(`${BASE}/api/v1/onboarding/start`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", ...authHeaders() },
+      body: JSON.stringify({ plan, seed_demo: seedDemo }),
+    });
+    if (!res.ok) throw new Error(`Onboarding start failed: ${res.status}`);
+    return res.json();
+  },
+
+  getStatus: async (onboardingId: string): Promise<OnboardingStatus> => {
+    const res = await fetch(`${BASE}/api/v1/onboarding/${onboardingId}/status`, {
+      headers: authHeaders(),
+    });
+    if (!res.ok) throw new Error(`Status check failed: ${res.status}`);
+    return res.json();
+  },
+
+  complete: async (): Promise<{ message: string; completed_at: string; checklist: ChecklistStep[] }> => {
+    const res = await fetch(`${BASE}/api/v1/onboarding/complete`, {
+      method: "POST",
+      headers: authHeaders(),
+    });
+    if (!res.ok) throw new Error(`Complete failed: ${res.status}`);
+    return res.json();
+  },
+
+  getChecklist: async (): Promise<ChecklistResponse> => {
+    const res = await fetch(`${BASE}/api/v1/onboarding/checklist`, {
+      headers: authHeaders(),
+    });
+    if (!res.ok) throw new Error(`Checklist fetch failed: ${res.status}`);
+    return res.json();
+  },
+};
