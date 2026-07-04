@@ -1,0 +1,209 @@
+{
+  "timestamp": "2026-07-04T14:40:41.876700+00:00",
+  "total_tests": 33,
+  "passed": 33,
+  "failed": 0,
+  "pass_rate_pct": 100.0,
+  "ci_threshold_pct": 95.0,
+  "ci_pass": true,
+  "tests": [
+    {
+      "test": "Healthy 45yo PhenoAge in [28,42]",
+      "passed": true,
+      "actual": "31.1",
+      "expected": "28-42yr"
+    },
+    {
+      "test": "Accelerated 58yo PhenoAge in [60,85]",
+      "passed": true,
+      "actual": "77.02",
+      "expected": "60-85yr"
+    },
+    {
+      "test": "Healthy panel: negative acceleration",
+      "passed": true,
+      "actual": "-13.9",
+      "expected": "< 0"
+    },
+    {
+      "test": "Accelerated panel: positive acceleration",
+      "passed": true,
+      "actual": "19.02",
+      "expected": "> 0"
+    },
+    {
+      "test": "PhenoAge deterministic (<0.001yr)",
+      "passed": true,
+      "actual": "0.0",
+      "expected": "< 0.001yr"
+    },
+    {
+      "test": "Healthy < Accelerated PhenoAge",
+      "passed": true,
+      "actual": "31.1 < 77.02",
+      "expected": "healthy < accelerated"
+    },
+    {
+      "test": "Mortality score in [0,1]",
+      "passed": true,
+      "actual": "0.008555",
+      "expected": "[0,1]"
+    },
+    {
+      "test": "ASCVD M/white in [0,100]%",
+      "passed": true,
+      "actual": "6.7",
+      "expected": "[0,100]%"
+    },
+    {
+      "test": "ASCVD F/white in [0,100]%",
+      "passed": true,
+      "actual": "100.0",
+      "expected": "[0,100]%"
+    },
+    {
+      "test": "ASCVD M/aa in [0,100]%",
+      "passed": true,
+      "actual": "7.2",
+      "expected": "[0,100]%"
+    },
+    {
+      "test": "ASCVD F/aa in [0,100]%",
+      "passed": true,
+      "actual": "4.3",
+      "expected": "[0,100]%"
+    },
+    {
+      "test": "High-risk CVD patient ASCVD > 15%",
+      "passed": true,
+      "actual": "22.1",
+      "expected": "> 15%"
+    },
+    {
+      "test": "hrv_rmssd HIGH_RISK",
+      "passed": true,
+      "actual": "HIGH_RISK",
+      "expected": "HIGH_RISK"
+    },
+    {
+      "test": "vo2max HIGH_RISK",
+      "passed": true,
+      "actual": "HIGH_RISK",
+      "expected": "HIGH_RISK"
+    },
+    {
+      "test": "deep_sleep_pct HIGH_RISK",
+      "passed": true,
+      "actual": "HIGH_RISK",
+      "expected": "HIGH_RISK"
+    },
+    {
+      "test": "daily_steps HIGH_RISK",
+      "passed": true,
+      "actual": "HIGH_RISK",
+      "expected": "HIGH_RISK"
+    },
+    {
+      "test": "resting_heart_rate HIGH_RISK",
+      "passed": true,
+      "actual": "HIGH_RISK",
+      "expected": "HIGH_RISK"
+    },
+    {
+      "test": "Mito signal >= 3.0 (all HIGH_RISK)",
+      "passed": true,
+      "actual": "5.0",
+      "expected": ">= 3.0"
+    },
+    {
+      "test": "hrv_rmssd OPTIMAL",
+      "passed": true,
+      "actual": "OPTIMAL",
+      "expected": "OPTIMAL"
+    },
+    {
+      "test": "vo2max OPTIMAL",
+      "passed": true,
+      "actual": "OPTIMAL",
+      "expected": "OPTIMAL"
+    },
+    {
+      "test": "Mito signal = 0 (all OPTIMAL, no false positive)",
+      "passed": true,
+      "actual": "0.0",
+      "expected": "0.0"
+    },
+    {
+      "test": "Improving trajectory",
+      "passed": true,
+      "actual": "IMPROVING",
+      "expected": "IMPROVING"
+    },
+    {
+      "test": "PhenoAge delta negative (improving)",
+      "passed": true,
+      "actual": "-4.1",
+      "expected": "< 0"
+    },
+    {
+      "test": "PhenoAge delta direction IMPROVING",
+      "passed": true,
+      "actual": "IMPROVING",
+      "expected": "IMPROVING"
+    },
+    {
+      "test": "Worsening trajectory",
+      "passed": true,
+      "actual": "WORSENING",
+      "expected": "WORSENING"
+    },
+    {
+      "test": "Mediterranean diet score >= 0.30",
+      "passed": true,
+      "actual": "0.347",
+      "expected": ">= 0.30"
+    },
+    {
+      "test": "Mediterranean diet tier WEAK or above (score 0.347)",
+      "passed": true,
+      "actual": "WEAK",
+      "expected": "WEAK or above"
+    },
+    {
+      "test": "omega_3 tier=MR_VALIDATED",
+      "passed": true,
+      "actual": "MR_VALIDATED",
+      "expected": "MR_VALIDATED"
+    },
+    {
+      "test": "vitamin_d3 tier=MR_VALIDATED",
+      "passed": true,
+      "actual": "MR_VALIDATED",
+      "expected": "MR_VALIDATED"
+    },
+    {
+      "test": "folate tier=MR_VALIDATED",
+      "passed": true,
+      "actual": "MR_VALIDATED",
+      "expected": "MR_VALIDATED"
+    },
+    {
+      "test": "metformin tier=MR_VALIDATED",
+      "passed": true,
+      "actual": "MR_VALIDATED",
+      "expected": "MR_VALIDATED"
+    },
+    {
+      "test": "berberine tier=RCT",
+      "passed": true,
+      "actual": "RCT",
+      "expected": "RCT"
+    },
+    {
+      "test": "nmn tier=RCT",
+      "passed": true,
+      "actual": "RCT",
+      "expected": "RCT"
+    }
+  ]
+}

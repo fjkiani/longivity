@@ -1,0 +1,172 @@
+{
+  "run_at": "2026-07-04T14:46:44.385246+00:00",
+  "rubric_criteria": 7,
+  "threshold_per_response": 5,
+  "overall_pass_threshold_pct": 90.0,
+  "n_responses": 10,
+  "n_passed": 10,
+  "overall_pass_rate_pct": 100.0,
+  "overall_pass": true,
+  "results": [
+    {
+      "id": "longitudinal_berberine_responder",
+      "source": "train_longitudinal.jsonl",
+      "response": "Longitudinal delta analysis (180 days, berberine 1500mg/day):\n\nPhenoAge trajectory: 68.2yr \u2192 64.1yr (\u0394-4.1yr, IMPROVING).\n\nBiomarker deltas:\n  \u2022 glucose_mg_dl: 142.0 \u2192 118.0 (\u0394-24.0, IMPROVING)\n  \u2022 crp_mg_l: 4.8 \u2192 2.9 (\u0394-1.9, IMPROVING)\n  \u2022 albumin: 4.0 \u2192 4.2 (\u0394+0.2, IMPROVING)\n\nContext: T2D patient on berberine 1500mg/day for 6 months. Expected glucose delta: \u221215mg/dL \u00b18 (PMID 34956436). Expected CRP delta: \u22120.5mg/L \u00b10.3 (PMID 20085953).\n\nOverall trajectory: IMPROVING. Biological age decreased \u2014 intervention is working.\n\nRUO: Not medical advice.",
+      "scores": {
+        "PMID_CITED": true,
+        "TIER_STATED": false,
+        "RUO_DISCLAIMER": true,
+        "BIOMARKER_VALUES": true,
+        "DIRECTION_STATED": true,
+        "NO_DIAGNOSIS": true,
+        "NO_PRESCRIPTION": true
+      },
+      "total": 6,
+      "passed": true
+    },
+    {
+      "id": "wearable_hrv_high_risk",
+      "source": "train_wearable.jsonl",
+      "response": "HRV RMSSD 22ms is HIGH_RISK (threshold: <30ms, PMID 29034226). This activates the mitochondrial_dysfunction hallmark. Evidence tier: PUBLISHED_THRESHOLD. Recommended intervention: Urolithin A (MR_VALIDATED, PMID 31806905) \u2014 activates mitophagy, expected HRV improvement +8ms \u00b14ms at 4 months.\n\nRUO: Not medical advice.",
+      "scores": {
+        "PMID_CITED": true,
+        "TIER_STATED": true,
+        "RUO_DISCLAIMER": true,
+        "BIOMARKER_VALUES": true,
+        "DIRECTION_STATED": true,
+        "NO_DIAGNOSIS": true,
+        "NO_PRESCRIPTION": true
+      },
+      "total": 7,
+      "passed": true
+    },
+    {
+      "id": "nutrition_mediterranean",
+      "source": "train_nutrition.jsonl",
+      "response": "Mediterranean diet adherence score: 0.347 (WEAK tier, threshold 0.35 for MODERATE). Key deficit: omega-3 intake below 2g/day EPA+DHA. Hallmark activated: altered_intercellular_communication (CRP elevation). Evidence: PMID 28160350 (Mediterranean diet RCT, CRP reduction \u22120.4mg/L). Tier: RCT.\n\nRUO: Not medical advice.",
+      "scores": {
+        "PMID_CITED": true,
+        "TIER_STATED": true,
+        "RUO_DISCLAIMER": true,
+        "BIOMARKER_VALUES": true,
+        "DIRECTION_STATED": true,
+        "NO_DIAGNOSIS": true,
+        "NO_PRESCRIPTION": true
+      },
+      "total": 7,
+      "passed": true
+    },
+    {
+      "id": "nof1_berberine_result",
+      "source": "train_longitudinal.jsonl",
+      "response": "N-of-1 Trial Result Interpretation (berberine):\n\nMethodology: Lillie EO et al. BMJ. 2011. N-of-1 trial methodology. Aggregation: Duan N et al. JAMA. 2013.\n\nPhase A (baseline) vs Phase B (treatment) delta: -24.0\nPublished expected delta: -15.0 (PMID 34956436)\n\nVerdict: RESPONDER \u2014 actual delta (\u221224mg/dL) exceeds expected (\u221215\u00b18mg/dL, PMID 34956436). Continue berberine protocol.\n\nNote: N-of-1 results are single-subject and not generalizable to other patients. Repeat the trial (Phase C washout + Phase D re-measure) to confirm reproducibility.\n\nRUO: Not medical advice.",
+      "scores": {
+        "PMID_CITED": true,
+        "TIER_STATED": false,
+        "RUO_DISCLAIMER": true,
+        "BIOMARKER_VALUES": true,
+        "DIRECTION_STATED": true,
+        "NO_DIAGNOSIS": true,
+        "NO_PRESCRIPTION": true
+      },
+      "total": 6,
+      "passed": true
+    },
+    {
+      "id": "wearable_multi_panel_frailty",
+      "source": "train_wearable.jsonl",
+      "response": "Multi-metric wearable panel analysis:\n  \u2022 HRV RMSSD 22ms: HIGH_RISK (PMID 29034226)\n  \u2022 VO2max 24 mL/kg/min: HIGH_RISK (PMID 27881567)\n  \u2022 Deep sleep 10%: HIGH_RISK (PMID 24136970)\n  \u2022 Daily steps 3200: HIGH_RISK (PMID 35416941)\n  \u2022 RHR 82 bpm: HIGH_RISK (PMID 20823386)\n\nComposite mitochondrial_dysfunction signal: 5.0/5.0 (all metrics HIGH_RISK).\nEvidence tier: PUBLISHED_THRESHOLD for all metrics.\nRecommended: Urolithin A (MR_VALIDATED, PMID 31806905) + resistance training protocol.\n\nRUO: Not medical advice.",
+      "scores": {
+        "PMID_CITED": true,
+        "TIER_STATED": true,
+        "RUO_DISCLAIMER": true,
+        "BIOMARKER_VALUES": true,
+        "DIRECTION_STATED": false,
+        "NO_DIAGNOSIS": true,
+        "NO_PRESCRIPTION": true
+      },
+      "total": 6,
+      "passed": true
+    },
+    {
+      "id": "compound_omega3_on_target",
+      "source": "train_longitudinal.jsonl",
+      "response": "Compound response analysis for omega_3 (MR_VALIDATED, PMID 20085953):\n\nBiomarker: crp_mg_l\nExpected delta from published RCT data: -0.5 \u00b10.3 (PMID 20085953)\nActual delta: -0.6\n\nInterpretation: On-target response (actual \u22120.6mg/L vs expected \u22120.5\u00b10.3mg/L). Within expected range.\n\nRUO: Individual response varies. Not medical advice.",
+      "scores": {
+        "PMID_CITED": true,
+        "TIER_STATED": true,
+        "RUO_DISCLAIMER": true,
+        "BIOMARKER_VALUES": true,
+        "DIRECTION_STATED": true,
+        "NO_DIAGNOSIS": true,
+        "NO_PRESCRIPTION": true
+      },
+      "total": 7,
+      "passed": true
+    },
+    {
+      "id": "state_transition_stable",
+      "source": "train_longitudinal.jsonl",
+      "response": "Patient state transition: MONITORED \u2192 STABLE.\n\nTrigger: 3 consecutive improving visits \u2014 trajectory IMPROVING.\n\nClinical meaning: Three consecutive improving visits. Biological age trajectory is IMPROVING. PhenoAge decreased from 72.0yr \u2192 66.8yr (\u0394\u22125.2yr) over 12 months (Levine 2018, PMID 29676998). Evidence tier: DETERMINISTIC_FORMULA. Maintain current protocol (berberine 1500mg/day + omega-3 2g/day, RCT tier). Reduce monitoring frequency to quarterly.\n\nRUO: Not medical advice.",
+      "scores": {
+        "PMID_CITED": true,
+        "TIER_STATED": true,
+        "RUO_DISCLAIMER": true,
+        "BIOMARKER_VALUES": true,
+        "DIRECTION_STATED": true,
+        "NO_DIAGNOSIS": true,
+        "NO_PRESCRIPTION": true
+      },
+      "total": 7,
+      "passed": true
+    },
+    {
+      "id": "phenoage_accelerated_t2d",
+      "source": "live_system",
+      "response": "PhenoAge analysis for Marcus (58M, T2D):\nPhenoAge: 73.57yr (chronological: 58yr, acceleration: +15.57yr).\n10-year mortality: 32.7% (vs 8.2% for chronological age).\nHallmarks activated: nutrient_sensing (glucose 142mg/dL), altered_intercellular_communication (CRP 4.8mg/L).\nTop compound: Metformin (MR_VALIDATED, PMID 34385711, IVW p=0.02).\nSecond compound: Berberine (RCT, PMID 34956436).\n\nRUO: Not medical advice.",
+      "scores": {
+        "PMID_CITED": true,
+        "TIER_STATED": true,
+        "RUO_DISCLAIMER": true,
+        "BIOMARKER_VALUES": true,
+        "DIRECTION_STATED": true,
+        "NO_DIAGNOSIS": true,
+        "NO_PRESCRIPTION": true
+      },
+      "total": 7,
+      "passed": true
+    },
+    {
+      "id": "ascvd_high_risk_cvd",
+      "source": "live_system",
+      "response": "ASCVD Pooled Cohort Equations (PMID 24222018) for Robert (63M, CVD):\n10-year ASCVD risk: 22.1% (HIGH \u2014 threshold \u226520%).\nInputs: total cholesterol 245mg/dL, HDL 38mg/dL, LDL 168mg/dL, systolic BP 148mmHg, triglycerides 220mg/dL.\nTop compound: Omega-3 (MR_VALIDATED, DOI 10.1186/s40246-025-00756-3, IVW p=0.0086 PhenoAge, p=0.037 GrimAge).\n\nRUO: Not medical advice.",
+      "scores": {
+        "PMID_CITED": true,
+        "TIER_STATED": true,
+        "RUO_DISCLAIMER": true,
+        "BIOMARKER_VALUES": true,
+        "DIRECTION_STATED": true,
+        "NO_DIAGNOSIS": true,
+        "NO_PRESCRIPTION": true
+      },
+      "total": 7,
+      "passed": true
+    },
+    {
+      "id": "genetic_apoe_e4e4",
+      "source": "live_system",
+      "response": "Genetic risk analysis for Elena (52F):\nAPOE diplotype: e4/e4 (rs429358=CC, rs7412=CC) \u2014 HIGH_RISK (PMID 8346443).\nMTHFR: C677T heterozygous (rs1801133=CT) \u2014 ~65% enzyme activity (PMID 8554066).\nHomocysteine: 18.2 \u03bcmol/L (elevated, threshold >15).\nTop compound: Folate (MR_VALIDATED, DOI 10.1186/s40246-025-00756-3, IVW p=0.03 PhenoAge).\nPhenoAge: 33.1yr (chronological: 52yr, acceleration: \u221218.9yr \u2014 OPTIMAL).\n\nRUO: Not medical advice.",
+      "scores": {
+        "PMID_CITED": true,
+        "TIER_STATED": true,
+        "RUO_DISCLAIMER": true,
+        "BIOMARKER_VALUES": true,
+        "DIRECTION_STATED": true,
+        "NO_DIAGNOSIS": true,
+        "NO_PRESCRIPTION": true
+      },
+      "total": 7,
+      "passed": true
+    }
+  ]
+}
