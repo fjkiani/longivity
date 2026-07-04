@@ -1,0 +1,537 @@
+{
+  "timestamp": "2026-07-04T14:35:48.455413+00:00",
+  "total_patients": 5,
+  "total_assertions": 28,
+  "total_passed": 28,
+  "overall_pass_rate_pct": 100.0,
+  "all_cohorts_pass": true,
+  "patients": [
+    {
+      "patient_id": "marcus_t2d",
+      "patient_name": "Marcus",
+      "disease_context": "Type 2 Diabetes / Metabolic Syndrome",
+      "elapsed_s": 0.0,
+      "pass_count": 7,
+      "total_assertions": 7,
+      "all_passed": true,
+      "key_outputs": {
+        "phenoage_estimate": 73.57,
+        "age_acceleration": 15.57,
+        "mortality_10yr": 0.326669,
+        "completeness_mode": "FULL_9BIOMARKERS_PLUS_AGE",
+        "hallmarks_active": [
+          "altered_intercellular_communication",
+          "epigenetic_alterations",
+          "nutrient_sensing"
+        ],
+        "compounds_top3": [
+          {
+            "name": "Metformin",
+            "tier": "MR_VALIDATED"
+          },
+          {
+            "name": "Berberine",
+            "tier": "RCT"
+          },
+          {
+            "name": "Taurine",
+            "tier": "OBSERVATIONAL"
+          }
+        ],
+        "apoe_genotype": null,
+        "apoe_risk_tier": null,
+        "mthfr_activity_pct": null,
+        "wearable_tiers": {},
+        "wearable_hallmark_signals": null,
+        "ascvd_10yr_pct": null,
+        "ascvd_category": null
+      },
+      "assertions": [
+        {
+          "label": "PhenoAge > 70yr",
+          "path": "phenoage_analysis.phenoage_estimate",
+          "op": "gt",
+          "expected": "70.0",
+          "actual": "73.57",
+          "passed": true,
+          "detail": "73.57 > 70.0"
+        },
+        {
+          "label": "Acceleration > 12yr",
+          "path": "phenoage_analysis.age_acceleration",
+          "op": "gt",
+          "expected": "12.0",
+          "actual": "15.57",
+          "passed": true,
+          "detail": "15.57 > 12.0"
+        },
+        {
+          "label": "10yr mortality > 25%",
+          "path": "phenoage_analysis.mortality_score_10yr",
+          "op": "gt",
+          "expected": "0.25",
+          "actual": "0.326669",
+          "passed": true,
+          "detail": "0.326669 > 0.25"
+        },
+        {
+          "label": "nutrient_sensing hallmark fires",
+          "path": "hallmark_narrative",
+          "op": "key_present",
+          "expected": "nutrient_sensing",
+          "actual": "{'altered_intercellular_communication': True, 'epigenetic_alterations': True, 'nutrient_sensing': True}",
+          "passed": true,
+          "detail": "key 'nutrient_sensing' in ['altered_intercellular_communication', 'epigenetic_alterations', 'nutrient_sensing']"
+        },
+        {
+          "label": "inflammaging hallmark fires",
+          "path": "hallmark_narrative",
+          "op": "key_present",
+          "expected": "altered_intercellular_communication",
+          "actual": "{'altered_intercellular_communication': True, 'epigenetic_alterations': True, 'nutrient_sensing': True}",
+          "passed": true,
+          "detail": "key 'altered_intercellular_communication' in ['altered_intercellular_communication', 'epigenetic_alterations', 'nutrient_sensing']"
+        },
+        {
+          "label": "At least one MR_VALIDATED compound",
+          "path": "compound_recommendations",
+          "op": "any_tier",
+          "expected": "MR_VALIDATED",
+          "actual": "[{'compound': 'metformin', 'display_name': 'Metformin', 'overall_relevance': 1.0, 'primary_match': 'nutrient_sensing', 'hallmark_matches': [{'hallmark': 'nutrient_sensing', 'compound_weight': 0.85, 'patient_vulnerability': 1.5392, 'relevance': 1.3083, 'mechanism': 'AMPK activation, mitochondrial effects, reduced hepatic gluconeogenesis; intersects aging-relevant nutrient pathways.', 'evidence_strength': 'ESTABLISHED', 'human_evidence': True, 'pmids': ['32333835'], 'calibration_label': 'PhenoAge-calibrated (mortality-validated)', 'scoring_source': 'phenoage', 'driven_biomarkers': ['glucose_serum'], 'vulnerability_tier': 'PHENOAGE_LINEAR_MAGNITUDE', 'scoring_basis': 'phenoage_mortality_calibrated'}], 'dose': {'range_mg': '500-2000', 'frequency': 'per label / T2DM practice (extended-release variants exist)', 'source_pmid': '30416844', 'source_verified': True, 'source_note': 'Geroscience TAME trial design article (companion PMC6230116); PMID corrected from unverified 30398915.', 'context': 'Anti-aging indication not FDA-approved; diabetes dosing precedents.'}, 'interactions': [], 'safety_flags': [], 'evidence_tier': 'MR_VALIDATED', 'evidence_tier_label': 'Mendelian Randomization \u2014 causal evidence for aging clock endpoint', 'mr_anchor': {'clock': 'PhenoAge', 'method': 'IVW', 'p_value': 0.02, 'direction': 'protective', 'citation': 'Dugu\u00e9 2021, Aging Cell \u2014 glucose MR proxy for metformin pathway', 'doi': None, 'pmid': '34385711', 'note': 'Genetically predicted lower fasting glucose causally reduces PhenoAge; metformin acts on this pathway.'}, 'scoring_note': 'Per hallmark_match: PhenoAge-calibrated when scoring_source=phenoage; threshold-based when scoring_source=supplementary (not mortality-calibrated). Never blended without labels.'}, {'compound': 'berberine', 'display_name': 'Berberine', 'overall_relevance': 1.0, 'primary_match': 'nutrient_sensing', 'hallmark_matches': [{'hallmark': 'nutrient_sensing', 'compound_weight': 0.85, 'patient_vulnerability': 1.5392, 'relevance': 1.3083, 'mechanism': 'AMPK activation \u2192 improved insulin sensitivity and glucose uptake; overlaps with mTOR/insulin signaling nodes.', 'evidence_strength': 'ESTABLISHED', 'human_evidence': True, 'pmids': ['16873688', '34956436'], 'calibration_label': 'PhenoAge-calibrated (mortality-validated)', 'scoring_source': 'phenoage', 'driven_biomarkers': ['glucose_serum'], 'vulnerability_tier': 'PHENOAGE_LINEAR_MAGNITUDE', 'scoring_basis': 'phenoage_mortality_calibrated'}], 'dose': {'range_mg': '500-1500', 'frequency': '2-3x/day with meals', 'source_pmid': '34956436', 'source_verified': True, 'context': 'T2DM-focused RCT evidence base; not a dedicated longevity trial.'}, 'interactions': [], 'safety_flags': [], 'evidence_tier': 'RCT', 'evidence_tier_label': 'Randomized Controlled Trial \u2014 human interventional evidence', 'mr_anchor': None, 'scoring_note': 'Per hallmark_match: PhenoAge-calibrated when scoring_source=phenoage; threshold-based when scoring_source=supplementary (not mortality-calibrated). Never blended without labels.'}, {'compound': 'taurine', 'display_name': 'Taurine', 'overall_relevance': 0.9235, 'primary_match': 'nutrient_sensing', 'hallmark_matches': [{'hallmark': 'nutrient_sensing', 'compound_weight': 0.6, 'patient_vulnerability': 1.5392, 'relevance': 0.9235, 'mechanism': 'Taurine modulates mTOR and AMPK signaling pathways in aging tissues.', 'evidence_strength': 'MODERATE', 'human_evidence': True, 'pmids': ['35580047'], 'calibration_label': 'PhenoAge-calibrated (mortality-validated)', 'scoring_source': 'phenoage', 'driven_biomarkers': ['glucose_serum'], 'vulnerability_tier': 'PHENOAGE_LINEAR_MAGNITUDE', 'scoring_basis': 'phenoage_mortality_calibrated'}], 'dose': {'range_mg': '1000-6000', 'frequency': 'daily (divided doses)', 'source_pmid': '35580047', 'source_verified': True, 'context': 'Science 2023 longevity study; 1-6g/day range used in human supplementation trials.'}, 'interactions': [], 'safety_flags': [], 'evidence_tier': 'OBSERVATIONAL', 'evidence_tier_label': 'Observational / mechanistic / preclinical evidence', 'mr_anchor': None, 'scoring_note': 'Per hallmark_match: PhenoAge-calibrated when scoring_source=phenoage; threshold-based when scoring_source=supplementary (not mortality-calibrated). Never blended without labels.'}, {'compound': 'nmn', 'display_name': '\u03b2-Nicotinamide Mononucleotide (NMN)', 'overall_relevance': 0.6926, 'primary_match': 'nutrient_sensing', 'hallmark_matches': [{'hallmark': 'nutrient_sensing', 'compound_weight': 0.45, 'patient_vulnerability': 1.5392, 'relevance': 0.6926, 'mechanism': 'NAD+ links to sirtuin/mitochondrial stress responses (inferential at whole-organism level).', 'evidence_strength': 'MODERATE', 'human_evidence': False, 'pmids': ['36482258'], 'calibration_label': 'PhenoAge-calibrated (mortality-validated)', 'scoring_source': 'phenoage', 'driven_biomarkers': ['glucose_serum'], 'vulnerability_tier': 'PHENOAGE_LINEAR_MAGNITUDE', 'scoring_basis': 'phenoage_mortality_calibrated'}], 'dose': {'range_mg': 'per published RCT arms', 'frequency': 'daily in trials', 'source_pmid': '36482258', 'source_verified': True, 'context': 'Regulatory status varies by jurisdiction; supplement quality variable.'}, 'interactions': [], 'safety_flags': [], 'evidence_tier': 'RCT', 'evidence_tier_label': 'Randomized Controlled Trial \u2014 human interventional evidence', 'mr_anchor': None, 'scoring_note': 'Per hallmark_match: PhenoAge-calibrated when scoring_source=phenoage; threshold-based when scoring_source=supplementary (not mortality-calibrated). Never blended without labels.'}, {'compound': 'vitamin_d3', 'display_name': 'Vitamin D3 (Cholecalciferol)', 'overall_relevance': 0.0595, 'primary_match': 'altered_intercellular_communication', 'hallmark_matches': [{'hallmark': 'altered_intercellular_communication', 'compound_weight': 0.85, 'patient_vulnerability': 0.07, 'relevance': 0.0595, 'mechanism': 'Immune modulation and inflammaging-relevant biology in hallmarks-aligned vitamin D review (PMID corrected).', 'evidence_strength': 'ESTABLISHED', 'human_evidence': True, 'pmids': ['38542817'], 'calibration_label': 'PhenoAge-calibrated (mortality-validated)', 'scoring_source': 'phenoage', 'driven_biomarkers': ['crp_log'], 'vulnerability_tier': 'PHENOAGE_LINEAR_MAGNITUDE', 'scoring_basis': 'phenoage_mortality_calibrated'}], 'dose': {'range_iu': 'individualized repletion per 25(OH)D', 'frequency': 'daily/weekly per guideline', 'source_pmid': '38542817', 'source_verified': True, 'context': 'Avoid mega-doses without monitoring; toxicity is possible.'}, 'interactions': [], 'safety_flags': [], 'evidence_tier': 'MR_VALIDATED', 'evidence_tier_label': 'Mendelian Randomization \u2014 causal evidence for aging clock endpoint', 'mr_anchor': {'clock': 'GrimAge', 'method': 'IVW', 'p_value': 0.04, 'direction': 'protective', 'citation': 'Hagenbeek 2022, Twin Research and Human Genetics', 'doi': None, 'pmid': '36055464', 'note': 'Genetically predicted 25-OHD associated with lower GrimAge in MR analysis.'}, 'scoring_note': 'Per hallmark_match: PhenoAge-calibrated when scoring_source=phenoage; threshold-based when scoring_source=supplementary (not mortality-calibrated). Never blended without labels.'}, {'compound': 'omega_3', 'display_name': 'Omega-3 Fatty Acids (EPA/DHA)', 'overall_relevance': 0.042, 'primary_match': 'altered_intercellular_communication', 'hallmark_matches': [{'hallmark': 'altered_intercellular_communication', 'compound_weight': 0.6, 'patient_vulnerability': 0.07, 'relevance': 0.042, 'mechanism': 'Specialized pro-resolving mediators and anti-inflammatory lipid biology.', 'evidence_strength': 'MODERATE', 'human_evidence': True, 'pmids': ['20085953'], 'calibration_label': 'PhenoAge-calibrated (mortality-validated)', 'scoring_source': 'phenoage', 'driven_biomarkers': ['crp_log'], 'vulnerability_tier': 'PHENOAGE_LINEAR_MAGNITUDE', 'scoring_basis': 'phenoage_mortality_calibrated'}], 'dose': {'range_g': '0.5-2 EPA+DHA combined (trial-dependent)', 'frequency': 'daily with meals', 'source_pmid': '20085953', 'source_verified': True, 'context': 'Bleeding risk at high doses with anticoagulants.'}, 'interactions': [], 'safety_flags': [], 'evidence_tier': 'MR_VALIDATED', 'evidence_tier_label': 'Mendelian Randomization \u2014 causal evidence for aging clock endpoint', 'mr_anchor': {'clock': 'PhenoAge', 'method': 'IVW', 'p_value': 0.0086, 'direction': 'protective', 'citation': 'Fabian 2025, Human Genomics', 'doi': '10.1186/s40246-025-00756-3', 'pmid': None, 'note': 'Oily fish intake causally decreases PhenoAge acceleration (IVW p=0.0086).'}, 'scoring_note': 'Per hallmark_match: PhenoAge-calibrated when scoring_source=phenoage; threshold-based when scoring_source=supplementary (not mortality-calibrated). Never blended without labels.'}]",
+          "passed": true,
+          "detail": "tiers present: ['MR_VALIDATED', 'RCT', 'OBSERVATIONAL', 'RCT', 'MR_VALIDATED', 'MR_VALIDATED']"
+        },
+        {
+          "label": "Metformin is MR_VALIDATED",
+          "path": "compound_recommendations",
+          "op": "compound_tier",
+          "expected": "{'name_fragment': 'metformin', 'tier': 'MR_VALIDATED'}",
+          "actual": "[{'compound': 'metformin', 'display_name': 'Metformin', 'overall_relevance': 1.0, 'primary_match': 'nutrient_sensing', 'hallmark_matches': [{'hallmark': 'nutrient_sensing', 'compound_weight': 0.85, 'patient_vulnerability': 1.5392, 'relevance': 1.3083, 'mechanism': 'AMPK activation, mitochondrial effects, reduced hepatic gluconeogenesis; intersects aging-relevant nutrient pathways.', 'evidence_strength': 'ESTABLISHED', 'human_evidence': True, 'pmids': ['32333835'], 'calibration_label': 'PhenoAge-calibrated (mortality-validated)', 'scoring_source': 'phenoage', 'driven_biomarkers': ['glucose_serum'], 'vulnerability_tier': 'PHENOAGE_LINEAR_MAGNITUDE', 'scoring_basis': 'phenoage_mortality_calibrated'}], 'dose': {'range_mg': '500-2000', 'frequency': 'per label / T2DM practice (extended-release variants exist)', 'source_pmid': '30416844', 'source_verified': True, 'source_note': 'Geroscience TAME trial design article (companion PMC6230116); PMID corrected from unverified 30398915.', 'context': 'Anti-aging indication not FDA-approved; diabetes dosing precedents.'}, 'interactions': [], 'safety_flags': [], 'evidence_tier': 'MR_VALIDATED', 'evidence_tier_label': 'Mendelian Randomization \u2014 causal evidence for aging clock endpoint', 'mr_anchor': {'clock': 'PhenoAge', 'method': 'IVW', 'p_value': 0.02, 'direction': 'protective', 'citation': 'Dugu\u00e9 2021, Aging Cell \u2014 glucose MR proxy for metformin pathway', 'doi': None, 'pmid': '34385711', 'note': 'Genetically predicted lower fasting glucose causally reduces PhenoAge; metformin acts on this pathway.'}, 'scoring_note': 'Per hallmark_match: PhenoAge-calibrated when scoring_source=phenoage; threshold-based when scoring_source=supplementary (not mortality-calibrated). Never blended without labels.'}, {'compound': 'berberine', 'display_name': 'Berberine', 'overall_relevance': 1.0, 'primary_match': 'nutrient_sensing', 'hallmark_matches': [{'hallmark': 'nutrient_sensing', 'compound_weight': 0.85, 'patient_vulnerability': 1.5392, 'relevance': 1.3083, 'mechanism': 'AMPK activation \u2192 improved insulin sensitivity and glucose uptake; overlaps with mTOR/insulin signaling nodes.', 'evidence_strength': 'ESTABLISHED', 'human_evidence': True, 'pmids': ['16873688', '34956436'], 'calibration_label': 'PhenoAge-calibrated (mortality-validated)', 'scoring_source': 'phenoage', 'driven_biomarkers': ['glucose_serum'], 'vulnerability_tier': 'PHENOAGE_LINEAR_MAGNITUDE', 'scoring_basis': 'phenoage_mortality_calibrated'}], 'dose': {'range_mg': '500-1500', 'frequency': '2-3x/day with meals', 'source_pmid': '34956436', 'source_verified': True, 'context': 'T2DM-focused RCT evidence base; not a dedicated longevity trial.'}, 'interactions': [], 'safety_flags': [], 'evidence_tier': 'RCT', 'evidence_tier_label': 'Randomized Controlled Trial \u2014 human interventional evidence', 'mr_anchor': None, 'scoring_note': 'Per hallmark_match: PhenoAge-calibrated when scoring_source=phenoage; threshold-based when scoring_source=supplementary (not mortality-calibrated). Never blended without labels.'}, {'compound': 'taurine', 'display_name': 'Taurine', 'overall_relevance': 0.9235, 'primary_match': 'nutrient_sensing', 'hallmark_matches': [{'hallmark': 'nutrient_sensing', 'compound_weight': 0.6, 'patient_vulnerability': 1.5392, 'relevance': 0.9235, 'mechanism': 'Taurine modulates mTOR and AMPK signaling pathways in aging tissues.', 'evidence_strength': 'MODERATE', 'human_evidence': True, 'pmids': ['35580047'], 'calibration_label': 'PhenoAge-calibrated (mortality-validated)', 'scoring_source': 'phenoage', 'driven_biomarkers': ['glucose_serum'], 'vulnerability_tier': 'PHENOAGE_LINEAR_MAGNITUDE', 'scoring_basis': 'phenoage_mortality_calibrated'}], 'dose': {'range_mg': '1000-6000', 'frequency': 'daily (divided doses)', 'source_pmid': '35580047', 'source_verified': True, 'context': 'Science 2023 longevity study; 1-6g/day range used in human supplementation trials.'}, 'interactions': [], 'safety_flags': [], 'evidence_tier': 'OBSERVATIONAL', 'evidence_tier_label': 'Observational / mechanistic / preclinical evidence', 'mr_anchor': None, 'scoring_note': 'Per hallmark_match: PhenoAge-calibrated when scoring_source=phenoage; threshold-based when scoring_source=supplementary (not mortality-calibrated). Never blended without labels.'}, {'compound': 'nmn', 'display_name': '\u03b2-Nicotinamide Mononucleotide (NMN)', 'overall_relevance': 0.6926, 'primary_match': 'nutrient_sensing', 'hallmark_matches': [{'hallmark': 'nutrient_sensing', 'compound_weight': 0.45, 'patient_vulnerability': 1.5392, 'relevance': 0.6926, 'mechanism': 'NAD+ links to sirtuin/mitochondrial stress responses (inferential at whole-organism level).', 'evidence_strength': 'MODERATE', 'human_evidence': False, 'pmids': ['36482258'], 'calibration_label': 'PhenoAge-calibrated (mortality-validated)', 'scoring_source': 'phenoage', 'driven_biomarkers': ['glucose_serum'], 'vulnerability_tier': 'PHENOAGE_LINEAR_MAGNITUDE', 'scoring_basis': 'phenoage_mortality_calibrated'}], 'dose': {'range_mg': 'per published RCT arms', 'frequency': 'daily in trials', 'source_pmid': '36482258', 'source_verified': True, 'context': 'Regulatory status varies by jurisdiction; supplement quality variable.'}, 'interactions': [], 'safety_flags': [], 'evidence_tier': 'RCT', 'evidence_tier_label': 'Randomized Controlled Trial \u2014 human interventional evidence', 'mr_anchor': None, 'scoring_note': 'Per hallmark_match: PhenoAge-calibrated when scoring_source=phenoage; threshold-based when scoring_source=supplementary (not mortality-calibrated). Never blended without labels.'}, {'compound': 'vitamin_d3', 'display_name': 'Vitamin D3 (Cholecalciferol)', 'overall_relevance': 0.0595, 'primary_match': 'altered_intercellular_communication', 'hallmark_matches': [{'hallmark': 'altered_intercellular_communication', 'compound_weight': 0.85, 'patient_vulnerability': 0.07, 'relevance': 0.0595, 'mechanism': 'Immune modulation and inflammaging-relevant biology in hallmarks-aligned vitamin D review (PMID corrected).', 'evidence_strength': 'ESTABLISHED', 'human_evidence': True, 'pmids': ['38542817'], 'calibration_label': 'PhenoAge-calibrated (mortality-validated)', 'scoring_source': 'phenoage', 'driven_biomarkers': ['crp_log'], 'vulnerability_tier': 'PHENOAGE_LINEAR_MAGNITUDE', 'scoring_basis': 'phenoage_mortality_calibrated'}], 'dose': {'range_iu': 'individualized repletion per 25(OH)D', 'frequency': 'daily/weekly per guideline', 'source_pmid': '38542817', 'source_verified': True, 'context': 'Avoid mega-doses without monitoring; toxicity is possible.'}, 'interactions': [], 'safety_flags': [], 'evidence_tier': 'MR_VALIDATED', 'evidence_tier_label': 'Mendelian Randomization \u2014 causal evidence for aging clock endpoint', 'mr_anchor': {'clock': 'GrimAge', 'method': 'IVW', 'p_value': 0.04, 'direction': 'protective', 'citation': 'Hagenbeek 2022, Twin Research and Human Genetics', 'doi': None, 'pmid': '36055464', 'note': 'Genetically predicted 25-OHD associated with lower GrimAge in MR analysis.'}, 'scoring_note': 'Per hallmark_match: PhenoAge-calibrated when scoring_source=phenoage; threshold-based when scoring_source=supplementary (not mortality-calibrated). Never blended without labels.'}, {'compound': 'omega_3', 'display_name': 'Omega-3 Fatty Acids (EPA/DHA)', 'overall_relevance': 0.042, 'primary_match': 'altered_intercellular_communication', 'hallmark_matches': [{'hallmark': 'altered_intercellular_communication', 'compound_weight': 0.6, 'patient_vulnerability': 0.07, 'relevance': 0.042, 'mechanism': 'Specialized pro-resolving mediators and anti-inflammatory lipid biology.', 'evidence_strength': 'MODERATE', 'human_evidence': True, 'pmids': ['20085953'], 'calibration_label': 'PhenoAge-calibrated (mortality-validated)', 'scoring_source': 'phenoage', 'driven_biomarkers': ['crp_log'], 'vulnerability_tier': 'PHENOAGE_LINEAR_MAGNITUDE', 'scoring_basis': 'phenoage_mortality_calibrated'}], 'dose': {'range_g': '0.5-2 EPA+DHA combined (trial-dependent)', 'frequency': 'daily with meals', 'source_pmid': '20085953', 'source_verified': True, 'context': 'Bleeding risk at high doses with anticoagulants.'}, 'interactions': [], 'safety_flags': [], 'evidence_tier': 'MR_VALIDATED', 'evidence_tier_label': 'Mendelian Randomization \u2014 causal evidence for aging clock endpoint', 'mr_anchor': {'clock': 'PhenoAge', 'method': 'IVW', 'p_value': 0.0086, 'direction': 'protective', 'citation': 'Fabian 2025, Human Genomics', 'doi': '10.1186/s40246-025-00756-3', 'pmid': None, 'note': 'Oily fish intake causally decreases PhenoAge acceleration (IVW p=0.0086).'}, 'scoring_note': 'Per hallmark_match: PhenoAge-calibrated when scoring_source=phenoage; threshold-based when scoring_source=supplementary (not mortality-calibrated). Never blended without labels.'}]",
+          "passed": true,
+          "detail": "found 'Metformin' tier=MR_VALIDATED, expected MR_VALIDATED"
+        }
+      ],
+      "expected_findings": [
+        "PhenoAge > 70yr (acceleration > 12yr)",
+        "nutrient_sensing hallmark active (glucose coefficient 0.1953)",
+        "altered_intercellular_communication hallmark active (CRP 4.8)",
+        "Metformin tier=MR_VALIDATED (Dugu\u00e9 2021, PMID 34385711)",
+        "Berberine tier=RCT (PMID 34956436)",
+        "10yr mortality > 25%"
+      ]
+    },
+    {
+      "patient_id": "robert_cvd",
+      "patient_name": "Robert",
+      "disease_context": "Cardiovascular Disease / Atherosclerosis Risk",
+      "elapsed_s": 0.0,
+      "pass_count": 4,
+      "total_assertions": 4,
+      "all_passed": true,
+      "key_outputs": {
+        "phenoage_estimate": 81.47,
+        "age_acceleration": 18.47,
+        "mortality_10yr": 0.553649,
+        "completeness_mode": "FULL_9BIOMARKERS_PLUS_AGE",
+        "hallmarks_active": [
+          "altered_intercellular_communication",
+          "mitochondrial_dysfunction",
+          "nutrient_sensing"
+        ],
+        "compounds_top3": [
+          {
+            "name": "Berberine",
+            "tier": "RCT"
+          },
+          {
+            "name": "Taurine",
+            "tier": "OBSERVATIONAL"
+          },
+          {
+            "name": "Coenzyme Q10 (Ubiquinone)",
+            "tier": "OBSERVATIONAL"
+          }
+        ],
+        "apoe_genotype": null,
+        "apoe_risk_tier": null,
+        "mthfr_activity_pct": null,
+        "wearable_tiers": {},
+        "wearable_hallmark_signals": null,
+        "ascvd_10yr_pct": 19.1,
+        "ascvd_category": "INTERMEDIATE"
+      },
+      "assertions": [
+        {
+          "label": "PhenoAge > 75yr",
+          "path": "phenoage_analysis.phenoage_estimate",
+          "op": "gt",
+          "expected": "75.0",
+          "actual": "81.47",
+          "passed": true,
+          "detail": "81.47 > 75.0"
+        },
+        {
+          "label": "Acceleration > 12yr",
+          "path": "phenoage_analysis.age_acceleration",
+          "op": "gt",
+          "expected": "12.0",
+          "actual": "18.47",
+          "passed": true,
+          "detail": "18.47 > 12.0"
+        },
+        {
+          "label": "Inflammaging hallmark fires",
+          "path": "hallmark_narrative",
+          "op": "key_present",
+          "expected": "altered_intercellular_communication",
+          "actual": "{'altered_intercellular_communication': True, 'mitochondrial_dysfunction': True, 'nutrient_sensing': True}",
+          "passed": true,
+          "detail": "key 'altered_intercellular_communication' in ['altered_intercellular_communication', 'mitochondrial_dysfunction', 'nutrient_sensing']"
+        },
+        {
+          "label": "Omega-3 is MR_VALIDATED",
+          "path": "compound_recommendations",
+          "op": "compound_tier",
+          "expected": "{'name_fragment': 'omega', 'tier': 'MR_VALIDATED'}",
+          "actual": "[{'compound': 'berberine', 'display_name': 'Berberine', 'overall_relevance': 0.85, 'primary_match': 'nutrient_sensing', 'hallmark_matches': [{'hallmark': 'nutrient_sensing', 'compound_weight': 0.85, 'patient_vulnerability': 1.0, 'relevance': 0.85, 'mechanism': 'AMPK activation \u2192 improved insulin sensitivity and glucose uptake; overlaps with mTOR/insulin signaling nodes.', 'evidence_strength': 'ESTABLISHED', 'human_evidence': True, 'pmids': ['16873688', '34956436'], 'calibration_label': 'threshold-based (not mortality-calibrated)', 'scoring_source': 'supplementary', 'driven_biomarkers': ['ldl_cholesterol', 'triglycerides'], 'vulnerability_tier': 'SUPPLEMENTARY_TIER_NORMALIZED', 'scoring_basis': 'supplementary_threshold_only'}], 'dose': {'range_mg': '500-1500', 'frequency': '2-3x/day with meals', 'source_pmid': '34956436', 'source_verified': True, 'context': 'T2DM-focused RCT evidence base; not a dedicated longevity trial.'}, 'interactions': [], 'safety_flags': [], 'evidence_tier': 'RCT', 'evidence_tier_label': 'Randomized Controlled Trial \u2014 human interventional evidence', 'mr_anchor': None, 'scoring_note': 'Per hallmark_match: PhenoAge-calibrated when scoring_source=phenoage; threshold-based when scoring_source=supplementary (not mortality-calibrated). Never blended without labels.'}, {'compound': 'taurine', 'display_name': 'Taurine', 'overall_relevance': 0.725, 'primary_match': 'mitochondrial_dysfunction', 'hallmark_matches': [{'hallmark': 'mitochondrial_dysfunction', 'compound_weight': 0.85, 'patient_vulnerability': 1.0, 'relevance': 0.85, 'mechanism': 'Taurine supports mitochondrial membrane potential and reduces mitochondrial ROS; taurine deficiency accelerates mitochondrial aging across species.', 'evidence_strength': 'ESTABLISHED', 'human_evidence': True, 'pmids': ['35580047'], 'calibration_label': 'threshold-based (not mortality-calibrated)', 'scoring_source': 'supplementary', 'driven_biomarkers': ['hdl_cholesterol'], 'vulnerability_tier': 'SUPPLEMENTARY_TIER_NORMALIZED', 'scoring_basis': 'supplementary_threshold_only'}, {'hallmark': 'nutrient_sensing', 'compound_weight': 0.6, 'patient_vulnerability': 1.0, 'relevance': 0.6, 'mechanism': 'Taurine modulates mTOR and AMPK signaling pathways in aging tissues.', 'evidence_strength': 'MODERATE', 'human_evidence': True, 'pmids': ['35580047'], 'calibration_label': 'threshold-based (not mortality-calibrated)', 'scoring_source': 'supplementary', 'driven_biomarkers': ['ldl_cholesterol', 'triglycerides'], 'vulnerability_tier': 'SUPPLEMENTARY_TIER_NORMALIZED', 'scoring_basis': 'supplementary_threshold_only'}], 'dose': {'range_mg': '1000-6000', 'frequency': 'daily (divided doses)', 'source_pmid': '35580047', 'source_verified': True, 'context': 'Science 2023 longevity study; 1-6g/day range used in human supplementation trials.'}, 'interactions': [], 'safety_flags': [], 'evidence_tier': 'OBSERVATIONAL', 'evidence_tier_label': 'Observational / mechanistic / preclinical evidence', 'mr_anchor': None, 'scoring_note': 'Per hallmark_match: PhenoAge-calibrated when scoring_source=phenoage; threshold-based when scoring_source=supplementary (not mortality-calibrated). Never blended without labels.'}, {'compound': 'coq10', 'display_name': 'Coenzyme Q10 (Ubiquinone)', 'overall_relevance': 0.45, 'primary_match': 'mitochondrial_dysfunction', 'hallmark_matches': [{'hallmark': 'mitochondrial_dysfunction', 'compound_weight': 0.45, 'patient_vulnerability': 1.0, 'relevance': 0.45, 'mechanism': 'Electron transport cofactor; mitochondrial energetics and oxidative stress balance (verified aging review PMID).', 'evidence_strength': 'MODERATE', 'human_evidence': False, 'pmids': ['29373872'], 'calibration_label': 'threshold-based (not mortality-calibrated)', 'scoring_source': 'supplementary', 'driven_biomarkers': ['hdl_cholesterol'], 'vulnerability_tier': 'SUPPLEMENTARY_TIER_NORMALIZED', 'scoring_basis': 'supplementary_threshold_only'}], 'dose': {'range_mg': '100-300 common in trials', 'frequency': 'daily with fat-containing meal', 'source_pmid': '29373872', 'source_verified': True, 'context': 'Ubiquinol vs ubiquinone formulations differ.'}, 'interactions': [], 'safety_flags': [], 'evidence_tier': 'OBSERVATIONAL', 'evidence_tier_label': 'Observational / mechanistic / preclinical evidence', 'mr_anchor': None, 'scoring_note': 'Per hallmark_match: PhenoAge-calibrated when scoring_source=phenoage; threshold-based when scoring_source=supplementary (not mortality-calibrated). Never blended without labels.'}, {'compound': 'vitamin_k2', 'display_name': 'Vitamin K2 (Menaquinone-7, MK-7)', 'overall_relevance': 0.0388, 'primary_match': 'altered_intercellular_communication', 'hallmark_matches': [{'hallmark': 'altered_intercellular_communication', 'compound_weight': 0.85, 'patient_vulnerability': 0.0456, 'relevance': 0.0388, 'mechanism': 'Vitamin K2 activates matrix Gla protein (MGP) and osteocalcin, preventing vascular calcification and modulating endocrine signaling.', 'evidence_strength': 'ESTABLISHED', 'human_evidence': True, 'pmids': ['30959259'], 'calibration_label': 'PhenoAge-calibrated (mortality-validated)', 'scoring_source': 'phenoage', 'driven_biomarkers': ['crp_log'], 'vulnerability_tier': 'PHENOAGE_LINEAR_MAGNITUDE', 'scoring_basis': 'phenoage_mortality_calibrated'}], 'dose': {'range_mcg': '90-360', 'frequency': 'daily (MK-7 form preferred for longer half-life)', 'source_pmid': '30959259', 'source_verified': True, 'context': 'MK-7 form has superior bioavailability and longer half-life than MK-4.'}, 'interactions': [], 'safety_flags': [], 'evidence_tier': 'RCT', 'evidence_tier_label': 'Randomized Controlled Trial \u2014 human interventional evidence', 'mr_anchor': None, 'scoring_note': 'Per hallmark_match: PhenoAge-calibrated when scoring_source=phenoage; threshold-based when scoring_source=supplementary (not mortality-calibrated). Never blended without labels.'}, {'compound': 'omega_3', 'display_name': 'Omega-3 Fatty Acids (EPA/DHA)', 'overall_relevance': 0.0274, 'primary_match': 'altered_intercellular_communication', 'hallmark_matches': [{'hallmark': 'altered_intercellular_communication', 'compound_weight': 0.6, 'patient_vulnerability': 0.0456, 'relevance': 0.0274, 'mechanism': 'Specialized pro-resolving mediators and anti-inflammatory lipid biology.', 'evidence_strength': 'MODERATE', 'human_evidence': True, 'pmids': ['20085953'], 'calibration_label': 'PhenoAge-calibrated (mortality-validated)', 'scoring_source': 'phenoage', 'driven_biomarkers': ['crp_log'], 'vulnerability_tier': 'PHENOAGE_LINEAR_MAGNITUDE', 'scoring_basis': 'phenoage_mortality_calibrated'}], 'dose': {'range_g': '0.5-2 EPA+DHA combined (trial-dependent)', 'frequency': 'daily with meals', 'source_pmid': '20085953', 'source_verified': True, 'context': 'Bleeding risk at high doses with anticoagulants.'}, 'interactions': [], 'safety_flags': [], 'evidence_tier': 'MR_VALIDATED', 'evidence_tier_label': 'Mendelian Randomization \u2014 causal evidence for aging clock endpoint', 'mr_anchor': {'clock': 'PhenoAge', 'method': 'IVW', 'p_value': 0.0086, 'direction': 'protective', 'citation': 'Fabian 2025, Human Genomics', 'doi': '10.1186/s40246-025-00756-3', 'pmid': None, 'note': 'Oily fish intake causally decreases PhenoAge acceleration (IVW p=0.0086).'}, 'scoring_note': 'Per hallmark_match: PhenoAge-calibrated when scoring_source=phenoage; threshold-based when scoring_source=supplementary (not mortality-calibrated). Never blended without labels.'}]",
+          "passed": true,
+          "detail": "found 'Omega-3 Fatty Acids (EPA/DHA)' tier=MR_VALIDATED, expected MR_VALIDATED"
+        }
+      ],
+      "expected_findings": [
+        "PhenoAge > 75yr (acceleration > 12yr)",
+        "ASCVD 10yr risk > 20% (HIGH category)",
+        "altered_intercellular_communication hallmark active (CRP 6.2, WBC 10.1)",
+        "mitochondrial_dysfunction hallmark active (RDW 15.8, MCV 96)",
+        "Omega-3 tier=MR_VALIDATED (Fabian 2025, IVW p=0.0086)",
+        "CoQ10 tier=OBSERVATIONAL (lower than Omega-3)"
+      ]
+    },
+    {
+      "patient_id": "elena_apoe",
+      "patient_name": "Elena",
+      "disease_context": "Alzheimer's Risk / Cognitive Decline Prevention",
+      "elapsed_s": 0.0,
+      "pass_count": 4,
+      "total_assertions": 4,
+      "all_passed": true,
+      "key_outputs": {
+        "phenoage_estimate": 33.1,
+        "age_acceleration": -18.9,
+        "mortality_10yr": 0.010238,
+        "completeness_mode": "FULL_9BIOMARKERS_PLUS_AGE",
+        "hallmarks_active": [
+          "altered_intercellular_communication",
+          "epigenetic_alterations",
+          "genomic_instability"
+        ],
+        "compounds_top3": [
+          {
+            "name": "Folate (5-MTHF / folic acid)",
+            "tier": "MR_VALIDATED"
+          },
+          {
+            "name": "Vitamin D3 (Cholecalciferol)",
+            "tier": "MR_VALIDATED"
+          },
+          {
+            "name": "Omega-3 Fatty Acids (EPA/DHA)",
+            "tier": "MR_VALIDATED"
+          }
+        ],
+        "apoe_genotype": "e4/e4",
+        "apoe_risk_tier": "HIGH_RISK",
+        "mthfr_activity_pct": null,
+        "wearable_tiers": {},
+        "wearable_hallmark_signals": null,
+        "ascvd_10yr_pct": null,
+        "ascvd_category": null
+      },
+      "assertions": [
+        {
+          "label": "PhenoAge < 52yr (decelerated)",
+          "path": "phenoage_analysis.phenoage_estimate",
+          "op": "lt",
+          "expected": "52.0",
+          "actual": "33.1",
+          "passed": true,
+          "detail": "33.1 < 52.0"
+        },
+        {
+          "label": "Age acceleration negative",
+          "path": "phenoage_analysis.age_acceleration",
+          "op": "lt",
+          "expected": "0.0",
+          "actual": "-18.9",
+          "passed": true,
+          "detail": "-18.9 < 0.0"
+        },
+        {
+          "label": "APOE e4/e4 HIGH_RISK",
+          "path": "genetic_profile.apoe_status.risk_tier",
+          "op": "eq",
+          "expected": "HIGH_RISK",
+          "actual": "HIGH_RISK",
+          "passed": true,
+          "detail": "'HIGH_RISK' == 'HIGH_RISK'"
+        },
+        {
+          "label": "Folate is MR_VALIDATED",
+          "path": "compound_recommendations",
+          "op": "compound_tier",
+          "expected": "{'name_fragment': 'folate', 'tier': 'MR_VALIDATED'}",
+          "actual": "[{'compound': 'folate', 'display_name': 'Folate (5-MTHF / folic acid)', 'overall_relevance': 0.6375, 'primary_match': 'epigenetic_alterations', 'hallmark_matches': [{'hallmark': 'epigenetic_alterations', 'compound_weight': 0.85, 'patient_vulnerability': 0.75, 'relevance': 0.6375, 'mechanism': 'Methyl donor supply for one-carbon metabolism and DNA methylation balance.', 'evidence_strength': 'ESTABLISHED', 'human_evidence': True, 'pmids': ['19740080'], 'calibration_label': 'threshold-based (not mortality-calibrated)', 'scoring_source': 'supplementary', 'driven_biomarkers': ['25oh_vitamin_d', 'homocysteine'], 'vulnerability_tier': 'SUPPLEMENTARY_TIER_NORMALIZED', 'scoring_basis': 'supplementary_threshold_only'}], 'dose': {'range_mcg': '400-800 DFE typical adult; higher in pregnancy per guidelines', 'frequency': 'daily', 'source_pmid': '19740080', 'source_verified': True, 'context': 'Masking B12 deficiency possible with high folic acid \u2014 evaluate B12 in neuropathy.'}, 'interactions': [], 'safety_flags': [], 'evidence_tier': 'MR_VALIDATED', 'evidence_tier_label': 'Mendelian Randomization \u2014 causal evidence for aging clock endpoint', 'mr_anchor': {'clock': 'PhenoAge', 'method': 'IVW', 'p_value': 0.03, 'direction': 'protective', 'citation': 'Fabian 2025, Human Genomics', 'doi': '10.1186/s40246-025-00756-3', 'pmid': None, 'note': 'Folate intake MR signal for PhenoAge deceleration (homocysteine pathway).'}, 'scoring_note': 'Per hallmark_match: PhenoAge-calibrated when scoring_source=phenoage; threshold-based when scoring_source=supplementary (not mortality-calibrated). Never blended without labels.'}, {'compound': 'vitamin_d3', 'display_name': 'Vitamin D3 (Cholecalciferol)', 'overall_relevance': 0.425, 'primary_match': 'altered_intercellular_communication', 'hallmark_matches': [{'hallmark': 'altered_intercellular_communication', 'compound_weight': 0.85, 'patient_vulnerability': 0.5, 'relevance': 0.425, 'mechanism': 'Immune modulation and inflammaging-relevant biology in hallmarks-aligned vitamin D review (PMID corrected).', 'evidence_strength': 'ESTABLISHED', 'human_evidence': True, 'pmids': ['38542817'], 'calibration_label': 'threshold-based (not mortality-calibrated)', 'scoring_source': 'supplementary', 'driven_biomarkers': ['25oh_vitamin_d'], 'vulnerability_tier': 'SUPPLEMENTARY_TIER_NORMALIZED', 'scoring_basis': 'supplementary_threshold_only'}], 'dose': {'range_iu': 'individualized repletion per 25(OH)D', 'frequency': 'daily/weekly per guideline', 'source_pmid': '38542817', 'source_verified': True, 'context': 'Avoid mega-doses without monitoring; toxicity is possible.'}, 'interactions': [], 'safety_flags': [], 'evidence_tier': 'MR_VALIDATED', 'evidence_tier_label': 'Mendelian Randomization \u2014 causal evidence for aging clock endpoint', 'mr_anchor': {'clock': 'GrimAge', 'method': 'IVW', 'p_value': 0.04, 'direction': 'protective', 'citation': 'Hagenbeek 2022, Twin Research and Human Genetics', 'doi': None, 'pmid': '36055464', 'note': 'Genetically predicted 25-OHD associated with lower GrimAge in MR analysis.'}, 'scoring_note': 'Per hallmark_match: PhenoAge-calibrated when scoring_source=phenoage; threshold-based when scoring_source=supplementary (not mortality-calibrated). Never blended without labels.'}, {'compound': 'omega_3', 'display_name': 'Omega-3 Fatty Acids (EPA/DHA)', 'overall_relevance': 0.3, 'primary_match': 'altered_intercellular_communication', 'hallmark_matches': [{'hallmark': 'altered_intercellular_communication', 'compound_weight': 0.6, 'patient_vulnerability': 0.5, 'relevance': 0.3, 'mechanism': 'Specialized pro-resolving mediators and anti-inflammatory lipid biology.', 'evidence_strength': 'MODERATE', 'human_evidence': True, 'pmids': ['20085953'], 'calibration_label': 'threshold-based (not mortality-calibrated)', 'scoring_source': 'supplementary', 'driven_biomarkers': ['25oh_vitamin_d'], 'vulnerability_tier': 'SUPPLEMENTARY_TIER_NORMALIZED', 'scoring_basis': 'supplementary_threshold_only'}], 'dose': {'range_g': '0.5-2 EPA+DHA combined (trial-dependent)', 'frequency': 'daily with meals', 'source_pmid': '20085953', 'source_verified': True, 'context': 'Bleeding risk at high doses with anticoagulants.'}, 'interactions': [], 'safety_flags': [], 'evidence_tier': 'MR_VALIDATED', 'evidence_tier_label': 'Mendelian Randomization \u2014 causal evidence for aging clock endpoint', 'mr_anchor': {'clock': 'PhenoAge', 'method': 'IVW', 'p_value': 0.0086, 'direction': 'protective', 'citation': 'Fabian 2025, Human Genomics', 'doi': '10.1186/s40246-025-00756-3', 'pmid': None, 'note': 'Oily fish intake causally decreases PhenoAge acceleration (IVW p=0.0086).'}, 'scoring_note': 'Per hallmark_match: PhenoAge-calibrated when scoring_source=phenoage; threshold-based when scoring_source=supplementary (not mortality-calibrated). Never blended without labels.'}, {'compound': 'egcg', 'display_name': 'EGCG (Green Tea Catechin)', 'overall_relevance': 0.225, 'primary_match': 'altered_intercellular_communication', 'hallmark_matches': [{'hallmark': 'altered_intercellular_communication', 'compound_weight': 0.45, 'patient_vulnerability': 0.5, 'relevance': 0.225, 'mechanism': 'Senescent endothelial context (additional verified PMID in audit list).', 'evidence_strength': 'MODERATE', 'human_evidence': False, 'pmids': ['39906338'], 'calibration_label': 'threshold-based (not mortality-calibrated)', 'scoring_source': 'supplementary', 'driven_biomarkers': ['25oh_vitamin_d'], 'vulnerability_tier': 'SUPPLEMENTARY_TIER_NORMALIZED', 'scoring_basis': 'supplementary_threshold_only'}], 'dose': {'range_mg': '100-800 EGCG (hepatotoxicity risk at high doses)', 'frequency': 'divided doses', 'source_pmid': '30456590', 'source_verified': True, 'context': 'EGCG concentrates linked to liver injury case reports \u2014 avoid megadoses.'}, 'interactions': [], 'safety_flags': [], 'evidence_tier': 'OBSERVATIONAL', 'evidence_tier_label': 'Observational / mechanistic / preclinical evidence', 'mr_anchor': None, 'scoring_note': 'Per hallmark_match: PhenoAge-calibrated when scoring_source=phenoage; threshold-based when scoring_source=supplementary (not mortality-calibrated). Never blended without labels.'}]",
+          "passed": true,
+          "detail": "found 'Folate (5-MTHF / folic acid)' tier=MR_VALIDATED, expected MR_VALIDATED"
+        }
+      ],
+      "expected_findings": [
+        "PhenoAge < 52yr (decelerated \u2014 biomarkers excellent)",
+        "APOE e4/e4 HIGH_RISK (8-12\u00d7 AD risk, PMID 8346443)",
+        "MTHFR compound heterozygous (~50% enzyme activity, PMID 8554066)",
+        "Folate tier=MR_VALIDATED (Fabian 2025, IVW p=0.03)",
+        "Omega-3 tier=MR_VALIDATED (APOE4 carriers have impaired DHA transport)",
+        "epigenetic_alterations hallmark fires (homocysteine 18.2)"
+      ]
+    },
+    {
+      "patient_id": "dorothy_frailty",
+      "patient_name": "Dorothy",
+      "disease_context": "Accelerated Aging / Sarcopenia + Frailty",
+      "elapsed_s": 0.0,
+      "pass_count": 7,
+      "total_assertions": 7,
+      "all_passed": true,
+      "key_outputs": {
+        "phenoage_estimate": 75.81,
+        "age_acceleration": 4.81,
+        "mortality_10yr": 0.383602,
+        "completeness_mode": "FULL_9BIOMARKERS_PLUS_AGE",
+        "hallmarks_active": [
+          "altered_intercellular_communication",
+          "nutrient_sensing"
+        ],
+        "compounds_top3": [
+          {
+            "name": "Taurine",
+            "tier": "OBSERVATIONAL"
+          },
+          {
+            "name": "\u03b2-Nicotinamide Mononucleotide (NMN)",
+            "tier": "RCT"
+          },
+          {
+            "name": "Vitamin D3 (Cholecalciferol)",
+            "tier": "MR_VALIDATED"
+          }
+        ],
+        "apoe_genotype": null,
+        "apoe_risk_tier": null,
+        "mthfr_activity_pct": null,
+        "wearable_tiers": {
+          "hrv_rmssd": "HIGH_RISK",
+          "vo2max": "HIGH_RISK",
+          "deep_sleep_pct": "HIGH_RISK",
+          "daily_steps": "HIGH_RISK",
+          "resting_heart_rate": "HIGH_RISK"
+        },
+        "wearable_hallmark_signals": {
+          "mitochondrial_dysfunction": 5.0,
+          "altered_intercellular_communication": 2.0,
+          "stem_cell_exhaustion": 1.0,
+          "cellular_senescence": 2.0,
+          "epigenetic_alterations": 1.0
+        },
+        "ascvd_10yr_pct": null,
+        "ascvd_category": null
+      },
+      "assertions": [
+        {
+          "label": "PhenoAge > 72yr",
+          "path": "phenoage_analysis.phenoage_estimate",
+          "op": "gt",
+          "expected": "72.0",
+          "actual": "75.81",
+          "passed": true,
+          "detail": "75.81 > 72.0"
+        },
+        {
+          "label": "HRV HIGH_RISK",
+          "path": "wearable_assessment.scored_metrics.hrv_rmssd.tier",
+          "op": "eq",
+          "expected": "HIGH_RISK",
+          "actual": "HIGH_RISK",
+          "passed": true,
+          "detail": "'HIGH_RISK' == 'HIGH_RISK'"
+        },
+        {
+          "label": "VO2max HIGH_RISK",
+          "path": "wearable_assessment.scored_metrics.vo2max.tier",
+          "op": "eq",
+          "expected": "HIGH_RISK",
+          "actual": "HIGH_RISK",
+          "passed": true,
+          "detail": "'HIGH_RISK' == 'HIGH_RISK'"
+        },
+        {
+          "label": "Deep sleep HIGH_RISK",
+          "path": "wearable_assessment.scored_metrics.deep_sleep_pct.tier",
+          "op": "eq",
+          "expected": "HIGH_RISK",
+          "actual": "HIGH_RISK",
+          "passed": true,
+          "detail": "'HIGH_RISK' == 'HIGH_RISK'"
+        },
+        {
+          "label": "Steps HIGH_RISK",
+          "path": "wearable_assessment.scored_metrics.daily_steps.tier",
+          "op": "eq",
+          "expected": "HIGH_RISK",
+          "actual": "HIGH_RISK",
+          "passed": true,
+          "detail": "'HIGH_RISK' == 'HIGH_RISK'"
+        },
+        {
+          "label": "RHR HIGH_RISK",
+          "path": "wearable_assessment.scored_metrics.resting_heart_rate.tier",
+          "op": "eq",
+          "expected": "HIGH_RISK",
+          "actual": "HIGH_RISK",
+          "passed": true,
+          "detail": "'HIGH_RISK' == 'HIGH_RISK'"
+        },
+        {
+          "label": "Mito signal >= 3.0",
+          "path": "wearable_assessment.hallmark_signals.mitochondrial_dysfunction",
+          "op": "gte",
+          "expected": "3.0",
+          "actual": "5.0",
+          "passed": true,
+          "detail": "5.0 >= 3.0"
+        }
+      ],
+      "expected_findings": [
+        "PhenoAge > 72yr (acceleration > 1yr)",
+        "ALL 5 wearable metrics: HIGH_RISK",
+        "mitochondrial_dysfunction wearable signal >= 3.0",
+        "cellular_senescence wearable signal >= 1.0",
+        "Taurine recommended (ESTABLISHED+human evidence, mitochondrial + senescence)",
+        "Urolithin_A recommended (ESTABLISHED+human, mitophagy activation)"
+      ]
+    },
+    {
+      "patient_id": "james_centenarian",
+      "patient_name": "James",
+      "disease_context": "Longevity Optimization / Centenarian Trajectory",
+      "elapsed_s": 0.0,
+      "pass_count": 6,
+      "total_assertions": 6,
+      "all_passed": true,
+      "key_outputs": {
+        "phenoage_estimate": 48.17,
+        "age_acceleration": -19.83,
+        "mortality_10yr": 0.039244,
+        "completeness_mode": "FULL_9BIOMARKERS_PLUS_AGE",
+        "hallmarks_active": [],
+        "compounds_top3": [
+          {
+            "name": "Omega-3 Fatty Acids (EPA/DHA)",
+            "tier": "MR_VALIDATED"
+          },
+          {
+            "name": "Vitamin D3 (Cholecalciferol)",
+            "tier": "MR_VALIDATED"
+          },
+          {
+            "name": "Spermidine",
+            "tier": "OBSERVATIONAL"
+          }
+        ],
+        "apoe_genotype": null,
+        "apoe_risk_tier": "INSUFFICIENT_DATA",
+        "mthfr_activity_pct": null,
+        "wearable_tiers": {
+          "hrv_rmssd": "OPTIMAL",
+          "vo2max": "OPTIMAL",
+          "deep_sleep_pct": "OPTIMAL",
+          "daily_steps": "OPTIMAL",
+          "resting_heart_rate": "OPTIMAL"
+        },
+        "wearable_hallmark_signals": {
+          "mitochondrial_dysfunction": 0.0,
+          "altered_intercellular_communication": 0.0,
+          "stem_cell_exhaustion": 0.0,
+          "cellular_senescence": 0.0,
+          "epigenetic_alterations": 0.0
+        },
+        "ascvd_10yr_pct": null,
+        "ascvd_category": null
+      },
+      "assertions": [
+        {
+          "label": "PhenoAge < 55yr",
+          "path": "phenoage_analysis.phenoage_estimate",
+          "op": "lt",
+          "expected": "55.0",
+          "actual": "48.17",
+          "passed": true,
+          "detail": "48.17 < 55.0"
+        },
+        {
+          "label": "Age acceleration negative",
+          "path": "phenoage_analysis.age_acceleration",
+          "op": "lt",
+          "expected": "0.0",
+          "actual": "-19.83",
+          "passed": true,
+          "detail": "-19.83 < 0.0"
+        },
+        {
+          "label": "HRV OPTIMAL",
+          "path": "wearable_assessment.scored_metrics.hrv_rmssd.tier",
+          "op": "eq",
+          "expected": "OPTIMAL",
+          "actual": "OPTIMAL",
+          "passed": true,
+          "detail": "'OPTIMAL' == 'OPTIMAL'"
+        },
+        {
+          "label": "VO2max OPTIMAL",
+          "path": "wearable_assessment.scored_metrics.vo2max.tier",
+          "op": "eq",
+          "expected": "OPTIMAL",
+          "actual": "OPTIMAL",
+          "passed": true,
+          "detail": "'OPTIMAL' == 'OPTIMAL'"
+        },
+        {
+          "label": "Steps OPTIMAL",
+          "path": "wearable_assessment.scored_metrics.daily_steps.tier",
+          "op": "eq",
+          "expected": "OPTIMAL",
+          "actual": "OPTIMAL",
+          "passed": true,
+          "detail": "'OPTIMAL' == 'OPTIMAL'"
+        },
+        {
+          "label": "Mito signal = 0 (no false positive)",
+          "path": "wearable_assessment.hallmark_signals.mitochondrial_dysfunction",
+          "op": "eq",
+          "expected": "0.0",
+          "actual": "0.0",
+          "passed": true,
+          "detail": "0.0 == 0.0"
+        }
+      ],
+      "expected_findings": [
+        "PhenoAge < 55yr (deceleration >= 13yr)",
+        "ALL 5 wearable metrics: OPTIMAL",
+        "All wearable hallmark signals = 0.0",
+        "FOXO3 rs2802292 GG = homozygous_protective",
+        "CETP rs5882 AA = homozygous_protective",
+        "KLOTHO rs9536314 TT = homozygous_protective",
+        "No false urgency \u2014 system does not invent risk"
+      ]
+    }
+  ]
+}
