@@ -32,7 +32,19 @@ export default function LoginPage() {
         full_name: res.full_name,
         clinic_id: res.clinic_id,
       });
-      router.push("/dashboard");
+      if (mode === "register") {
+        // Trigger onboarding: seed demo patients, then redirect to wizard
+        try {
+          const { onboardingApi } = await import("@/lib/api");
+          const ob = await onboardingApi.start("trial", true);
+          router.push(`/onboarding?id=${ob.onboarding_id}`);
+        } catch {
+          // Onboarding start failed — still go to dashboard
+          router.push("/dashboard");
+        }
+      } else {
+        router.push("/dashboard");
+      }
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : "Something went wrong";
       setError(message);

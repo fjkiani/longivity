@@ -6,6 +6,7 @@ import { patientsApi, Patient, intelligenceApi, IntelligenceResponse } from "@/l
 import { isAuthenticated, getUser } from "@/lib/auth";
 import Sidebar from "@/components/Sidebar";
 import DemoBanner from "@/components/DemoBanner";
+import OnboardingChecklist from "@/components/OnboardingChecklist";
 import { formatDate, formatAge } from "@/lib/utils";
 
 // Human-readable state labels — no internal jargon shown to demo viewers
@@ -106,6 +107,7 @@ export default function DashboardPage() {
   return (
     <div className="flex h-screen bg-gray-50 flex-col">
       <DemoBanner />
+        <OnboardingChecklist />
       <div className="flex flex-1 overflow-hidden">
         <Sidebar />
         <main className="flex-1 overflow-auto">

@@ -36,6 +36,7 @@ from .routers.evidence import router as evidence_router
 from .routers.nutrition import router as nutrition_router
 from .research_intelligence.router import router as ri_router
 from .routers.benchmark import router as benchmark_router
+from .routers.onboarding import router as onboarding_router
 
 # ── Structured logging ────────────────────────────────────────────────────────
 import structlog
@@ -166,6 +167,7 @@ app.include_router(evidence_router)
 app.include_router(nutrition_router)
 app.include_router(ri_router)
 app.include_router(benchmark_router)
+app.include_router(onboarding_router)
 
 
 @app.get("/", tags=["root"])
@@ -212,6 +214,12 @@ async def root():
             "intelligence": [
                 "GET /api/v1/patients/{id}/intelligence",
                 "GET /api/v1/clinic/intelligence",
+            ],
+            "onboarding": [
+                "POST /api/v1/onboarding/start",
+                "GET  /api/v1/onboarding/{id}/status",
+                "POST /api/v1/onboarding/complete",
+                "GET  /api/v1/onboarding/checklist",
             ],
             "benchmark": [
                 "GET /api/v1/longevity/benchmark/cohorts",
