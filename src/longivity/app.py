@@ -1,3 +1,14 @@
+
+# ── Production CORS lockdown ──────────────────────────────────────────────────
+import os as _os
+_env = _os.getenv("ENV", "development")
+_origins = _os.getenv("ALLOWED_ORIGINS", "")
+if _env == "production" and "*" in _origins:
+    raise RuntimeError(
+        "CORS wildcard '*' is not allowed in production. "
+        "Set ALLOWED_ORIGINS to specific origins in your environment."
+    )
+
 """Longivity FastAPI application — full patient platform."""
 from __future__ import annotations
 
@@ -8,6 +19,8 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi import Request
+from fastapi.responses import JSONResponse
 
 from .api import router as longevity_router
 from .routers.auth import router as auth_router
@@ -22,6 +35,31 @@ from .routers.demo import router as demo_router
 from .routers.evidence import router as evidence_router
 from .routers.nutrition import router as nutrition_router
 from .research_intelligence.router import router as ri_router
+from .routers.benchmark import router as benchmark_router
+
+# ── Structured logging ────────────────────────────────────────────────────────
+import structlog
+
+structlog.configure(
+    processors=[
+        structlog.stdlib.add_log_level,
+        structlog.stdlib.add_logger_name,
+        structlog.processors.TimeStamper(fmt="iso"),
+        structlog.processors.JSONRenderer(),
+    ],
+    wrapper_class=structlog.stdlib.BoundLogger,
+    context_class=dict,
+    logger_factory=structlog.stdlib.LoggerFactory(),
+)
+_slog = structlog.get_logger("longivity.app")
+
+# ── Rate limiting ─────────────────────────────────────────────────────────────
+from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi.util import get_remote_address
+from slowapi.errors import RateLimitExceeded
+
+_RATE_LIMIT_DEFAULT = os.getenv("RATE_LIMIT_DEFAULT", "60/minute")
+limiter = Limiter(key_func=get_remote_address, default_limits=[_RATE_LIMIT_DEFAULT])
 
 logger = logging.getLogger("longivity.keepalive")
 
@@ -88,6 +126,11 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+# Wire rate limiter
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+_slog.info("rate_limiter_configured", default_limit=_RATE_LIMIT_DEFAULT)
+
 # ── CORS ──────────────────────────────────────────────────────────────────────
 # Read comma-separated origins from env var; fall back to localhost for dev.
 _origins_env = os.getenv("ALLOWED_ORIGINS", "")
@@ -122,6 +165,7 @@ app.include_router(demo_router)
 app.include_router(evidence_router)
 app.include_router(nutrition_router)
 app.include_router(ri_router)
+app.include_router(benchmark_router)
 
 
 @app.get("/", tags=["root"])
@@ -168,6 +212,11 @@ async def root():
             "intelligence": [
                 "GET /api/v1/patients/{id}/intelligence",
                 "GET /api/v1/clinic/intelligence",
+            ],
+            "benchmark": [
+                "GET /api/v1/longevity/benchmark/cohorts",
+                "GET /api/v1/longevity/benchmark/evals",
+                "GET /api/v1/longevity/benchmark/trust",
             ],
             "science": [
                 "/api/v1/longevity/assessment_level0",

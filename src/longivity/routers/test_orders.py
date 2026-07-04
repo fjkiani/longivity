@@ -223,6 +223,23 @@ async def approve_test_order(
         age=age,
     )
 
+    # Persist approved order to database
+    try:
+        from ..db.models import TestOrder
+        from datetime import datetime
+        order_record = TestOrder(
+            patient_id=patient_id,
+            clinic_id=user.clinic_id,
+            status="approved",
+            order_data=agent_result,
+            approved_by=user.id,
+            approved_at=datetime.utcnow(),
+        )
+        db.add(order_record)
+        await db.commit()
+    except Exception as e:
+        logger.warning(f"Failed to persist approved test order: {e}")
+
     # Filter panels if clinician specified a subset
     recommended = agent_result.get("recommended_panels", [])
     if body.panel_ids_to_include:
