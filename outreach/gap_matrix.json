@@ -1,0 +1,167 @@
+{
+  "generated_at": "2026-07-04",
+  "capabilities": [
+    {
+      "capability": "PhenoAge / biological age acceleration",
+      "longivity": true,
+      "function_health": false,
+      "fountain_life": true,
+      "superpower": true,
+      "dossier_health": true,
+      "elysium_health": true
+    },
+    {
+      "capability": "Hallmark scoring (9 hallmarks of aging)",
+      "longivity": true,
+      "function_health": false,
+      "fountain_life": false,
+      "superpower": false,
+      "dossier_health": false,
+      "elysium_health": false
+    },
+    {
+      "capability": "AI-ranked compound recommendations",
+      "longivity": true,
+      "function_health": false,
+      "fountain_life": false,
+      "superpower": false,
+      "dossier_health": false,
+      "elysium_health": false
+    },
+    {
+      "capability": "MR evidence tiers (MR_VALIDATED / RCT)",
+      "longivity": true,
+      "function_health": false,
+      "fountain_life": false,
+      "superpower": false,
+      "dossier_health": false,
+      "elysium_health": false
+    },
+    {
+      "capability": "N-of-1 trial engine",
+      "longivity": true,
+      "function_health": false,
+      "fountain_life": false,
+      "superpower": false,
+      "dossier_health": false,
+      "elysium_health": false
+    },
+    {
+      "capability": "Longitudinal delta engine",
+      "longivity": true,
+      "function_health": false,
+      "fountain_life": false,
+      "superpower": true,
+      "dossier_health": false,
+      "elysium_health": true
+    },
+    {
+      "capability": "Wearable integration (HRV, VO2max, steps)",
+      "longivity": true,
+      "function_health": false,
+      "fountain_life": true,
+      "superpower": true,
+      "dossier_health": false,
+      "elysium_health": false
+    },
+    {
+      "capability": "Genetic risk layer (APOE, MTHFR)",
+      "longivity": true,
+      "function_health": false,
+      "fountain_life": true,
+      "superpower": false,
+      "dossier_health": false,
+      "elysium_health": false
+    },
+    {
+      "capability": "PDF lab import",
+      "longivity": true,
+      "function_health": false,
+      "fountain_life": false,
+      "superpower": false,
+      "dossier_health": true,
+      "elysium_health": false
+    },
+    {
+      "capability": "Multi-patient clinic dashboard",
+      "longivity": true,
+      "function_health": false,
+      "fountain_life": true,
+      "superpower": false,
+      "dossier_health": true,
+      "elysium_health": false
+    },
+    {
+      "capability": "Test ordering agent",
+      "longivity": true,
+      "function_health": false,
+      "fountain_life": true,
+      "superpower": true,
+      "dossier_health": false,
+      "elysium_health": false
+    },
+    {
+      "capability": "ASCVD cardiovascular risk",
+      "longivity": true,
+      "function_health": false,
+      "fountain_life": false,
+      "superpower": false,
+      "dossier_health": false,
+      "elysium_health": false
+    },
+    {
+      "capability": "Patient state machine (NEW\u2192STABLE)",
+      "longivity": true,
+      "function_health": false,
+      "fountain_life": false,
+      "superpower": false,
+      "dossier_health": false,
+      "elysium_health": false
+    },
+    {
+      "capability": "Clinic auth + multi-user roles",
+      "longivity": true,
+      "function_health": false,
+      "fountain_life": true,
+      "superpower": false,
+      "dossier_health": true,
+      "elysium_health": false
+    },
+    {
+      "capability": "Self-serve onboarding (no sales call)",
+      "longivity": true,
+      "function_health": true,
+      "fountain_life": false,
+      "superpower": true,
+      "dossier_health": false,
+      "elysium_health": true
+    },
+    {
+      "capability": "API-first (embeddable)",
+      "longivity": true,
+      "function_health": false,
+      "fountain_life": false,
+      "superpower": false,
+      "dossier_health": false,
+      "elysium_health": false
+    },
+    {
+      "capability": "Benchmark / trust architecture",
+      "longivity": true,
+      "function_health": false,
+      "fountain_life": false,
+      "superpower": false,
+      "dossier_health": false,
+      "elysium_health": false
+    },
+    {
+      "capability": "Nutrition hallmark scoring",
+      "longivity": true,
+      "function_health": false,
+      "fountain_life": false,
+      "superpower": false,
+      "dossier_health": false,
+      "elysium_health": false
+    }
+  ]
+}
