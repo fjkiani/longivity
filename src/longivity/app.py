@@ -227,3 +227,25 @@ async def root():
             ],
         },
     }
+
+@app.get("/api/v1/longevity/healthz/db", tags=["health"])
+async def healthz_db():
+    """
+    Database connectivity health check.
+    Returns {db: ok, latency_ms: N} on success, {db: error, detail: ...} on failure.
+    Used by Render health checks and monitoring.
+    """
+    import time
+    try:
+        import asyncpg
+        db_url = os.getenv("DATABASE_URL", "")
+        if not db_url:
+            return {"db": "skipped", "detail": "DATABASE_URL not set"}
+        t0 = time.monotonic()
+        conn = await asyncpg.connect(db_url)
+        await conn.fetchval("SELECT 1")
+        await conn.close()
+        latency_ms = round((time.monotonic() - t0) * 1000, 1)
+        return {"db": "ok", "latency_ms": latency_ms}
+    except Exception as e:
+        return {"db": "error", "detail": str(e)}
