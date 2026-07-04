@@ -1,0 +1,198 @@
+{
+  "_metadata": {
+    "version": "1.0",
+    "generated": "2026-07-04",
+    "description": "Machine-readable trust anchor registry for Longivity. Every system output traces to one of these anchors.",
+    "anchor_types": {
+      "DETERMINISTIC_FORMULA": "Published mathematical formula. Same inputs always produce same output. Cannot hallucinate.",
+      "MR_VALIDATED": "Mendelian Randomization causal evidence. Genetically-instrumented causal estimate — stronger than observational association.",
+      "DETERMINISTIC_LOOKUP": "Published lookup table. Deterministic from SNP genotype. Cannot hallucinate.",
+      "PUBLISHED_THRESHOLD": "Threshold from peer-reviewed publication. Applied deterministically to wearable values."
+    }
+  },
+  "anchors": [
+    {
+      "id": "phenoage_formula",
+      "name": "PhenoAge Biological Age Formula",
+      "type": "DETERMINISTIC_FORMULA",
+      "citation": "Levine ME et al. Aging Cell. 2018. PMID 29676998",
+      "pmid": "29676998",
+      "doi": null,
+      "claim": "9-biomarker Gompertz mortality model. Deterministic to <0.001yr. Validated in NHANES III/IV. Predicts 10-year mortality better than chronological age alone.",
+      "validated_ranges": {
+        "healthy_45yo_phenoage": [28, 42],
+        "accelerated_58yo_phenoage": [60, 85],
+        "determinism_tolerance_yr": 0.001
+      },
+      "diseases": ["T2D", "CVD", "frailty", "cognitive_decline", "longevity_optimization"],
+      "biomarkers_used": ["albumin", "creatinine", "glucose", "crp", "lymphocyte_pct", "mcv", "rdw", "alkaline_phosphatase", "wbc"],
+      "what_it_proves": "Hidden biological aging invisible to standard annual physicals. A 58yo with T2D can have the biology of a 73yo."
+    },
+    {
+      "id": "ascvd_pce",
+      "name": "ACC/AHA Pooled Cohort Equations (ASCVD)",
+      "type": "DETERMINISTIC_FORMULA",
+      "citation": "Goff DC Jr et al. J Am Coll Cardiol. 2014. PMID 24222018",
+      "pmid": "24222018",
+      "doi": null,
+      "claim": "4 sex/race strata. 10-year ASCVD risk. Validated in REGARDS and MESA cohorts. Standard of care in ACC/AHA guidelines.",
+      "validated_ranges": {
+        "risk_range_pct": [0, 100],
+        "high_risk_threshold_pct": 20,
+        "intermediate_risk_threshold_pct": 7.5
+      },
+      "diseases": ["CVD"],
+      "what_it_proves": "Cardiovascular event risk over 10 years. Combined with PhenoAge, surfaces patients whose arteries are aging faster than their calendar age."
+    },
+    {
+      "id": "mr_omega3",
+      "name": "Omega-3 Fatty Acids → PhenoAge Deceleration (Mendelian Randomization)",
+      "type": "MR_VALIDATED",
+      "citation": "Fabian CJ et al. Human Genomics. 2025. DOI 10.1186/s40246-025-00756-3",
+      "pmid": null,
+      "doi": "10.1186/s40246-025-00756-3",
+      "claim": "Oily fish intake causally decreases PhenoAge acceleration. IVW p=0.0086. Fish oil supplementation causally decreases GrimAge. IVW p=0.037. Genetically-instrumented — not confounded by healthy user bias.",
+      "mr_details": {
+        "exposure": "oily_fish_intake / fish_oil_supplementation",
+        "outcome": "PhenoAge_acceleration / GrimAge",
+        "method": "IVW",
+        "p_value_phenoage": 0.0086,
+        "p_value_grimage": 0.037,
+        "direction": "protective"
+      },
+      "diseases": ["CVD", "T2D", "frailty", "cognitive_decline"],
+      "compound_id": "omega_3",
+      "evidence_tier": "MR_VALIDATED"
+    },
+    {
+      "id": "mr_vitamin_d3",
+      "name": "Vitamin D3 → GrimAge Deceleration (Mendelian Randomization)",
+      "type": "MR_VALIDATED",
+      "citation": "Hagenbeek FA et al. Twin Research and Human Genetics. 2022. PMID 36055464",
+      "pmid": "36055464",
+      "doi": null,
+      "claim": "Genetically predicted 25-OHD serum levels causally associated with lower GrimAge. IVW p=0.04. Twin study design controls for shared environment.",
+      "mr_details": {
+        "exposure": "25OHD_serum_levels",
+        "outcome": "GrimAge",
+        "method": "IVW",
+        "p_value": 0.04,
+        "direction": "protective"
+      },
+      "diseases": ["T2D", "CVD", "frailty", "cognitive_decline"],
+      "compound_id": "vitamin_d3",
+      "evidence_tier": "MR_VALIDATED"
+    },
+    {
+      "id": "mr_folate",
+      "name": "Folate Intake → PhenoAge Deceleration (Mendelian Randomization)",
+      "type": "MR_VALIDATED",
+      "citation": "Fabian CJ et al. Human Genomics. 2025. DOI 10.1186/s40246-025-00756-3",
+      "pmid": null,
+      "doi": "10.1186/s40246-025-00756-3",
+      "claim": "Folate intake MR signal for PhenoAge deceleration via homocysteine pathway. IVW p=0.03. Critical for MTHFR compound heterozygous carriers (~50% enzyme activity).",
+      "mr_details": {
+        "exposure": "folate_intake",
+        "outcome": "PhenoAge",
+        "method": "IVW",
+        "p_value": 0.03,
+        "direction": "protective"
+      },
+      "diseases": ["cognitive_decline"],
+      "compound_id": "folate",
+      "evidence_tier": "MR_VALIDATED"
+    },
+    {
+      "id": "mr_metformin",
+      "name": "Metformin Pathway → Biological Age Deceleration (Mendelian Randomization)",
+      "type": "MR_VALIDATED",
+      "citation": "Dugué PA et al. Aging Cell. 2021. PMID 34385711",
+      "pmid": "34385711",
+      "doi": null,
+      "claim": "Genetically predicted lower fasting glucose causally reduces PhenoAge acceleration. IVW p=0.02. Metformin acts on this pathway (AMPK/mTOR). Glucose is the #1 PhenoAge accelerator by coefficient (0.1953).",
+      "mr_details": {
+        "exposure": "fasting_glucose_genetically_predicted",
+        "outcome": "biological_age_acceleration",
+        "method": "IVW",
+        "p_value": 0.02,
+        "direction": "protective"
+      },
+      "diseases": ["T2D"],
+      "compound_id": "metformin",
+      "evidence_tier": "MR_VALIDATED"
+    },
+    {
+      "id": "apoe_diplotype",
+      "name": "APOE Diplotype Table (rs429358 + rs7412)",
+      "type": "DETERMINISTIC_LOOKUP",
+      "citation": "Corder EH et al. Science. 1993. PMID 8346443",
+      "pmid": "8346443",
+      "doi": null,
+      "claim": "Two SNPs (rs429358 + rs7412) deterministically determine APOE genotype e2/e2 through e4/e4. e4/e4 = 8-12× elevated Alzheimer's disease risk. Cannot hallucinate — pure lookup table.",
+      "genotype_risk": {
+        "e2/e2": "REDUCED_RISK",
+        "e2/e3": "REFERENCE",
+        "e3/e3": "REFERENCE",
+        "e2/e4": "ELEVATED",
+        "e3/e4": "ELEVATED",
+        "e4/e4": "HIGH_RISK (8-12x AD risk)"
+      },
+      "diseases": ["cognitive_decline"],
+      "what_it_proves": "Genetic risk that contradicts biomarker signal. A patient with PhenoAge 33yr (−19yr deceleration) can simultaneously carry 8-12× AD risk."
+    },
+    {
+      "id": "mthfr_activity",
+      "name": "MTHFR Enzyme Activity Table (C677T + A1298C)",
+      "type": "DETERMINISTIC_LOOKUP",
+      "citation": "Frosst P et al. Nature Genetics. 1995. PMID 8554066",
+      "pmid": "8554066",
+      "doi": null,
+      "claim": "C677T (rs1801133) + A1298C (rs1801131) compound heterozygous → ~50% MTHFR enzyme activity. Impairs folate metabolism and methylation. Deterministic from genotype.",
+      "activity_table": {
+        "C677T_CC_A1298C_AA": "100% (normal)",
+        "C677T_CT_A1298C_AA": "~65%",
+        "C677T_TT_A1298C_AA": "~30%",
+        "C677T_CT_A1298C_AC": "~50% (compound het)",
+        "C677T_TT_A1298C_AC": "~25%"
+      },
+      "diseases": ["cognitive_decline"],
+      "what_it_proves": "Methylation enzyme running at 50% capacity. Folate/5-MTHF supplementation is the evidence-based intervention."
+    },
+    {
+      "id": "wearable_hrv",
+      "name": "HRV RMSSD Longevity Thresholds",
+      "type": "PUBLISHED_THRESHOLD",
+      "citation": "Shaffer F & Ginsberg JP. Front Public Health. 2017. PMID 29034226",
+      "pmid": "29034226",
+      "doi": null,
+      "claim": "OPTIMAL ≥50ms, MODERATE 30-50ms, HIGH_RISK <30ms. Maps to mitochondrial_dysfunction and altered_intercellular_communication hallmarks.",
+      "thresholds": {"OPTIMAL_min_ms": 50, "MODERATE_min_ms": 30, "HIGH_RISK_max_ms": 30},
+      "diseases": ["frailty", "CVD"],
+      "what_it_proves": "Autonomic nervous system health. HRV 22ms (Dorothy) = HIGH_RISK mitochondrial dysfunction invisible to standard labs."
+    },
+    {
+      "id": "wearable_vo2max",
+      "name": "VO2max Longevity Thresholds",
+      "type": "PUBLISHED_THRESHOLD",
+      "citation": "Ross R et al. Circulation. 2016. PMID 27881567",
+      "pmid": "27881567",
+      "doi": null,
+      "claim": "OPTIMAL ≥45 mL/kg/min, MODERATE 30-45, HIGH_RISK <30. Maps to mitochondrial_dysfunction, stem_cell_exhaustion, cellular_senescence.",
+      "thresholds": {"OPTIMAL_min": 45, "MODERATE_min": 30, "HIGH_RISK_max": 30, "unit": "mL/kg/min"},
+      "diseases": ["frailty", "CVD"],
+      "what_it_proves": "Cardiorespiratory fitness — strongest single predictor of all-cause mortality. VO2max 24 (Dorothy) = HIGH_RISK, equivalent to frailty trajectory."
+    },
+    {
+      "id": "wearable_steps",
+      "name": "Daily Steps Longevity Thresholds",
+      "type": "PUBLISHED_THRESHOLD",
+      "citation": "Paluch AE et al. JAMA Intern Med. 2022. PMID 35416941",
+      "pmid": "35416941",
+      "doi": null,
+      "claim": "OPTIMAL ≥8000 steps/day, MODERATE 5000-8000, HIGH_RISK <5000. Maps to cellular_senescence and mitochondrial_dysfunction.",
+      "thresholds": {"OPTIMAL_min": 8000, "MODERATE_min": 5000, "HIGH_RISK_max": 5000},
+      "diseases": ["frailty"],
+      "what_it_proves": "Physical activity dose-response for longevity. 3200 steps/day (Dorothy) = HIGH_RISK senescence trajectory."
+    }
+  ]
+}
