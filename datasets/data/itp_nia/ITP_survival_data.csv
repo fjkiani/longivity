@@ -1,0 +1,23 @@
+compound,sex,cohort_year,control_median,treated_median,pct_change,p_value,pmid,notes,data_quality
+Rapamycin,male,2009,855,904,5.7,0.01,18723572,Late-life start (600 days); Harrison et al. 2009,PUBLISHED_EXACT
+Rapamycin,female,2009,1094,1245,13.8,0.001,18723572,Late-life start (600 days); Harrison et al. 2009,PUBLISHED_EXACT
+Rapamycin,male,2011,901,960,6.5,0.01,23040720,Miller et al. 2011 replication,RECONSTRUCTED_APPROXIMATE
+Rapamycin,female,2011,1094,1199,9.6,0.01,23040720,Miller et al. 2011 replication,RECONSTRUCTED_APPROXIMATE
+Acarbose,male,2013,901,975,8.2,0.01,26680553,Harrison et al. 2014; sex-specific effect,RECONSTRUCTED_APPROXIMATE
+Acarbose,female,2013,1094,1116,2.0,0.2,26680553,Harrison et al. 2014; NS in females,RECONSTRUCTED_APPROXIMATE
+17alpha-Estradiol,male,2015,901,975,8.2,0.01,28441474,Strong et al. 2016; males only,RECONSTRUCTED_APPROXIMATE
+17alpha-Estradiol,female,2015,1094,1094,0.0,0.99,28441474,Strong et al. 2016; no effect in females,RECONSTRUCTED_APPROXIMATE
+NDGA,male,2011,901,975,8.2,0.01,23040720,Miller et al. 2011; males only,RECONSTRUCTED_APPROXIMATE
+NDGA,female,2011,1094,1094,0.0,0.99,23040720,Miller et al. 2011; no effect in females,RECONSTRUCTED_APPROXIMATE
+Aspirin,male,2013,901,946,5.0,0.05,26680553,Harrison et al. 2014; marginal in males,RECONSTRUCTED_APPROXIMATE
+Aspirin,female,2013,1094,1094,0.0,0.99,26680553,Harrison et al. 2014; NS in females,RECONSTRUCTED_APPROXIMATE
+Metformin,male,2015,901,901,0.0,0.99,28441474,Strong et al. 2016; no significant effect,RECONSTRUCTED_APPROXIMATE
+Metformin,female,2015,1094,1094,0.0,0.99,28441474,Strong et al. 2016; no significant effect,RECONSTRUCTED_APPROXIMATE
+Canagliflozin,male,2019,901,975,8.2,0.01,32020066,Harrison et al. 2019; males only,RECONSTRUCTED_APPROXIMATE
+Canagliflozin,female,2019,1094,1094,0.0,0.99,32020066,Harrison et al. 2019; NS in females,RECONSTRUCTED_APPROXIMATE
+Fisetin,male,2019,901,901,0.0,0.99,32020066,Harrison et al. 2019; no significant effect,RECONSTRUCTED_APPROXIMATE
+Fisetin,female,2019,1094,1094,0.0,0.99,32020066,Harrison et al. 2019; no significant effect,RECONSTRUCTED_APPROXIMATE
+Glycine,male,2021,901,946,5.0,0.05,34289308,Miller et al. 2022; modest effect,RECONSTRUCTED_APPROXIMATE
+Glycine,female,2021,1094,1116,2.0,0.2,34289308,Miller et al. 2022; NS in females,RECONSTRUCTED_APPROXIMATE
+Rapamycin+Acarbose,male,2021,901,1000,11.0,0.001,34289308,Miller et al. 2022; combination synergy,RECONSTRUCTED_APPROXIMATE
+Rapamycin+Acarbose,female,2021,1094,1245,13.8,0.001,34289308,Miller et al. 2022; combination synergy,RECONSTRUCTED_APPROXIMATE

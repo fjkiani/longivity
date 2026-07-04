@@ -1,3 +1,11 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:a6129c83ec82242bef9f06e8fd535aecc7ee2283e5d832ac245989592acfcf9d
-size 1332
+compound_id,display_name,in_longevity_map,itp_result
+17alpha-estradiol,17alpha-Estradiol,False,POSITIVE
+acarbose,Acarbose,True,POSITIVE
+aspirin,Aspirin,False,NEGATIVE_OR_SEX_SPECIFIC
+canagliflozin,Canagliflozin,True,POSITIVE
+fisetin,Fisetin,True,NEGATIVE_OR_SEX_SPECIFIC
+glycine,Glycine,True,NEGATIVE_OR_SEX_SPECIFIC
+metformin,Metformin,True,NEGATIVE_OR_SEX_SPECIFIC
+ndga,NDGA,False,POSITIVE
+rapamycin,Rapamycin,True,POSITIVE
+rapamycin+acarbose,Rapamycin+Acarbose,False,POSITIVE

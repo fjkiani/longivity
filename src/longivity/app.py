@@ -20,6 +20,7 @@ from .routers.timeline import router as timeline_router
 from .routers.intelligence import router as intelligence_router
 from .routers.demo import router as demo_router
 from .routers.evidence import router as evidence_router
+from .routers.nutrition import router as nutrition_router
 from .research_intelligence.router import router as ri_router
 
 logger = logging.getLogger("longivity.keepalive")
@@ -119,6 +120,7 @@ app.include_router(timeline_router)
 app.include_router(intelligence_router)
 app.include_router(demo_router)
 app.include_router(evidence_router)
+app.include_router(nutrition_router)
 app.include_router(ri_router)
 
 

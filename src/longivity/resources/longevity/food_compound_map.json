@@ -1,0 +1,932 @@
+{
+  "_metadata": {
+    "version": "1.0",
+    "compound_ids_source": "longevity_compound_hallmark_map.json",
+    "literature_sources": [
+      "Phenol-Explorer 3.6 (Neveu et al. 2010, PMID 20952405)",
+      "USDA FoodData Central (fdc.nal.usda.gov)",
+      "Spermidine content: Mu\u00f1oz-Esparza et al. 2019 (PMID 31817669)",
+      "Sulforaphane: Fahey et al. 2012 (PMID 22877795)",
+      "Omega-3: Calder 2015 (PMID 25149823)",
+      "Vitamin K2: Schurgers & Vermeer 2000 (PMID 11356998)",
+      "CoQ10: Pravst et al. 2010 (PMID 20041827)",
+      "Astaxanthin: Ambati et al. 2014 (PMID 24936534)"
+    ],
+    "note": "Compound IDs must match compound_id fields in longevity_compound_hallmark_map.json"
+  },
+  "categories": {
+    "berries": {
+      "blueberries": {
+        "display_name": "Blueberries",
+        "compounds": [
+          "quercetin",
+          "resveratrol",
+          "vitamin_c",
+          "pterostilbene"
+        ],
+        "serving_unit": "cup",
+        "notes": "Highest pterostilbene content of common berries; quercetin ~7.7mg/100g"
+      },
+      "strawberries": {
+        "display_name": "Strawberries",
+        "compounds": [
+          "fisetin",
+          "quercetin",
+          "vitamin_c"
+        ],
+        "serving_unit": "cup",
+        "notes": "Highest fisetin content of common foods (~160 \u03bcg/g fresh weight)"
+      },
+      "raspberries": {
+        "display_name": "Raspberries",
+        "compounds": [
+          "quercetin",
+          "fisetin",
+          "vitamin_c",
+          "folate"
+        ],
+        "serving_unit": "cup",
+        "notes": "Ellagitannins metabolized to urolithin_a by gut microbiome"
+      },
+      "blackberries": {
+        "display_name": "Blackberries",
+        "compounds": [
+          "quercetin",
+          "vitamin_c",
+          "folate"
+        ],
+        "serving_unit": "cup",
+        "notes": "High anthocyanin content"
+      },
+      "pomegranate": {
+        "display_name": "Pomegranate",
+        "compounds": [
+          "urolithin_a",
+          "quercetin",
+          "vitamin_c"
+        ],
+        "serving_unit": "cup",
+        "notes": "Ellagitannins \u2192 urolithin A (gut-dependent); punicalagin is primary polyphenol"
+      },
+      "grapes_red": {
+        "display_name": "Red Grapes",
+        "compounds": [
+          "resveratrol",
+          "quercetin",
+          "pterostilbene"
+        ],
+        "serving_unit": "cup",
+        "notes": "Resveratrol primarily in skin; ~0.16-3.54 mg/100g"
+      },
+      "acai": {
+        "display_name": "A\u00e7a\u00ed",
+        "compounds": [
+          "resveratrol",
+          "quercetin",
+          "vitamin_c",
+          "omega_3"
+        ],
+        "serving_unit": "100g",
+        "notes": "High ORAC; contains small amounts of omega-3"
+      }
+    },
+    "cruciferous_vegetables": {
+      "broccoli": {
+        "display_name": "Broccoli",
+        "compounds": [
+          "sulforaphane",
+          "vitamin_c",
+          "folate",
+          "vitamin_k2"
+        ],
+        "serving_unit": "cup",
+        "notes": "Highest sulforaphane precursor (glucoraphanin) of common vegetables; ~44mg/100g raw"
+      },
+      "broccoli_sprouts": {
+        "display_name": "Broccoli Sprouts",
+        "compounds": [
+          "sulforaphane",
+          "vitamin_c",
+          "folate"
+        ],
+        "serving_unit": "cup",
+        "notes": "10-100x more glucoraphanin than mature broccoli (Fahey 1997, PMID 9294217)"
+      },
+      "cauliflower": {
+        "display_name": "Cauliflower",
+        "compounds": [
+          "sulforaphane",
+          "vitamin_c",
+          "folate"
+        ],
+        "serving_unit": "cup",
+        "notes": "Lower sulforaphane than broccoli but significant"
+      },
+      "brussels_sprouts": {
+        "display_name": "Brussels Sprouts",
+        "compounds": [
+          "sulforaphane",
+          "vitamin_c",
+          "folate",
+          "vitamin_k2"
+        ],
+        "serving_unit": "cup",
+        "notes": "High glucosinolate content"
+      },
+      "kale": {
+        "display_name": "Kale",
+        "compounds": [
+          "sulforaphane",
+          "vitamin_c",
+          "vitamin_k2",
+          "folate",
+          "beta_carotene"
+        ],
+        "serving_unit": "cup",
+        "notes": "Exceptionally high vitamin K1 (not K2); beta-carotene ~9990 \u03bcg/100g"
+      },
+      "arugula": {
+        "display_name": "Arugula (Rocket)",
+        "compounds": [
+          "sulforaphane",
+          "vitamin_c",
+          "folate"
+        ],
+        "serving_unit": "cup",
+        "notes": "Erucin is primary isothiocyanate"
+      },
+      "cabbage": {
+        "display_name": "Cabbage",
+        "compounds": [
+          "sulforaphane",
+          "vitamin_c",
+          "folate"
+        ],
+        "serving_unit": "cup",
+        "notes": "Fermented cabbage (sauerkraut) adds probiotic benefit"
+      },
+      "bok_choy": {
+        "display_name": "Bok Choy",
+        "compounds": [
+          "sulforaphane",
+          "vitamin_c",
+          "folate",
+          "beta_carotene"
+        ],
+        "serving_unit": "cup",
+        "notes": "High calcium and vitamin A"
+      }
+    },
+    "alliums": {
+      "garlic": {
+        "display_name": "Garlic",
+        "compounds": [
+          "quercetin",
+          "vitamin_c"
+        ],
+        "serving_unit": "clove",
+        "notes": "Allicin (from alliin) is primary bioactive; quercetin ~11.4mg/100g"
+      },
+      "onions_red": {
+        "display_name": "Red Onions",
+        "compounds": [
+          "quercetin",
+          "vitamin_c"
+        ],
+        "serving_unit": "medium",
+        "notes": "Highest quercetin of common vegetables ~33mg/100g"
+      },
+      "onions_yellow": {
+        "display_name": "Yellow Onions",
+        "compounds": [
+          "quercetin",
+          "vitamin_c"
+        ],
+        "serving_unit": "medium",
+        "notes": "Quercetin ~22mg/100g"
+      },
+      "leeks": {
+        "display_name": "Leeks",
+        "compounds": [
+          "quercetin",
+          "folate",
+          "vitamin_k2"
+        ],
+        "serving_unit": "cup",
+        "notes": "Kaempferol is primary flavonoid"
+      },
+      "chives": {
+        "display_name": "Chives",
+        "compounds": [
+          "quercetin",
+          "vitamin_c",
+          "vitamin_k2"
+        ],
+        "serving_unit": "tbsp",
+        "notes": "High quercetin density per gram"
+      }
+    },
+    "fatty_fish": {
+      "salmon_wild": {
+        "display_name": "Wild Salmon",
+        "compounds": [
+          "omega_3",
+          "vitamin_d3",
+          "astaxanthin",
+          "coq10",
+          "selenium"
+        ],
+        "serving_unit": "3oz",
+        "notes": "Wild > farmed for astaxanthin; EPA+DHA ~2.2g/100g"
+      },
+      "salmon_farmed": {
+        "display_name": "Farmed Salmon",
+        "compounds": [
+          "omega_3",
+          "vitamin_d3",
+          "coq10",
+          "selenium"
+        ],
+        "serving_unit": "3oz",
+        "notes": "Lower astaxanthin than wild; EPA+DHA ~2.5g/100g"
+      },
+      "sardines": {
+        "display_name": "Sardines",
+        "compounds": [
+          "omega_3",
+          "vitamin_d3",
+          "coq10",
+          "vitamin_k2",
+          "selenium"
+        ],
+        "serving_unit": "3oz",
+        "notes": "Excellent vitamin K2 (MK-4) source; EPA+DHA ~1.5g/100g"
+      },
+      "mackerel": {
+        "display_name": "Mackerel",
+        "compounds": [
+          "omega_3",
+          "vitamin_d3",
+          "coq10",
+          "selenium"
+        ],
+        "serving_unit": "3oz",
+        "notes": "Highest EPA+DHA of common fish ~2.6g/100g"
+      },
+      "herring": {
+        "display_name": "Herring",
+        "compounds": [
+          "omega_3",
+          "vitamin_d3",
+          "coq10",
+          "selenium"
+        ],
+        "serving_unit": "3oz",
+        "notes": "EPA+DHA ~1.7g/100g"
+      },
+      "anchovies": {
+        "display_name": "Anchovies",
+        "compounds": [
+          "omega_3",
+          "vitamin_d3",
+          "selenium"
+        ],
+        "serving_unit": "3oz",
+        "notes": "High omega-3 density; low mercury"
+      },
+      "tuna_bluefin": {
+        "display_name": "Bluefin Tuna",
+        "compounds": [
+          "omega_3",
+          "coq10",
+          "selenium"
+        ],
+        "serving_unit": "3oz",
+        "notes": "High CoQ10 (~3mg/100g); moderate mercury \u2014 limit frequency"
+      }
+    },
+    "fermented_foods": {
+      "yogurt_plain": {
+        "display_name": "Plain Yogurt",
+        "compounds": [
+          "probiotics_lactobacillus"
+        ],
+        "serving_unit": "cup",
+        "notes": "L. acidophilus, L. bulgaricus; calcium and protein"
+      },
+      "kefir": {
+        "display_name": "Kefir",
+        "compounds": [
+          "probiotics_lactobacillus",
+          "akkermansia_muciniphila"
+        ],
+        "serving_unit": "cup",
+        "notes": "30+ bacterial strains; may support Akkermansia colonization"
+      },
+      "kimchi": {
+        "display_name": "Kimchi",
+        "compounds": [
+          "probiotics_lactobacillus",
+          "sulforaphane",
+          "vitamin_c"
+        ],
+        "serving_unit": "cup",
+        "notes": "L. kimchii; fermented cruciferous base"
+      },
+      "sauerkraut": {
+        "display_name": "Sauerkraut",
+        "compounds": [
+          "probiotics_lactobacillus",
+          "sulforaphane",
+          "vitamin_c"
+        ],
+        "serving_unit": "cup",
+        "notes": "L. plantarum; fermented cabbage"
+      },
+      "miso": {
+        "display_name": "Miso",
+        "compounds": [
+          "probiotics_lactobacillus",
+          "spermidine"
+        ],
+        "serving_unit": "tbsp",
+        "notes": "Fermented soy; spermidine ~0.5mg/100g"
+      },
+      "tempeh": {
+        "display_name": "Tempeh",
+        "compounds": [
+          "probiotics_lactobacillus",
+          "spermidine",
+          "vitamin_k2"
+        ],
+        "serving_unit": "3oz",
+        "notes": "Highest vitamin K2 (MK-7) of plant foods ~1103 \u03bcg/100g"
+      },
+      "natto": {
+        "display_name": "Natto",
+        "compounds": [
+          "vitamin_k2",
+          "spermidine",
+          "probiotics_lactobacillus"
+        ],
+        "serving_unit": "3oz",
+        "notes": "Highest K2 (MK-7) of any food ~1000 \u03bcg/100g; spermidine ~1.3mg/100g"
+      },
+      "kombucha": {
+        "display_name": "Kombucha",
+        "compounds": [
+          "probiotics_lactobacillus"
+        ],
+        "serving_unit": "8oz",
+        "notes": "SCOBY fermentation; variable probiotic content"
+      }
+    },
+    "nuts_seeds": {
+      "walnuts": {
+        "display_name": "Walnuts",
+        "compounds": [
+          "omega_3",
+          "vitamin_e_tocotrienols",
+          "magnesium",
+          "folate"
+        ],
+        "serving_unit": "oz",
+        "notes": "Highest ALA of tree nuts ~2.5g/oz; gamma-tocopherol dominant"
+      },
+      "almonds": {
+        "display_name": "Almonds",
+        "compounds": [
+          "vitamin_e_tocotrienols",
+          "magnesium",
+          "vitamin_k2"
+        ],
+        "serving_unit": "oz",
+        "notes": "Highest vitamin E of tree nuts ~7.3mg/oz"
+      },
+      "brazil_nuts": {
+        "display_name": "Brazil Nuts",
+        "compounds": [
+          "selenium",
+          "magnesium",
+          "vitamin_e_tocotrienols"
+        ],
+        "serving_unit": "oz",
+        "notes": "Highest selenium of any food ~544 \u03bcg/oz (2 nuts = RDA)"
+      },
+      "flaxseed": {
+        "display_name": "Flaxseed",
+        "compounds": [
+          "omega_3",
+          "folate",
+          "magnesium"
+        ],
+        "serving_unit": "tbsp",
+        "notes": "Highest ALA of seeds ~2.4g/tbsp; lignans have phytoestrogenic activity"
+      },
+      "chia_seeds": {
+        "display_name": "Chia Seeds",
+        "compounds": [
+          "omega_3",
+          "magnesium",
+          "folate"
+        ],
+        "serving_unit": "tbsp",
+        "notes": "ALA ~2.5g/tbsp; high fiber"
+      },
+      "pumpkin_seeds": {
+        "display_name": "Pumpkin Seeds",
+        "compounds": [
+          "magnesium",
+          "zinc",
+          "vitamin_e_tocotrienols"
+        ],
+        "serving_unit": "oz",
+        "notes": "Highest magnesium of seeds ~150mg/oz; zinc ~2.2mg/oz"
+      },
+      "sunflower_seeds": {
+        "display_name": "Sunflower Seeds",
+        "compounds": [
+          "vitamin_e_tocotrienols",
+          "selenium",
+          "magnesium"
+        ],
+        "serving_unit": "oz",
+        "notes": "High alpha-tocopherol ~7.4mg/oz"
+      },
+      "sesame_seeds": {
+        "display_name": "Sesame Seeds",
+        "compounds": [
+          "magnesium",
+          "zinc",
+          "vitamin_e_tocotrienols"
+        ],
+        "serving_unit": "tbsp",
+        "notes": "Sesamin and sesamolin are lignans with antioxidant activity"
+      }
+    },
+    "legumes": {
+      "lentils": {
+        "display_name": "Lentils",
+        "compounds": [
+          "spermidine",
+          "folate",
+          "magnesium"
+        ],
+        "serving_unit": "cup",
+        "notes": "Spermidine ~0.6mg/100g; highest folate of legumes ~358 \u03bcg/cup"
+      },
+      "chickpeas": {
+        "display_name": "Chickpeas (Garbanzo Beans)",
+        "compounds": [
+          "spermidine",
+          "folate",
+          "magnesium",
+          "zinc"
+        ],
+        "serving_unit": "cup",
+        "notes": "Spermidine ~0.5mg/100g"
+      },
+      "black_beans": {
+        "display_name": "Black Beans",
+        "compounds": [
+          "spermidine",
+          "folate",
+          "magnesium"
+        ],
+        "serving_unit": "cup",
+        "notes": "High anthocyanin in seed coat"
+      },
+      "soybeans_edamame": {
+        "display_name": "Edamame / Soybeans",
+        "compounds": [
+          "spermidine",
+          "folate",
+          "magnesium",
+          "vitamin_k2"
+        ],
+        "serving_unit": "cup",
+        "notes": "Spermidine ~0.7mg/100g; isoflavones (genistein, daidzein)"
+      },
+      "peas": {
+        "display_name": "Green Peas",
+        "compounds": [
+          "spermidine",
+          "folate",
+          "vitamin_c"
+        ],
+        "serving_unit": "cup",
+        "notes": "Spermidine ~0.4mg/100g"
+      }
+    },
+    "whole_grains": {
+      "wheat_germ": {
+        "display_name": "Wheat Germ",
+        "compounds": [
+          "spermidine",
+          "folate",
+          "magnesium",
+          "zinc",
+          "vitamin_e_tocotrienols"
+        ],
+        "serving_unit": "2tbsp",
+        "notes": "Highest spermidine of common foods ~2.4mg/100g (Mu\u00f1oz-Esparza 2019)"
+      },
+      "oats": {
+        "display_name": "Oats",
+        "compounds": [
+          "magnesium",
+          "folate",
+          "zinc"
+        ],
+        "serving_unit": "cup",
+        "notes": "Beta-glucan fiber; avenanthramides are unique polyphenols"
+      },
+      "quinoa": {
+        "display_name": "Quinoa",
+        "compounds": [
+          "magnesium",
+          "folate",
+          "zinc"
+        ],
+        "serving_unit": "cup",
+        "notes": "Complete protein; quercetin and kaempferol in hull"
+      },
+      "brown_rice": {
+        "display_name": "Brown Rice",
+        "compounds": [
+          "magnesium",
+          "selenium"
+        ],
+        "serving_unit": "cup",
+        "notes": "Gamma-oryzanol has antioxidant activity"
+      },
+      "buckwheat": {
+        "display_name": "Buckwheat",
+        "compounds": [
+          "quercetin",
+          "magnesium",
+          "folate"
+        ],
+        "serving_unit": "cup",
+        "notes": "Rutin (quercetin glycoside) ~36mg/100g"
+      }
+    },
+    "spices_herbs": {
+      "turmeric": {
+        "display_name": "Turmeric",
+        "compounds": [
+          "curcumin"
+        ],
+        "serving_unit": "tsp",
+        "notes": "Curcumin ~3% by weight; bioavailability enhanced 2000% by piperine (black pepper)"
+      },
+      "ginger": {
+        "display_name": "Ginger",
+        "compounds": [
+          "quercetin",
+          "vitamin_c"
+        ],
+        "serving_unit": "tsp",
+        "notes": "Gingerols and shogaols are primary bioactives; anti-inflammatory"
+      },
+      "rosemary": {
+        "display_name": "Rosemary",
+        "compounds": [
+          "quercetin",
+          "vitamin_c"
+        ],
+        "serving_unit": "tsp",
+        "notes": "Rosmarinic acid and carnosic acid are primary polyphenols"
+      },
+      "thyme": {
+        "display_name": "Thyme",
+        "compounds": [
+          "quercetin",
+          "vitamin_c"
+        ],
+        "serving_unit": "tsp",
+        "notes": "Luteolin and apigenin are primary flavonoids"
+      },
+      "parsley": {
+        "display_name": "Parsley",
+        "compounds": [
+          "apigenin",
+          "vitamin_c",
+          "folate",
+          "vitamin_k2"
+        ],
+        "serving_unit": "tbsp",
+        "notes": "Highest apigenin of common herbs ~215mg/100g"
+      },
+      "celery": {
+        "display_name": "Celery",
+        "compounds": [
+          "apigenin",
+          "vitamin_c",
+          "folate"
+        ],
+        "serving_unit": "stalk",
+        "notes": "Apigenin ~19mg/100g; luteolin also present"
+      },
+      "chamomile_tea": {
+        "display_name": "Chamomile Tea",
+        "compounds": [
+          "apigenin"
+        ],
+        "serving_unit": "cup",
+        "notes": "Apigenin ~3-5mg/cup; primary flavonoid in chamomile"
+      }
+    },
+    "beverages": {
+      "green_tea": {
+        "display_name": "Green Tea",
+        "compounds": [
+          "egcg",
+          "quercetin",
+          "vitamin_c"
+        ],
+        "serving_unit": "cup",
+        "notes": "EGCG ~50-100mg/cup; catechin content varies by brewing"
+      },
+      "matcha": {
+        "display_name": "Matcha",
+        "compounds": [
+          "egcg",
+          "quercetin",
+          "vitamin_c"
+        ],
+        "serving_unit": "tsp",
+        "notes": "EGCG ~137mg/tsp \u2014 3x higher than brewed green tea"
+      },
+      "red_wine": {
+        "display_name": "Red Wine",
+        "compounds": [
+          "resveratrol",
+          "quercetin"
+        ],
+        "serving_unit": "5oz glass",
+        "notes": "Resveratrol ~0.1-14mg/glass; Pinot Noir highest; alcohol is a confounder"
+      },
+      "coffee": {
+        "display_name": "Coffee",
+        "compounds": [
+          "vitamin_c"
+        ],
+        "serving_unit": "cup",
+        "notes": "Chlorogenic acids are primary polyphenols; not in compound map but significant"
+      },
+      "black_tea": {
+        "display_name": "Black Tea",
+        "compounds": [
+          "quercetin"
+        ],
+        "serving_unit": "cup",
+        "notes": "Theaflavins and thearubigins from oxidized catechins"
+      }
+    },
+    "animal_products": {
+      "eggs": {
+        "display_name": "Eggs",
+        "compounds": [
+          "coq10",
+          "vitamin_d3",
+          "selenium",
+          "vitamin_k2"
+        ],
+        "serving_unit": "large egg",
+        "notes": "CoQ10 ~0.5mg/egg; vitamin D3 in yolk; K2 (MK-4) ~0.5 \u03bcg/egg"
+      },
+      "liver_beef": {
+        "display_name": "Beef Liver",
+        "compounds": [
+          "coq10",
+          "vitamin_k2",
+          "folate",
+          "zinc",
+          "selenium",
+          "vitamin_c"
+        ],
+        "serving_unit": "3oz",
+        "notes": "Highest CoQ10 of organ meats ~3.9mg/100g; K2 (MK-4) ~1 \u03bcg/100g; folate ~290 \u03bcg/100g"
+      },
+      "liver_chicken": {
+        "display_name": "Chicken Liver",
+        "compounds": [
+          "coq10",
+          "vitamin_k2",
+          "folate",
+          "zinc",
+          "selenium"
+        ],
+        "serving_unit": "3oz",
+        "notes": "CoQ10 ~1.2mg/100g; folate ~578 \u03bcg/100g \u2014 highest of any food"
+      },
+      "beef_grass_fed": {
+        "display_name": "Grass-Fed Beef",
+        "compounds": [
+          "coq10",
+          "zinc",
+          "selenium",
+          "vitamin_k2"
+        ],
+        "serving_unit": "3oz",
+        "notes": "CoQ10 ~3.1mg/100g; higher CLA and omega-3 than grain-fed"
+      },
+      "oysters": {
+        "display_name": "Oysters",
+        "compounds": [
+          "zinc",
+          "selenium",
+          "vitamin_d3",
+          "coq10"
+        ],
+        "serving_unit": "3oz",
+        "notes": "Highest zinc of any food ~74mg/100g; selenium ~77 \u03bcg/100g"
+      }
+    },
+    "oils_fats": {
+      "olive_oil_evoo": {
+        "display_name": "Extra Virgin Olive Oil",
+        "compounds": [
+          "vitamin_e_tocotrienols",
+          "vitamin_k2",
+          "quercetin"
+        ],
+        "serving_unit": "tbsp",
+        "notes": "Oleocanthal (ibuprofen-like COX inhibitor); oleuropein; polyphenols ~200-500mg/kg"
+      },
+      "avocado": {
+        "display_name": "Avocado",
+        "compounds": [
+          "coq10",
+          "vitamin_k2",
+          "magnesium",
+          "folate",
+          "vitamin_e_tocotrienols"
+        ],
+        "serving_unit": "half",
+        "notes": "CoQ10 ~0.95mg/100g; K2 (MK-4) ~0.5 \u03bcg/100g; folate ~81 \u03bcg/100g"
+      },
+      "coconut_oil": {
+        "display_name": "Coconut Oil",
+        "compounds": [],
+        "serving_unit": "tbsp",
+        "notes": "MCTs; no significant longevity compounds in map"
+      }
+    },
+    "mushrooms": {
+      "shiitake": {
+        "display_name": "Shiitake Mushrooms",
+        "compounds": [
+          "vitamin_d3",
+          "spermidine",
+          "zinc",
+          "selenium"
+        ],
+        "serving_unit": "cup",
+        "notes": "Spermidine ~0.9mg/100g; ergothioneine; lentinan (beta-glucan)"
+      },
+      "reishi": {
+        "display_name": "Reishi Mushrooms",
+        "compounds": [
+          "vitamin_d3",
+          "zinc"
+        ],
+        "serving_unit": "3g dried",
+        "notes": "Ganoderic acids; beta-glucans; adaptogenic"
+      },
+      "maitake": {
+        "display_name": "Maitake Mushrooms",
+        "compounds": [
+          "vitamin_d3",
+          "zinc",
+          "selenium"
+        ],
+        "serving_unit": "cup",
+        "notes": "D-fraction beta-glucan; high vitamin D2 when UV-exposed"
+      },
+      "portobello": {
+        "display_name": "Portobello Mushrooms",
+        "compounds": [
+          "vitamin_d3",
+          "selenium",
+          "zinc"
+        ],
+        "serving_unit": "cup",
+        "notes": "Vitamin D2 increases dramatically with UV exposure"
+      }
+    },
+    "other": {
+      "dark_chocolate_85pct": {
+        "display_name": "Dark Chocolate (\u226585%)",
+        "compounds": [
+          "resveratrol",
+          "quercetin",
+          "magnesium",
+          "zinc"
+        ],
+        "serving_unit": "1oz",
+        "notes": "Resveratrol ~0.35mg/oz; flavanols (epicatechin) ~200mg/oz; magnesium ~64mg/oz"
+      },
+      "aged_cheese": {
+        "display_name": "Aged Cheese (Gouda, Brie, Edam)",
+        "compounds": [
+          "vitamin_k2",
+          "spermidine"
+        ],
+        "serving_unit": "1oz",
+        "notes": "K2 (MK-7 and MK-9) ~75 \u03bcg/100g; spermidine ~0.4mg/100g"
+      },
+      "tomatoes": {
+        "display_name": "Tomatoes",
+        "compounds": [
+          "vitamin_c",
+          "beta_carotene",
+          "folate"
+        ],
+        "serving_unit": "medium",
+        "notes": "Lycopene is primary carotenoid (not in compound map); beta-carotene ~449 \u03bcg/100g"
+      },
+      "sweet_potato": {
+        "display_name": "Sweet Potato",
+        "compounds": [
+          "beta_carotene",
+          "vitamin_c",
+          "magnesium"
+        ],
+        "serving_unit": "medium",
+        "notes": "Highest beta-carotene of common vegetables ~8509 \u03bcg/100g"
+      },
+      "carrots": {
+        "display_name": "Carrots",
+        "compounds": [
+          "beta_carotene",
+          "vitamin_c",
+          "folate"
+        ],
+        "serving_unit": "medium",
+        "notes": "Beta-carotene ~8285 \u03bcg/100g"
+      },
+      "spinach": {
+        "display_name": "Spinach",
+        "compounds": [
+          "folate",
+          "magnesium",
+          "vitamin_c",
+          "beta_carotene",
+          "vitamin_k2"
+        ],
+        "serving_unit": "cup",
+        "notes": "Folate ~194 \u03bcg/cup; magnesium ~157mg/cup cooked; high oxalate reduces mineral absorption"
+      },
+      "asparagus": {
+        "display_name": "Asparagus",
+        "compounds": [
+          "folate",
+          "vitamin_c",
+          "vitamin_k2"
+        ],
+        "serving_unit": "cup",
+        "notes": "Folate ~262 \u03bcg/cup; asparagine is primary amino acid"
+      },
+      "beets": {
+        "display_name": "Beets",
+        "compounds": [
+          "folate",
+          "vitamin_c"
+        ],
+        "serving_unit": "cup",
+        "notes": "Betalains are primary pigments; nitrates \u2192 NO pathway"
+      },
+      "pineapple": {
+        "display_name": "Pineapple",
+        "compounds": [
+          "vitamin_c",
+          "folate"
+        ],
+        "serving_unit": "cup",
+        "notes": "Bromelain (protease); vitamin C ~47mg/cup"
+      },
+      "kiwi": {
+        "display_name": "Kiwi",
+        "compounds": [
+          "vitamin_c",
+          "vitamin_k2",
+          "folate"
+        ],
+        "serving_unit": "medium",
+        "notes": "Highest vitamin C density of common fruits ~93mg/medium"
+      },
+      "bell_pepper_red": {
+        "display_name": "Red Bell Pepper",
+        "compounds": [
+          "vitamin_c",
+          "beta_carotene",
+          "vitamin_k2"
+        ],
+        "serving_unit": "medium",
+        "notes": "Highest vitamin C of common vegetables ~152mg/medium"
+      }
+    }
+  }
+}

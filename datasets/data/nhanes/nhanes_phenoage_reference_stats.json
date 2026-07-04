@@ -1,0 +1,186 @@
+{
+  "_metadata": {
+    "source": "Levine et al. 2018 (PMID 29676998) - PhenoAge paper",
+    "population": "NHANES III (1988-1994) + NHANES 1999-2010",
+    "n_total": 11432,
+    "note": "Reference statistics for PhenoAge biomarker normalization"
+  },
+  "biomarkers": {
+    "albumin": {
+      "unit": "g/dL",
+      "mean": 4.18,
+      "sd": 0.35,
+      "reference_range": [
+        3.5,
+        5.0
+      ],
+      "phenoage_coefficient": -0.0336,
+      "direction": "lower_is_older",
+      "nhanes_variable": "LBDSALSI"
+    },
+    "creatinine": {
+      "unit": "mg/dL",
+      "mean": 0.96,
+      "sd": 0.27,
+      "reference_range": [
+        0.6,
+        1.2
+      ],
+      "phenoage_coefficient": 0.0095,
+      "direction": "higher_is_older",
+      "nhanes_variable": "LBXSCR"
+    },
+    "glucose": {
+      "unit": "mg/dL",
+      "mean": 99.5,
+      "sd": 27.8,
+      "reference_range": [
+        70,
+        100
+      ],
+      "phenoage_coefficient": 0.1953,
+      "direction": "higher_is_older",
+      "nhanes_variable": "LBXSGL"
+    },
+    "crp": {
+      "unit": "mg/L",
+      "mean": 3.84,
+      "sd": 7.52,
+      "reference_range": [
+        0,
+        3.0
+      ],
+      "phenoage_coefficient": 0.0954,
+      "direction": "higher_is_older",
+      "nhanes_variable": "LBXCRP"
+    },
+    "lymphocyte_pct": {
+      "unit": "%",
+      "mean": 29.8,
+      "sd": 8.2,
+      "reference_range": [
+        20,
+        40
+      ],
+      "phenoage_coefficient": -0.012,
+      "direction": "lower_is_older",
+      "nhanes_variable": "LBXLYPCT"
+    },
+    "mcv": {
+      "unit": "fL",
+      "mean": 89.7,
+      "sd": 5.8,
+      "reference_range": [
+        80,
+        100
+      ],
+      "phenoage_coefficient": 0.0268,
+      "direction": "higher_is_older",
+      "nhanes_variable": "LBXMCVSI"
+    },
+    "rdw": {
+      "unit": "%",
+      "mean": 13.0,
+      "sd": 1.2,
+      "reference_range": [
+        11.5,
+        14.5
+      ],
+      "phenoage_coefficient": 0.3306,
+      "direction": "higher_is_older",
+      "nhanes_variable": "LBXRDW"
+    },
+    "alkaline_phosphatase": {
+      "unit": "U/L",
+      "mean": 72.5,
+      "sd": 30.2,
+      "reference_range": [
+        44,
+        147
+      ],
+      "phenoage_coefficient": 0.00188,
+      "direction": "higher_is_older",
+      "nhanes_variable": "LBXSAPSI"
+    },
+    "wbc": {
+      "unit": "1000 cells/uL",
+      "mean": 7.0,
+      "sd": 2.1,
+      "reference_range": [
+        4.5,
+        11.0
+      ],
+      "phenoage_coefficient": 0.0554,
+      "direction": "higher_is_older",
+      "nhanes_variable": "LBXWBCSI"
+    }
+  },
+  "age_stratified_means": {
+    "30-39": {
+      "albumin": 4.28,
+      "creatinine": 0.92,
+      "glucose": 93.2,
+      "crp": 2.8,
+      "lymphocyte_pct": 32.1,
+      "mcv": 88.5,
+      "rdw": 12.7,
+      "alkaline_phosphatase": 68.2,
+      "wbc": 7.2
+    },
+    "40-49": {
+      "albumin": 4.22,
+      "creatinine": 0.94,
+      "glucose": 97.8,
+      "crp": 3.2,
+      "lymphocyte_pct": 30.8,
+      "mcv": 89.2,
+      "rdw": 12.9,
+      "alkaline_phosphatase": 70.1,
+      "wbc": 7.1
+    },
+    "50-59": {
+      "albumin": 4.18,
+      "creatinine": 0.96,
+      "glucose": 101.5,
+      "crp": 3.8,
+      "lymphocyte_pct": 29.5,
+      "mcv": 89.8,
+      "rdw": 13.1,
+      "alkaline_phosphatase": 72.8,
+      "wbc": 7.0
+    },
+    "60-69": {
+      "albumin": 4.1,
+      "creatinine": 0.98,
+      "glucose": 105.2,
+      "crp": 4.5,
+      "lymphocyte_pct": 28.2,
+      "mcv": 90.5,
+      "rdw": 13.4,
+      "alkaline_phosphatase": 75.2,
+      "wbc": 6.8
+    },
+    "70-79": {
+      "albumin": 4.02,
+      "creatinine": 1.01,
+      "glucose": 108.8,
+      "crp": 5.2,
+      "lymphocyte_pct": 26.8,
+      "mcv": 91.2,
+      "rdw": 13.8,
+      "alkaline_phosphatase": 78.5,
+      "wbc": 6.5
+    },
+    "80+": {
+      "albumin": 3.92,
+      "creatinine": 1.05,
+      "glucose": 112.5,
+      "crp": 6.1,
+      "lymphocyte_pct": 25.1,
+      "mcv": 92.0,
+      "rdw": 14.2,
+      "alkaline_phosphatase": 82.1,
+      "wbc": 6.2
+    }
+  }
+}

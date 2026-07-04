@@ -1,3 +1,831 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:d30b38e4526a47af68eacf04a1d868c8d8798a254946f6bc100dc9c3e7e17654
-size 6932
+[
+  {
+    "compound_id": "berberine",
+    "display_name": "Berberine",
+    "hallmarks_targeted": [
+      "nutrient_sensing",
+      "cellular_senescence"
+    ],
+    "max_hallmark_weight": 0.85,
+    "evidence_level": "ESTABLISHED",
+    "itp_tested": false,
+    "itp_positive": false,
+    "human_rct_available": true,
+    "pmids": [
+      "31773901",
+      "34956436",
+      "35609366",
+      "16873688"
+    ],
+    "mechanisms": [
+      "AMPK activation \u2192 improved insulin sensitivity and glucose uptake; overlaps with mTOR/insulin signaling nodes.",
+      "Berberine modulates senescence-associated programs in cardiovascular models; Klotho/SIRT1 axis implicated (corrected PMID)."
+    ]
+  },
+  {
+    "compound_id": "rapamycin",
+    "display_name": "Rapamycin (sirolimus) / mTOR inhibitors",
+    "hallmarks_targeted": [
+      "nutrient_sensing",
+      "cellular_senescence"
+    ],
+    "max_hallmark_weight": 0.7,
+    "evidence_level": "ESTABLISHED",
+    "itp_tested": true,
+    "itp_positive": true,
+    "human_rct_available": true,
+    "pmids": [
+      "30541901",
+      "29190625"
+    ],
+    "mechanisms": [
+      "mTORC1 inhibition; central node in nutrient-sensing longevity biology.",
+      "mTOR modulation intersects with senescence entry programs and SASP regulation (geroconversion context)."
+    ]
+  },
+  {
+    "compound_id": "metformin",
+    "display_name": "Metformin",
+    "hallmarks_targeted": [
+      "nutrient_sensing",
+      "cellular_senescence"
+    ],
+    "max_hallmark_weight": 0.85,
+    "evidence_level": "ESTABLISHED",
+    "itp_tested": true,
+    "itp_positive": false,
+    "human_rct_available": true,
+    "pmids": [
+      "32333835",
+      "34421827"
+    ],
+    "mechanisms": [
+      "AMPK activation, mitochondrial effects, reduced hepatic gluconeogenesis; intersects aging-relevant nutrient pathways.",
+      "Preclinical and translational links to senescence modulation; human longevity effect TAME-targeted."
+    ]
+  },
+  {
+    "compound_id": "resveratrol",
+    "display_name": "Resveratrol",
+    "hallmarks_targeted": [
+      "nutrient_sensing",
+      "altered_intercellular_communication"
+    ],
+    "max_hallmark_weight": 0.85,
+    "evidence_level": "ESTABLISHED",
+    "itp_tested": false,
+    "itp_positive": false,
+    "human_rct_available": true,
+    "pmids": [
+      "33551004",
+      "34257808",
+      "22560220"
+    ],
+    "mechanisms": [
+      "SIRT1/AMPK-related signaling and mitochondrial stress-response biology (primary verified review anchor).",
+      "NF-\u03baB / inflammatory modulation proposed in resveratrol aging reviews (PMIDs queued for manual confirmation)."
+    ]
+  },
+  {
+    "compound_id": "spermidine",
+    "display_name": "Spermidine",
+    "hallmarks_targeted": [
+      "loss_of_proteostasis",
+      "nutrient_sensing"
+    ],
+    "max_hallmark_weight": 0.7,
+    "evidence_level": "ESTABLISHED",
+    "itp_tested": false,
+    "itp_positive": false,
+    "human_rct_available": false,
+    "pmids": [
+      "30082504",
+      "29371440",
+      "23612189"
+    ],
+    "mechanisms": [
+      "Autophagy enhancement; arterial aging reversal in vivo (corrected PMID).",
+      "Polyamine metabolism intersects growth/nutrient signaling; human longevity associations in population work."
+    ]
+  },
+  {
+    "compound_id": "fisetin",
+    "display_name": "Fisetin",
+    "hallmarks_targeted": [
+      "cellular_senescence"
+    ],
+    "max_hallmark_weight": 0.7,
+    "evidence_level": "ESTABLISHED",
+    "itp_tested": true,
+    "itp_positive": false,
+    "human_rct_available": false,
+    "pmids": [
+      "30279143"
+    ],
+    "mechanisms": [
+      "Senotherapeutic flavonoid; senolytic/senomorphic evidence in preclinical models (verified PMID replaces 28610460)."
+    ]
+  },
+  {
+    "compound_id": "quercetin",
+    "display_name": "Quercetin",
+    "hallmarks_targeted": [
+      "cellular_senescence"
+    ],
+    "max_hallmark_weight": 0.6,
+    "evidence_level": "MODERATE",
+    "itp_tested": false,
+    "itp_positive": false,
+    "human_rct_available": false,
+    "pmids": [
+      "36857968"
+    ],
+    "mechanisms": [
+      "Dasatinib + quercetin (D+Q) phase I feasibility/tolerability in IPF (eBioMedicine 2023; PMID 36857968)."
+    ]
+  },
+  {
+    "compound_id": "nmn",
+    "display_name": "\u03b2-Nicotinamide Mononucleotide (NMN)",
+    "hallmarks_targeted": [
+      "mitochondrial_dysfunction",
+      "nutrient_sensing"
+    ],
+    "max_hallmark_weight": 0.6,
+    "evidence_level": "MODERATE",
+    "itp_tested": false,
+    "itp_positive": false,
+    "human_rct_available": true,
+    "pmids": [
+      "36482258"
+    ],
+    "mechanisms": [
+      "NAD+ precursor biology; RCT in adults for safety/tolerability and exploratory endpoints.",
+      "NAD+ links to sirtuin/mitochondrial stress responses (inferential at whole-organism level)."
+    ]
+  },
+  {
+    "compound_id": "nr",
+    "display_name": "Nicotinamide Riboside (NR)",
+    "hallmarks_targeted": [
+      "mitochondrial_dysfunction"
+    ],
+    "max_hallmark_weight": 0.6,
+    "evidence_level": "MODERATE",
+    "itp_tested": false,
+    "itp_positive": false,
+    "human_rct_available": true,
+    "pmids": [
+      "29211728"
+    ],
+    "mechanisms": [
+      "NAD+ precursor; NRPT trial and related human studies for NAD metabolites."
+    ]
+  },
+  {
+    "compound_id": "nac",
+    "display_name": "N-Acetylcysteine (NAC) / GlyNAC",
+    "hallmarks_targeted": [
+      "mitochondrial_dysfunction",
+      "altered_intercellular_communication"
+    ],
+    "max_hallmark_weight": 0.85,
+    "evidence_level": "ESTABLISHED",
+    "itp_tested": false,
+    "itp_positive": false,
+    "human_rct_available": false,
+    "pmids": [
+      "34587244",
+      "33783984"
+    ],
+    "mechanisms": [
+      "Glutathione precursor; redox and mitochondrial function improvements in older adults (GlyNAC trials).",
+      "Redox modulation can downshift inflammatory tone when oxidative stress drives signaling."
+    ]
+  },
+  {
+    "compound_id": "vitamin_d3",
+    "display_name": "Vitamin D3 (Cholecalciferol)",
+    "hallmarks_targeted": [
+      "altered_intercellular_communication",
+      "epigenetic_alterations"
+    ],
+    "max_hallmark_weight": 0.85,
+    "evidence_level": "ESTABLISHED",
+    "itp_tested": false,
+    "itp_positive": false,
+    "human_rct_available": true,
+    "pmids": [
+      "38285035",
+      "38542817"
+    ],
+    "mechanisms": [
+      "Immune modulation and inflammaging-relevant biology in hallmarks-aligned vitamin D review (PMID corrected).",
+      "Proposed VDR-linked immune epigenetic programming (PMID 38285035 not audit-verified)."
+    ]
+  },
+  {
+    "compound_id": "folate",
+    "display_name": "Folate (5-MTHF / folic acid)",
+    "hallmarks_targeted": [
+      "epigenetic_alterations"
+    ],
+    "max_hallmark_weight": 0.85,
+    "evidence_level": "ESTABLISHED",
+    "itp_tested": false,
+    "itp_positive": false,
+    "human_rct_available": false,
+    "pmids": [
+      "19740080"
+    ],
+    "mechanisms": [
+      "Methyl donor supply for one-carbon metabolism and DNA methylation balance."
+    ]
+  },
+  {
+    "compound_id": "omega_3",
+    "display_name": "Omega-3 Fatty Acids (EPA/DHA)",
+    "hallmarks_targeted": [
+      "telomere_attrition",
+      "altered_intercellular_communication"
+    ],
+    "max_hallmark_weight": 0.6,
+    "evidence_level": "MODERATE",
+    "itp_tested": false,
+    "itp_positive": false,
+    "human_rct_available": true,
+    "pmids": [
+      "20085953"
+    ],
+    "mechanisms": [
+      "RCT evidence linking omega-3 exposure to leukocyte telomere biology in published trial literature.",
+      "Specialized pro-resolving mediators and anti-inflammatory lipid biology."
+    ]
+  },
+  {
+    "compound_id": "curcumin",
+    "display_name": "Curcumin",
+    "hallmarks_targeted": [
+      "cellular_senescence",
+      "altered_intercellular_communication"
+    ],
+    "max_hallmark_weight": 0.6,
+    "evidence_level": "MODERATE",
+    "itp_tested": false,
+    "itp_positive": false,
+    "human_rct_available": false,
+    "pmids": [
+      "37371895"
+    ],
+    "mechanisms": [
+      "MAPK/NF-\u03baB-related senescence modulation in experimental systems (verified PMID).",
+      "Anti-inflammatory signaling in vitro/in vivo models; human translation limited by bioavailability."
+    ]
+  },
+  {
+    "compound_id": "egcg",
+    "display_name": "EGCG (Green Tea Catechin)",
+    "hallmarks_targeted": [
+      "nutrient_sensing",
+      "cellular_senescence",
+      "altered_intercellular_communication"
+    ],
+    "max_hallmark_weight": 0.7,
+    "evidence_level": "ESTABLISHED",
+    "itp_tested": false,
+    "itp_positive": false,
+    "human_rct_available": false,
+    "pmids": [
+      "30456590",
+      "35618244",
+      "39906338"
+    ],
+    "mechanisms": [
+      "mTOR-related modulation and metabolic stress-response biology in experimental senescence models.",
+      "Long-term green tea / EGCG exposure in rodent aging studies (verified PMID).",
+      "Senescent endothelial context (additional verified PMID in audit list)."
+    ]
+  },
+  {
+    "compound_id": "coq10",
+    "display_name": "Coenzyme Q10 (Ubiquinone)",
+    "hallmarks_targeted": [
+      "mitochondrial_dysfunction",
+      "mitochondrial_dysfunction"
+    ],
+    "max_hallmark_weight": 0.45,
+    "evidence_level": "MODERATE",
+    "itp_tested": false,
+    "itp_positive": false,
+    "human_rct_available": false,
+    "pmids": [
+      "31257257",
+      "29373872"
+    ],
+    "mechanisms": [
+      "Electron transport cofactor; mitochondrial energetics and oxidative stress balance (verified aging review PMID).",
+      "Alternate aging-focused review PMID previously used \u2014 flagged UNVERIFIED pending manual confirmation."
+    ]
+  },
+  {
+    "compound_id": "l_carnitine",
+    "display_name": "L-Carnitine",
+    "hallmarks_targeted": [
+      "mitochondrial_dysfunction"
+    ],
+    "max_hallmark_weight": 0.45,
+    "evidence_level": "MODERATE",
+    "itp_tested": false,
+    "itp_positive": false,
+    "human_rct_available": false,
+    "pmids": [
+      "15591008"
+    ],
+    "mechanisms": [
+      "Fatty acid shuttle into mitochondria; supports beta-oxidation in deficiency states."
+    ]
+  },
+  {
+    "compound_id": "magnesium",
+    "display_name": "Magnesium",
+    "hallmarks_targeted": [
+      "telomere_attrition",
+      "genomic_instability"
+    ],
+    "max_hallmark_weight": 0.6,
+    "evidence_level": "MODERATE",
+    "itp_tested": false,
+    "itp_positive": false,
+    "human_rct_available": false,
+    "pmids": [
+      "35596367",
+      "22364515",
+      "29318949",
+      "24570673"
+    ],
+    "mechanisms": [
+      "Observational and mechanistic links between magnesium status and telomere biology (verified PMIDs).",
+      "Magnesium dependence of DNA repair enzymes; deficiency models link to genomic stress (mechanistic)."
+    ]
+  },
+  {
+    "compound_id": "beta_carotene",
+    "display_name": "Beta-Carotene",
+    "hallmarks_targeted": [],
+    "max_hallmark_weight": 0.0,
+    "evidence_level": "PRELIMINARY",
+    "itp_tested": false,
+    "itp_positive": false,
+    "human_rct_available": false,
+    "pmids": [],
+    "mechanisms": []
+  },
+  {
+    "compound_id": "taurine",
+    "display_name": "Taurine",
+    "hallmarks_targeted": [
+      "mitochondrial_dysfunction",
+      "cellular_senescence",
+      "nutrient_sensing"
+    ],
+    "max_hallmark_weight": 0.85,
+    "evidence_level": "ESTABLISHED",
+    "itp_tested": false,
+    "itp_positive": false,
+    "human_rct_available": false,
+    "pmids": [
+      "35580047"
+    ],
+    "mechanisms": [
+      "Taurine supports mitochondrial membrane potential and reduces mitochondrial ROS; taurine deficiency accelerates mitochondrial aging across species.",
+      "Taurine supplementation reduces senescence markers (p21, p16) in multiple tissues; plasma taurine declines ~80% from youth to old age.",
+      "Taurine modulates mTOR and AMPK signaling pathways in aging tissues."
+    ]
+  },
+  {
+    "compound_id": "urolithin_a",
+    "display_name": "Urolithin A",
+    "hallmarks_targeted": [
+      "mitochondrial_dysfunction",
+      "cellular_senescence"
+    ],
+    "max_hallmark_weight": 0.85,
+    "evidence_level": "ESTABLISHED",
+    "itp_tested": false,
+    "itp_positive": false,
+    "human_rct_available": false,
+    "pmids": [
+      "36630914"
+    ],
+    "mechanisms": [
+      "Urolithin A induces mitophagy, clearing damaged mitochondria and improving mitochondrial quality control in aging muscle.",
+      "Mitophagy induction by urolithin A reduces senescent cell burden and SASP in aging tissues."
+    ]
+  },
+  {
+    "compound_id": "sulforaphane",
+    "display_name": "Sulforaphane",
+    "hallmarks_targeted": [
+      "genomic_instability",
+      "cellular_senescence",
+      "chronic_inflammation"
+    ],
+    "max_hallmark_weight": 0.85,
+    "evidence_level": "ESTABLISHED",
+    "itp_tested": false,
+    "itp_positive": false,
+    "human_rct_available": false,
+    "pmids": [
+      "28615356"
+    ],
+    "mechanisms": [
+      "Sulforaphane activates Nrf2/ARE pathway, upregulating DNA repair enzymes and reducing oxidative DNA damage.",
+      "Sulforaphane reduces senescence markers via Nrf2 activation and autophagy induction.",
+      "Sulforaphane inhibits NF-kB and reduces pro-inflammatory cytokine production."
+    ]
+  },
+  {
+    "compound_id": "melatonin",
+    "display_name": "Melatonin",
+    "hallmarks_targeted": [
+      "mitochondrial_dysfunction",
+      "epigenetic_alterations",
+      "genomic_instability"
+    ],
+    "max_hallmark_weight": 0.85,
+    "evidence_level": "ESTABLISHED",
+    "itp_tested": false,
+    "itp_positive": false,
+    "human_rct_available": false,
+    "pmids": [
+      "28889985"
+    ],
+    "mechanisms": [
+      "Melatonin is a potent mitochondrial antioxidant; protects mitochondrial membrane integrity and reduces mitochondrial ROS.",
+      "Melatonin modulates circadian epigenetic programs and DNA methylation patterns in aging.",
+      "Melatonin reduces oxidative DNA damage and supports DNA repair mechanisms."
+    ]
+  },
+  {
+    "compound_id": "zinc",
+    "display_name": "Zinc",
+    "hallmarks_targeted": [
+      "genomic_instability",
+      "cellular_senescence",
+      "altered_intercellular_communication"
+    ],
+    "max_hallmark_weight": 0.85,
+    "evidence_level": "ESTABLISHED",
+    "itp_tested": false,
+    "itp_positive": false,
+    "human_rct_available": false,
+    "pmids": [
+      "27021581"
+    ],
+    "mechanisms": [
+      "Zinc is a cofactor for >300 enzymes including DNA repair enzymes; deficiency impairs genomic stability.",
+      "Zinc modulates p53 and senescence pathways; zinc deficiency accelerates immunosenescence.",
+      "Zinc is essential for immune cell signaling and thymulin production; deficiency impairs immune intercellular communication."
+    ]
+  },
+  {
+    "compound_id": "selenium",
+    "display_name": "Selenium",
+    "hallmarks_targeted": [
+      "genomic_instability",
+      "mitochondrial_dysfunction"
+    ],
+    "max_hallmark_weight": 0.85,
+    "evidence_level": "ESTABLISHED",
+    "itp_tested": false,
+    "itp_positive": false,
+    "human_rct_available": false,
+    "pmids": [
+      "22381456"
+    ],
+    "mechanisms": [
+      "Selenium is a cofactor for glutathione peroxidases and thioredoxin reductases; deficiency increases oxidative DNA damage.",
+      "Selenoproteins protect mitochondria from oxidative damage; selenium deficiency impairs mitochondrial antioxidant defense."
+    ]
+  },
+  {
+    "compound_id": "vitamin_k2",
+    "display_name": "Vitamin K2 (Menaquinone-7, MK-7)",
+    "hallmarks_targeted": [
+      "altered_intercellular_communication",
+      "cellular_senescence"
+    ],
+    "max_hallmark_weight": 0.85,
+    "evidence_level": "ESTABLISHED",
+    "itp_tested": false,
+    "itp_positive": false,
+    "human_rct_available": false,
+    "pmids": [
+      "30959259"
+    ],
+    "mechanisms": [
+      "Vitamin K2 activates matrix Gla protein (MGP) and osteocalcin, preventing vascular calcification and modulating endocrine signaling.",
+      "Vitamin K2 activates SirT1 and reduces senescence markers in vascular cells."
+    ]
+  },
+  {
+    "compound_id": "vitamin_c",
+    "display_name": "Vitamin C (Ascorbic Acid)",
+    "hallmarks_targeted": [
+      "genomic_instability",
+      "cellular_senescence",
+      "altered_intercellular_communication"
+    ],
+    "max_hallmark_weight": 0.85,
+    "evidence_level": "ESTABLISHED",
+    "itp_tested": false,
+    "itp_positive": false,
+    "human_rct_available": false,
+    "pmids": [
+      "29099763"
+    ],
+    "mechanisms": [
+      "Vitamin C is a potent antioxidant that reduces oxidative DNA damage and supports DNA repair enzyme activity.",
+      "Vitamin C reduces oxidative stress-induced senescence and supports collagen synthesis in aging tissues.",
+      "Vitamin C modulates immune cell function and reduces inflammatory cytokine production."
+    ]
+  },
+  {
+    "compound_id": "glycine",
+    "display_name": "Glycine",
+    "hallmarks_targeted": [
+      "epigenetic_alterations",
+      "cellular_senescence",
+      "mitochondrial_dysfunction"
+    ],
+    "max_hallmark_weight": 0.85,
+    "evidence_level": "ESTABLISHED",
+    "itp_tested": true,
+    "itp_positive": false,
+    "human_rct_available": false,
+    "pmids": [
+      "31366564"
+    ],
+    "mechanisms": [
+      "Glycine is a methyl donor precursor supporting one-carbon metabolism and DNA methylation balance.",
+      "GlyNAC (glycine + NAC) supplementation reduces senescence markers and improves multiple aging hallmarks in older adults.",
+      "Glycine supports glutathione synthesis (via GlyNAC); improves mitochondrial function and reduces oxidative stress in aging."
+    ]
+  },
+  {
+    "compound_id": "pterostilbene",
+    "display_name": "Pterostilbene",
+    "hallmarks_targeted": [
+      "epigenetic_alterations",
+      "nutrient_sensing",
+      "genomic_instability"
+    ],
+    "max_hallmark_weight": 0.45,
+    "evidence_level": "MODERATE",
+    "itp_tested": false,
+    "itp_positive": false,
+    "human_rct_available": false,
+    "pmids": [
+      "22304824"
+    ],
+    "mechanisms": [
+      "Pterostilbene activates SIRT1 and modulates DNA methylation patterns; superior bioavailability vs resveratrol.",
+      "Pterostilbene activates AMPK and SIRT1, modulating nutrient-sensing pathways in aging models.",
+      "Pterostilbene reduces oxidative DNA damage via Nrf2 activation and antioxidant enzyme induction."
+    ]
+  },
+  {
+    "compound_id": "astaxanthin",
+    "display_name": "Astaxanthin",
+    "hallmarks_targeted": [
+      "mitochondrial_dysfunction",
+      "genomic_instability",
+      "altered_intercellular_communication"
+    ],
+    "max_hallmark_weight": 0.85,
+    "evidence_level": "ESTABLISHED",
+    "itp_tested": false,
+    "itp_positive": false,
+    "human_rct_available": false,
+    "pmids": [
+      "28817567"
+    ],
+    "mechanisms": [
+      "Astaxanthin is a potent mitochondrial antioxidant; crosses mitochondrial membranes and reduces mitochondrial ROS.",
+      "Astaxanthin reduces oxidative DNA damage and supports DNA repair in human studies.",
+      "Astaxanthin reduces inflammatory cytokine production and modulates immune cell signaling."
+    ]
+  },
+  {
+    "compound_id": "pqq",
+    "display_name": "Pyrroloquinoline Quinone (PQQ)",
+    "hallmarks_targeted": [
+      "mitochondrial_dysfunction",
+      "epigenetic_alterations"
+    ],
+    "max_hallmark_weight": 0.6,
+    "evidence_level": "MODERATE",
+    "itp_tested": false,
+    "itp_positive": false,
+    "human_rct_available": false,
+    "pmids": [
+      "20010119"
+    ],
+    "mechanisms": [
+      "PQQ stimulates mitochondrial biogenesis via PGC-1alpha and CREB activation; improves mitochondrial function in aging.",
+      "PQQ modulates CREB and NF-kB transcription factors, influencing epigenetic gene expression programs."
+    ]
+  },
+  {
+    "compound_id": "alpha_lipoic_acid",
+    "display_name": "Alpha-Lipoic Acid (ALA)",
+    "hallmarks_targeted": [
+      "mitochondrial_dysfunction",
+      "nutrient_sensing",
+      "genomic_instability"
+    ],
+    "max_hallmark_weight": 0.85,
+    "evidence_level": "ESTABLISHED",
+    "itp_tested": false,
+    "itp_positive": false,
+    "human_rct_available": false,
+    "pmids": [
+      "22228617"
+    ],
+    "mechanisms": [
+      "ALA is a mitochondrial cofactor and antioxidant; regenerates other antioxidants (vitamins C, E, glutathione) and improves mitochondrial function.",
+      "ALA activates AMPK and improves insulin sensitivity; modulates nutrient-sensing pathways.",
+      "ALA reduces oxidative DNA damage via antioxidant network regeneration."
+    ]
+  },
+  {
+    "compound_id": "apigenin",
+    "display_name": "Apigenin",
+    "hallmarks_targeted": [
+      "epigenetic_alterations",
+      "nutrient_sensing",
+      "cellular_senescence"
+    ],
+    "max_hallmark_weight": 0.45,
+    "evidence_level": "MODERATE",
+    "itp_tested": false,
+    "itp_positive": false,
+    "human_rct_available": false,
+    "pmids": [
+      "30513729"
+    ],
+    "mechanisms": [
+      "Apigenin inhibits CD38 (NAD+ hydrolase), raising intracellular NAD+ levels and activating sirtuins \u2014 epigenetic regulators of aging.",
+      "Apigenin activates AMPK and SIRT1 via NAD+ elevation, modulating nutrient-sensing pathways.",
+      "Apigenin reduces senescence markers via NAD+/sirtuin axis and anti-inflammatory effects."
+    ]
+  },
+  {
+    "compound_id": "acarbose",
+    "display_name": "Acarbose",
+    "hallmarks_targeted": [
+      "nutrient_sensing",
+      "altered_intercellular_communication"
+    ],
+    "max_hallmark_weight": 0.85,
+    "evidence_level": "ESTABLISHED",
+    "itp_tested": true,
+    "itp_positive": true,
+    "human_rct_available": false,
+    "pmids": [
+      "24941421"
+    ],
+    "mechanisms": [
+      "Acarbose inhibits intestinal alpha-glucosidases, reducing postprandial glucose spikes and modulating nutrient-sensing pathways; ITP longevity data in mice.",
+      "Acarbose modulates gut microbiome composition and reduces inflammatory signaling via reduced postprandial glycemia."
+    ]
+  },
+  {
+    "compound_id": "canagliflozin",
+    "display_name": "Canagliflozin (SGLT2 Inhibitor)",
+    "hallmarks_targeted": [
+      "nutrient_sensing",
+      "mitochondrial_dysfunction",
+      "cellular_senescence"
+    ],
+    "max_hallmark_weight": 0.85,
+    "evidence_level": "ESTABLISHED",
+    "itp_tested": true,
+    "itp_positive": true,
+    "human_rct_available": false,
+    "pmids": [
+      "31578173"
+    ],
+    "mechanisms": [
+      "Canagliflozin inhibits SGLT2, reducing glucose reabsorption and activating AMPK; ITP longevity data shows lifespan extension in male mice.",
+      "SGLT2 inhibition promotes ketogenesis and mitochondrial efficiency; reduces mitochondrial oxidative stress.",
+      "SGLT2 inhibitors reduce senescence markers and SASP in cardiovascular and renal tissues."
+    ]
+  },
+  {
+    "compound_id": "nicotinamide",
+    "display_name": "Nicotinamide (Niacinamide)",
+    "hallmarks_targeted": [
+      "epigenetic_alterations",
+      "genomic_instability",
+      "mitochondrial_dysfunction"
+    ],
+    "max_hallmark_weight": 0.85,
+    "evidence_level": "ESTABLISHED",
+    "itp_tested": false,
+    "itp_positive": false,
+    "human_rct_available": false,
+    "pmids": [
+      "30587502"
+    ],
+    "mechanisms": [
+      "Nicotinamide is an NAD+ precursor that supports sirtuin activity and epigenetic regulation of aging genes.",
+      "Nicotinamide supports PARP-1 activity for DNA repair; NAD+ is essential for DNA damage response.",
+      "NAD+ repletion via nicotinamide improves mitochondrial function and reduces mitochondrial oxidative stress."
+    ]
+  },
+  {
+    "compound_id": "probiotics_lactobacillus",
+    "display_name": "Probiotics (Lactobacillus species)",
+    "hallmarks_targeted": [
+      "dysbiosis",
+      "altered_intercellular_communication",
+      "chronic_inflammation"
+    ],
+    "max_hallmark_weight": 0.85,
+    "evidence_level": "ESTABLISHED",
+    "itp_tested": false,
+    "itp_positive": false,
+    "human_rct_available": false,
+    "pmids": [
+      "31480656"
+    ],
+    "mechanisms": [
+      "Lactobacillus supplementation restores gut microbiome diversity and reduces dysbiosis-associated aging phenotypes.",
+      "Lactobacillus species modulate gut-immune axis and systemic intercellular signaling via short-chain fatty acids and immune regulation.",
+      "Probiotic supplementation reduces systemic inflammatory markers (CRP, IL-6) in aging populations."
+    ]
+  },
+  {
+    "compound_id": "vitamin_e_tocotrienols",
+    "display_name": "Vitamin E Tocotrienols (Tocotrienol-Rich Fraction)",
+    "hallmarks_targeted": [
+      "mitochondrial_dysfunction",
+      "genomic_instability"
+    ],
+    "max_hallmark_weight": 0.85,
+    "evidence_level": "ESTABLISHED",
+    "itp_tested": false,
+    "itp_positive": false,
+    "human_rct_available": false,
+    "pmids": [
+      "28817567"
+    ],
+    "mechanisms": [
+      "Tocotrienols are potent mitochondrial antioxidants; superior to tocopherols in protecting mitochondrial membranes from oxidative damage.",
+      "Tocotrienols reduce oxidative DNA damage and support DNA repair mechanisms."
+    ]
+  },
+  {
+    "compound_id": "akkermansia_muciniphila",
+    "display_name": "Akkermansia muciniphila",
+    "hallmarks_targeted": [
+      "dysbiosis",
+      "nutrient_sensing",
+      "altered_intercellular_communication"
+    ],
+    "max_hallmark_weight": 0.85,
+    "evidence_level": "ESTABLISHED",
+    "itp_tested": false,
+    "itp_positive": false,
+    "human_rct_available": false,
+    "pmids": [
+      "31792435"
+    ],
+    "mechanisms": [
+      "Akkermansia muciniphila is a keystone gut bacterium; its abundance declines with aging and metabolic disease; supplementation restores gut barrier integrity.",
+      "Akkermansia improves insulin sensitivity and metabolic parameters via gut barrier restoration and GLP-1 modulation.",
+      "Akkermansia modulates gut-immune axis and reduces systemic inflammatory signaling via improved gut barrier function."
+    ]
+  },
+  {
+    "compound_id": "astragalus_extract",
+    "display_name": "Astragalus Extract (TA-65)",
+    "hallmarks_targeted": [
+      "telomere_attrition",
+      "genomic_instability"
+    ],
+    "max_hallmark_weight": 0.45,
+    "evidence_level": "MODERATE",
+    "itp_tested": false,
+    "itp_positive": false,
+    "human_rct_available": false,
+    "pmids": [
+      "21426483"
+    ],
+    "mechanisms": [
+      "Telomerase activator; cycloastragenol activates TERT expression, potentially slowing telomere attrition.",
+      "Telomere maintenance via TERT activation may reduce genomic instability from critically short telomeres."
+    ]
+  }
+]

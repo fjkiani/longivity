@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import type { Scenario } from "./ScenarioCard";
 import PipelineOutput from "./PipelineOutput";
 import SCENARIO_OUTPUTS from "./scenario_outputs.json";
@@ -17,11 +17,72 @@ const ACCENT: Record<string, { pill: string; num: string; border: string; bg: st
   emerald: { pill: "bg-emerald-100 text-emerald-700 border-emerald-200", num: "bg-emerald-500 text-white", border: "border-emerald-400", bg: "bg-emerald-50" },
 };
 
+// API base — reads from env at build time, falls back to Render deployment
+const API_BASE =
+  process.env.NEXT_PUBLIC_API_URL ??
+  "https://longevity-backend.onrender.com";
+
 export default function DemoRunner({ scenarios }: DemoRunnerProps) {
   const [selected, setSelected] = useState<Scenario>(scenarios[0]);
   const [showRaw, setShowRaw] = useState(false);
+  const [result, setResult] = useState<Record<string, unknown> | null>(
+    // Pre-populate with static output so the demo is never blank on first load
+    ((SCENARIO_OUTPUTS as Record<string, unknown>)[scenarios[0].id] ?? null) as Record<string, unknown> | null
+  );
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [isLive, setIsLive] = useState(false);
+  const [lastRunAt, setLastRunAt] = useState<string | null>(null);
 
-  const result = ((SCENARIO_OUTPUTS as Record<string, unknown>)[selected.id] ?? null) as Record<string, unknown> | null;
+  const runScenario = useCallback(async (scenario: Scenario) => {
+    setLoading(true);
+    setError(null);
+    setIsLive(false);
+
+    try {
+      const response = await fetch(`${API_BASE}/api/v1/patients/demo/assessment`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Demo-Mode": "true",
+        },
+        body: JSON.stringify(scenario.payload),
+        signal: AbortSignal.timeout(30_000), // 30s timeout
+      });
+
+      if (!response.ok) {
+        throw new Error(`API returned ${response.status}: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      setResult(data);
+      setIsLive(true);
+      setLastRunAt(new Date().toISOString());
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      console.warn("Live API call failed, falling back to static output:", msg);
+      setError(`Live API unavailable — showing cached output. (${msg})`);
+      // Graceful fallback to static JSON
+      const staticOutput = (SCENARIO_OUTPUTS as Record<string, unknown>)[scenario.id] ?? null;
+      setResult(staticOutput as Record<string, unknown> | null);
+      setIsLive(false);
+      setLastRunAt(null);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  const handleSelectScenario = (s: Scenario) => {
+    setSelected(s);
+    setShowRaw(false);
+    // Load static output immediately, then kick off live fetch
+    const staticOutput = (SCENARIO_OUTPUTS as Record<string, unknown>)[s.id] ?? null;
+    setResult(staticOutput as Record<string, unknown> | null);
+    setIsLive(false);
+    setError(null);
+    runScenario(s);
+  };
+
   const ac = ACCENT[selected.accentColor] || ACCENT.rose;
 
   return (
@@ -34,7 +95,7 @@ export default function DemoRunner({ scenarios }: DemoRunnerProps) {
           return (
             <button
               key={s.id}
-              onClick={() => { setSelected(s); setShowRaw(false); }}
+              onClick={() => handleSelectScenario(s)}
               className={`rounded-2xl border-2 p-4 text-left transition-all hover:shadow-md ${
                 isActive ? `${a.border} ${a.bg} shadow-md` : "border-gray-200 bg-white hover:border-gray-300"
               }`}
@@ -101,22 +162,56 @@ export default function DemoRunner({ scenarios }: DemoRunnerProps) {
             </pre>
           </details>
 
+          {/* Status bar */}
           <div className="flex items-center gap-2 text-xs text-gray-400 px-1">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0 animate-pulse" />
-            <span>Output from <span className="font-mono text-gray-500">longevity-backend.onrender.com</span> · 2026-05-17</span>
+            {loading ? (
+              <>
+                <span className="w-2 h-2 rounded-full bg-yellow-400 shrink-0 animate-pulse" />
+                <span>Calling live API...</span>
+              </>
+            ) : isLive ? (
+              <>
+                <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" />
+                <span>
+                  Live output from{" "}
+                  <span className="font-mono text-gray-500">longevity-backend.onrender.com</span>
+                  {lastRunAt && (
+                    <> · {new Date(lastRunAt).toLocaleString()}</>
+                  )}
+                </span>
+              </>
+            ) : (
+              <>
+                <span className="w-2 h-2 rounded-full bg-gray-400 shrink-0" />
+                <span>Cached output · <button onClick={() => runScenario(selected)} className="underline hover:text-gray-600">Run live</button></span>
+              </>
+            )}
           </div>
+
+          {/* Error banner */}
+          {error && (
+            <div className="rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-xs text-amber-700">
+              {error}
+            </div>
+          )}
         </div>
 
         {/* Right: pipeline output */}
         <div className="lg:col-span-3">
-          {result ? (
+          {loading && (
+            <div className="rounded-2xl border border-gray-200 bg-gray-50 p-12 text-center">
+              <div className="inline-block w-8 h-8 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin mb-4" />
+              <p className="text-sm text-gray-500 font-medium">Running live assessment...</p>
+            </div>
+          )}
+          {!loading && result ? (
             <PipelineOutput
               data={result as unknown as Parameters<typeof PipelineOutput>[0]["data"]}
               rawJson={JSON.stringify(result, null, 2)}
               showRaw={showRaw}
               onToggleRaw={() => setShowRaw((v) => !v)}
             />
-          ) : (
+          ) : !loading && (
             <div className="rounded-2xl border border-gray-200 bg-gray-50 p-12 text-center text-gray-400">
               No output captured for this scenario.
             </div>

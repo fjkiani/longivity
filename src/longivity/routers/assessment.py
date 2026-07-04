@@ -247,3 +247,39 @@ async def get_patient_nof1(
         "drawn_at": panel.drawn_at.isoformat(),
     }
     return protocol
+
+
+# ── Demo endpoint (no auth required) ─────────────────────────────────────────
+
+@router.post("/demo/assessment", response_model=dict, include_in_schema=True)
+async def demo_assessment(payload: dict) -> dict:
+    """
+    Run a longevity assessment from a raw biomarker payload.
+    No authentication required — for demo and testing purposes only.
+
+    Accepts the same payload format as the standard assessment endpoint:
+        {
+            "biomarkers": {"albumin": 4.2, "creatinine": 0.9, ...},
+            "age": 45,
+            "chronological_age": 45,
+            "compound_queries": ["metformin", "berberine"]  // optional
+        }
+
+    Returns the full assessment result including PhenoAge, hallmark scores,
+    compound recommendations, and N-of-1 protocol suggestions.
+    """
+    try:
+        result = run_longevity_assessment_level0(payload)
+        result["_meta"] = {
+            "source": "demo",
+            "demo_mode": True,
+            "timestamp": __import__("datetime").datetime.utcnow().isoformat() + "Z",
+            "disclaimer": "Research-use only (RUO). Not for clinical decision-making.",
+        }
+        return result
+    except Exception as e:
+        from fastapi import HTTPException
+        raise HTTPException(
+            status_code=422,
+            detail=f"Assessment failed: {str(e)}. Check that biomarkers dict contains valid numeric values.",
+        )
