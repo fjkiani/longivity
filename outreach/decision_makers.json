@@ -1,0 +1,86 @@
+{
+  "generated_at": "2026-07-04",
+  "total": 10,
+  "decision_makers": [
+    {
+      "rank": 1, "clinic": "Fountain Life", "city": "Naples, FL",
+      "decision_maker": "Dr. William Kapp", "title": "Chief Medical Officer & Co-founder",
+      "linkedin": "https://www.linkedin.com/in/william-kapp-md",
+      "public_content": "Frequent A4M speaker on precision diagnostics. Advocates for data-driven longevity medicine. Published on full-body MRI screening protocols.",
+      "email_hook": "full-body diagnostics without an AI clinical decision layer",
+      "longivity_feature": "PhenoAge acceleration + hallmark scoring on top of your existing diagnostic data"
+    },
+    {
+      "rank": 2, "clinic": "Human Longevity Inc.", "city": "San Diego, CA",
+      "decision_maker": "Dr. David Karow", "title": "President & Chief Medical Officer",
+      "linkedin": "https://www.linkedin.com/in/david-karow-md-phd",
+      "public_content": "Published on genomics-driven health optimization. Speaks on translating multi-omics data into clinical action.",
+      "email_hook": "genomics data without a longitudinal AI engine to translate it into compound protocols",
+      "longivity_feature": "N-of-1 trial engine + MR-validated compound recommendations grounded in your genomic risk layer"
+    },
+    {
+      "rank": 3, "clinic": "Cleveland Clinic Center for Functional Medicine", "city": "Cleveland, OH",
+      "decision_maker": "Dr. Elizabeth Hohmann", "title": "Medical Director, Center for Functional Medicine",
+      "linkedin": "https://www.linkedin.com/in/elizabeth-hohmann-md",
+      "public_content": "Leads the largest functional medicine center in the US. Published on root-cause biomarker analysis.",
+      "email_hook": "10,000+ patients/yr with manual biomarker interpretation",
+      "longivity_feature": "Automated PhenoAge + hallmark scoring that scales clinical decision-making across your entire patient volume"
+    },
+    {
+      "rank": 4, "clinic": "Lifespan Medicine", "city": "Los Angeles, CA",
+      "decision_maker": "Dr. Prudence Hall", "title": "Founder & Medical Director",
+      "linkedin": "https://www.linkedin.com/in/prudence-hall-md",
+      "public_content": "Pioneer in longevity medicine. Publicly advocates for biological age testing. Speaks on hormone optimization + biomarker-driven protocols.",
+      "email_hook": "biological age testing without an AI layer to rank compound interventions by evidence tier",
+      "longivity_feature": "MR-validated compound recommendations ranked by Mendelian randomization causal evidence strength"
+    },
+    {
+      "rank": 5, "clinic": "Parsley Health", "city": "New York, NY",
+      "decision_maker": "Dr. Robin Berzin", "title": "CEO & Founder",
+      "linkedin": "https://www.linkedin.com/in/robinberzin",
+      "public_content": "TED Talk on functional medicine at scale. Active on LinkedIn. Advocates for data-driven chronic disease reversal.",
+      "email_hook": "50K+ members with heavy biomarker ordering but no AI longevity engine",
+      "longivity_feature": "Automated hallmark scoring + compound protocols that turn existing lab data into ranked clinical actions"
+    },
+    {
+      "rank": 6, "clinic": "Wild Health", "city": "Lexington, KY",
+      "decision_maker": "Dr. Matt Dawson", "title": "CEO & Co-founder",
+      "linkedin": "https://www.linkedin.com/in/mattdawsonmd",
+      "public_content": "Wild Health Podcast host. Published on precision medicine + genomics. Advocates for personalized medicine.",
+      "email_hook": "genomics + biomarker data without a causal evidence layer for compound recommendations",
+      "longivity_feature": "APOE/MTHFR genetic risk layer + MR-validated compound recommendations extending your genomics workflow"
+    },
+    {
+      "rank": 7, "clinic": "Sollis Health", "city": "New York, NY / Los Angeles, CA",
+      "decision_maker": "Dr. Ian Weisberg", "title": "Chief Medical Officer",
+      "linkedin": "https://www.linkedin.com/in/ian-weisberg-md",
+      "public_content": "Speaks on concierge medicine evolution. Advocates for proactive health optimization. Published on preventive cardiology.",
+      "email_hook": "concierge patients expecting cutting-edge longevity protocols",
+      "longivity_feature": "ASCVD cardiovascular risk + PhenoAge acceleration — the two metrics your concierge patients are asking about"
+    },
+    {
+      "rank": 8, "clinic": "Cenegenics", "city": "Las Vegas, NV (national)",
+      "decision_maker": "Dr. Jeffrey Life", "title": "Chief Medical Officer",
+      "linkedin": "https://www.linkedin.com/company/cenegenics",
+      "public_content": "30+ location franchise. Published on age management medicine. Advocates for hormone + biomarker optimization.",
+      "email_hook": "30+ locations with manual biomarker interpretation across a franchise network",
+      "longivity_feature": "Multi-clinic dashboard + automated PhenoAge scoring to standardize clinical decisions across all 30+ locations"
+    },
+    {
+      "rank": 9, "clinic": "Superpower", "city": "San Francisco, CA",
+      "decision_maker": "Michael Dubrovsky", "title": "CEO & Co-founder",
+      "linkedin": "https://www.linkedin.com/in/michaeldubrovsky",
+      "public_content": "Raised $30M. Speaks on democratizing biomarker testing. Advocates for consumer-grade longevity tools.",
+      "email_hook": "consumer biomarker tracking without a clinical decision layer",
+      "longivity_feature": "White-label Longivity's AI engine — add compound recommendations and N-of-1 trials to your existing platform"
+    },
+    {
+      "rank": 10, "clinic": "Marek Health", "city": "Dallas, TX",
+      "decision_maker": "Derek Ciocca (Derek MPMD)", "title": "Founder & Medical Director",
+      "linkedin": "https://www.linkedin.com/in/derek-ciocca",
+      "public_content": "Large YouTube/podcast following on hormone optimization. Advocates for data-driven testosterone + metabolic protocols.",
+      "email_hook": "hormone + metabolic panels without a biological age acceleration layer",
+      "longivity_feature": "PhenoAge acceleration + wearable hallmark scoring showing exactly how hormone protocols affect biological age"
+    }
+  ]
+}
