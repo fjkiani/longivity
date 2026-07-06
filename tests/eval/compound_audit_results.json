@@ -1,0 +1,46 @@
+{
+  "run_at": "2026-07-06T05:25:50.657385+00:00",
+  "mr_validated_compounds": [
+    "omega_3",
+    "vitamin_d3",
+    "folate",
+    "metformin"
+  ],
+  "paper_fetch_ok": 4,
+  "paper_fetch_total": 4,
+  "pval_found_in_abstract": 4,
+  "pval_total": 5,
+  "tier_integrity_pass": true,
+  "geroprotectors_found": 0,
+  "geroprotectors_total": 9,
+  "compound_results": {
+    "omega_3": {
+      "paper_fetched": true,
+      "tier_correct": true
+    },
+    "vitamin_d3": {
+      "paper_fetched": true,
+      "tier_correct": true
+    },
+    "folate": {
+      "paper_fetched": true,
+      "tier_correct": true
+    },
+    "metformin": {
+      "paper_fetched": true,
+      "tier_correct": true
+    }
+  },
+  "geroprotectors_results": {
+    "omega_3": false,
+    "vitamin_d3": false,
+    "folate": false,
+    "metformin": false,
+    "nmn": false,
+    "nr": false,
+    "astaxanthin": false,
+    "glycine": false,
+    "vitamin_e_tocotrienols": false
+  },
+  "overall_pass": true
+}

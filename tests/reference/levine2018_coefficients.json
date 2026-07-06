@@ -1,0 +1,38 @@
+{
+  "_source": "Levine ME et al. An epigenetic biomarker of aging for lifespan and healthspan. Aging (Albany NY). 2018;10(4):573-591. PMID 29676998.",
+  "_note": "Coefficients from Table S1 / Methods. PhenoAge = linear combination of 9 biomarkers + age, then transformed via Gompertz mortality model.",
+  "_units": {
+    "albumin": "g/L",
+    "creatinine": "umol/L",
+    "glucose": "mmol/L",
+    "crp": "mg/L (log-transformed: ln(CRP+1))",
+    "lymphocyte_pct": "percent",
+    "mcv": "fL",
+    "rdw": "percent",
+    "alkaline_phosphatase": "U/L",
+    "wbc": "10^9/L",
+    "age": "years"
+  },
+  "linear_combination_coefficients": {
+    "albumin": -0.0336,
+    "creatinine": 0.0095,
+    "glucose": 0.1953,
+    "ln_crp": 0.0954,
+    "lymphocyte_pct": -0.0120,
+    "mcv": 0.0268,
+    "rdw": 0.3306,
+    "alkaline_phosphatase": 0.00188,
+    "wbc": 0.0554,
+    "age": 0.0804
+  },
+  "intercept": -19.9067,
+  "gompertz_parameters": {
+    "gamma": 0.0076927,
+    "comment": "Gompertz mortality rate parameter. PhenoAge derived from: mortality_score = 1 - exp(-exp(xb) * (exp(gamma*120) - 1) / gamma), then PhenoAge = ln(-ln(1 - mortality_score) / gamma) / gamma"
+  },
+  "published_validation": {
+    "nhanes_iii_r_with_chronological_age": 0.80,
+    "nhanes_iii_n": 11432,
+    "comment": "Pearson r between PhenoAge and chronological age in NHANES III (Table 1, Levine 2018)"
+  }
+}

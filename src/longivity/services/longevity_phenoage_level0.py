@@ -147,7 +147,10 @@ def extract_phenoage_marker_values(payload: Dict[str, Any]) -> Tuple[Dict[str, f
         raw_g_mgdl = _coerce_float(L["glucose_mg_dl"])
         if raw_g_mgdl is not None and (raw_g_mgdl < 30 or raw_g_mgdl > 500):
             notes["glucose_mg_dl"] = "glucose value outside expected range for mg/dL — verify units"
-        gl = float(L["glucose_mg_dl"]) * GLUCOSE_MGDL_TO_MMOLL
+        if raw_g_mgdl is not None:
+            gl = raw_g_mgdl * GLUCOSE_MGDL_TO_MMOLL
+        else:
+            notes["glucose_serum"] = f"glucose_mg_dl value could not be parsed as a number — skipped"
         notes["glucose_serum"] = "converted glucose_mg_dl -> mmol/L (/18.018)"
     if gl is not None:
         out["glucose_serum"] = gl

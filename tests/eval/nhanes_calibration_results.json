@@ -1,0 +1,25 @@
+{
+  "run_at": "2026-07-06T05:24:13.778254+00:00",
+  "n_complete_cases": 4894,
+  "pearson_r": 0.9094,
+  "mean_bias_yr": -0.571,
+  "gates": {
+    "n_complete_cases": {
+      "value": 4894,
+      "threshold": 2000,
+      "pass": true
+    },
+    "pearson_r": {
+      "value": 0.9094,
+      "threshold": 0.75,
+      "pass": true
+    },
+    "mean_bias_yr": {
+      "value": -0.571,
+      "threshold": 5.0,
+      "pass": true
+    },
+    "auc_gate_pass": null
+  },
+  "overall_pass": true
+}

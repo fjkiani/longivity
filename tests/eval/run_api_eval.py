@@ -1,3 +1,9 @@
+# REGRESSION TESTS (not a calibration eval)
+# These tests verify the API does not crash and returns expected types.
+# Ranges were self-calibrated against system output — not external ground truth.
+# For external-ground-truth calibration, see: tests/eval/nhanes_phenoage_calibration.py
+# For compound evidence verification, see: tests/eval/compound_evidence_audit.py
+
 """
 API Correctness Eval — deterministic, CI-safe.
 
