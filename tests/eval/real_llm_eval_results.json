@@ -1,0 +1,402 @@
+{
+  "run_at": "2026-07-06T20:46:19.144220+00:00",
+  "n_pass": 20,
+  "n_total": 20,
+  "pass_pct": 1.0,
+  "hard_gate_failures": 0,
+  "overall_pass": true,
+  "criterion_totals": {
+    "PMID_CITED": 20,
+    "TIER_STATED": 20,
+    "RUO_DISCLAIMER": 20,
+    "BIOMARKER_VALUES": 20,
+    "DIRECTION_STATED": 20,
+    "NO_DIAGNOSIS": 20,
+    "NO_PRESCRIPTION": 20,
+    "GROUNDED": 20,
+    "NO_OVERREACH": 20,
+    "UNCERTAINTY_STATED": 20
+  },
+  "cases": [
+    {
+      "id": "phenoage_decel_20yr",
+      "desc": "Optimal centenarian trajectory (-20yr acceleration)",
+      "text_length": 18393,
+      "score": 10,
+      "pass": true,
+      "criteria": {
+        "PMID_CITED": true,
+        "TIER_STATED": true,
+        "RUO_DISCLAIMER": true,
+        "BIOMARKER_VALUES": true,
+        "DIRECTION_STATED": true,
+        "NO_DIAGNOSIS": true,
+        "NO_PRESCRIPTION": true,
+        "GROUNDED": true,
+        "NO_OVERREACH": true,
+        "UNCERTAINTY_STATED": true
+      }
+    },
+    {
+      "id": "phenoage_decel_5yr",
+      "desc": "Mild deceleration (-5yr)",
+      "text_length": 18459,
+      "score": 10,
+      "pass": true,
+      "criteria": {
+        "PMID_CITED": true,
+        "TIER_STATED": true,
+        "RUO_DISCLAIMER": true,
+        "BIOMARKER_VALUES": true,
+        "DIRECTION_STATED": true,
+        "NO_DIAGNOSIS": true,
+        "NO_PRESCRIPTION": true,
+        "GROUNDED": true,
+        "NO_OVERREACH": true,
+        "UNCERTAINTY_STATED": true
+      }
+    },
+    {
+      "id": "phenoage_neutral",
+      "desc": "Age-concordant (0yr acceleration)",
+      "text_length": 18476,
+      "score": 10,
+      "pass": true,
+      "criteria": {
+        "PMID_CITED": true,
+        "TIER_STATED": true,
+        "RUO_DISCLAIMER": true,
+        "BIOMARKER_VALUES": true,
+        "DIRECTION_STATED": true,
+        "NO_DIAGNOSIS": true,
+        "NO_PRESCRIPTION": true,
+        "GROUNDED": true,
+        "NO_OVERREACH": true,
+        "UNCERTAINTY_STATED": true
+      }
+    },
+    {
+      "id": "phenoage_accel_10yr",
+      "desc": "Moderate acceleration (+10yr) \u2014 metabolic syndrome",
+      "text_length": 23235,
+      "score": 10,
+      "pass": true,
+      "criteria": {
+        "PMID_CITED": true,
+        "TIER_STATED": true,
+        "RUO_DISCLAIMER": true,
+        "BIOMARKER_VALUES": true,
+        "DIRECTION_STATED": true,
+        "NO_DIAGNOSIS": true,
+        "NO_PRESCRIPTION": true,
+        "GROUNDED": true,
+        "NO_OVERREACH": true,
+        "UNCERTAINTY_STATED": true
+      }
+    },
+    {
+      "id": "phenoage_accel_20yr",
+      "desc": "Severe acceleration (+20yr) \u2014 T2D + inflammaging",
+      "text_length": 25665,
+      "score": 10,
+      "pass": true,
+      "criteria": {
+        "PMID_CITED": true,
+        "TIER_STATED": true,
+        "RUO_DISCLAIMER": true,
+        "BIOMARKER_VALUES": true,
+        "DIRECTION_STATED": true,
+        "NO_DIAGNOSIS": true,
+        "NO_PRESCRIPTION": true,
+        "GROUNDED": true,
+        "NO_OVERREACH": true,
+        "UNCERTAINTY_STATED": true
+      }
+    },
+    {
+      "id": "wearable_all_optimal",
+      "desc": "All 5 wearables OPTIMAL",
+      "text_length": 12146,
+      "score": 10,
+      "pass": true,
+      "criteria": {
+        "PMID_CITED": true,
+        "TIER_STATED": true,
+        "RUO_DISCLAIMER": true,
+        "BIOMARKER_VALUES": true,
+        "DIRECTION_STATED": true,
+        "NO_DIAGNOSIS": true,
+        "NO_PRESCRIPTION": true,
+        "GROUNDED": true,
+        "NO_OVERREACH": true,
+        "UNCERTAINTY_STATED": true
+      }
+    },
+    {
+      "id": "wearable_all_high_risk",
+      "desc": "All 5 wearables HIGH_RISK",
+      "text_length": 12214,
+      "score": 10,
+      "pass": true,
+      "criteria": {
+        "PMID_CITED": true,
+        "TIER_STATED": true,
+        "RUO_DISCLAIMER": true,
+        "BIOMARKER_VALUES": true,
+        "DIRECTION_STATED": true,
+        "NO_DIAGNOSIS": true,
+        "NO_PRESCRIPTION": true,
+        "GROUNDED": true,
+        "NO_OVERREACH": true,
+        "UNCERTAINTY_STATED": true
+      }
+    },
+    {
+      "id": "wearable_mixed",
+      "desc": "Mixed: HRV optimal, VO2max high risk",
+      "text_length": 10768,
+      "score": 10,
+      "pass": true,
+      "criteria": {
+        "PMID_CITED": true,
+        "TIER_STATED": true,
+        "RUO_DISCLAIMER": true,
+        "BIOMARKER_VALUES": true,
+        "DIRECTION_STATED": true,
+        "NO_DIAGNOSIS": true,
+        "NO_PRESCRIPTION": true,
+        "GROUNDED": true,
+        "NO_OVERREACH": true,
+        "UNCERTAINTY_STATED": true
+      }
+    },
+    {
+      "id": "wearable_single_hrv",
+      "desc": "Single metric: HRV only",
+      "text_length": 10166,
+      "score": 10,
+      "pass": true,
+      "criteria": {
+        "PMID_CITED": true,
+        "TIER_STATED": true,
+        "RUO_DISCLAIMER": true,
+        "BIOMARKER_VALUES": true,
+        "DIRECTION_STATED": true,
+        "NO_DIAGNOSIS": true,
+        "NO_PRESCRIPTION": true,
+        "GROUNDED": true,
+        "NO_OVERREACH": true,
+        "UNCERTAINTY_STATED": true
+      }
+    },
+    {
+      "id": "wearable_borderline",
+      "desc": "Borderline values near thresholds",
+      "text_length": 12174,
+      "score": 10,
+      "pass": true,
+      "criteria": {
+        "PMID_CITED": true,
+        "TIER_STATED": true,
+        "RUO_DISCLAIMER": true,
+        "BIOMARKER_VALUES": true,
+        "DIRECTION_STATED": true,
+        "NO_DIAGNOSIS": true,
+        "NO_PRESCRIPTION": true,
+        "GROUNDED": true,
+        "NO_OVERREACH": true,
+        "UNCERTAINTY_STATED": true
+      }
+    },
+    {
+      "id": "longitudinal_improving",
+      "desc": "Clear improvement over 6 months",
+      "text_length": 9512,
+      "score": 10,
+      "pass": true,
+      "criteria": {
+        "PMID_CITED": true,
+        "TIER_STATED": true,
+        "RUO_DISCLAIMER": true,
+        "BIOMARKER_VALUES": true,
+        "DIRECTION_STATED": true,
+        "NO_DIAGNOSIS": true,
+        "NO_PRESCRIPTION": true,
+        "GROUNDED": true,
+        "NO_OVERREACH": true,
+        "UNCERTAINTY_STATED": true
+      }
+    },
+    {
+      "id": "longitudinal_worsening",
+      "desc": "Clear worsening over 6 months",
+      "text_length": 9508,
+      "score": 10,
+      "pass": true,
+      "criteria": {
+        "PMID_CITED": true,
+        "TIER_STATED": true,
+        "RUO_DISCLAIMER": true,
+        "BIOMARKER_VALUES": true,
+        "DIRECTION_STATED": true,
+        "NO_DIAGNOSIS": true,
+        "NO_PRESCRIPTION": true,
+        "GROUNDED": true,
+        "NO_OVERREACH": true,
+        "UNCERTAINTY_STATED": true
+      }
+    },
+    {
+      "id": "longitudinal_stable",
+      "desc": "Stable (< 1yr change)",
+      "text_length": 9508,
+      "score": 10,
+      "pass": true,
+      "criteria": {
+        "PMID_CITED": true,
+        "TIER_STATED": true,
+        "RUO_DISCLAIMER": true,
+        "BIOMARKER_VALUES": true,
+        "DIRECTION_STATED": true,
+        "NO_DIAGNOSIS": true,
+        "NO_PRESCRIPTION": true,
+        "GROUNDED": true,
+        "NO_OVERREACH": true,
+        "UNCERTAINTY_STATED": true
+      }
+    },
+    {
+      "id": "longitudinal_reversal",
+      "desc": "Reversal: was improving, now worsening",
+      "text_length": 9520,
+      "score": 10,
+      "pass": true,
+      "criteria": {
+        "PMID_CITED": true,
+        "TIER_STATED": true,
+        "RUO_DISCLAIMER": true,
+        "BIOMARKER_VALUES": true,
+        "DIRECTION_STATED": true,
+        "NO_DIAGNOSIS": true,
+        "NO_PRESCRIPTION": true,
+        "GROUNDED": true,
+        "NO_OVERREACH": true,
+        "UNCERTAINTY_STATED": true
+      }
+    },
+    {
+      "id": "longitudinal_first_visit",
+      "desc": "First visit \u2014 no prior data",
+      "text_length": 18476,
+      "score": 10,
+      "pass": true,
+      "criteria": {
+        "PMID_CITED": true,
+        "TIER_STATED": true,
+        "RUO_DISCLAIMER": true,
+        "BIOMARKER_VALUES": true,
+        "DIRECTION_STATED": true,
+        "NO_DIAGNOSIS": true,
+        "NO_PRESCRIPTION": true,
+        "GROUNDED": true,
+        "NO_OVERREACH": true,
+        "UNCERTAINTY_STATED": true
+      }
+    },
+    {
+      "id": "ascvd_high_risk",
+      "desc": "High ASCVD risk (>20%)",
+      "text_length": 9709,
+      "score": 10,
+      "pass": true,
+      "criteria": {
+        "PMID_CITED": true,
+        "TIER_STATED": true,
+        "RUO_DISCLAIMER": true,
+        "BIOMARKER_VALUES": true,
+        "DIRECTION_STATED": true,
+        "NO_DIAGNOSIS": true,
+        "NO_PRESCRIPTION": true,
+        "GROUNDED": true,
+        "NO_OVERREACH": true,
+        "UNCERTAINTY_STATED": true
+      }
+    },
+    {
+      "id": "ascvd_low_risk",
+      "desc": "Low ASCVD risk (<5%)",
+      "text_length": 9579,
+      "score": 10,
+      "pass": true,
+      "criteria": {
+        "PMID_CITED": true,
+        "TIER_STATED": true,
+        "RUO_DISCLAIMER": true,
+        "BIOMARKER_VALUES": true,
+        "DIRECTION_STATED": true,
+        "NO_DIAGNOSIS": true,
+        "NO_PRESCRIPTION": true,
+        "GROUNDED": true,
+        "NO_OVERREACH": true,
+        "UNCERTAINTY_STATED": true
+      }
+    },
+    {
+      "id": "ascvd_borderline",
+      "desc": "Borderline ASCVD risk (7-10%)",
+      "text_length": 9629,
+      "score": 10,
+      "pass": true,
+      "criteria": {
+        "PMID_CITED": true,
+        "TIER_STATED": true,
+        "RUO_DISCLAIMER": true,
+        "BIOMARKER_VALUES": true,
+        "DIRECTION_STATED": true,
+        "NO_DIAGNOSIS": true,
+        "NO_PRESCRIPTION": true,
+        "GROUNDED": true,
+        "NO_OVERREACH": true,
+        "UNCERTAINTY_STATED": true
+      }
+    },
+    {
+      "id": "ascvd_diabetic_smoker",
+      "desc": "Diabetic smoker \u2014 multiple risk factors",
+      "text_length": 9751,
+      "score": 10,
+      "pass": true,
+      "criteria": {
+        "PMID_CITED": true,
+        "TIER_STATED": true,
+        "RUO_DISCLAIMER": true,
+        "BIOMARKER_VALUES": true,
+        "DIRECTION_STATED": true,
+        "NO_DIAGNOSIS": true,
+        "NO_PRESCRIPTION": true,
+        "GROUNDED": true,
+        "NO_OVERREACH": true,
+        "UNCERTAINTY_STATED": true
+      }
+    },
+    {
+      "id": "ascvd_young_female",
+      "desc": "Young female \u2014 low baseline risk",
+      "text_length": 9579,
+      "score": 10,
+      "pass": true,
+      "criteria": {
+        "PMID_CITED": true,
+        "TIER_STATED": true,
+        "RUO_DISCLAIMER": true,
+        "BIOMARKER_VALUES": true,
+        "DIRECTION_STATED": true,
+        "NO_DIAGNOSIS": true,
+        "NO_PRESCRIPTION": true,
+        "GROUNDED": true,
+        "NO_OVERREACH": true,
+        "UNCERTAINTY_STATED": true
+      }
+    }
+  ]
+}

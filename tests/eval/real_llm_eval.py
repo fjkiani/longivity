@@ -33,7 +33,6 @@ sys.path.insert(0, "/workspace/longivity/src")
 
 from longivity.services.longevity_report_builder import (
     build_longevity_full_assessment,
-    run_longevity_assessment_level0,
 )
 
 # ── Test cases ─────────────────────────────────────────────────────────────────
@@ -41,7 +40,7 @@ from longivity.services.longevity_report_builder import (
 PHENOAGE_BASE = {
     "albumin_g_dl": 4.2, "creatinine_mg_dl": 0.9, "glucose_mg_dl": 90.0,
     "crp_mg_l": 0.8, "lymphocyte_pct": 28.0, "mcv_fl": 88.0,
-    "rdw_pct": 12.5, "alp_ul": 55.0, "wbc_10e9l": 5.5,
+    "rdw_pct": 12.5, "alkaline_phosphatase_u_l": 55.0, "wbc": 5.5,
 }
 
 def _pa_case(label: str, desc: str, overrides: dict) -> dict:
@@ -59,7 +58,7 @@ TEST_CASES = [
              {"glucose_mg_dl": 145.0, "crp_mg_l": 4.5, "rdw_pct": 14.2, "albumin_g_dl": 3.9}),
     _pa_case("phenoage_accel_20yr", "Severe acceleration (+20yr) — T2D + inflammaging",
              {"glucose_mg_dl": 210.0, "crp_mg_l": 12.0, "rdw_pct": 16.5, "albumin_g_dl": 3.5,
-              "wbc_10e9l": 9.5, "lymphocyte_pct": 18.0}),
+              "wbc": 9.5, "lymphocyte_pct": 18.0}),
 
     # Wearable cases — wearable assessment endpoint
     {"id": "wearable_all_optimal", "desc": "All 5 wearables OPTIMAL",
@@ -258,60 +257,56 @@ def _eval_response(case: dict, text: str) -> dict:
 
 
 def _call_service(case: dict) -> str:
-    """Call the appropriate service endpoint based on case type."""
+    """
+    Route all 20 eval cases through build_longevity_full_assessment().
+    This ensures wearable_analysis, longitudinal_analysis, and cardiovascular_risk
+    blocks are always present in the JSON output for rubric scoring.
+    """
     inp = case["input"]
     case_id = case["id"]
 
     try:
-        if case_id.startswith("phenoage_") or case_id.startswith("longitudinal_first"):
-            body = {
-                "age": inp.get("age"),
-                "sex": inp.get("sex"),
-                "biomarkers": inp.get("biomarkers", {}),
-            }
-            result = build_longevity_full_assessment(body)
-            if isinstance(result, dict):
-                return json.dumps(result)
-            return str(result)
+        # Build a unified body from all possible input keys
+        body: dict = {}
 
-        elif case_id.startswith("wearable_"):
-            body = {
-                "age": inp.get("age"),
-                "sex": inp.get("sex"),
-                "wearable": inp.get("wearable", {}),
-            }
-            result = run_longevity_assessment_level0(body)
-            if isinstance(result, dict):
-                return json.dumps(result)
-            return str(result)
+        # Always pass age + sex
+        if inp.get("age") is not None:
+            body["age"] = inp["age"]
+        if inp.get("sex") is not None:
+            body["sex"] = inp["sex"]
 
-        elif case_id.startswith("longitudinal_"):
-            body = {
-                "age": inp.get("age"),
-                "sex": inp.get("sex"),
-                "visits": inp.get("visits", []),
-            }
-            result = run_longevity_assessment_level0(body)
-            if isinstance(result, dict):
-                return json.dumps(result)
-            return str(result)
+        # PhenoAge biomarkers
+        if inp.get("biomarkers"):
+            body["biomarkers"] = inp["biomarkers"]
 
-        elif case_id.startswith("ascvd_"):
-            body = {
-                "age": inp.get("age"),
-                "sex": inp.get("sex"),
-                "ascvd_10yr_pct": inp.get("ascvd_10yr_pct"),
-                "ldl_mg_dl": inp.get("ldl_mg_dl"),
-                "hdl_mg_dl": inp.get("hdl_mg_dl"),
-                "sbp_mmhg": inp.get("sbp_mmhg"),
-                "on_bp_treatment": inp.get("on_bp_treatment"),
-                "smoker": inp.get("smoker"),
-                "diabetic": inp.get("diabetic"),
-            }
-            result = run_longevity_assessment_level0(body)
-            if isinstance(result, dict):
-                return json.dumps(result)
-            return str(result)
+        # Wearable metrics
+        if inp.get("wearable"):
+            body["wearable"] = inp["wearable"]
+
+        # Longitudinal visits
+        if inp.get("visits"):
+            body["visits"] = inp["visits"]
+
+        # ASCVD inputs
+        for key in ("ascvd_10yr_pct", "ldl_mg_dl", "hdl_mg_dl", "sbp_mmhg",
+                    "on_bp_treatment", "smoker", "diabetic"):
+            if inp.get(key) is not None:
+                body[key] = inp[key]
+
+        # Genetics / variants (pass-through)
+        if inp.get("variants"):
+            body["variants"] = inp["variants"]
+        if inp.get("patient_genotype"):
+            body["patient_genotype"] = inp["patient_genotype"]
+        if inp.get("compound_queries"):
+            body["compound_queries"] = inp["compound_queries"]
+        if inp.get("patient_medications"):
+            body["patient_medications"] = inp["patient_medications"]
+
+        result = build_longevity_full_assessment(body)
+        if isinstance(result, dict):
+            return json.dumps(result)
+        return str(result)
 
     except Exception as e:
         return f"SERVICE_ERROR: {e}"

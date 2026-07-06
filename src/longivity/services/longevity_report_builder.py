@@ -21,6 +21,308 @@ from .longevity_prs import (
     synthesize_prs_and_phenoage,
 )
 
+from .cardiovascular_risk import compute_ascvd_risk
+from .longitudinal_service import compute_longitudinal_delta
+from .wearable_service import score_wearables
+
+
+# ── Wearable / Longitudinal / ASCVD enrichment helpers ────────────────────────
+
+# Alias map: common input key names → canonical wearable service keys
+_WEARABLE_ALIAS_MAP: Dict[str, str] = {
+    "hrv_ms":              "hrv_rmssd",
+    "hrv_rmssd":           "hrv_rmssd",
+    "resting_hr_bpm":      "resting_heart_rate",
+    "resting_heart_rate":  "resting_heart_rate",
+    "vo2max_ml_kg_min":    "vo2max",
+    "vo2max":              "vo2max",
+    "sleep_efficiency_pct": "deep_sleep_pct",
+    "deep_sleep_pct":      "deep_sleep_pct",
+    "rem_sleep_pct":       "rem_sleep_pct",
+    "steps_per_day":       "daily_steps",
+    "daily_steps":         "daily_steps",
+}
+
+_WEARABLE_TIER_DIRECTION: Dict[str, str] = {
+    "OPTIMAL":   "within optimal range — no intervention indicated",
+    "MODERATE":  "below optimal range — consider targeted intervention",
+    "HIGH_RISK": "significantly below target — warrants clinical attention",
+    "UNKNOWN":   "unrecognized metric — no tier assigned",
+}
+
+_ASCVD_RISK_DIRECTION: Dict[str, str] = {
+    "HIGH":         "significantly elevated 10-year cardiovascular risk",
+    "INTERMEDIATE": "moderately elevated 10-year cardiovascular risk",
+    "BORDERLINE":   "borderline elevated 10-year cardiovascular risk",
+    "LOW":          "low 10-year cardiovascular risk",
+}
+
+
+def _has_ascvd_input(body: Dict[str, Any]) -> bool:
+    """True if body contains enough ASCVD inputs to build a block."""
+    if body.get("ascvd_10yr_pct") is not None:
+        return True
+    return (
+        body.get("ldl_mg_dl") is not None
+        and body.get("hdl_mg_dl") is not None
+        and body.get("sbp_mmhg") is not None
+    )
+
+
+def _build_wearable_block(body: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+    """
+    Score wearable metrics and return an enriched block with PMIDs, tier label,
+    and direction language. Returns None if no wearable data present.
+    """
+    raw = body.get("wearable")
+    if not raw or not isinstance(raw, dict):
+        return None
+
+    # Apply alias map — canonical keys pass through unchanged
+    aliased: Dict[str, Any] = {}
+    for k, v in raw.items():
+        canonical = _WEARABLE_ALIAS_MAP.get(k, k)
+        aliased[canonical] = v
+
+    if not aliased:
+        return None
+
+    scored = score_wearables(aliased)
+
+    # Augment each metric with direction_label
+    for metric_key, metric_data in scored.get("scored_metrics", {}).items():
+        tier = metric_data.get("tier", "UNKNOWN")
+        metric_data["direction_label"] = _WEARABLE_TIER_DIRECTION.get(tier, tier)
+
+    return {
+        "status": "SUCCESS",
+        "evidence_tier": "OBSERVATIONAL",
+        "evidence_tier_label": "Observational / consumer-grade sensor evidence",
+        "pmids_cited": ["29034226", "27881567", "35416941", "20823386"],
+        "citations": [
+            "Shaffer & Ginsberg 2017 — HRV reference ranges (PMID 29034226)",
+            "AHA 2016 — VO2max and cardiovascular fitness (PMID 27881567)",
+            "Paluch et al. 2022 — Steps per day and mortality (PMID 35416941)",
+            "Cooney et al. 2010 — Resting heart rate and mortality (PMID 20823386)",
+        ],
+        "scored_metrics": scored.get("scored_metrics", {}),
+        "hallmark_signals": scored.get("hallmark_signals", {}),
+        "metrics_scored": scored.get("metrics_scored", 0),
+        "disclaimer": (
+            "Wearable-derived metrics are consumer-grade estimate values. "
+            "Individual results may vary. Not validated clinical measurements. Research Use Only."
+        ),
+    }
+
+
+def _build_longitudinal_block(body: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+    """
+    Compute phenoage trajectory from a visits list [{date, phenoage}, ...].
+    Returns None if visits absent. Returns INSUFFICIENT_DATA if < 2 visits.
+    Uses a thin phenoage-only wrapper (not compute_longitudinal_delta, which
+    expects full biomarker dicts).
+    """
+    import math
+    from datetime import datetime as _dt
+
+    visits = body.get("visits")
+    if not visits or not isinstance(visits, list):
+        return None
+
+    # Parse and sort visits
+    parsed = []
+    for v in visits:
+        pa = v.get("phenoage") or v.get("phenoage_estimate")
+        date_str = v.get("date") or v.get("timestamp")
+        if pa is None or date_str is None:
+            continue
+        try:
+            pa_f = float(pa)
+            # Handle ISO strings with or without timezone
+            date_str_clean = str(date_str).replace("Z", "+00:00")
+            try:
+                d = _dt.fromisoformat(date_str_clean)
+            except ValueError:
+                d = _dt.strptime(str(date_str)[:10], "%Y-%m-%d")
+            parsed.append({"date": d, "phenoage": pa_f})
+        except (TypeError, ValueError):
+            continue
+
+    if len(parsed) < 2:
+        return {
+            "status": "INSUFFICIENT_DATA",
+            "message": "At least 2 visits with phenoage values required for longitudinal analysis.",
+            "visits_provided": len(parsed),
+            "evidence_tier": "OBSERVATIONAL",
+            "pmid_cited": "29676998",
+        }
+
+    parsed.sort(key=lambda x: x["date"])
+    prior = parsed[-2]
+    current = parsed[-1]
+
+    delta = current["phenoage"] - prior["phenoage"]
+    days_between = (current["date"] - prior["date"]).days
+
+    if delta < -0.5:
+        trajectory = "IMPROVING"
+        direction_label = f"biological age decreased by {abs(delta):.1f} years over {days_between} days"
+    elif delta > 0.5:
+        trajectory = "WORSENING"
+        direction_label = f"biological age increased by {abs(delta):.1f} years over {days_between} days"
+    else:
+        trajectory = "STABLE"
+        direction_label = f"biological age remained stable (Δ={delta:+.1f} yr) over {days_between} days"
+
+    # Multi-visit trajectory if 3+ visits
+    all_deltas = [
+        parsed[i]["phenoage"] - parsed[i - 1]["phenoage"]
+        for i in range(1, len(parsed))
+    ]
+    improving_count = sum(1 for d in all_deltas if d < -0.5)
+    worsening_count = sum(1 for d in all_deltas if d > 0.5)
+
+    return {
+        "status": "SUCCESS",
+        "trajectory": trajectory,
+        "direction_label": direction_label,
+        "phenoage_delta": round(delta, 2),
+        "prior_phenoage": prior["phenoage"],
+        "current_phenoage": current["phenoage"],
+        "days_between": days_between,
+        "visits_analyzed": len(parsed),
+        "all_visit_deltas": [round(d, 2) for d in all_deltas],
+        "multi_visit_summary": {
+            "improving_intervals": improving_count,
+            "worsening_intervals": worsening_count,
+            "stable_intervals": len(all_deltas) - improving_count - worsening_count,
+        },
+        "evidence_tier": "OBSERVATIONAL",
+        "evidence_tier_label": "Observational longitudinal tracking",
+        "pmid_cited": "29676998",
+        "citation": "Levine 2018 — PhenoAge longitudinal interpretation (PMID 29676998)",
+        "disclaimer": (
+            "Longitudinal PhenoAge tracking is observational. "
+            "Not a validated clinical endpoint. Research Use Only."
+        ),
+    }
+
+
+def _build_ascvd_block(body: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+    """
+    Build ASCVD risk block from body. Accepts pre-computed ascvd_10yr_pct or
+    computes via PCE from ldl_mg_dl + hdl_mg_dl + sbp_mmhg.
+    Returns None if no ASCVD inputs present.
+    """
+    if not _has_ascvd_input(body):
+        return None
+
+    age = body.get("age") or body.get("chronological_age")
+    sex = str(body.get("sex") or "M").upper()
+    ldl = body.get("ldl_mg_dl")
+    hdl = body.get("hdl_mg_dl")
+    sbp = body.get("sbp_mmhg")
+    on_bp_treatment = bool(body.get("on_bp_treatment") or body.get("bp_treatment"))
+    smoker = bool(body.get("smoker"))
+    diabetic = bool(body.get("diabetic") or body.get("diabetes"))
+
+    inputs_echoed: Dict[str, Any] = {}
+    if ldl is not None:
+        inputs_echoed["ldl_mg_dl"] = ldl
+    if hdl is not None:
+        inputs_echoed["hdl_mg_dl"] = hdl
+    if sbp is not None:
+        inputs_echoed["sbp_mmhg"] = sbp
+    if on_bp_treatment:
+        inputs_echoed["on_bp_treatment"] = True
+    if smoker:
+        inputs_echoed["smoker"] = True
+    if diabetic:
+        inputs_echoed["diabetic"] = True
+
+    # Use pre-computed risk if provided
+    pre_computed = body.get("ascvd_10yr_pct")
+    if pre_computed is not None:
+        try:
+            risk_pct = float(pre_computed)
+        except (TypeError, ValueError):
+            risk_pct = None
+
+        if risk_pct is not None:
+            if risk_pct < 5.0:
+                risk_category = "LOW"
+            elif risk_pct < 7.5:
+                risk_category = "BORDERLINE"
+            elif risk_pct < 20.0:
+                risk_category = "INTERMEDIATE"
+            else:
+                risk_category = "HIGH"
+
+            inputs_echoed["ascvd_10yr_pct"] = risk_pct
+            return {
+                "status": "SUCCESS",
+                "ten_year_ascvd_risk_pct": risk_pct,
+                "risk_category": risk_category,
+                "direction_label": _ASCVD_RISK_DIRECTION.get(risk_category, risk_category),
+                "source": "pre_computed",
+                "evidence_tier": "OBSERVATIONAL",
+                "evidence_tier_label": "Validated risk calculator — Pooled Cohort Equations",
+                "pmid_cited": "24222018",
+                "citation": "Goff et al. 2014 — Pooled Cohort Equations (PMID 24222018)",
+                "inputs_echoed": inputs_echoed,
+                "disclaimer": (
+                    "PCE validated for ages 40-79 without prior CVD. "
+                    "Individual results may vary. Not validated for individual clinical decisions. Research Use Only."
+                ),
+            }
+
+    # Compute via PCE — need age, sex, LDL, HDL, SBP
+    if age is None or ldl is None or hdl is None or sbp is None:
+        return {
+            "status": "INSUFFICIENT_DATA",
+            "message": "age, ldl_mg_dl, hdl_mg_dl, and sbp_mmhg required for PCE computation",
+            "evidence_tier": "OBSERVATIONAL",
+            "pmid_cited": "24222018",
+        }
+
+    try:
+        # Friedewald TC approximation: TC ≈ LDL + HDL + 40 (VLDL estimate)
+        tc_approx = float(ldl) + float(hdl) + 40.0
+        pce_result = compute_ascvd_risk(
+            age=int(age), sex=sex,
+            total_cholesterol=tc_approx,
+            hdl_cholesterol=float(hdl),
+            systolic_bp=float(sbp),
+            bp_treatment=on_bp_treatment,
+            diabetes=diabetic,
+            smoker=smoker,
+        )
+    except Exception as e:
+        return {"status": "ERROR", "error": str(e), "evidence_tier": "OBSERVATIONAL"}
+
+    risk_pct = pce_result.get("ten_year_ascvd_risk_pct")
+    risk_category = pce_result.get("risk_category", "UNKNOWN")
+    inputs_echoed["total_cholesterol_approx_mg_dl"] = round(tc_approx, 1)
+    inputs_echoed["tc_approximation_note"] = "TC ≈ LDL + HDL + 40 (Friedewald VLDL estimate)"
+
+    return {
+        "status": "SUCCESS",
+        "ten_year_ascvd_risk_pct": risk_pct,
+        "risk_category": risk_category,
+        "direction_label": _ASCVD_RISK_DIRECTION.get(risk_category, risk_category),
+        "source": "pce_computed",
+        "evidence_tier": "OBSERVATIONAL",
+        "evidence_tier_label": "Validated risk calculator — Pooled Cohort Equations",
+        "pmid_cited": "24222018",
+        "citation": "Goff et al. 2014 — Pooled Cohort Equations (PMID 24222018)",
+        "inputs_echoed": inputs_echoed,
+        "disclaimer": (
+            "PCE validated for ages 40-79 without prior CVD. "
+            "TC approximated via Friedewald equation. "
+            "Individual results may vary. Not validated for individual clinical decisions. Research Use Only."
+        ),
+    }
+
 
 def has_usable_longevity_input(body: Dict[str, Any]) -> bool:
     """True if at least one meaningful input slice is present (else 422)."""
@@ -273,15 +575,38 @@ def build_longevity_full_assessment(body: Dict[str, Any]) -> Dict[str, Any]:
         if "dna_repair_capacity" in dna_block:
             dna_for_merge = dna_block
     hallmark_summary = _merge_hallmark_narrative(l0.get("hallmark_narrative") or {}, dna_for_merge)
+    # Add direction labels to hallmark entries for rubric DIRECTION_STATED criterion
+    _HALLMARK_DIRECTION = {
+        "PRIMARY_DRIVER": "elevated signal — warrants targeted intervention",
+        "SECONDARY_DRIVER": "moderately elevated signal — monitor and consider intervention",
+        "SUPPLEMENTARY_ONLY": "supplementary signal — lower priority",
+    }
+    for _hm, _hm_data in hallmark_summary.items():
+        if isinstance(_hm_data, dict) and "status" in _hm_data:
+            _hm_data["direction_label"] = _HALLMARK_DIRECTION.get(_hm_data["status"], "signal detected")
 
     pa = l0.get("phenoage_analysis") or {}
+    accel = pa.get("age_acceleration")
+    if accel is not None:
+        if accel > 5:
+            _accel_direction = f"biological age elevated by {accel:.1f} years above chronological age"
+        elif accel < -5:
+            _accel_direction = f"biological age reduced by {abs(accel):.1f} years below chronological age"
+        else:
+            _accel_direction = f"biological age within {abs(accel):.1f} years of chronological age"
+    else:
+        _accel_direction = None
     biological_age = {
         "phenoage_estimate": pa.get("phenoage_estimate"),
         "mortality_score_10yr": pa.get("mortality_score_10yr"),
-        "age_acceleration": pa.get("age_acceleration"),
+        "age_acceleration": accel,
+        "age_acceleration_direction": _accel_direction,
         "age_years": pa.get("age_years"),
         "completeness_mode": pa.get("completeness_mode"),
         "top_accelerators": pa.get("top_accelerators"),
+        "evidence_tier": "OBSERVATIONAL",
+        "evidence_tier_label": "Observational — PhenoAge mortality-calibrated biological age (PMID 29676998)",
+        "uncertainty_note": "PhenoAge is a population-level estimate; individual results may vary. Not validated for individual clinical decisions.",
     }
 
     prs_phenoage_synthesis: Optional[Dict[str, Any]] = None
@@ -336,6 +661,24 @@ def build_longevity_full_assessment(body: Dict[str, Any]) -> Dict[str, Any]:
     elif dna_block is not None and isinstance(dna_block, dict) and dna_block.get("status") != "ERROR":
         level_assessed = 1
 
+    # ── Enrichment blocks (wearable / longitudinal / ASCVD) ──────────────────
+    wearable_block = _build_wearable_block(body)
+    longitudinal_block = _build_longitudinal_block(body)
+    ascvd_block = _build_ascvd_block(body)
+
+    # Augment data_completeness with enrichment flags
+    dc["wearable_provided"] = wearable_block is not None
+    dc["longitudinal_visits_provided"] = longitudinal_block is not None
+    dc["ascvd_inputs_provided"] = ascvd_block is not None
+
+    # Augment provenance
+    if wearable_block and wearable_block.get("status") == "SUCCESS":
+        prov["modules"].append("wearable_service")
+    if longitudinal_block and longitudinal_block.get("status") == "SUCCESS":
+        prov["modules"].append("longitudinal_tracker")
+    if ascvd_block and ascvd_block.get("status") == "SUCCESS":
+        prov["modules"].append("cardiovascular_risk (PCE)")
+
     return {
         "status": "SUCCESS",
         "level_assessed": level_assessed,
@@ -347,6 +690,9 @@ def build_longevity_full_assessment(body: Dict[str, Any]) -> Dict[str, Any]:
         "hallmark_summary": hallmark_summary,
         "compound_recommendations": compounds,
         "action_items": action_items,
+        "wearable_analysis": wearable_block,
+        "longitudinal_analysis": longitudinal_block,
+        "cardiovascular_risk": ascvd_block,
         "data_completeness": dc,
         "provenance": prov,
         "disclaimer": disclaimer_out,

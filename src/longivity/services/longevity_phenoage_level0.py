@@ -701,7 +701,7 @@ def run_longevity_assessment_level0(body: Dict[str, Any]) -> Dict[str, Any]:
     run_id = str(uuid.uuid4())
     ts = datetime.now(timezone.utc).isoformat()
 
-    return {
+    result = {
         "status": "SUCCESS",
         "level": 0,
         "phenoage_analysis": {
@@ -761,4 +761,30 @@ def run_longevity_assessment_level0(body: Dict[str, Any]) -> Dict[str, Any]:
             "Do not use for clinical decisions without a qualified clinician."
         ),
     }
+
+    # ── Enrichment blocks: wearable / longitudinal / ASCVD ────────────────────
+    # Lazy import avoids circular dependency (report_builder imports this module).
+    try:
+        from longivity.services.longevity_report_builder import (
+            _build_wearable_block,
+            _build_longitudinal_block,
+            _build_ascvd_block,
+        )
+        wearable_block = _build_wearable_block(body)
+        longitudinal_block = _build_longitudinal_block(body)
+        ascvd_block = _build_ascvd_block(body)
+    except Exception as _enrich_err:
+        logger.warning("Enrichment block error: %s", _enrich_err)
+        wearable_block = None
+        longitudinal_block = None
+        ascvd_block = None
+
+    if wearable_block is not None:
+        result["wearable_analysis"] = wearable_block
+    if longitudinal_block is not None:
+        result["longitudinal_analysis"] = longitudinal_block
+    if ascvd_block is not None:
+        result["cardiovascular_risk"] = ascvd_block
+
+    return result
 
